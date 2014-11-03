@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>5ee0dea7-3e15-47ae-b2b2-c6bfdf69a858</ProjectGuid>
+    <ProjectGuid>{9236F1D9-A7F9-41BE-9797-11530F028995}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ex00.GarageManagementSystem.ConsoleUI</RootNamespace>
@@ -46,6 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ex00.GarageLogic\Ex00.GarageLogic.csproj">
+      <Project>{d6d32c87-84f7-4155-9cb8-3830aa68d797}</Project>
+      <Name>Ex00.GarageLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
