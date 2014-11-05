@@ -4,22 +4,48 @@ using System.Linq;
 
 namespace Ex00.GarageLogic
 {
-    internal abstract class Vehicle
+    internal class Vehicle : IVehicle
     {
-        #region fields
+        #region general fields
 
-        private readonly string m_ModelName;
+        protected readonly Engine r_engine;
 
-        private readonly string m_LicenseNumber;
+        #endregion general fields
 
-        private float m_RemainingEnergyPercentage;
+        #region general properties
 
-        private IEnumerable<Wheel> m_Wheels;
+        public string ModelName { get; private set; }
 
-        private readonly FuelEngine m_FuelEngine;
+        public string LicenseNumber { get; private set; }
 
-        private readonly ElectricEngine m_ElectricEngine;
+        public IEnumerable<Wheel> Wheels { get; private set; }
 
-        #endregion fields
+        #endregion general properties
+
+        #region constructors
+
+        protected Vehicle(
+            string i_ModelName,
+            string i_LicenseNumber,
+            IEnumerable<Wheel> i_Wheels,
+            Engine engine)
+        {
+            ModelName = i_ModelName;
+            LicenseNumber = i_LicenseNumber;
+            Wheels = i_Wheels;
+            r_engine = engine;
+        }
+
+        #endregion constructors
+
+        public override string ToString()
+        {
+            return 
+                "model name: {1}, license number: {2}, wheels state:{3}, engine: {4}".FormatWith(
+                    ModelName,
+                    LicenseNumber,
+                    string.Join(",", Wheels.Select(i_Wheel => i_Wheel.ToString())),
+                    r_engine.ToString());
+        }
     }
 }

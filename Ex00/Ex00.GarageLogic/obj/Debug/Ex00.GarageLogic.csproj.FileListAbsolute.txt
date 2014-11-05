@@ -1,1 +1,16 @@
-E:\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00.GarageLogic\bin\Debug\Ex00.GarageLogic.exe.config
+E:\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00.GarageLogic\obj\Debug\Ex00.GarageLogic.csprojResolveAssemblyReference.cache
+E:\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00.GarageLogic\obj\Debug\Ex00.GarageLogic.Properties.Resources.resources
+E:\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00.GarageLogic\obj\Debug\Ex00.GarageLogic.csproj.GenerateResource.Cache
+E:\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00.GarageLogic\bin\Debug\Ex00.GarageLogic.dll.config
+E:\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00.GarageLogic\bin\Debug\Ex00.GarageLogic.dll
+E:\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00.GarageLogic\bin\Debug\Ex00.GarageLogic.pdb
+E:\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00.GarageLogic\obj\Debug\Ex00.GarageLogic.dll
+E:\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00.GarageLogic\obj\Debug\Ex00.GarageLogic.pdb
+C:\dropbox\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00.GarageLogic\obj\Debug\Ex00.GarageLogic.csprojResolveAssemblyReference.cache
+C:\dropbox\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00.GarageLogic\obj\Debug\Ex00.GarageLogic.Properties.Resources.resources
+C:\dropbox\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00.GarageLogic\obj\Debug\Ex00.GarageLogic.csproj.GenerateResource.Cache
+C:\dropbox\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00.GarageLogic\obj\Debug\Ex00.GarageLogic.dll
+C:\dropbox\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00.GarageLogic\obj\Debug\Ex00.GarageLogic.pdb
+C:\dropbox\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00.GarageLogic\bin\Debug\Ex00.GarageLogic.dll.config
+C:\dropbox\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00.GarageLogic\bin\Debug\Ex00.GarageLogic.dll
+C:\dropbox\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00.GarageLogic\bin\Debug\Ex00.GarageLogic.pdb

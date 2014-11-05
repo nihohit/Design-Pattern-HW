@@ -1,0 +1,13 @@
+Ex00/Ex00.GarageManagementSystem.ConsoleUI/bin/
+Ex00/Ex00.GarageLogic/bin/
+Ex00/Ex00.GarageLogic/bin/
+Ex00/Ex00.GarageLogic/App.config
+*.cache
+*.txt
+Ex00/Ex00.GarageLogic/obj/
+Ex00/Ex00.GarageManagementSystem.ConsoleUI/obj/
+*.config
+Ex00/Ex00.GarageManagementSystem.ConsoleUI/Properties/
+*.suo
+*.DotSettings
+*.StyleCop

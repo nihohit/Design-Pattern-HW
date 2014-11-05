@@ -47,9 +47,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cars.cs" />
     <Compile Include="Engines.cs" />
+    <Compile Include="enums.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Garage.cs" />
+    <Compile Include="GarageEntry.cs" />
+    <Compile Include="Interfaces.cs" />
+    <Compile Include="Motorcycles.cs" />
+    <Compile Include="Truck.cs" />
+    <Compile Include="ValueOutOfRangeException.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VehicleMaker.cs" />
     <Compile Include="Wheel.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
