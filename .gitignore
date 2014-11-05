@@ -1,3 +1,43 @@
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+ 
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+Game/UpgradeLog*
+*.htm
+*.csproj
+Game/Assembly-CSharp.csproj
+*.dwlt
+Game/Library/CurrentLayout.dwlt
+Game/ProjectSettings/
+Game/Assembly-CSharp.csproj
+Game/Library/CurrentLayout.dwlt
+Game/*.csproj
+Game/UnityVS.*
+Game/Assets/UnityVS/Editor/*.dll
+Game/Library/CurrentLayout.dwlt
+
+
 Ex00/Ex00.GarageManagementSystem.ConsoleUI/bin/
 Ex00/Ex00.GarageLogic/bin/
 Ex00/Ex00.GarageLogic/bin/
