@@ -57,4 +57,20 @@ namespace Ex00.GarageLogic
 
         float MaximumAllowedCarryingWeight { get; }
     }
+
+    public interface ICommunicateWithConsole 
+    {
+        bool IsVehicleInGarage(string i_LicenseNumber);
+        void SetVehicleState(string i_LicenseNumber, eVehicleState i_VehicleState);
+        string GetVehicleInfo(string i_LicenseNumber);
+        void FillWheelsToMax(string i_LicenseNumber);
+        bool HasGasEngine(string i_LicenseNumber);
+        bool HasElectricEngine(string i_LicenseNumber);
+        void FillGas(string i_LicenseNumber, eFuelType i_FuelType, float i_FuelAmountInLiters);
+        void ChargeEngine(float i_ChargeMinutes);
+        Dictionary<string, eVehicleState> GetGarageVehicleAndState();
+        List<string> GetGarageVehicle(eVehicleState i_VehicleState);
+        string[] GetGarageEntryNeededArgsDisplayNames(eVehicleType i_VehicleState);
+        void AddGarageEntry(eVehicleType i_VehicleState, string[] Args);
+    }
 }
