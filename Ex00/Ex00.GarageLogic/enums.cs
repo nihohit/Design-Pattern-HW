@@ -30,13 +30,4 @@
         Blue,
         Black
     }
-
-    public enum eVehicleType
-    {
-        ElectricCar,
-        FuelBasedCar,
-        ElectricBike,
-        FuelBasedBike,
-        Truck
-    }
 }

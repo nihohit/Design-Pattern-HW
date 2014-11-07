@@ -12,7 +12,7 @@ namespace Ex00.GarageLogic
 
         public int EngineSize { get; private set; }
 
-        #endregion
+        #endregion properties
 
         protected Motorcycle(
             string i_ModelName,
@@ -20,8 +20,9 @@ namespace Ex00.GarageLogic
             IEnumerable<Wheel> i_Wheels,
             eLicense i_LicenseType,
             int i_EngineSize,
-            TEngineType i_Engine) : 
-            base(i_ModelName,
+            TEngineType i_Engine) :
+            base(
+                i_ModelName,
                 i_LicenseNumber,
                 i_Wheels,
                 i_Engine)
@@ -46,38 +47,46 @@ namespace Ex00.GarageLogic
     {
         public ElectricEngine Engine { get { return r_engine as ElectricEngine; } }
 
-        public ElectricMotorcycle(string i_ModelName,
+        public ElectricMotorcycle(
+            string i_ModelName,
             string i_LicenseNumber,
             IEnumerable<Wheel> i_Wheels,
             eLicense i_LicenseType,
             int i_EngineSize,
             float i_CurrentCharge,
-            float i_MaximumCharge) : base(i_ModelName,
+            float i_MaximumCharge)
+            : base(
+                i_ModelName,
                 i_LicenseNumber,
                 i_Wheels,
                 i_LicenseType,
                 i_EngineSize,
                 new ElectricEngine(i_CurrentCharge, i_MaximumCharge))
-        {}
+        {
+        }
     }
 
     internal class RegularMotorcycle : Motorcycle<GasEngine>, IRegularMotorcycle
     {
         public GasEngine Engine { get { return r_engine as GasEngine; } }
 
-        public RegularMotorcycle(string i_ModelName,
+        public RegularMotorcycle(
+            string i_ModelName,
             string i_LicenseNumber,
             IEnumerable<Wheel> i_Wheels,
             eLicense i_LicenseType,
             int i_EngineSize,
             eFuelType i_FuelType,
             float i_CurrentFuelAmount,
-            float i_MaximumFuelAmount) : base(i_ModelName,
+            float i_MaximumFuelAmount)
+            : base(
+                i_ModelName,
                 i_LicenseNumber,
                 i_Wheels,
                 i_LicenseType,
                 i_EngineSize,
                 new GasEngine(i_CurrentFuelAmount, i_MaximumFuelAmount, i_FuelType))
-        {}
+        {
+        }
     }
 }

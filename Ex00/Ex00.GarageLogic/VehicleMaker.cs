@@ -1,5 +1,10 @@
 ﻿namespace Ex00.GarageLogic
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+
     public class VehicleMaker
     {
         #region consts
@@ -21,16 +26,42 @@
         private const float k_BikeMaxElectricEngineCharge = 2.4f;
         private const float k_BikekMaxWheelPressure = 33;
 
+        private const string k_CreationMethodBeginning = "create";
+        private readonly int r_LengthOfCreate = k_CreationMethodBeginning.Length;
+
+        private IEnumerable<KeyValuePair<string, ParameterInfo[]>> m_SupportedTypes;
+
         #endregion consts
 
         #region creation methods
 
-        public static ITruck CreateTruck(
+        public IEnumerable<KeyValuePair<string, ParameterInfo[]>> GetAllSupportedTypesAndArguments()
+        {
+            if (m_SupportedTypes != null)
+            {
+                return m_SupportedTypes;
+            }
+
+            var methods = typeof(VehicleMaker).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance);
+            var creationMethods = methods.Where(i_Method => i_Method.Name.StartsWith(k_CreationMethodBeginning));
+
+            m_SupportedTypes = creationMethods.ToDictionary(
+                i_MethodInfo => i_MethodInfo.Name.Substring(r_LengthOfCreate),
+                i_MethodInfo => i_MethodInfo.GetParameters());
+            return m_SupportedTypes;
+        }
+
+        public IVehicle CreateVehicle(string i_VehicleType, IEnumerable<string> i_Args)
+        {
+            return null;
+        }
+
+        private ITruck createTruck(
             string i_ModelName,
             string i_LicenseNumber,
             string i_WheelManufacturerName,
             bool i_CarryingDangerousMaterials,
-            float i_MaximumAllowedWeight, 
+            float i_MaximumAllowedWeight,
             float i_CurrentWheelPressure,
             float i_CurrentFuelAmount)
         {
@@ -45,7 +76,7 @@
                 k_TruckFuelEngineCapacity);
         }
 
-        public static IRegularMotorcycle CreateRegularMotorcycle(
+        private IRegularMotorcycle createRegularMotorcycle(
             string i_ModelName,
             string i_LicenseNumber,
             string i_WheelManufacturerName,
@@ -65,7 +96,7 @@
                  k_BikeFuelEngineCapacity);
         }
 
-        public static IElectricMotorcycle CreateElectricMotorcycle(
+        private IElectricMotorcycle createElectricMotorcycle(
             string i_ModelName,
             string i_LicenseNumber,
             string i_WheelManufacturerName,
@@ -84,7 +115,7 @@
                  k_BikeMaxElectricEngineCharge);
         }
 
-        public static IRegularCar CreateRegularCar(
+        private IRegularCar createRegularCar(
             string i_ModelName,
             string i_LicenseNumber,
             string i_WheelManufacturerName,
@@ -104,7 +135,7 @@
                  k_CarFuelEngineCapacity);
         }
 
-        public static IElectricCar CreaElectricCar(
+        private IElectricCar createElectricCar(
             string i_ModelName,
             string i_LicenseNumber,
             string i_WheelManufacturerName,

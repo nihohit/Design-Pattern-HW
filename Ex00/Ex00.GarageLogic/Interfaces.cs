@@ -58,19 +58,26 @@ namespace Ex00.GarageLogic
         float MaximumAllowedCarryingWeight { get; }
     }
 
-    public interface ICommunicateWithConsole 
+    public interface ICommunicateWithConsole
     {
+        string AddGarageEntry(string i_LicenseNumber, string i_OwnerPhoneNumber, string i_OwnerName, string i_VehicleType, string[] i_Args);
+
+        IEnumerable<string> GetVehicleTypes();
+
+        IEnumerable<string> GetNecessaryArgsForType(string i_VehicleType);
+
         bool IsVehicleInGarage(string i_LicenseNumber);
-        void SetVehicleState(string i_LicenseNumber, eVehicleState i_VehicleState);
-        string GetVehicleInfo(string i_LicenseNumber);
+
+        void SetVehicleState(string i_LicenseNumber, eVehicleState i_NewVehicleState);
+
         void FillWheelsToMax(string i_LicenseNumber);
-        bool HasGasEngine(string i_LicenseNumber);
-        bool HasElectricEngine(string i_LicenseNumber);
+
+        IEnumerable<KeyValuePair<string, eVehicleState>> GetGarageVehiclesAndStates();
+
         void FillGas(string i_LicenseNumber, eFuelType i_FuelType, float i_FuelAmountInLiters);
-        void ChargeEngine(float i_ChargeMinutes);
-        Dictionary<string, eVehicleState> GetGarageVehicleAndState();
-        List<string> GetGarageVehicle(eVehicleState i_VehicleState);
-        string[] GetGarageEntryNeededArgsDisplayNames(eVehicleType i_VehicleState);
-        void AddGarageEntry(eVehicleType i_VehicleState, string[] Args);
+
+        void ChargeEngine(string i_LicenseNumber, float i_ChargeHours);
+
+        string GetVehicleInfo(string i_LicenseNumber);
     }
 }
