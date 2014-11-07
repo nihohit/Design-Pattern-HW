@@ -40,8 +40,8 @@ namespace Ex00.GarageLogic
 
         public override string ToString()
         {
-            return 
-                "model name: {1}, license number: {2}, wheels state:{3}, engine: {4}".FormatWith(
+            return
+                "model name: {0}, license number: {1}, wheels state:{2}, engine: {3}".FormatWith(
                     ModelName,
                     LicenseNumber,
                     string.Join(",", Wheels.Select(i_Wheel => i_Wheel.ToString())),

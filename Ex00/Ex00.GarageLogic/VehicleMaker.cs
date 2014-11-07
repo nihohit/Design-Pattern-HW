@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Reflection;
 
@@ -53,7 +54,34 @@
 
         public IVehicle CreateVehicle(string i_VehicleType, IEnumerable<string> i_Args)
         {
-            return null;
+            var method = typeof(VehicleMaker).GetMethod(
+                "{0}{1}".FormatWith(k_CreationMethodBeginning, i_VehicleType), BindingFlags.NonPublic | BindingFlags.Instance);
+
+            var methodParameters = method.GetParameters();
+
+            return (IVehicle)method.Invoke(this, parseParameters(methodParameters, i_Args));
+        }
+
+        private object[] parseParameters(ParameterInfo[] i_MethodParameters, IEnumerable<string> i_Args)
+        {
+            var argCount = i_Args.Count();
+            if (argCount != i_MethodParameters.Length)
+            {
+                throw new ArgumentException(
+                    "Not given enough arguments. Expected {0} and received {1}"
+                    .FormatWith(i_MethodParameters.Length, argCount));
+            }
+
+            object[] requestedParams = new object[i_MethodParameters.Length];
+            int i = 0;
+            foreach (var arg in i_Args)
+            {
+                var converter = TypeDescriptor.GetConverter(i_MethodParameters[i].ParameterType);
+                requestedParams[i] = converter.ConvertFrom(arg);
+                i++;
+            }
+
+            return requestedParams;
         }
 
         private ITruck createTruck(
