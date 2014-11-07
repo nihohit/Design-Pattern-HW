@@ -2,6 +2,9 @@
 {
     #region GarageEntry
 
+    /// <summary>
+    /// The information about a vehicle entered into the garage
+    /// </summary>
     public class GarageEntry
     {
         #region properties

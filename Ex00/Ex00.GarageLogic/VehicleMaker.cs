@@ -6,36 +6,51 @@
     using System.Linq;
     using System.Reflection;
 
+    /// <summary>
+    ///
+    /// </summary>
     public class VehicleMaker
     {
         #region consts
 
+        // truck consts
         private const int k_TruckAmountOfWheels = 14;
+
         private const float k_TruckFuelEngineCapacity = 180;
         private const float k_TruckMaxWheelPressure = 23;
         private const eFuelType k_TruckFuelType = eFuelType.Soler;
 
+        // car consts
         private const float k_CarFuelEngineCapacity = 44;
+
         private const float k_CarMaxWheelPressure = 27;
         private const float k_CarMaxElectricEngineCharge = 3.3f;
         private const int k_CarAmountOfWheels = 4;
         private const eFuelType k_CarFuelType = eFuelType.Octan98;
 
+        // motorcylce consts
         private const eFuelType k_BikeFuelType = eFuelType.Octan95;
+
         private const int k_BikeAmountOfWheels = 2;
         private const float k_BikeFuelEngineCapacity = 7.2f;
         private const float k_BikeMaxElectricEngineCharge = 2.4f;
         private const float k_BikekMaxWheelPressure = 33;
 
+        // reflection consts
         private const string k_CreationMethodBeginning = "create";
+
         private readonly int r_LengthOfCreate = k_CreationMethodBeginning.Length;
 
         private IEnumerable<KeyValuePair<string, ParameterInfo[]>> m_SupportedTypes;
 
         #endregion consts
 
-        #region creation methods
+        #region methods
 
+        /// <summary>
+        /// return all supported vehicle types, and the arguments needed to create them.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<KeyValuePair<string, ParameterInfo[]>> GetAllSupportedTypesAndArguments()
         {
             if (m_SupportedTypes != null)
@@ -52,6 +67,12 @@
             return m_SupportedTypes;
         }
 
+        /// <summary>
+        /// create a new vehicle of the given type with given arguments
+        /// </summary>
+        /// <param name="i_VehicleType"></param>
+        /// <param name="i_Args"></param>
+        /// <returns></returns>
         public IVehicle CreateVehicle(string i_VehicleType, IEnumerable<string> i_Args)
         {
             var method = typeof(VehicleMaker).GetMethod(
@@ -62,9 +83,16 @@
             return (IVehicle)method.Invoke(this, parseParameters(methodParameters, i_Args));
         }
 
+        /// <summary>
+        /// try to parse the received arguments into the relevant parameter types
+        /// </summary>
+        /// <param name="i_MethodParameters"></param>
+        /// <param name="i_Args"></param>
+        /// <returns></returns>
         private object[] parseParameters(ParameterInfo[] i_MethodParameters, IEnumerable<string> i_Args)
         {
-            var argCount = i_Args.Count();
+            string[] argsArray = i_Args as string[] ?? i_Args.ToArray();
+            var argCount = argsArray.Count();
             if (argCount != i_MethodParameters.Length)
             {
                 throw new ArgumentException(
@@ -74,7 +102,7 @@
 
             object[] requestedParams = new object[i_MethodParameters.Length];
             int i = 0;
-            foreach (var arg in i_Args)
+            foreach (var arg in argsArray)
             {
                 var converter = TypeDescriptor.GetConverter(i_MethodParameters[i].ParameterType);
                 requestedParams[i] = converter.ConvertFrom(arg);
@@ -83,6 +111,10 @@
 
             return requestedParams;
         }
+
+        #endregion methods
+
+        #region creation methods
 
         private ITruck createTruck(
             string i_ModelName,

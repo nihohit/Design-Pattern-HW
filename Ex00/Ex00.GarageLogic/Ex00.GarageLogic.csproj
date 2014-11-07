@@ -47,14 +47,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cars.cs" />
-    <Compile Include="Engines.cs" />
+    <Compile Include="Car.cs" />
+    <Compile Include="ElectricCar.cs" />
+    <Compile Include="ElectricEngine.cs" />
+    <Compile Include="ElectricMotorcycle.cs" />
+    <Compile Include="Engine.cs" />
     <Compile Include="enums.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Garage.cs" />
     <Compile Include="GarageEntry.cs" />
+    <Compile Include="GasEngine.cs" />
     <Compile Include="Interfaces.cs" />
-    <Compile Include="Motorcycles.cs" />
+    <Compile Include="Motorcycle.cs" />
+    <Compile Include="RegularCar.cs" />
+    <Compile Include="RegularMotorcycle.cs" />
     <Compile Include="Truck.cs" />
     <Compile Include="ValueOutOfRangeException.cs" />
     <Compile Include="Vehicle.cs" />

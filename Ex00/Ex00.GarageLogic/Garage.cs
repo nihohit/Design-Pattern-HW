@@ -5,6 +5,9 @@ namespace Ex00.GarageLogic
 {
     using System.Linq;
 
+    /// <summary>
+    /// The garage holds vehicles and communicates with the console.
+    /// </summary>
     public class Garage : ICommunicateWithConsole
     {
         #region private fields
@@ -15,9 +18,17 @@ namespace Ex00.GarageLogic
 
         #endregion private fields
 
-        #region methods
+        #region private methods
 
-        private GarageEntry AddVehicleToGarage(string i_OwnerPhoneNumber, string i_OwnerName, string i_VehicleType, string[] i_Args)
+        /// <summary>
+        /// After checking that a vehicle isn't in the garage, create a new vehicle and add it to the garage.
+        /// </summary>
+        /// <param name="i_OwnerPhoneNumber">owner phone number</param>
+        /// <param name="i_OwnerName">owner's name</param>
+        /// <param name="i_VehicleType">type of vehicle</param>
+        /// <param name="i_Args">arguments for vehicle creation</param>
+        /// <returns></returns>
+        private GarageEntry addVehicleToGarage(string i_OwnerPhoneNumber, string i_OwnerName, string i_VehicleType, string[] i_Args)
         {
             IVehicle vehicle = r_VehicleMaker.CreateVehicle(i_VehicleType, i_Args);
             GarageEntry garageEntry = new GarageEntry(i_OwnerName, i_OwnerPhoneNumber, vehicle);
@@ -25,6 +36,11 @@ namespace Ex00.GarageLogic
             return garageEntry;
         }
 
+        /// <summary>
+        /// Try to get a vehicle from the garage, and if not in, throw ArgumentException
+        /// </summary>
+        /// <param name="i_LicenseNumber">License number of said vehicle</param>
+        /// <returns></returns>
         private GarageEntry getEntryOrFail(string i_LicenseNumber)
         {
             GarageEntry garageEntry;
@@ -36,16 +52,25 @@ namespace Ex00.GarageLogic
             return garageEntry;
         }
 
-        #endregion methods
+        #endregion private methods
 
         #region ICommunicateWithConsole
 
-        public string AddGarageEntry(string i_LicenseNumber, string i_OwnerPhoneNumber, string i_OwnerName, string i_VehicleType, string[] i_Args)
+        /// <summary>
+        /// Try to add a vehicle to the garage. If it isn't in create a new entry. If it is, update it's state.
+        /// </summary>
+        /// <param name="i_LicenseNumber"></param>
+        /// <param name="i_OwnerPhoneNumber"></param>
+        /// <param name="i_OwnerName"></param>
+        /// <param name="i_VehicleType"></param>
+        /// <param name="i_Args"></param>
+        /// <returns></returns>
+        public string AddAVehicleToGarage(string i_LicenseNumber, string i_OwnerPhoneNumber, string i_OwnerName, string i_VehicleType, string[] i_Args)
         {
             GarageEntry garageEntry;
             if (!this.r_VehiclesInGarage.TryGetValue(i_LicenseNumber, out garageEntry))
             {
-                garageEntry = AddVehicleToGarage(i_OwnerPhoneNumber, i_OwnerName, i_VehicleType, i_Args);
+                garageEntry = this.addVehicleToGarage(i_OwnerPhoneNumber, i_OwnerName, i_VehicleType, i_Args);
                 return string.Format("Received {0}", garageEntry);
             }
 
@@ -53,11 +78,20 @@ namespace Ex00.GarageLogic
             return string.Format("Already contains {0}", garageEntry);
         }
 
-        public IEnumerable<string> GetVehicleTypes()
+        /// <summary>
+        /// Get all vehicle types currently supported by the garage
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<string> GetSupportedVehicleTypes()
         {
             return r_VehicleMaker.GetAllSupportedTypesAndArguments().Select(i_Pair => i_Pair.Key);
         }
 
+        /// <summary>
+        /// Get the names of the necessary arguments to create a new vehicle of a given type.
+        /// </summary>
+        /// <param name="i_VehicleType"></param>
+        /// <returns></returns>
         public IEnumerable<string> GetNecessaryArgsForType(string i_VehicleType)
         {
             return r_VehicleMaker.GetAllSupportedTypesAndArguments()
@@ -65,11 +99,20 @@ namespace Ex00.GarageLogic
                 .Value.Select(i_Param => i_Param.Name);
         }
 
+        /// <summary>
+        /// Set the state of a vehicle
+        /// </summary>
+        /// <param name="i_LicenseNumber"></param>
+        /// <param name="i_NewVehicleState"></param>
         public void SetVehicleState(string i_LicenseNumber, eVehicleState i_NewVehicleState)
         {
             getEntryOrFail(i_LicenseNumber).VehicleState = i_NewVehicleState;
         }
 
+        /// <summary>
+        /// Completely fill the wheels of a given vehicle
+        /// </summary>
+        /// <param name="i_LicenseNumber"></param>
         public void FillWheelsToMax(string i_LicenseNumber)
         {
             foreach (var wheel in getEntryOrFail(i_LicenseNumber).Vehicle.Wheels)
@@ -78,11 +121,21 @@ namespace Ex00.GarageLogic
             }
         }
 
-        public IEnumerable<KeyValuePair<string, eVehicleState>> GetGarageVehiclesAndStates()
+        /// <summary>
+        /// Get all vehicles in the garage, and their respective states
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<KeyValuePair<string, string>> GetGarageVehiclesAndStates()
         {
-            return this.r_VehiclesInGarage.ToDictionary(i_Pair => i_Pair.Key, i_Pair => i_Pair.Value.VehicleState);
+            return this.r_VehiclesInGarage.ToDictionary(i_Pair => i_Pair.Key, i_Pair => i_Pair.Value.VehicleState.ToString());
         }
 
+        /// <summary>
+        /// Fill the gas in a regular vehicle
+        /// </summary>
+        /// <param name="i_LicenseNumber"></param>
+        /// <param name="i_FuelType"></param>
+        /// <param name="i_FuelAmountInLiters"></param>
         public void FillGas(string i_LicenseNumber, eFuelType i_FuelType, float i_FuelAmountInLiters)
         {
             GarageEntry garageEntry = getEntryOrFail(i_LicenseNumber);
@@ -95,6 +148,11 @@ namespace Ex00.GarageLogic
             fuelBasedVehicle.Engine.FillFuel(i_FuelAmountInLiters, i_FuelType);
         }
 
+        /// <summary>
+        /// Charge the engine of an electric vehicle
+        /// </summary>
+        /// <param name="i_LicenseNumber"></param>
+        /// <param name="i_ChargeHours"></param>
         public void ChargeEngine(string i_LicenseNumber, float i_ChargeHours)
         {
             GarageEntry garageEntry = getEntryOrFail(i_LicenseNumber);
@@ -107,11 +165,21 @@ namespace Ex00.GarageLogic
             electricVehicleVehicle.Engine.ChargeEngine(i_ChargeHours);
         }
 
+        /// <summary>
+        /// Check if vehicle is in garage
+        /// </summary>
+        /// <param name="i_LicenseNumber"></param>
+        /// <returns></returns>
         public bool IsVehicleInGarage(string i_LicenseNumber)
         {
             return this.r_VehiclesInGarage.ContainsKey(i_LicenseNumber);
         }
 
+        /// <summary>
+        /// Get the information of the given vehicle
+        /// </summary>
+        /// <param name="i_LicenseNumber"></param>
+        /// <returns></returns>
         public string GetVehicleInfo(string i_LicenseNumber)
         {
             return getEntryOrFail(i_LicenseNumber).Vehicle.ToString();

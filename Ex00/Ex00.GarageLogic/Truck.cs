@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Ex00.GarageLogic
 {
-    internal class Truck : Vehicle, ITruck
+    internal class Truck : Vehicle<GasEngine>, ITruck
     {
         public bool CarryingDangerousMaterials { get; private set; }
 
         public float MaximumAllowedCarryingWeight { get; private set; }
-
-        public GasEngine Engine { get { return r_engine as GasEngine; } }
 
         public Truck(
             string i_ModelName,
@@ -20,7 +17,9 @@ namespace Ex00.GarageLogic
             float i_MaximumAllowedWeight,
             eFuelType i_FuelType,
             float i_CurrentFuelAmount,
-            float i_MaximumFuelAmount) : base(i_ModelName,
+            float i_MaximumFuelAmount)
+            : base(
+                i_ModelName,
                 i_LicenseNumber,
                 i_Wheels,
                 new GasEngine(i_CurrentFuelAmount, i_MaximumFuelAmount, i_FuelType))
