@@ -36,9 +36,9 @@ namespace Ex00.GarageLogic
 
         public override string ToString()
         {
-            return "{0}, {1}allowed to carry dangerous materials, max allowed weight: {2}".FormatWith(
+            return "Truck\n{0}\n{1} to carry dangerous materials\nmax allowed weight: {2}".FormatWith(
                         base.ToString(),
-                        CarryingDangerousMaterials ? string.Empty : "not ",
+                        CarryingDangerousMaterials ? "allowed" : "not allowed",
                         MaximumAllowedCarryingWeight);
         }
     }

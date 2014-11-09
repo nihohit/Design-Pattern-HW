@@ -70,12 +70,12 @@ namespace Ex00.GarageLogic
             GarageEntry garageEntry;
             if (!this.r_VehiclesInGarage.TryGetValue(i_LicenseNumber, out garageEntry))
             {
-                garageEntry = this.addVehicleToGarage(i_OwnerPhoneNumber, i_OwnerName, i_VehicleType, i_Args);
-                return string.Format("Received {0}", garageEntry);
+                garageEntry = AddVehicleToGarage(i_OwnerPhoneNumber, i_OwnerName, i_VehicleType, i_Args);
+                return string.Format("{0}", garageEntry);
             }
 
             garageEntry.VehicleState = eVehicleState.UnderRepair;
-            return string.Format("Already contains {0}", garageEntry);
+            return string.Format("Already contains {0}\n{1}", i_LicenseNumber, garageEntry);
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace Ex00.GarageLogic
         /// <param name="i_LicenseNumber"></param>
         public void FillWheelsToMax(string i_LicenseNumber)
         {
-            foreach (var wheel in getEntryOrFail(i_LicenseNumber).Vehicle.Wheels)
+            foreach (Wheel wheel in getEntryOrFail(i_LicenseNumber).Vehicle.Wheels)
             {
                 wheel.FillToMax();
             }
@@ -136,7 +136,7 @@ namespace Ex00.GarageLogic
         /// <param name="i_LicenseNumber"></param>
         /// <param name="i_FuelType"></param>
         /// <param name="i_FuelAmountInLiters"></param>
-        public void FillGas(string i_LicenseNumber, eFuelType i_FuelType, float i_FuelAmountInLiters)
+        public void FillFuel(string i_LicenseNumber, eFuelType i_FuelType, float i_FuelAmountInLiters)
         {
             GarageEntry garageEntry = getEntryOrFail(i_LicenseNumber);
             IRegularVehicle fuelBasedVehicle = garageEntry.Vehicle as IRegularVehicle;
@@ -159,7 +159,7 @@ namespace Ex00.GarageLogic
             IElectricVehicle electricVehicleVehicle = garageEntry.Vehicle as IElectricVehicle;
             if (electricVehicleVehicle == null)
             {
-                throw new ArgumentException(string.Format("Vehicle {0} isn't electric", garageEntry));
+                throw new ArgumentException(string.Format("Vehicle {0} isn't electric", i_LicenseNumber));
             }
 
             electricVehicleVehicle.Engine.ChargeEngine(i_ChargeHours);

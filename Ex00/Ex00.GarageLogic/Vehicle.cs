@@ -40,11 +40,12 @@ namespace Ex00.GarageLogic
         public override string ToString()
         {
             return
-                "model name: {0}, license number: {1}, wheels state:{2}, engine: {3}".FormatWith(
-                    ModelName,
+                "license number: {0}\nmodel name: {1}\nnumber of wheels: {2}\n{3}\n{4}".FormatWith(
                     LicenseNumber,
-                    string.Join(",", Wheels.Select(i_Wheel => i_Wheel.ToString())),
-                    this.Engine.ToString());
+                    ModelName,
+                    Wheels.Count(),
+                    Wheels.ElementAt(0).ToString(),
+                    Engine.ToString());
         }
     }
 }

@@ -68,7 +68,7 @@ namespace Ex00.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("air pressure: {0}, manufacturer's name: {1}", CurrentAirPressure, ManufacturerName);
+            return string.Format("wheels manufacturer's name: {0}\nwheels air pressure: {1}\nwheels max air pressure: {2}", ManufacturerName, CurrentAirPressure, MaxAirPressure);
         }
 
         #endregion methods

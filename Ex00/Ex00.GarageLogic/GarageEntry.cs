@@ -34,11 +34,11 @@
         public override string ToString()
         {
             return string.Format(
-                "Owner name: {0}, Owner phone number: {1}, Vehicle state: {2}, {3}",
-                OwnerName,
-                OwnerPhoneNumber,
+                "{0}\nVehicle state: {1}\nOwner name: {2}\nOwner phone number: {3}",
+                Vehicle,
                 VehicleState,
-                Vehicle);
+                OwnerName,
+                OwnerPhoneNumber);
         }
     }
 

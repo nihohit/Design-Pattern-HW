@@ -46,7 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeStatePage.cs" />
+    <Compile Include="ChargeBatteryPage.cs" />
+    <Compile Include="ConsoleAppPage.cs" />
+    <Compile Include="DisplayGarageEntriesPage.cs" />
+    <Compile Include="DisplayVehicleFullInfoPage.cs" />
+    <Compile Include="FillFuelPage.cs" />
+    <Compile Include="FillVehicleWheelsPage.cs" />
     <Compile Include="GarageManagmentMain.cs" />
+    <Compile Include="AddVehiclePage.cs" />
+    <Compile Include="MessagePage.cs" />
+    <Compile Include="VehicleAlreadyExistsPage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
