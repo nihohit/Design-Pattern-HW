@@ -1,5 +1,4 @@
-﻿using Ex00.GarageLogic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,7 +37,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
             StringBuilder l_sb = new StringBuilder();
             l_sb.AppendLine("States:");
             m_NumberOfStates = 0;
-            l_sb.Append(GetEnumActionTexts(typeof(eVehicleState), 1, out m_NumberOfStates));
+            l_sb.Append(GetAsChoicesListTexts(GarageObject.GetVehiclesStates(), 1, out m_NumberOfStates));
             m_BodyText = l_sb.ToString();
         
         }
@@ -74,26 +73,24 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                 }
                 else
                 {
+                    string l_filterChoice = i_Input;
+                    int l_filterChoiceNumber;
+                    if (Int32.TryParse(i_Input, out l_filterChoiceNumber) &&
+                        l_filterChoiceNumber > 1 && l_filterChoiceNumber-1 < m_NumberOfStates)
+                    {
+                        l_filterChoice = GarageObject.GetVehiclesStates().ElementAt(l_filterChoiceNumber - 1);
+                    }
                     try
                     {
-                        eVehicleState l_FilterChoice = (eVehicleState)Convert.ToInt32(i_Input);
-                        try
-                        {
-                            GarageObject.SetVehicleState(VehicleLicence, l_FilterChoice);
-                            m_BodyText = string.Format("Vehicle state was successfully changed to {0}", l_FilterChoice);
-                        }
-                        catch (Exception ex)
-                        {
-                            m_BodyText = string.Format(c_GeneralErrorTextFormat, ex.Message);
-                        }
-                        m_ActionText = c_ReturnToMenuActionText;
-                        m_Finished = true;
+                        GarageObject.SetVehicleState(VehicleLicence, l_filterChoice);
+                        m_BodyText = string.Format("Vehicle state was successfully changed to '{0}'", l_filterChoice);
                     }
                     catch (Exception ex)
                     {
-                        m_BodyText = string.Format(c_InvalidActionNumErrorTextFormat, "state", "state", ex.Message, m_NumberOfStates);
-                        m_ActionText = "Choose state:";
+                        m_BodyText = string.Format(c_GeneralErrorTextFormat, ex.Message);
                     }
+                    m_ActionText = c_ReturnToMenuActionText;
+                    m_Finished = true;                 
                 }
             }
         }

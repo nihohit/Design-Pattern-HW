@@ -28,7 +28,7 @@ namespace Ex00.GarageLogic
         /// <param name="i_VehicleType">type of vehicle</param>
         /// <param name="i_Args">arguments for vehicle creation</param>
         /// <returns></returns>
-        private GarageEntry addVehicleToGarage(string i_OwnerPhoneNumber, string i_OwnerName, string i_VehicleType, string[] i_Args)
+        private GarageEntry AddVehicleToGarage(string i_OwnerPhoneNumber, string i_OwnerName, string i_VehicleType, string[] i_Args)
         {
             IVehicle vehicle = r_VehicleMaker.CreateVehicle(i_VehicleType, i_Args);
             GarageEntry garageEntry = new GarageEntry(i_OwnerName, i_OwnerPhoneNumber, vehicle);
@@ -70,7 +70,7 @@ namespace Ex00.GarageLogic
             GarageEntry garageEntry;
             if (!this.r_VehiclesInGarage.TryGetValue(i_LicenseNumber, out garageEntry))
             {
-                garageEntry = AddVehicleToGarage(i_OwnerPhoneNumber, i_OwnerName, i_VehicleType, i_Args);
+                garageEntry = this.AddVehicleToGarage(i_OwnerPhoneNumber, i_OwnerName, i_VehicleType, i_Args);
                 return string.Format("{0}", garageEntry);
             }
 
@@ -104,9 +104,25 @@ namespace Ex00.GarageLogic
         /// </summary>
         /// <param name="i_LicenseNumber"></param>
         /// <param name="i_NewVehicleState"></param>
-        public void SetVehicleState(string i_LicenseNumber, eVehicleState i_NewVehicleState)
+        public void SetVehicleState(string i_LicenseNumber, string i_NewVehicleState)
         {
-            getEntryOrFail(i_LicenseNumber).VehicleState = i_NewVehicleState;
+            eVehicleState newVehicleState;
+            try
+            {
+                newVehicleState = (eVehicleState)Enum.Parse(typeof(eVehicleState), i_NewVehicleState, true);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ArgumentNullException || ex is ArgumentException || ex is OverflowException)
+                {
+                    string validTypes = string.Join(",", Enum.GetNames(typeof(eVehicleState)));
+                    throw new FormatException(string.Format("Vehicle state must be from this list ({0})", validTypes));
+                }
+                else
+                    throw ex;
+            }
+
+            getEntryOrFail(i_LicenseNumber).VehicleState = newVehicleState;
         }
 
         /// <summary>
@@ -136,16 +152,38 @@ namespace Ex00.GarageLogic
         /// <param name="i_LicenseNumber"></param>
         /// <param name="i_FuelType"></param>
         /// <param name="i_FuelAmountInLiters"></param>
-        public void FillFuel(string i_LicenseNumber, eFuelType i_FuelType, float i_FuelAmountInLiters)
+        public void FillFuel(string i_LicenseNumber, string i_FuelType, float i_FuelAmountInLiters)
         {
             GarageEntry garageEntry = getEntryOrFail(i_LicenseNumber);
             IRegularVehicle fuelBasedVehicle = garageEntry.Vehicle as IRegularVehicle;
             if (fuelBasedVehicle == null)
             {
-                throw new ArgumentException(string.Format("Vehicle {0} isn't fuel based", garageEntry));
+                throw new ArgumentException(string.Format("Vehicle '{0}' isn't fuel based", i_LicenseNumber));
             }
 
-            fuelBasedVehicle.Engine.FillFuel(i_FuelAmountInLiters, i_FuelType);
+            string[] fuelTypes = Enum.GetNames(typeof(eFuelType));
+            string validTypes = string.Join(",", fuelTypes);
+
+            if (!fuelTypes.AsEnumerable().Contains(i_FuelType))
+                throw new FormatException(string.Format("Fuel type must be from this list ({0})", validTypes));
+
+            eFuelType fuelType;
+            try
+            {
+                fuelType = (eFuelType)Enum.Parse(typeof(eFuelType), i_FuelType, true);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ArgumentNullException || ex is ArgumentException || ex is OverflowException)
+                {
+                    throw new FormatException(string.Format("Fuel type must be from this list ({0})",validTypes));
+                }
+                else
+                    throw ex;
+            }
+
+
+            fuelBasedVehicle.Engine.FillFuel(i_FuelAmountInLiters, fuelType);
         }
 
         /// <summary>
@@ -183,6 +221,11 @@ namespace Ex00.GarageLogic
         public string GetVehicleInfo(string i_LicenseNumber)
         {
             return getEntryOrFail(i_LicenseNumber).Vehicle.ToString();
+        }
+
+        public IEnumerable<string> GetVehiclesStates()
+        {
+            return Enum.GetNames(typeof(eVehicleState)).AsEnumerable();
         }
 
         #endregion ICommunicateWithConsole

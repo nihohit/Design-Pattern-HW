@@ -96,7 +96,7 @@ namespace Ex00.GarageLogic
         /// </summary>
         /// <param name="i_LicenseNumber"></param>
         /// <param name="i_NewVehicleState"></param>
-        void SetVehicleState(string i_LicenseNumber, eVehicleState i_NewVehicleState);
+        void SetVehicleState(string i_LicenseNumber, string i_NewVehicleState);
 
         /// <summary>
         /// Completely fill the wheels of a given vehicle
@@ -116,7 +116,7 @@ namespace Ex00.GarageLogic
         /// <param name="i_LicenseNumber"></param>
         /// <param name="i_FuelType"></param>
         /// <param name="i_FuelAmountInLiters"></param>
-        void FillFuel(string i_LicenseNumber, eFuelType i_FuelType, float i_FuelAmountInLiters);
+        void FillFuel(string i_LicenseNumber, string i_FuelType, float i_FuelAmountInLiters);
 
         /// <summary>
         /// Charge the engine of an electric vehicle
@@ -131,5 +131,7 @@ namespace Ex00.GarageLogic
         /// <param name="i_LicenseNumber"></param>
         /// <returns></returns>
         string GetVehicleInfo(string i_LicenseNumber);
+
+        IEnumerable<string> GetVehiclesStates();
     }
 }

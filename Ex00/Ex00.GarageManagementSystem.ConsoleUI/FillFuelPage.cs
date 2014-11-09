@@ -1,5 +1,4 @@
-﻿using Ex00.GarageLogic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +11,6 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         private string m_BodyText;
         private string[] m_ActionTexts;
         private int m_CurActionIndex;
-        private int m_NumberOfFuelTypes;
 
         protected override string Title { get { return "Fill Vehicle Fuel"; } }        
         protected override string BodyText { get {return m_BodyText;} }
@@ -28,7 +26,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         }
 
         private string m_LicenseNumber;
-        private eFuelType m_FuelType;
+        private string m_FuelType;
 
         public FillFuelPage()
             : base()
@@ -46,18 +44,9 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         protected void ResetActionTexts()
         {
             string[] l_ActionTexts = { c_EnterVehicleLicenceNumberActionText, 
-                                       "Choose type of fuel: ",
-                                       "Enter amount (liters): "};
+                                       "Fuel type: ",
+                                       "Amount (liters): "};
             m_ActionTexts = l_ActionTexts;
-        }
-
-
-        private void UpdateFuelTypesText()
-        {
-            StringBuilder l_sb = new StringBuilder();
-            l_sb.AppendLine("Fuel types:");
-            l_sb.Append(GetEnumActionTexts(typeof(eFuelType), 1, out m_NumberOfFuelTypes));
-            m_BodyText = l_sb.ToString();
         }
 
         protected override void TakeAction(string i_Input)
@@ -117,7 +106,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                 else
                 {
                     m_LicenseNumber = i_Input;
-                    UpdateFuelTypesText();
+                    m_BodyText = "";
                     m_CurActionIndex++;
                 }
             }
@@ -130,16 +119,8 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         private void FuelTypeAction(string i_Input)
         {
             m_BodyText = "";
-            try
-            {
-                m_FuelType = (eFuelType)Convert.ToInt32(i_Input);
-                m_CurActionIndex++;
-            }
-            catch (Exception ex)
-            {
-                m_BodyText = string.Format(c_InvalidActionNumErrorTextFormat, "fuel type", "type", ex.Message);
-                m_CurActionIndex = -1;
-            }
+            m_FuelType = i_Input;
+            m_CurActionIndex++;
         }
 
         private void AmountAction(string i_Input)

@@ -130,7 +130,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         {
             try
             {
-                VehicleTypes = GarageObject.GetVehicleTypes().ToArray();
+                VehicleTypes = GarageObject.GetSupportedVehicleTypes().ToArray();
                 if (VehicleTypes != null && VehicleTypes.Length > 0)
                 {
                     StringBuilder l_sb = new StringBuilder();
@@ -286,7 +286,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
             {
                 try
                 {
-                    string l_msg = GarageObject.AddGarageEntry(LicenseNumber, OwnerPhoneNumber, OwnerName, VehicleType, NecessaryArgs);
+                    string l_msg = GarageObject.AddAVehicleToGarage(LicenseNumber, OwnerPhoneNumber, OwnerName, VehicleType, NecessaryArgs);
                     MessagePage l_MessagePage = new MessagePage("New vehicle added to the garage", l_msg);
                     l_MessagePage.OpenPage(GarageObject);
                     ShouldExitPage = true;

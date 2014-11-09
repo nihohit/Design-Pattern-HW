@@ -1,5 +1,4 @@
-﻿using Ex00.GarageLogic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +14,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         protected const string c_ReturnToMenuActionText = "Press 'Enter' to return to menu";
         protected const string c_GeneralErrorTextFormat = "Something went wrong (ERROR: {0})";
         protected const string c_CannotFindVehicleErrorTextFormat = "Could not find vehicle {0} in the garage records.";
-        protected const string c_InvalidActionNumErrorTextFormat = "Invalid {0}! Should choose {1} number from list. (ERROR: {2})";
+        protected const string c_InvalidActionNumErrorTextFormat = "Invalid {0}! Should choose {1} from list. (ERROR: {2})";
         protected const string c_InvalidInputGeneralErrorTextFormat = "Invalid {0}! (ERROR: {1})";
         protected const string ActionDescriptionFormat = "{0}) {1}"; 
 
@@ -39,7 +38,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         #endregion abstract
 
         protected string TitleLine { get { return new String('-', Title.Count()); } }
-        protected Garage GarageObject { get; private set; }
+        protected Ex00.GarageLogic.Garage GarageObject { get; private set; }
 
         //default value set at the member
         protected bool ShouldExitPage { get { return m_ShouldExitPage; } set { m_ShouldExitPage = value; } }
@@ -54,7 +53,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         #region Methods
         #region public
 
-        public void OpenPage(Garage i_GarageObject)
+        public void OpenPage(Ex00.GarageLogic.Garage i_GarageObject)
         {
             GarageObject = i_GarageObject;
 
@@ -71,17 +70,23 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                     ShouldClearPageText = false;
                 }
 
+                bool l_ShouldReadLine = false;
                 if (!string.IsNullOrWhiteSpace(BodyText))
                 {
                     Console.WriteLine(BodyText);
                     Console.WriteLine();
+                    l_ShouldReadLine = true;
                 }
                 if (!string.IsNullOrWhiteSpace(ActionText))
                 {
                     Console.Write(ActionText);
+                    l_ShouldReadLine = true;
                 }
-                string l_Input = Console.ReadLine();
-                Console.WriteLine();
+
+                string l_Input = l_ShouldReadLine ? Console.ReadLine() : "";
+                if (l_ShouldReadLine)
+                    Console.WriteLine();
+
                 TakeAction(l_Input);
             }
 
@@ -111,19 +116,19 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
             return l_IsVehicleInGarage;
         }
 
-        protected string GetEnumActionTexts(Type i_EnumType, int i_StartIndex, out int o_NumberOfEnumNames)
+        
+        protected string GetAsChoicesListTexts(IEnumerable<string> i_choices, int i_StartIndex, out int o_NumberOfChoices)
         {
-            string[] l_EnumNames = Enum.GetNames(i_EnumType);
             StringBuilder l_sb = new StringBuilder();
-            o_NumberOfEnumNames = 0;
-            foreach (string name in l_EnumNames)
+            o_NumberOfChoices = 0;
+            foreach (string choice in i_choices)
             {
-                l_sb.AppendLine(string.Format(ActionDescriptionFormat, o_NumberOfEnumNames + i_StartIndex, name));
-                o_NumberOfEnumNames++;
+                l_sb.AppendLine(string.Format(ActionDescriptionFormat, o_NumberOfChoices + i_StartIndex, choice));
+                o_NumberOfChoices++;
             }
             return l_sb.ToString();
         }
-
+        
         #endregion protected
         #endregion Methods
 
