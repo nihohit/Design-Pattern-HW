@@ -80,7 +80,15 @@
 
             var methodParameters = method.GetParameters();
 
-            return (IVehicle)method.Invoke(this, parseParameters(methodParameters, i_Args));
+            try
+            {
+                return (IVehicle)method.Invoke(this, parseParameters(methodParameters, i_Args));
+            }
+            catch (Exception e)
+            {
+
+                throw e.InnerException;
+            }
         }
 
         /// <summary>

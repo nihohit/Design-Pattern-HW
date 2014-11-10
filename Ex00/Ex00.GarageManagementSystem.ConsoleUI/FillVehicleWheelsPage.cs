@@ -1,70 +1,87 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex00.GarageManagementSystem.ConsoleUI
 {
-    public class FillVehicleWheelsPage: ConsoleAppPage
+    public class FillVehicleWheelsPage : ConsoleAppPage
     {
         private string m_BodyText;
         private string m_ActionText;
         private bool m_Finished;
-        protected override string Title { get { return "Fill Vehicle Tires"; } }        
-        protected override string BodyText { get {return m_BodyText;} }
-        protected override string ActionText { get {return m_ActionText;} }
 
-        public FillVehicleWheelsPage()
-            : base()
+        protected override string Title
         {
-            ResetPageValues();
+            get
+            {
+                return "Fill Vehicle Tires";
+            }
         }
 
-        private void ResetPageValues()
+        protected override string BodyText
+        {
+            get
+            {
+                return m_BodyText;
+            }
+        }
+
+        protected override string ActionText
+        {
+            get
+            {
+                return m_ActionText;
+            }
+        }
+
+        public FillVehicleWheelsPage()
+        {
+            this.resetPageValues();
+        }
+
+        private void resetPageValues()
         {
             m_Finished = false;
-            m_BodyText = string.Format("Lets fill up the tires. (to cancel enter '{0}')", c_CancelActionString);
-            m_ActionText = c_EnterVehicleLicenceNumberActionText;
+            m_BodyText = string.Format("Lets fill up the tires. (to cancel enter '{0}')", k_CancelActionString);
+            m_ActionText = k_EnterVehicleLicenceNumberActionText;
         }
 
         protected override void TakeAction(string i_Input)
         {
-            if (i_Input == c_CancelActionString || m_Finished)
+            if (i_Input == k_CancelActionString || m_Finished)
             {
                 ShouldExitPage = true;
-                ResetPageValues();
+                this.resetPageValues();
             }
-            else 
+            else
             {
-                string l_ErrorMsg;
-                bool l_IsVehicleInGarage = IsVehicleInGarage(i_Input, out l_ErrorMsg);
-                if (string.IsNullOrEmpty(l_ErrorMsg))
+                string errorMsg;
+                bool isVehicleInGarage = IsVehicleInGarage(i_Input, out errorMsg);
+                if (string.IsNullOrEmpty(errorMsg))
                 {
-                    if (!l_IsVehicleInGarage)
+                    if (!isVehicleInGarage)
                     {
-                        m_BodyText = string.Format(c_CannotFindVehicleErrorTextFormat, i_Input);
+                        m_BodyText = string.Format(k_CannotFindVehicleErrorTextFormat, i_Input);
                     }
                     else
                     {
-                        try 
+                        try
                         {
                             m_BodyText = "Tires filled up :)";
                             GarageObject.FillWheelsToMax(i_Input);
-                            m_ActionText = c_ReturnToMenuActionText;
+                            m_ActionText = k_ReturnToMenuActionText;
                         }
                         catch (Exception ex)
                         {
-                            m_BodyText = string.Format(c_GeneralErrorTextFormat, ex.Message);
-                            m_ActionText = c_ReturnToMenuActionText;
+                            m_BodyText = string.Format(k_GeneralErrorTextFormat, ex.Message);
+                            m_ActionText = k_ReturnToMenuActionText;
                         }
+
                         m_Finished = true;
                     }
                 }
                 else
                 {
-                    m_BodyText = l_ErrorMsg;   
-                }            
+                    m_BodyText = errorMsg;
+                }
             }
         }
     }

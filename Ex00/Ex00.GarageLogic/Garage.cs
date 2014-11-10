@@ -28,7 +28,7 @@ namespace Ex00.GarageLogic
         /// <param name="i_VehicleType">type of vehicle</param>
         /// <param name="i_Args">arguments for vehicle creation</param>
         /// <returns></returns>
-        private GarageEntry AddVehicleToGarage(string i_OwnerPhoneNumber, string i_OwnerName, string i_VehicleType, string[] i_Args)
+        private GarageEntry addVehicleToGarage(string i_OwnerPhoneNumber, string i_OwnerName, string i_VehicleType, string[] i_Args)
         {
             IVehicle vehicle = r_VehicleMaker.CreateVehicle(i_VehicleType, i_Args);
             GarageEntry garageEntry = new GarageEntry(i_OwnerName, i_OwnerPhoneNumber, vehicle);
@@ -70,7 +70,7 @@ namespace Ex00.GarageLogic
             GarageEntry garageEntry;
             if (!this.r_VehiclesInGarage.TryGetValue(i_LicenseNumber, out garageEntry))
             {
-                garageEntry = this.AddVehicleToGarage(i_OwnerPhoneNumber, i_OwnerName, i_VehicleType, i_Args);
+                garageEntry = this.addVehicleToGarage(i_OwnerPhoneNumber, i_OwnerName, i_VehicleType, i_Args);
                 return string.Format("{0}", garageEntry);
             }
 
@@ -118,8 +118,8 @@ namespace Ex00.GarageLogic
                     string validTypes = string.Join(",", Enum.GetNames(typeof(eVehicleState)));
                     throw new FormatException(string.Format("Vehicle state must be from this list ({0})", validTypes));
                 }
-                else
-                    throw ex;
+
+                throw;
             }
 
             getEntryOrFail(i_LicenseNumber).VehicleState = newVehicleState;
@@ -165,7 +165,9 @@ namespace Ex00.GarageLogic
             string validTypes = string.Join(",", fuelTypes);
 
             if (!fuelTypes.AsEnumerable().Contains(i_FuelType))
+            {
                 throw new FormatException(string.Format("Fuel type must be from this list ({0})", validTypes));
+            }
 
             eFuelType fuelType;
             try
@@ -176,12 +178,11 @@ namespace Ex00.GarageLogic
             {
                 if (ex is ArgumentNullException || ex is ArgumentException || ex is OverflowException)
                 {
-                    throw new FormatException(string.Format("Fuel type must be from this list ({0})",validTypes));
+                    throw new FormatException(string.Format("Fuel type must be from this list ({0})", validTypes));
                 }
-                else
-                    throw ex;
-            }
 
+                throw;
+            }
 
             fuelBasedVehicle.Engine.FillFuel(i_FuelAmountInLiters, fuelType);
         }

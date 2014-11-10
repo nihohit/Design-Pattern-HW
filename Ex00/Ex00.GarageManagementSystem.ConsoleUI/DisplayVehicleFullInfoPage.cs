@@ -1,26 +1,47 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex00.GarageManagementSystem.ConsoleUI
 {
     public class DisplayVehicleFullInfoPage : ConsoleAppPage
     {
-        private string m_BodyText = "";
-        private string m_ActionText = "";
-        protected override string Title { get { return "Vehicle Full Info"; } }        
-        protected override string BodyText { get {return m_BodyText;} }
-        protected override string ActionText { get {return m_ActionText;} }
+        private string m_BodyText = string.Empty;
+        private string m_ActionText = string.Empty;
+
+        protected override string Title
+        {
+            get
+            {
+                return "Vehicle Full Info";
+            }
+        }
+
+        protected override string BodyText
+        {
+            get
+            {
+                return m_BodyText;
+            }
+        }
+
+        protected override string ActionText
+        {
+            get
+            {
+                return m_ActionText;
+            }
+        }
+
         protected bool LegalVehicleLicence { get; set; }
-        private string m_VehicleLicence = null;
-        public string VehicleLicence 
+
+        private string m_VehicleLicence;
+
+        public string VehicleLicence
         {
             get
             {
                 return m_VehicleLicence;
             }
+
             set
             {
                 if (m_VehicleLicence != value)
@@ -32,23 +53,22 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         }
 
         public DisplayVehicleFullInfoPage()
-            : base()
         {
-            VehicleLicence = "";
+            VehicleLicence = string.Empty;
         }
-        
+
         protected void UpdatePageTexts()
         {
             LegalVehicleLicence = false;
             if (!string.IsNullOrEmpty(VehicleLicence))
             {
-                string l_ErrorMsg;
-                bool l_IsVehicleInGarage = IsVehicleInGarage(VehicleLicence, out l_ErrorMsg);
-                if (string.IsNullOrEmpty(l_ErrorMsg))
+                string errorMsg;
+                bool isVehicleInGarage = IsVehicleInGarage(VehicleLicence, out errorMsg);
+                if (string.IsNullOrEmpty(errorMsg))
                 {
-                    if (!l_IsVehicleInGarage)
+                    if (!isVehicleInGarage)
                     {
-                        m_BodyText = string.Format(c_CannotFindVehicleErrorTextFormat, VehicleLicence);
+                        m_BodyText = string.Format(k_CannotFindVehicleErrorTextFormat, VehicleLicence);
                     }
                     else
                     {
@@ -59,16 +79,17 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                         }
                         catch (Exception ex)
                         {
-                            m_BodyText = string.Format(c_GeneralErrorTextFormat, ex.Message);
+                            m_BodyText = string.Format(k_GeneralErrorTextFormat, ex.Message);
                         }
                     }
                 }
-                m_ActionText = c_ReturnToMenuActionText;
+
+                m_ActionText = k_ReturnToMenuActionText;
             }
             else
             {
-                m_BodyText = "";
-                m_ActionText = c_EnterVehicleLicenceNumberActionText;
+                m_BodyText = string.Empty;
+                m_ActionText = k_EnterVehicleLicenceNumberActionText;
             }
         }
 
@@ -83,7 +104,5 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                 ShouldExitPage = true;
             }
         }
-
-
     }
 }

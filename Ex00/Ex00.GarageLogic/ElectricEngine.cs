@@ -26,7 +26,7 @@
         #endregion properties
 
         public ElectricEngine(float i_CurrentCharge, float i_MaximumCharge)
-            : base(i_CurrentCharge, i_MaximumCharge)
+            : base(i_CurrentCharge, i_MaximumCharge, "charge")
         {
         }
 

@@ -27,7 +27,7 @@ namespace Ex00.GarageLogic
         #endregion properties
 
         public GasEngine(float i_CurrentFuelAmount, float i_MaximumFuelAmount, eFuelType i_FuelType) :
-            base(i_CurrentFuelAmount, i_MaximumFuelAmount)
+            base(i_CurrentFuelAmount, i_MaximumFuelAmount, "fuel")
         {
             EngineFuelType = i_FuelType;
         }

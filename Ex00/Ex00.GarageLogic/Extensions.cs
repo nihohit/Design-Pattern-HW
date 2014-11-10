@@ -57,6 +57,5 @@
         {
             return string.Format(i_Str, i_FormattingInfo);
         }
-
     }
 }

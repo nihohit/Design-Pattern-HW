@@ -1,15 +1,14 @@
-﻿using System;
-using Ex00.GarageLogic;
+﻿using Ex00.GarageLogic;
 
 namespace Ex00.GarageManagementSystem.ConsoleUI
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        public static void Main(string[] i_Args)
         {
-            Garage l_GarageObject = new Garage();
-            GarageManagmentMainPage l_GarageManagmentMainPage = new GarageManagmentMainPage();
-            l_GarageManagmentMainPage.OpenPage(l_GarageObject);
+            Garage garageObject = new Garage();
+            GarageManagmentMainPage garageManagmentMainPage = new GarageManagmentMainPage();
+            garageManagmentMainPage.OpenPage(garageObject);
         }
     }
 }
