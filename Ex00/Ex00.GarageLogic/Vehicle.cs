@@ -44,7 +44,7 @@ namespace Ex00.GarageLogic
                     LicenseNumber,
                     ModelName,
                     Wheels.Count(),
-                    Wheels.ElementAt(0).ToString(),
+                    Wheels.First().ToString(),
                     Engine.ToString());
         }
     }

@@ -46,7 +46,7 @@ namespace Ex00.GarageLogic
         /// <returns></returns>
         public static IEnumerable<Wheel> CreateWheels(string i_ManufacturerName, float i_CurrentWheelPressure, float i_MaxAirPressure, int i_Amount)
         {
-            return Enumerable.Range(0, i_Amount).Select(i_Num => new Wheel(i_ManufacturerName, i_CurrentWheelPressure, i_MaxAirPressure));
+            return Enumerable.Range(0, i_Amount).Select(i_Num => new Wheel(i_ManufacturerName, i_CurrentWheelPressure, i_MaxAirPressure)).ToList();
         }
 
         /// <summary>
