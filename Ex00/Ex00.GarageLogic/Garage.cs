@@ -106,10 +106,11 @@ namespace Ex00.GarageLogic
         /// <param name="i_NewVehicleState"></param>
         public void SetVehicleState(string i_LicenseNumber, string i_NewVehicleState)
         {
+            const bool v_IgnoreCase = true;
             eVehicleState newVehicleState;
             try
             {
-                newVehicleState = (eVehicleState)Enum.Parse(typeof(eVehicleState), i_NewVehicleState, true);
+                newVehicleState = (eVehicleState)Enum.Parse(typeof(eVehicleState), i_NewVehicleState, v_IgnoreCase);
             }
             catch (Exception exception)
             {
@@ -161,9 +162,10 @@ namespace Ex00.GarageLogic
                 throw new ArgumentException(string.Format("Vehicle '{0}' isn't fuel based", i_LicenseNumber));
             }
 
+            const bool v_IgnoreCase = true;
             if (Extensions.ValidateParamValueIsEnumName("Fuel type", typeof(eFuelType), i_FuelType)) // method throw FormatException if i_FuelType is not a eFuelType enum name
             {
-                eFuelType fuelType = (eFuelType)Enum.Parse(typeof(eFuelType), i_FuelType, true); //will succesed to parse becouse validated
+                eFuelType fuelType = (eFuelType)Enum.Parse(typeof(eFuelType), i_FuelType, v_IgnoreCase); //will succesed to parse becouse validated
                 fuelBasedVehicle.Engine.FillFuel(i_FuelAmountInLiters, fuelType);
             }
 

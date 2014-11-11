@@ -147,12 +147,12 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                 }
                 catch (Exception exception)
                 {
-                    m_BodyText =  GetExceptionMessage(exception);
+                    m_BodyText = GetExceptionMessage(exception);
                     m_CurActionIndex = -1;
                 }
             }
         }
-        
+
         #endregion protected
         #endregion override
 
@@ -190,7 +190,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
             }
             catch (Exception exception)
             {
-                m_BodyText =  GetExceptionMessage(exception);
+                m_BodyText = GetExceptionMessage(exception);
                 m_CurActionIndex = -1;
             }
         }
@@ -205,7 +205,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
             m_ActionTexts = actionTexts;
             m_NumberOfResetActionTexts = actionTexts.Length;
         }
-        
+
         private void licenceNumberAction(string i_Input)
         {
             string errorMsg;
@@ -238,7 +238,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
             try
             {
                 int vehicleTypeChoice = Convert.ToInt32(i_Input);
-                if (this.vehicleTypes == null || this.vehicleTypes.Length < 1) 
+                if (this.vehicleTypes == null || this.vehicleTypes.Length < 1)
                 {
                     this.updateVehicleTypesAndText();
                 }
@@ -321,7 +321,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                 }
             }
         }
-        
+
         private void exitPage()
         {
             ShouldExitPage = true;
