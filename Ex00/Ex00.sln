@@ -1,11 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex00.GarageLogic", "Ex00.GarageLogic\Ex00.GarageLogic.csproj", "{D6D32C87-84F7-4155-9CB8-3830AA68D797}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex00.GarageManagementSystem.ConsoleUI", "Ex00.GarageManagementSystem.ConsoleUI\Ex00.GarageManagementSystem.ConsoleUI.csproj", "{9236F1D9-A7F9-41BE-9797-11530F028995}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B6428077-5351-4349-9381-EE06CC2B105C}"
+	ProjectSection(SolutionItems) = preProject
+		ExerciseCheckingReport.txt = ExerciseCheckingReport.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
