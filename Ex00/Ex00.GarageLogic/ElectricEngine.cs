@@ -7,19 +7,25 @@
     {
         #region properties
 
+        /// <summary>
+        /// get battery time left in hours
+        /// </summary>
         public float CurrentChargeAmount
         {
             get
             {
-                return CurrentEnergySourceAmount;
+                return CurrentEnergySourceAmount / 60;
             }
         }
 
+        /// <summary>
+        /// get max battery time in hours
+        /// </summary>
         public float MaximumChargeAmount
         {
             get
             {
-                return MaximumEnergySourceAmount;
+                return MaximumEnergySourceAmount / 60;
             }
         }
 
@@ -33,15 +39,15 @@
         /// <summary>
         /// Charge the engine
         /// </summary>
-        /// <param name="i_ChargeHours">amount of charging hours</param>
-        public void ChargeEngine(float i_ChargeHours)
+        /// <param name="i_ChargeMinutes">amount of charging minutes</param>
+        public void ChargeEngine(float i_ChargeMinutes)
         {
-            Fill(i_ChargeHours);
+            Fill(i_ChargeMinutes);
         }
 
         public override string ToString()
         {
-            return string.Format("charge amount: {0}", this.CurrentChargeAmount);
+            return string.Format("Remaining battery time: {0} hours ({1}%)", this.CurrentChargeAmount, GetFillPercentage());
         }
     }
 }

@@ -55,22 +55,19 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         {
             try
             {
-                int choice = Convert.ToInt32(i_Input);
-                switch (choice)
+                if (string.Compare("1", i_Input, StringComparison.OrdinalIgnoreCase) == 0 || string.Compare("yes", i_Input, StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    case 1:
-                        DisplayVehicleFullInfoPage displayGarageEntryPage = new DisplayVehicleFullInfoPage();
-                        displayGarageEntryPage.VehicleLicence = VehicleLicence;
-                        displayGarageEntryPage.OpenPage(GarageObject);
-                        break;
-
-                    case 2:
-                        // do nothing, just exit
-                        break;
-
-                    default:
-                        m_BodyText = string.Format(k_InvalidInputGeneralErrorTextFormat, "input", "Action choosen is not a number between 1 and 2");
-                        break;
+                    DisplayVehicleFullInfoPage displayGarageEntryPage = new DisplayVehicleFullInfoPage();
+                    displayGarageEntryPage.VehicleLicence = VehicleLicence;
+                    displayGarageEntryPage.OpenPage(GarageObject);
+                }
+                else if (string.Compare("2", i_Input, StringComparison.OrdinalIgnoreCase) == 0 || string.Compare("no", i_Input, StringComparison.OrdinalIgnoreCase) == 0)
+                {
+                    // do nothing, just exit
+                }
+                else
+                {
+                    throw new FormatException(k_ActionOutOfActionListErrorTextFormat);
                 }
 
                 ShouldExitPage = true;

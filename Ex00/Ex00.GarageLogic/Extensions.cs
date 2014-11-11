@@ -46,7 +46,7 @@ namespace Ex00.GarageLogic
         {
             if (i_MinValue > i_Value || i_Value > i_MaxValue)
             {
-                throw new ValueOutOfRangeException(i_Value, i_MinValue, i_MaxValue);
+                throw new ValueOutOfRangeException(i_MinValue, i_MaxValue, i_Value);
             }
         }
 
@@ -101,15 +101,22 @@ namespace Ex00.GarageLogic
         /// <param name="i_EnumType"></param>
         /// <param name="i_Value"></param>
         /// <returns></returns>
-        public static bool ValidateParamValueIsEnumName(string i_ParmDisplayName, Type i_EnumType, string i_Value)
+        public static bool ValidateParamValueIsEnumName(string i_ParmDisplayName, Type i_EnumType, string i_Value, out string o_EnumStringValue)
         {
             string[] enumTypes = Enum.GetNames(i_EnumType);
-            string validTypes = string.Join(",", enumTypes);
-            if (!enumTypes.Contains(i_Value, StringComparer.OrdinalIgnoreCase))
+            if (string.IsNullOrEmpty(i_Value))
             {
+                throw new FormatException(string.Format("{0} cannot be empty", i_ParmDisplayName));
+            }
+            
+            int valueNameIndex = Array.FindIndex(enumTypes, 0, i_name => 0 == string.Compare(i_name, i_Value.Trim(), StringComparison.OrdinalIgnoreCase));
+            if (valueNameIndex == -1)
+            {
+                string validTypes = string.Join(",", enumTypes);
                 throw new FormatException(string.Format("{0} must be one of these: {1}", i_ParmDisplayName, validTypes));
             }
 
+            o_EnumStringValue = enumTypes[valueNameIndex];
             return true;
         }
     }

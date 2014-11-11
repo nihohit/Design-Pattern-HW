@@ -37,7 +37,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         {
             get
             {
-                return "Choose an action: ";
+                return "Choose an action (by index): ";
             }
         }
 
@@ -100,7 +100,8 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                         break;
 
                     default:
-                        throw new FormatException(k_ActionOutOfActionListErrorTextFormat);
+                        // should never get here (by code logic)! if got here something gone really wrong :(
+                        throw new Exception("Unknown action");
                 }
 
                 this.updateBodyTextToActionsList();

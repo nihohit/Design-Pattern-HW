@@ -46,7 +46,7 @@ namespace Ex00.GarageLogic
         /// <returns></returns>
         public float GetFillPercentage()
         {
-            return 100 * MaximumEnergySourceAmount / CurrentEnergySourceAmount;
+            return 100 * CurrentEnergySourceAmount / MaximumEnergySourceAmount;
         }
 
         /// <summary>

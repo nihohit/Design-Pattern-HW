@@ -22,7 +22,7 @@
         // car consts
         private const float k_CarFuelEngineCapacity = 44;
         private const float k_CarMaxWheelPressure = 27;
-        private const float k_CarMaxElectricEngineCharge = 3.3f;
+        private const float k_CarMaxElectricEngineCharge = 60 * 3.2f;
         private const int k_CarAmountOfWheels = 4;
         private const eFuelType k_CarFuelType = eFuelType.Octan98;
 
@@ -30,7 +30,7 @@
         private const eFuelType k_BikeFuelType = eFuelType.Octan95;
         private const int k_BikeAmountOfWheels = 2;
         private const float k_BikeFuelEngineCapacity = 7.2f;
-        private const float k_BikeMaxElectricEngineCharge = 2.4f;
+        private const float k_BikeMaxElectricEngineCharge = 60 * 2.4f;
         private const float k_BikekMaxWheelPressure = 33;
 
         // reflection consts
@@ -122,20 +122,28 @@
             return requestedParams;
         }
 
-        private object convertValue(string i_ArgumentName, Type i_ArgumentType, string i_AargumenValue)
+        private object convertValue(string i_ArgumentName, Type i_ArgumentType, string i_ArgumenValue)
         {
             object argumenValue;
             string i_ArgumentDisplayName = Extensions.ToFirstLatterUpperRestLower(Extensions.GetDisplayNameOfArgument(i_ArgumentName));
-            
-            if (i_ArgumentType.BaseType == typeof (Enum))
+            string argumenValueString;
+            if (string.IsNullOrEmpty(i_ArgumenValue))
             {
-                Extensions.ValidateParamValueIsEnumName(i_ArgumentDisplayName, i_ArgumentType, i_AargumenValue);
+                throw new FormatException(string.Format("{0} cannot be empty", i_ArgumentDisplayName));
+            }
+            else if (i_ArgumentType.BaseType == typeof(Enum))
+            {
+                Extensions.ValidateParamValueIsEnumName(i_ArgumentDisplayName, i_ArgumentType, i_ArgumenValue, out argumenValueString);
+            }
+            else
+            {
+                argumenValueString = i_ArgumenValue;
             }
 
             TypeConverter converter = TypeDescriptor.GetConverter(i_ArgumentType);
             try
             {
-                argumenValue = converter.ConvertFrom(i_AargumenValue);
+                argumenValue = converter.ConvertFrom(argumenValueString);
             }
             catch (Exception exception)
             {
@@ -147,18 +155,19 @@
 
         private string getBetterErrorMsgForConvertError(string i_ArgumentDisplayName, TypeConverter i_Converter, string i_OrigErrorMsg)
         {
-            string msgSuffix  = "";
+            string msgSuffix = string.Empty;
             if (i_Converter.GetStandardValuesSupported())
             {
-                string validValues = "";
+                string validValues = string.Empty;
                 foreach (var value in i_Converter.GetStandardValues())
                 {
                     validValues += value.ToString();
                     validValues += ", ";
                 }
+
                 validValues = validValues.Trim();
                 validValues = validValues.TrimEnd(',');
-                msgSuffix = "valid values are: {0}".FormatWith(validValues);
+                msgSuffix = "\nValid values are: {0}".FormatWith(validValues);
             }
             else if (i_Converter is System.ComponentModel.SingleConverter)
             {

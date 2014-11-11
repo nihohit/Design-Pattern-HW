@@ -5,9 +5,9 @@
     /// </summary>
     public enum eVehicleState
     {
-        UnderRepair = 1,
-        Repaired = 2,
-        Paid = 3
+        UnderRepair,
+        Repaired,
+        Paid
     }
 
     /// <summary>

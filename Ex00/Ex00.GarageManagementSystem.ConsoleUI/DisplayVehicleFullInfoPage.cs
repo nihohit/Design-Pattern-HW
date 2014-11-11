@@ -2,11 +2,17 @@
 
 namespace Ex00.GarageManagementSystem.ConsoleUI
 {
+    /// <summary>
+    /// Console page that displays a vehicle fuul info
+    /// </summary>
     public class DisplayVehicleFullInfoPage : ConsoleAppPage
     {
+        #region members
         private string m_BodyText = string.Empty;
         private string m_ActionText = string.Empty;
-
+        
+        #endregion members
+        #region protected override properties
         protected override string Title
         {
             get
@@ -31,15 +37,57 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
             }
         }
         
-        private bool Finished { get; set; }
-        public string VehicleLicence { get; set; }
-     
+        #endregion protected override properties
+        #region private properties
+        private bool finished
+        {
+            get;
+            set;
+        }
+        #endregion private properties
+        #region public properties
+        public string VehicleLicence
+        {
+            get; 
+            set;
+        }
+
+        #endregion public properties
+        #region contractor
         public DisplayVehicleFullInfoPage()
         {
             VehicleLicence = string.Empty;
+            this.finished = false;
         }
 
-        protected void UpdatePageTexts()
+        #endregion contractor
+        #region protected override methods
+        protected override void TakeAction(string i_Input)
+        {
+            if (string.IsNullOrEmpty(VehicleLicence))
+            {
+                VehicleLicence = i_Input;
+            }
+
+            if (this.finished)
+            {
+                exitPage();
+            }
+
+            try
+            {
+                updatePageTexts();
+            }
+            catch (Exception exception)
+            {
+                m_BodyText = GetExceptionMessage(exception);
+                m_ActionText = k_ReturnToMenuActionText;
+            }
+        }
+
+        #endregion protected override methods
+        #region private methods
+        private void updatePageTexts()
         {
             if (!string.IsNullOrEmpty(VehicleLicence))
             {
@@ -47,25 +95,18 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                 bool isVehicleInGarage = IsVehicleInGarage(VehicleLicence, out errorMsg);
                 if (string.IsNullOrEmpty(errorMsg))
                 {
-                    if (!isVehicleInGarage)
+                    if (isVehicleInGarage)
                     {
-                        m_BodyText = string.Format(k_CannotFindVehicleErrorTextFormat, VehicleLicence);
+                        m_BodyText = GarageObject.GetVehicleInfo(VehicleLicence);
                     }
                     else
                     {
-                        try
-                        {
-                            m_BodyText = GarageObject.GetVehicleInfo(VehicleLicence);
-                        }
-                        catch (Exception exception)
-                        {
-                            m_BodyText = GetExceptionMessage(exception);
-                        }
+                        throw new Exception(string.Format(k_CannotFindVehicleErrorTextFormat, VehicleLicence));
                     }
                 }
 
                 m_ActionText = k_ReturnToMenuActionText;
-                Finished = true;
+                this.finished = true;
             }
             else
             {
@@ -74,20 +115,12 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
             }
         }
 
-        protected override void TakeAction(string i_Input)
-        { 
-            if (string.IsNullOrEmpty(VehicleLicence))
-            {
-                VehicleLicence = i_Input;
-            }
-
-            if (Finished)
-            {
-                Finished = false;
-                ShouldExitPage = true;
-            }
-
-            UpdatePageTexts();
+        private void exitPage()
+        {
+            this.finished = false;
+            ShouldExitPage = true;
         }
+
+        #endregion private methods
     }
 }

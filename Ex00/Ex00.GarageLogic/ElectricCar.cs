@@ -13,8 +13,8 @@ namespace Ex00.GarageLogic
             IEnumerable<Wheel> i_Wheels,
             eColor i_Color,
             int i_DoorsAmount,
-            float i_MaximumCharge,
-            float i_CurrentCharge)
+            float i_CurrentCharge,
+            float i_MaximumCharge)
             : base(
                 i_ModelName,
                 i_LicenseNumber,

@@ -2,12 +2,20 @@
 
 namespace Ex00.GarageManagementSystem.ConsoleUI
 {
+    /// <summary>
+    /// Console page in which the application user fills vehicle fuel tank. 
+    /// </summary>
     public class FillFuelPage : ConsoleAppPage
     {
+        #region members
         private string m_BodyText;
         private string[] m_ActionTexts;
         private int m_CurActionIndex;
+        private string m_LicenseNumber;
+        private string m_FuelType;
 
+        #endregion members
+        #region protected override properties
         protected override string Title
         {
             get
@@ -37,33 +45,20 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
             }
         }
 
-        private string m_LicenseNumber;
-        private string m_FuelType;
-
+        #endregion protected override properties
+        #region contractor
         public FillFuelPage()
         {
             this.resetPageValues();
         }
 
-        private void resetPageValues()
-        {
-            m_BodyText = string.Format("Filling vehicle fuel (to cancel enter '{0}')", k_CancelActionString);
-            m_CurActionIndex = 0;
-            ResetActionTexts();
-        }
-
-        protected void ResetActionTexts()
-        {
-            string[] actionTexts = { k_VehicleLicenceNumberActionText, "Fuel type: ", "Amount (liters): " };
-            m_ActionTexts = actionTexts;
-        }
-
+        #endregion contractor
+        #region override protected methods
         protected override void TakeAction(string i_Input)
         {
             if (i_Input == k_CancelActionString)
             {
-                ShouldExitPage = true;
-                this.resetPageValues();
+                this.exitPage();
             }
             else
             {
@@ -72,27 +67,26 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                     switch (m_CurActionIndex)
                     {
                         case 0:
-                            this.licenceNumberAction(i_Input);
+                            licenceNumberAction(i_Input);
                             break;
 
                         case 1:
-                            this.fuelTypeAction(i_Input);
+                            fuelTypeAction(i_Input);
                             break;
 
                         case 2:
-                            this.amountAction(i_Input);
+                            amountAction(i_Input);
                             break;
 
                         default:
                             if (m_CurActionIndex == -1)
                             {
-                                ShouldExitPage = true;
-                                this.resetPageValues();
+                                exitPage();
                             }
                             else
                             {
-                                m_BodyText = k_ActionOutOfActionListErrorTextFormat;
-                                m_CurActionIndex = -1;
+                                // should never get here (by code logic)! if got here something gone really wrong :(
+                                throw new Exception("Unknown action");
                             }
 
                             break;
@@ -100,10 +94,25 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                 }
                 catch (Exception exception)
                 {
-                    m_BodyText = GetExceptionMessage(exception);
-                    m_CurActionIndex = -1;
+                    m_BodyText = GetTryAgainWithExceptionMsgBodyText(exception);
+                    m_CurActionIndex = 0;
                 }
             }
+        }
+
+        #endregion override protected methods
+        #region private methods
+        private void resetPageValues()
+        {
+            m_BodyText = string.Format("Filling vehicle fuel (to cancel enter '{0}')", k_CancelActionString);
+            m_CurActionIndex = 0;
+            resetActionTexts();
+        }
+
+        private void resetActionTexts()
+        {
+            string[] actionTexts = { k_VehicleLicenceNumberActionText, "Fuel type: ", "Amount (liters): " };
+            m_ActionTexts = actionTexts;
         }
 
         private void licenceNumberAction(string i_Input)
@@ -140,18 +149,18 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         private void amountAction(string i_Input)
         {
             m_BodyText = string.Empty;
-            try
-            {
-                float amount = float.Parse(i_Input, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
-                GarageObject.FillFuel(m_LicenseNumber, m_FuelType, amount);
-                m_BodyText = string.Format("Filled {0} liters :)", amount);
-                m_CurActionIndex = -1;
-            }
-            catch (Exception exception)
-            {
-                m_BodyText = GetExceptionMessage(exception);
-                m_CurActionIndex = -1;
-            }
+            float amount = float.Parse(i_Input, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+            GarageObject.FillFuel(m_LicenseNumber, m_FuelType, amount);
+            m_BodyText = string.Format("Filled {0} liters :)", amount);
+            m_CurActionIndex = -1;
         }
+
+        private void exitPage()
+        {
+            ShouldExitPage = true;
+            this.resetPageValues();
+        }
+
+        #endregion private methods
     }
 }

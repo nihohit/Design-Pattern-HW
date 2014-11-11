@@ -2,6 +2,9 @@
 
 namespace Ex00.GarageManagementSystem.ConsoleUI
 {
+    /// <summary>
+    /// Console page in which the application user charge an electric vehicle 
+    /// </summary>
     public class ChargeBatteryPage : ConsoleAppPage
     {
         #region private members
@@ -78,9 +81,9 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                                 this.exitPage();
                             }
                             else
-                            {//should never get here!
-                                m_BodyText = k_ActionOutOfActionListErrorTextFormat;
-                                m_CurActionIndex = -1;
+                            {
+                                // should never get here (by code logic)! if got here something gone really wrong :(
+                                throw new Exception("Unknown action");
                             }
 
                             break;
@@ -88,8 +91,8 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                 }
                 catch (Exception exception)
                 {
-                    m_BodyText = GetExceptionMessage(exception);
-                    m_CurActionIndex = -1;
+                    m_BodyText = GetTryAgainWithExceptionMsgBodyText(exception);
+                    m_CurActionIndex = 0;
                 }
             }
         }
@@ -106,10 +109,10 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         {
             m_BodyText = string.Format("Charging vehicle (to cancel enter '{0}')", k_CancelActionString);
             m_CurActionIndex = 0;
-            ResetActionTexts();
+            resetActionTexts();
         }
 
-        private void ResetActionTexts()
+        private void resetActionTexts()
         {
             string[] actionTexts = { k_VehicleLicenceNumberActionText, "Enter amount (minutes): " };
             m_ActionTexts = actionTexts;
@@ -142,17 +145,9 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         private void amountAction(string i_Input)
         {
             m_BodyText = string.Empty;
-            try
-            {
-                float amount = float.Parse(i_Input, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
-                GarageObject.ChargeEngine(m_LicenseNumber, amount / 60);
-                m_CurActionIndex = -1;
-            }
-            catch (Exception exception)
-            {
-                m_BodyText = GetExceptionMessage((exception));
-                m_CurActionIndex = -1;
-            }
+            float amount = float.Parse(i_Input, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+            GarageObject.ChargeEngine(m_LicenseNumber, amount);
+            m_CurActionIndex = -1;
         }
 
         #endregion private methods

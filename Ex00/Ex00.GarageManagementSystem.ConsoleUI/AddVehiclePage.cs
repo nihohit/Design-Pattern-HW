@@ -15,24 +15,16 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
     public class AddVehiclePage : ConsoleAppPage
     {
         #region members
-
         #region private
-
         private string m_BodyText;
         private string[] m_ActionTexts;
         private int m_CurActionIndex;
         private int m_NumberOfResetActionTexts;
 
         #endregion private
-
         #endregion members
-
         #region properties
-
-        #region protected
-
-        #region override
-
+        #region override (protected)
         protected override string Title
         {
             get
@@ -40,7 +32,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                 return "Vehicle addition";
             }
         }
-
+        
         protected override string BodyText
         {
             get
@@ -62,12 +54,8 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
             }
         }
 
-        #endregion override
-
-        #endregion protected
-
+        #endregion override (protected)
         #region private
-
         private string licenseNumber { get; set; }
 
         private string vehicleType { get; set; }
@@ -81,23 +69,16 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         private string[] vehicleTypes { get; set; }
 
         #endregion private
-
         #endregion properties
-
         #region constractor
-
         public AddVehiclePage()
         {
             this.resetPage();
         }
 
         #endregion constractor
-
         #region methods
-
-        #region override
-        #region protected
-
+        #region override (protected)
         protected override void TakeAction(string i_Input)
         {
             ShouldClearPageText = false;
@@ -138,8 +119,8 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                             }
                             else
                             {
-                                m_BodyText = k_InvalidActionNumErrorTextFormat;
-                                m_CurActionIndex = -1;
+                                //// should never get here (by code logic)! if got here something gone really wrong :(
+                                throw new Exception("Unknown action");
                             }
 
                             break;
@@ -147,17 +128,14 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                 }
                 catch (Exception exception)
                 {
-                    m_BodyText =  GetExceptionMessage(exception);
-                    m_CurActionIndex = -1;
+                    resetPage();
+                    m_BodyText = GetTryAgainWithExceptionMsgBodyText(exception); ////lines order important! m_BodyText is replaced from the reset text
                 }
             }
         }
-        
-        #endregion protected
-        #endregion override
 
+        #endregion override (protected)
         #region private
-
         private void resetPage()
         {
             this.vehicleTypes = null;
@@ -168,30 +146,22 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
 
         private void updateVehicleTypesAndText()
         {
-            try
+            this.vehicleTypes = GarageObject.GetSupportedVehicleTypes().ToArray();
+            if (this.vehicleTypes != null && this.vehicleTypes.Length > 0)
             {
-                this.vehicleTypes = GarageObject.GetSupportedVehicleTypes().ToArray();
-                if (this.vehicleTypes != null && this.vehicleTypes.Length > 0)
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.AppendLine("Available vehicle types:");
+                for (int i = 0; i < this.vehicleTypes.Length; i++)
                 {
-                    StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.AppendLine("Available vehicle types:");
-                    for (int i = 0; i < this.vehicleTypes.Length; i++)
-                    {
-                        stringBuilder.AppendLine(string.Format(k_ActionDescriptionFormat, i + 1, this.vehicleTypes[i]));
-                    }
+                    stringBuilder.AppendLine(string.Format(k_ActionDescriptionFormat, i + 1, this.vehicleTypes[i]));
+                }
 
-                    m_BodyText = stringBuilder.ToString();
-                }
-                else
-                {
-                    m_BodyText = string.Format(k_GeneralErrorTextFormat, "Missing vehicle types in the system");
-                    m_CurActionIndex = -1;
-                }
+                m_BodyText = stringBuilder.ToString();
             }
-            catch (Exception exception)
+            else
             {
-                m_BodyText =  GetExceptionMessage(exception);
-                m_CurActionIndex = -1;
+                // should never get here (by code logic)! if got here something gone really wrong :(
+                throw new Exception("Missing vehicle types in the system");
             }
         }
 
@@ -235,33 +205,46 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         private void vehicleTypeAction(string i_Input)
         {
             m_BodyText = string.Empty;
-            try
+            if (this.vehicleTypes == null || this.vehicleTypes.Length < 1)
             {
-                int vehicleTypeChoice = Convert.ToInt32(i_Input);
-                if (this.vehicleTypes == null || this.vehicleTypes.Length < 1) 
-                {
-                    this.updateVehicleTypesAndText();
-                }
-                else if ((vehicleTypeChoice < 1) || (vehicleTypeChoice > this.vehicleTypes.Length))
-                {
-                    m_BodyText = k_ActionOutOfActionListErrorTextFormat;
-                }
-                else
-                {
-                    AddActionTextForSpecificVehicleType(vehicleTypeChoice);
-                    m_CurActionIndex++;
-                }
+                this.updateVehicleTypesAndText();
             }
-            catch (Exception exception)
+            else
             {
-                m_BodyText = GetExceptionMessage(exception);
-                m_CurActionIndex = -1;
+                updateVehicleTypeAndAddNecessaryArgsActionTexts(i_Input);
+                m_CurActionIndex++;
             }
         }
 
-        private void AddActionTextForSpecificVehicleType(int vehicleTypeChoice)
+        private void updateVehicleTypeAndAddNecessaryArgsActionTexts(string i_Input)
         {
-            this.vehicleType = this.vehicleTypes[vehicleTypeChoice - 1];
+            updateVehicleType(i_Input);
+            addNecessaryArgsActionTexts();
+        }
+
+        private void updateVehicleType(string i_Input)
+        {
+            int vehicleTypeChoice;
+            if (int.TryParse(i_Input, out vehicleTypeChoice) && (vehicleTypeChoice > 0) && (vehicleTypeChoice - 1 < this.vehicleTypes.Count()))
+            {
+                this.vehicleType = this.vehicleTypes[vehicleTypeChoice - 1];
+            }
+            else
+            {
+                int vehicleTypeIndex = Array.FindIndex(this.vehicleTypes, 0, i_state => 0 == string.Compare(i_state, i_Input.Trim(), StringComparison.OrdinalIgnoreCase));
+                if (vehicleTypeIndex != -1)
+                {
+                    this.vehicleType = this.vehicleTypes[vehicleTypeIndex];
+                }
+                else
+                {
+                    throw new FormatException(k_ActionOutOfActionListErrorTextFormat);
+                }
+            }
+        }
+
+        private void addNecessaryArgsActionTexts()
+        {
             IEnumerable<string> necessaryArgsForType = GarageObject.GetNecessaryArgsForType(this.vehicleType);
             this.necessaryArgs = new string[necessaryArgsForType.Count()];
             string[] typeActionTexts = new string[necessaryArgsForType.Count()];
@@ -270,6 +253,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                 string paramName = Extensions.ToFirstLatterUpperRestLower(Extensions.GetDisplayNameOfArgument(necessaryArgsForType.ElementAt(i)));
                 typeActionTexts[i] = string.Format("{0}: ", paramName);
             }
+
             string[] origActionTexts = m_ActionTexts;
             m_ActionTexts = new string[origActionTexts.Length + typeActionTexts.Length];
             origActionTexts.CopyTo(m_ActionTexts, 0);
@@ -306,19 +290,10 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
             }
             else
             {
-                try
-                {
-                    string msg = GarageObject.AddAVehicleToGarage(this.licenseNumber, this.ownerPhoneNumber, this.ownerName, this.vehicleType, this.necessaryArgs);
-                    MessagePage messagePage = new MessagePage("New vehicle added to the garage", msg);
-                    messagePage.OpenPage(GarageObject);
-                    ShouldExitPage = true;
-                    this.resetPage();
-                }
-                catch (Exception exception)
-                {
-                    m_BodyText = GetExceptionMessage(exception);
-                    m_CurActionIndex = -1;
-                }
+                string msg = GarageObject.AddAVehicleToGarage(this.licenseNumber, this.ownerPhoneNumber, this.ownerName, this.vehicleType, this.necessaryArgs);
+                MessagePage messagePage = new MessagePage("New vehicle added to the garage", msg);
+                messagePage.OpenPage(GarageObject);
+                this.exitPage();
             }
         }
         
@@ -329,7 +304,6 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         }
 
         #endregion private
-
         #endregion methods
     }
 }

@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Ex00.GarageManagementSystem.ConsoleUI
 {
+    /// <summary>
+    /// Console page in which the application user changes a vehicle state
+    /// </summary>
     public class ChangeStatePage : ConsoleAppPage
     {
         #region private members
@@ -59,21 +62,28 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         #region override methods
         protected override void TakeAction(string i_Input)
         {
-            if (i_Input == k_CancelActionString || m_Finished)
+            try
             {
-                this.exitPage();
-            }
-            else
-            {
-                if (string.IsNullOrEmpty(this.vehicleLicence))
+                if (i_Input == k_CancelActionString || m_Finished)
                 {
-                    this.vehicleLicenceAction(i_Input);
+                    this.exitPage();
                 }
                 else
                 {
-                    this.setVehicleState(i_Input);
-                    this.setFinishWorkingOnPage();
+                    if (string.IsNullOrEmpty(this.vehicleLicence))
+                    {
+                        this.vehicleLicenceAction(i_Input);
+                    }
+                    else
+                    {
+                        this.setVehicleState(i_Input);
+                        this.setFinishWorkingOnPage();
+                    }
                 }
+            }
+            catch (Exception exception)
+            {
+                m_BodyText = GetTryAgainWithExceptionMsgBodyText(exception);
             }
         }
 
@@ -123,21 +133,13 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         {
             string stateChoice = i_Input;
             int stateChoiceNumber;
-            if (int.TryParse(i_Input, out stateChoiceNumber) &&
-                stateChoiceNumber > 1 && stateChoiceNumber - 1 < m_NumberOfStates)
+            if (int.TryParse(i_Input, out stateChoiceNumber) && (stateChoiceNumber > 0) && (stateChoiceNumber - 1 < m_NumberOfStates))
             {
                 stateChoice = GarageObject.GetVehiclesStates().ElementAt(stateChoiceNumber - 1);
             }
-
-            try
-            {
-                GarageObject.SetVehicleState(this.vehicleLicence, stateChoice);
-                m_BodyText = string.Format("Vehicle state was successfully changed to '{0}'", stateChoice);
-            }
-            catch (Exception exception)
-            {
-                m_BodyText = GetExceptionMessage(exception);
-            }
+            
+            GarageObject.SetVehicleState(this.vehicleLicence, stateChoice);
+            m_BodyText = string.Format("Vehicle state was successfully changed to '{0}'", stateChoice);
         }
 
         private void setFinishWorkingOnPage()

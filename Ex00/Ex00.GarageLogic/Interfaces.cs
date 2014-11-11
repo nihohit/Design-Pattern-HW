@@ -122,8 +122,8 @@ namespace Ex00.GarageLogic
         /// Charge the engine of an electric vehicle
         /// </summary>
         /// <param name="i_LicenseNumber"></param>
-        /// <param name="i_ChargeHours"></param>
-        void ChargeEngine(string i_LicenseNumber, float i_ChargeHours);
+        /// <param name="i_ChargeMinutes"></param>
+        void ChargeEngine(string i_LicenseNumber, float i_ChargeMinutes);
 
         /// <summary>
         /// Get the information of the given vehicle

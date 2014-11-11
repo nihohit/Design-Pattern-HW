@@ -2,12 +2,18 @@
 
 namespace Ex00.GarageManagementSystem.ConsoleUI
 {
+    /// <summary>
+    /// Console page in which the application user fills up to max air presure vehicle wheels.
+    /// </summary>
     public class FillVehicleWheelsPage : ConsoleAppPage
     {
+        #region members
         private string m_BodyText;
         private string m_ActionText;
         private bool m_Finished;
 
+        #endregion members
+        #region override protected properties
         protected override string Title
         {
             get
@@ -32,24 +38,20 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
             }
         }
 
+        #endregion override protected properties
+        #region contractor
         public FillVehicleWheelsPage()
         {
-            this.resetPageValues();
+            resetPageValues();
         }
 
-        private void resetPageValues()
-        {
-            m_Finished = false;
-            m_BodyText = string.Format("Lets fill up the tires. (to cancel enter '{0}')", k_CancelActionString);
-            m_ActionText = k_VehicleLicenceNumberActionText;
-        }
-
+        #endregion contractor
+        #region override protected methods
         protected override void TakeAction(string i_Input)
         {
             if (i_Input == k_CancelActionString || m_Finished)
             {
-                ShouldExitPage = true;
-                this.resetPageValues();
+                exitPage();
             }
             else
             {
@@ -84,5 +86,21 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                 }
             }
         }
+
+        private void exitPage()
+        {
+            ShouldExitPage = true;
+            resetPageValues();
+        }
+
+        #endregion override protected methods
+        #region private methods
+        private void resetPageValues()
+        {
+            m_Finished = false;
+            m_BodyText = string.Format("Lets fill up the tires. (to cancel enter '{0}')", k_CancelActionString);
+            m_ActionText = k_VehicleLicenceNumberActionText;
+        }
+        #endregion private methods
     }
 }
