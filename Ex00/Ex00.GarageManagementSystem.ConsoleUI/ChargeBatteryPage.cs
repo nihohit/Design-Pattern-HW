@@ -4,10 +4,15 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
 {
     public class ChargeBatteryPage : ConsoleAppPage
     {
+        #region private members
         private string m_BodyText;
         private string[] m_ActionTexts;
         private int m_CurActionIndex;
+        private string m_LicenseNumber;
 
+        #endregion private members
+        #region properties
+        #region override
         protected override string Title
         {
             get
@@ -37,32 +42,21 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
             }
         }
 
-        private string m_LicenseNumber;
-
+        #endregion override
+        #endregion properties
+        #region contractor
         public ChargeBatteryPage()
         {
             this.resetPageValues();
         }
-
-        private void resetPageValues()
-        {
-            m_BodyText = string.Format("Charging vehicle (to cancel enter '{0}')", k_CancelActionString);
-            m_CurActionIndex = 0;
-            ResetActionTexts();
-        }
-
-        protected void ResetActionTexts()
-        {
-            string[] actionTexts = { k_EnterVehicleLicenceNumberActionText, "Enter amount (minutes): " };
-            m_ActionTexts = actionTexts;
-        }
-
+        
+        #endregion contractor
+        #region override methods
         protected override void TakeAction(string i_Input)
         {
             if (i_Input == k_CancelActionString)
             {
-                ShouldExitPage = true;
-                this.resetPageValues();
+                this.exitPage();
             }
             else
             {
@@ -81,26 +75,46 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                         default:
                             if (m_CurActionIndex == -1)
                             {
-                                ShouldExitPage = true;
-                                this.resetPageValues();
+                                this.exitPage();
                             }
                             else
-                            {
-                                m_BodyText = string.Format(k_GeneralErrorTextFormat, "Input corrupted");
+                            {//should never get here!
+                                m_BodyText = k_ActionOutOfActionListErrorTextFormat;
                                 m_CurActionIndex = -1;
                             }
 
                             break;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception exception)
                 {
-                    m_BodyText = string.Format(k_GeneralErrorTextFormat, ex.Message);
+                    m_BodyText = GetExceptionMessage(exception);
                     m_CurActionIndex = -1;
                 }
             }
         }
 
+        #endregion override methods
+        #region private methods
+        private void exitPage()
+        {
+            ShouldExitPage = true;
+            this.resetPageValues();
+        }
+
+        private void resetPageValues()
+        {
+            m_BodyText = string.Format("Charging vehicle (to cancel enter '{0}')", k_CancelActionString);
+            m_CurActionIndex = 0;
+            ResetActionTexts();
+        }
+
+        private void ResetActionTexts()
+        {
+            string[] actionTexts = { k_VehicleLicenceNumberActionText, "Enter amount (minutes): " };
+            m_ActionTexts = actionTexts;
+        }
+        
         private void licenceNumberAction(string i_Input)
         {
             m_BodyText = string.Empty;
@@ -134,11 +148,13 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                 GarageObject.ChargeEngine(m_LicenseNumber, amount / 60);
                 m_CurActionIndex = -1;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                m_BodyText = string.Format(k_InvalidInputGeneralErrorTextFormat, "amount", ex.Message);
+                m_BodyText = GetExceptionMessage((exception));
                 m_CurActionIndex = -1;
             }
         }
+
+        #endregion private methods
     }
 }

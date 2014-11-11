@@ -41,7 +41,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         {
             m_Finished = false;
             m_BodyText = string.Format("Lets fill up the tires. (to cancel enter '{0}')", k_CancelActionString);
-            m_ActionText = k_EnterVehicleLicenceNumberActionText;
+            m_ActionText = k_VehicleLicenceNumberActionText;
         }
 
         protected override void TakeAction(string i_Input)
@@ -69,9 +69,9 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                             GarageObject.FillWheelsToMax(i_Input);
                             m_ActionText = k_ReturnToMenuActionText;
                         }
-                        catch (Exception ex)
+                        catch (Exception exception)
                         {
-                            m_BodyText = string.Format(k_GeneralErrorTextFormat, ex.Message);
+                            m_BodyText = GetExceptionMessage(exception);
                             m_ActionText = k_ReturnToMenuActionText;
                         }
 

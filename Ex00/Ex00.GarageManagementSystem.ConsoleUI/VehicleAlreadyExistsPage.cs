@@ -75,9 +75,9 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
 
                 ShouldExitPage = true;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                m_BodyText = string.Format(k_InvalidInputGeneralErrorTextFormat, "input", ex.Message);
+                m_BodyText = GetExceptionMessage(exception);
             }
         }
     }

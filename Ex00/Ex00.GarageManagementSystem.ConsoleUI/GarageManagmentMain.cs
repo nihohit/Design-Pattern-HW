@@ -9,19 +9,12 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
     public class GarageManagmentMainPage : ConsoleAppPage
     {
         #region members
-
         #region private
-
         private string m_BodyText;
 
         #endregion private
-
         #endregion members
-
         #region Properties
-
-        #region protected
-
         #region override
 
         protected override string Title
@@ -49,11 +42,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         }
 
         #endregion override
-
-        #endregion protected
-
         #endregion Properties
-
         #region constractor
 
         public GarageManagmentMainPage()
@@ -62,13 +51,8 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         }
 
         #endregion constractor
-
         #region Methods
-
-        #region protected
-
         #region override
-
         protected override void TakeAction(string i_Input)
         {
             try
@@ -116,22 +100,19 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                         break;
 
                     default:
-                        throw new FormatException("Action choosen is not a number between 1 and 8");
+                        throw new FormatException(k_ActionOutOfActionListErrorTextFormat);
                 }
 
                 this.updateBodyTextToActionsList();
                 ShouldClearPageText = true;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                m_BodyText = string.Format(k_InvalidInputGeneralErrorTextFormat, "input", ex.Message);
+                m_BodyText = GetExceptionMessage(exception);
             }
         }
 
         #endregion override
-
-        #endregion protected
-
         #region private
 
         private void updateBodyTextToActionsList()
@@ -149,7 +130,6 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         }
 
         #endregion private
-
         #endregion Methods
     }
 }

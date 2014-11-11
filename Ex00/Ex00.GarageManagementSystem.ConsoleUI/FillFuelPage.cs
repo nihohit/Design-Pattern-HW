@@ -54,7 +54,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
 
         protected void ResetActionTexts()
         {
-            string[] actionTexts = { k_EnterVehicleLicenceNumberActionText, "Fuel type: ", "Amount (liters): " };
+            string[] actionTexts = { k_VehicleLicenceNumberActionText, "Fuel type: ", "Amount (liters): " };
             m_ActionTexts = actionTexts;
         }
 
@@ -91,16 +91,16 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                             }
                             else
                             {
-                                m_BodyText = string.Format(k_GeneralErrorTextFormat, "Input corrupted");
+                                m_BodyText = k_ActionOutOfActionListErrorTextFormat;
                                 m_CurActionIndex = -1;
                             }
 
                             break;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception exception)
                 {
-                    m_BodyText = string.Format(k_GeneralErrorTextFormat, ex.Message);
+                    m_BodyText = GetExceptionMessage(exception);
                     m_CurActionIndex = -1;
                 }
             }
@@ -147,9 +147,9 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                 m_BodyText = string.Format("Filled {0} liters :)", amount);
                 m_CurActionIndex = -1;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                m_BodyText = string.Format(k_InvalidInputGeneralErrorTextFormat, "amount", ex.Message);
+                m_BodyText = GetExceptionMessage(exception);
                 m_CurActionIndex = -1;
             }
         }

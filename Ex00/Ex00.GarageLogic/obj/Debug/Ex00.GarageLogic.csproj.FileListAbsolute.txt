@@ -17,8 +17,8 @@ C:\dropbox\Dropbox\DesignPatterns\CurrentAssignment\design-patterns-hw\Ex00\Ex00
 C:\Users\keren-or\Dropbox\Study\IDC\desiignPatterns\HW\1\design-patterns-hw\Ex00\Ex00.GarageLogic\bin\Debug\Ex00.GarageLogic.dll.config
 C:\Users\keren-or\Dropbox\Study\IDC\desiignPatterns\HW\1\design-patterns-hw\Ex00\Ex00.GarageLogic\bin\Debug\Ex00.GarageLogic.dll
 C:\Users\keren-or\Dropbox\Study\IDC\desiignPatterns\HW\1\design-patterns-hw\Ex00\Ex00.GarageLogic\bin\Debug\Ex00.GarageLogic.pdb
-C:\Users\keren-or\Dropbox\Study\IDC\desiignPatterns\HW\1\design-patterns-hw\Ex00\Ex00.GarageLogic\obj\Debug\Ex00.GarageLogic.csprojResolveAssemblyReference.cache
 C:\Users\keren-or\Dropbox\Study\IDC\desiignPatterns\HW\1\design-patterns-hw\Ex00\Ex00.GarageLogic\obj\Debug\Ex00.GarageLogic.Properties.Resources.resources
 C:\Users\keren-or\Dropbox\Study\IDC\desiignPatterns\HW\1\design-patterns-hw\Ex00\Ex00.GarageLogic\obj\Debug\Ex00.GarageLogic.csproj.GenerateResource.Cache
 C:\Users\keren-or\Dropbox\Study\IDC\desiignPatterns\HW\1\design-patterns-hw\Ex00\Ex00.GarageLogic\obj\Debug\Ex00.GarageLogic.dll
 C:\Users\keren-or\Dropbox\Study\IDC\desiignPatterns\HW\1\design-patterns-hw\Ex00\Ex00.GarageLogic\obj\Debug\Ex00.GarageLogic.pdb
+C:\Users\keren-or\Dropbox\Study\IDC\desiignPatterns\HW\1\design-patterns-hw\Ex00\Ex00.GarageLogic\obj\Debug\Ex00.GarageLogic.csprojResolveAssemblyReference.cache

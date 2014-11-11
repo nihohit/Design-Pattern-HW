@@ -30,28 +30,10 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                 return m_ActionText;
             }
         }
-
-        protected bool LegalVehicleLicence { get; set; }
-
-        private string m_VehicleLicence;
-
-        public string VehicleLicence
-        {
-            get
-            {
-                return m_VehicleLicence;
-            }
-
-            set
-            {
-                if (m_VehicleLicence != value)
-                {
-                    m_VehicleLicence = value;
-                    UpdatePageTexts();
-                }
-            }
-        }
-
+        
+        private bool Finished { get; set; }
+        public string VehicleLicence { get; set; }
+     
         public DisplayVehicleFullInfoPage()
         {
             VehicleLicence = string.Empty;
@@ -59,7 +41,6 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
 
         protected void UpdatePageTexts()
         {
-            LegalVehicleLicence = false;
             if (!string.IsNullOrEmpty(VehicleLicence))
             {
                 string errorMsg;
@@ -75,34 +56,38 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                         try
                         {
                             m_BodyText = GarageObject.GetVehicleInfo(VehicleLicence);
-                            LegalVehicleLicence = true;
                         }
-                        catch (Exception ex)
+                        catch (Exception exception)
                         {
-                            m_BodyText = string.Format(k_GeneralErrorTextFormat, ex.Message);
+                            m_BodyText = GetExceptionMessage(exception);
                         }
                     }
                 }
 
                 m_ActionText = k_ReturnToMenuActionText;
+                Finished = true;
             }
             else
             {
                 m_BodyText = string.Empty;
-                m_ActionText = k_EnterVehicleLicenceNumberActionText;
+                m_ActionText = k_VehicleLicenceNumberActionText;
             }
         }
 
         protected override void TakeAction(string i_Input)
-        {
+        { 
             if (string.IsNullOrEmpty(VehicleLicence))
             {
                 VehicleLicence = i_Input;
             }
-            else
+
+            if (Finished)
             {
+                Finished = false;
                 ShouldExitPage = true;
             }
+
+            UpdatePageTexts();
         }
     }
 }

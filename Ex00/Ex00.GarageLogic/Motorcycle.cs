@@ -38,7 +38,7 @@ namespace Ex00.GarageLogic
 
         public override string ToString()
         {
-            return "{0}, license type: {1}, engine size: {2}".FormatWith(base.ToString(), LicenseType, EngineSize);
+            return "{0}\nlicense type: {1}\nengine size: {2}".FormatWith(base.ToString(), LicenseType, EngineSize);
         }
     }
 }

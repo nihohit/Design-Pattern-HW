@@ -15,14 +15,12 @@
 
         // truck consts
         private const int k_TruckAmountOfWheels = 14;
-
         private const float k_TruckFuelEngineCapacity = 180;
         private const float k_TruckMaxWheelPressure = 23;
         private const eFuelType k_TruckFuelType = eFuelType.Soler;
 
         // car consts
         private const float k_CarFuelEngineCapacity = 44;
-
         private const float k_CarMaxWheelPressure = 27;
         private const float k_CarMaxElectricEngineCharge = 3.3f;
         private const int k_CarAmountOfWheels = 4;
@@ -30,7 +28,6 @@
 
         // motorcylce consts
         private const eFuelType k_BikeFuelType = eFuelType.Octan95;
-
         private const int k_BikeAmountOfWheels = 2;
         private const float k_BikeFuelEngineCapacity = 7.2f;
         private const float k_BikeMaxElectricEngineCharge = 2.4f;
@@ -58,8 +55,8 @@
                 return m_SupportedTypes;
             }
 
-            var methods = typeof(VehicleMaker).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance);
-            var creationMethods = methods.Where(i_Method => i_Method.Name.StartsWith(k_CreationMethodBeginning));
+            MethodInfo[] methods = typeof(VehicleMaker).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance);
+            IEnumerable<MethodInfo> creationMethods = methods.Where(i_Method => i_Method.Name.StartsWith(k_CreationMethodBeginning));
 
             m_SupportedTypes = creationMethods.ToDictionary(
                 i_MethodInfo => i_MethodInfo.Name.Substring(r_LengthOfCreate),
@@ -75,10 +72,10 @@
         /// <returns></returns>
         public IVehicle CreateVehicle(string i_VehicleType, IEnumerable<string> i_Args)
         {
-            var method = typeof(VehicleMaker).GetMethod(
+            MethodInfo method = typeof(VehicleMaker).GetMethod(
                 "{0}{1}".FormatWith(k_CreationMethodBeginning, i_VehicleType), BindingFlags.NonPublic | BindingFlags.Instance);
 
-            var methodParameters = method.GetParameters();
+            ParameterInfo[] methodParameters = method.GetParameters();
 
             try
             {
@@ -86,8 +83,14 @@
             }
             catch (Exception e)
             {
-
-                throw e.InnerException;
+                if (e is System.Reflection.TargetInvocationException)
+                {
+                    throw e.InnerException;
+                }
+                else
+                {
+                    throw e;
+                }
             }
         }
 
@@ -100,7 +103,7 @@
         private object[] parseParameters(ParameterInfo[] i_MethodParameters, IEnumerable<string> i_Args)
         {
             string[] argsArray = i_Args as string[] ?? i_Args.ToArray();
-            var argCount = argsArray.Count();
+            int argCount = argsArray.Count();
             if (argCount != i_MethodParameters.Length)
             {
                 throw new ArgumentException(
@@ -110,14 +113,59 @@
 
             object[] requestedParams = new object[i_MethodParameters.Length];
             int i = 0;
-            foreach (var arg in argsArray)
+            foreach (string arg in argsArray)
             {
-                var converter = TypeDescriptor.GetConverter(i_MethodParameters[i].ParameterType);
-                requestedParams[i] = converter.ConvertFrom(arg);
+                requestedParams[i] = convertValue(i_MethodParameters[i].Name, i_MethodParameters[i].ParameterType, arg);
                 i++;
             }
 
             return requestedParams;
+        }
+
+        private object convertValue(string i_ArgumentName, Type i_ArgumentType, string i_AargumenValue)
+        {
+            object argumenValue;
+            string i_ArgumentDisplayName = Extensions.ToFirstLatterUpperRestLower(Extensions.GetDisplayNameOfArgument(i_ArgumentName));
+            
+            if (i_ArgumentType.BaseType == typeof (Enum))
+            {
+                Extensions.ValidateParamValueIsEnumName(i_ArgumentDisplayName, i_ArgumentType, i_AargumenValue);
+            }
+
+            TypeConverter converter = TypeDescriptor.GetConverter(i_ArgumentType);
+            try
+            {
+                argumenValue = converter.ConvertFrom(i_AargumenValue);
+            }
+            catch (Exception exception)
+            {
+                throw new ArgumentException(getBetterErrorMsgForConvertError(i_ArgumentDisplayName, converter, exception.Message));
+            }
+
+            return argumenValue;
+        }
+
+        private string getBetterErrorMsgForConvertError(string i_ArgumentDisplayName, TypeConverter i_Converter, string i_OrigErrorMsg)
+        {
+            string msgSuffix  = "";
+            if (i_Converter.GetStandardValuesSupported())
+            {
+                string validValues = "";
+                foreach (var value in i_Converter.GetStandardValues())
+                {
+                    validValues += value.ToString();
+                    validValues += ", ";
+                }
+                validValues = validValues.Trim();
+                validValues = validValues.TrimEnd(',');
+                msgSuffix = "valid values are: {0}".FormatWith(validValues);
+            }
+            else if (i_Converter is System.ComponentModel.SingleConverter)
+            {
+                msgSuffix = i_OrigErrorMsg;
+            }
+
+            return string.Format("{0} got invalid input. {1}", i_ArgumentDisplayName, msgSuffix);
         }
 
         #endregion methods

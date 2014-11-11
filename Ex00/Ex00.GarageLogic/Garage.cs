@@ -111,9 +111,9 @@ namespace Ex00.GarageLogic
             {
                 newVehicleState = (eVehicleState)Enum.Parse(typeof(eVehicleState), i_NewVehicleState, true);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                if (ex is ArgumentNullException || ex is ArgumentException || ex is OverflowException)
+                if (exception is ArgumentNullException || exception is ArgumentException || exception is OverflowException)
                 {
                     string validTypes = string.Join(",", Enum.GetNames(typeof(eVehicleState)));
                     throw new FormatException(string.Format("Vehicle state must be from this list ({0})", validTypes));
@@ -161,30 +161,12 @@ namespace Ex00.GarageLogic
                 throw new ArgumentException(string.Format("Vehicle '{0}' isn't fuel based", i_LicenseNumber));
             }
 
-            string[] fuelTypes = Enum.GetNames(typeof(eFuelType));
-            string validTypes = string.Join(",", fuelTypes);
-
-            if (!fuelTypes.AsEnumerable().Contains(i_FuelType))
+            if (Extensions.ValidateParamValueIsEnumName("Fuel type", typeof(eFuelType), i_FuelType)) // method throw FormatException if i_FuelType is not a eFuelType enum name
             {
-                throw new FormatException(string.Format("Fuel type must be from this list ({0})", validTypes));
+                eFuelType fuelType = (eFuelType)Enum.Parse(typeof(eFuelType), i_FuelType, true); //will succesed to parse becouse validated
+                fuelBasedVehicle.Engine.FillFuel(i_FuelAmountInLiters, fuelType);
             }
 
-            eFuelType fuelType;
-            try
-            {
-                fuelType = (eFuelType)Enum.Parse(typeof(eFuelType), i_FuelType, true);
-            }
-            catch (Exception ex)
-            {
-                if (ex is ArgumentNullException || ex is ArgumentException || ex is OverflowException)
-                {
-                    throw new FormatException(string.Format("Fuel type must be from this list ({0})", validTypes));
-                }
-
-                throw;
-            }
-
-            fuelBasedVehicle.Engine.FillFuel(i_FuelAmountInLiters, fuelType);
         }
 
         /// <summary>

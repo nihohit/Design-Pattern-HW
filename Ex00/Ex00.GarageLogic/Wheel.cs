@@ -22,6 +22,12 @@ namespace Ex00.GarageLogic
 
         public Wheel(string i_ManufacturerName, float i_CurrentAirPressure, float i_MaxAirPressure)
         {
+            if (i_CurrentAirPressure > i_MaxAirPressure)
+            {
+                throw new System.ArgumentException(
+                    "Current air pressure level {0} is above the maximum allowed air pressure level {1}".FormatWith(i_CurrentAirPressure, i_MaxAirPressure));
+            }
+            
             ManufacturerName = i_ManufacturerName;
             CurrentAirPressure = i_CurrentAirPressure;
             MaxAirPressure = i_MaxAirPressure;

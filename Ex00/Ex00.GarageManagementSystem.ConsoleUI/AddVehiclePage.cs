@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ex00.GarageLogic;
 
 namespace Ex00.GarageManagementSystem.ConsoleUI
 {
     using System.Globalization;
 
+    /// <summary>
+    /// Console page in which the application user adds a vehicle
+    /// if vehicle is already in the garage, a new VehicleAlreadyExistsPage will open
+    /// </summary>
     public class AddVehiclePage : ConsoleAppPage
     {
         #region members
@@ -90,19 +95,15 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
 
         #region methods
 
-        #region protected
-
         #region override
+        #region protected
 
         protected override void TakeAction(string i_Input)
         {
             ShouldClearPageText = false;
             if (i_Input == k_CancelActionString)
             {
-                ShouldExitPage = true;
-                this.resetPage();
-                m_CurActionIndex = 0;
-                m_BodyText = string.Empty;
+                this.exitPage();
             }
             else
             {
@@ -129,9 +130,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                         default:
                             if (m_CurActionIndex == -1)
                             {
-                                ShouldExitPage = true;
-                                this.resetPage();
-                                m_CurActionIndex = 0;
+                                this.exitPage();
                             }
                             else if (m_CurActionIndex < m_ActionTexts.Length)
                             {
@@ -139,24 +138,23 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                             }
                             else
                             {
-                                m_BodyText = string.Format(k_GeneralErrorTextFormat, "Input corrupted");
+                                m_BodyText = k_InvalidActionNumErrorTextFormat;
                                 m_CurActionIndex = -1;
                             }
 
                             break;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception exception)
                 {
-                    m_BodyText = string.Format(k_GeneralErrorTextFormat, ex.Message);
+                    m_BodyText =  GetExceptionMessage(exception);
                     m_CurActionIndex = -1;
                 }
             }
         }
-
-        #endregion override
-
+        
         #endregion protected
+        #endregion override
 
         #region private
 
@@ -190,9 +188,9 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                     m_CurActionIndex = -1;
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                m_BodyText = string.Format(k_GeneralErrorTextFormat, ex.Message);
+                m_BodyText =  GetExceptionMessage(exception);
                 m_CurActionIndex = -1;
             }
         }
@@ -201,37 +199,13 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
         {
             string[] actionTexts =
                 {
-                    k_EnterVehicleLicenceNumberActionText, "Choose type of vehicle: ", "Owner name: ",
+                    k_VehicleLicenceNumberActionText, "Choose type of vehicle: ", "Owner name: ",
                     "Owner phone number: "
                 };
             m_ActionTexts = actionTexts;
             m_NumberOfResetActionTexts = actionTexts.Length;
         }
-
-        private string getArgDisplayName(string i_Args)
-        {
-            string args = i_Args;
-            if (0 == string.Compare("i_", 0, i_Args, 0, 2, true))
-            {
-                args = args.Substring(2);
-            }
-
-            string displayNameArg = string.Empty;
-            foreach (char ch in args)
-            {
-                if (char.IsLower(ch))
-                {
-                    displayNameArg += ch.ToString(CultureInfo.InvariantCulture);
-                }
-                else
-                {
-                    displayNameArg += " " + ch.ToString(CultureInfo.InvariantCulture).ToLower();
-                }
-            }
-
-            return displayNameArg.Trim();
-        }
-
+        
         private void licenceNumberAction(string i_Input)
         {
             string errorMsg;
@@ -244,10 +218,10 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
             {
                 if (isVehicleInGarage)
                 {
-                    this.resetPage();
-                    ShouldExitPage = true;
                     VehicleAlreadyExistsPage vehicleAlreadyExistsPage = new VehicleAlreadyExistsPage(i_Input);
                     vehicleAlreadyExistsPage.OpenPage(GarageObject);
+                    this.resetPage();
+                    ShouldExitPage = true;
                 }
                 else
                 {
@@ -264,45 +238,42 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
             try
             {
                 int vehicleTypeChoice = Convert.ToInt32(i_Input);
-                if (this.vehicleTypes == null || this.vehicleTypes.Length < 1)
+                if (this.vehicleTypes == null || this.vehicleTypes.Length < 1) 
                 {
                     this.updateVehicleTypesAndText();
                 }
                 else if ((vehicleTypeChoice < 1) || (vehicleTypeChoice > this.vehicleTypes.Length))
                 {
-                    m_BodyText = string.Format(k_InvalidActionNumErrorTextFormat, "vehicle type", "type", string.Format("Type number out of range 1:{0}", this.vehicleTypes.Length));
+                    m_BodyText = k_ActionOutOfActionListErrorTextFormat;
                 }
                 else
                 {
-                    this.vehicleType = this.vehicleTypes[vehicleTypeChoice - 1];
-                    IEnumerable<string> necessaryArgsForType = GarageObject.GetNecessaryArgsForType(this.vehicleType);
-                    this.necessaryArgs = new string[necessaryArgsForType.Count()];
-                    string[] typeActionTexts = new string[necessaryArgsForType.Count()];
-                    for (int i = 0; i < typeActionTexts.Length; i++)
-                    {
-                        string paramName = this.getArgDisplayName(necessaryArgsForType.ElementAt(i));
-                        paramName = paramName.Substring(0, 1).ToUpper() + paramName.Substring(1).ToLower();
-                        typeActionTexts[i] = string.Format("{0}: ", paramName);
-                    }
-                    string[] origActionTexts = m_ActionTexts;
-                    m_ActionTexts = new string[origActionTexts.Length + typeActionTexts.Length];
-                    origActionTexts.CopyTo(m_ActionTexts, 0);
-                    typeActionTexts.CopyTo(m_ActionTexts, origActionTexts.Length);
+                    AddActionTextForSpecificVehicleType(vehicleTypeChoice);
                     m_CurActionIndex++;
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                if (ex is OverflowException || ex is FormatException)
-                {
-                    m_BodyText = string.Format(k_InvalidActionNumErrorTextFormat, "vehicle type", "type", ex.Message);
-                }
-                else
-                {
-                    m_BodyText = string.Format(k_GeneralErrorTextFormat, ex.Message);
-                    m_CurActionIndex = -1;
-                }
+                m_BodyText = GetExceptionMessage(exception);
+                m_CurActionIndex = -1;
             }
+        }
+
+        private void AddActionTextForSpecificVehicleType(int vehicleTypeChoice)
+        {
+            this.vehicleType = this.vehicleTypes[vehicleTypeChoice - 1];
+            IEnumerable<string> necessaryArgsForType = GarageObject.GetNecessaryArgsForType(this.vehicleType);
+            this.necessaryArgs = new string[necessaryArgsForType.Count()];
+            string[] typeActionTexts = new string[necessaryArgsForType.Count()];
+            for (int i = 0; i < typeActionTexts.Length; i++)
+            {
+                string paramName = Extensions.ToFirstLatterUpperRestLower(Extensions.GetDisplayNameOfArgument(necessaryArgsForType.ElementAt(i)));
+                typeActionTexts[i] = string.Format("{0}: ", paramName);
+            }
+            string[] origActionTexts = m_ActionTexts;
+            m_ActionTexts = new string[origActionTexts.Length + typeActionTexts.Length];
+            origActionTexts.CopyTo(m_ActionTexts, 0);
+            typeActionTexts.CopyTo(m_ActionTexts, origActionTexts.Length);
         }
 
         private void ownerNameAction(string i_Input)
@@ -343,12 +314,18 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                     ShouldExitPage = true;
                     this.resetPage();
                 }
-                catch (Exception ex)
+                catch (Exception exception)
                 {
-                    m_BodyText = string.Format(k_GeneralErrorTextFormat, ex.Message);
+                    m_BodyText = GetExceptionMessage(exception);
                     m_CurActionIndex = -1;
                 }
             }
+        }
+        
+        private void exitPage()
+        {
+            ShouldExitPage = true;
+            this.resetPage();
         }
 
         #endregion private

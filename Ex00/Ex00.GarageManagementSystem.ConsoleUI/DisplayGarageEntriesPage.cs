@@ -63,9 +63,9 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                 stringBuilder.AppendLine(string.Format(k_ActionDescriptionFormat, m_NumberOfFilters, "Without filtering"));
                 m_BodyText = stringBuilder.ToString();
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                m_BodyText = string.Format(k_GeneralErrorTextFormat, ex.Message);
+                m_BodyText = GetExceptionMessage(exception);
             }
         }
 
@@ -84,7 +84,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                     int filterChoice = Convert.ToInt32(i_Input);
                     if ((filterChoice < 1) || (filterChoice > m_NumberOfFilters))
                     {
-                        m_BodyText = string.Format(k_InvalidActionNumErrorTextFormat, "filter", "filter", string.Format("Filter number out of range 1:{0}", m_NumberOfFilters));
+                        m_BodyText = k_ActionOutOfActionListErrorTextFormat;
                     }
                     else
                     {
@@ -98,20 +98,9 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (Exception exception)
                 {
-                    if (ex is OverflowException || ex is FormatException)
-                    {
-                        m_BodyText = string.Format(
-                            k_InvalidActionNumErrorTextFormat,
-                            "vehicle type",
-                            "type",
-                            ex.Message);
-                    }
-                    else
-                    {
-                        m_BodyText = string.Format(k_GeneralErrorTextFormat, ex.Message);
-                    }
+                    m_BodyText = GetExceptionMessage(exception);
                 }
 
                 m_ChooseFilterMode = false;

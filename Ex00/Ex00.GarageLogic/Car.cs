@@ -49,7 +49,7 @@ namespace Ex00.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Car {0} {1}", base.ToString(), string.Format("color: {0}, door amount: {1}", Color, DoorAmount));
+            return string.Format("Car \n{0} \n{1}", base.ToString(), string.Format("color: {0} \ndoor amount: {1}", Color, DoorAmount));
         }
     }
 }

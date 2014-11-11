@@ -1,4 +1,7 @@
-﻿namespace Ex00.GarageLogic
+﻿using System;
+using System.Linq;
+
+namespace Ex00.GarageLogic
 {
     public static class Extensions
     {
@@ -12,17 +15,17 @@
         /// <returns></returns>
         public static float CheckLegalAddition(this float i_ReceivedValue, float i_CurrentValue, float i_MinValue, float i_MaxValue)
         {
-            var resultingValue = i_CurrentValue + i_ReceivedValue;
+            float resultingValue = i_CurrentValue + i_ReceivedValue;
             if (resultingValue > i_MaxValue || resultingValue < i_MinValue)
             {
-                throw new ValueOutOfRangeException(resultingValue, i_MinValue, i_MaxValue);
+                throw new ValueOutOfRangeException(Math.Max(0, i_MinValue - i_CurrentValue), i_MaxValue - i_CurrentValue, i_ReceivedValue);
             }
 
             return resultingValue;
         }
 
         /// <summary>
-        /// checks if a given addition is within a legal range, from zero to a given maximum
+        /// checks if a given addition is within a legal range of zero to a given maximum
         /// </summary>
         /// <param name="i_ReceivedValue"> the amount to add</param>
         /// <param name="i_CurrentValue"> the current value</param>
@@ -56,6 +59,58 @@
         public static string FormatWith(this string i_Str, params object[] i_FormattingInfo)
         {
             return string.Format(i_Str, i_FormattingInfo);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i_ArgumentName"></param>
+        /// <returns></returns>
+        public static string GetDisplayNameOfArgument(string i_ArgumentName)
+        {
+            string displayNameOfArgument = string.Empty;
+            foreach (char ch in i_ArgumentName.Substring(2))
+            {
+                if (char.IsLower(ch))
+                {
+                    displayNameOfArgument += ch.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                }
+                else
+                {
+                    displayNameOfArgument += " " + ch.ToString(System.Globalization.CultureInfo.InvariantCulture).ToLower();
+                }
+            }
+            
+            return displayNameOfArgument.Trim();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i_Value"></param>
+        /// <returns></returns>
+        public static string ToFirstLatterUpperRestLower(string i_Value)
+        {
+            return i_Value.Substring(0, 1).ToUpper() + i_Value.Substring(1).ToLower();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i_ParmName"></param>
+        /// <param name="i_EnumType"></param>
+        /// <param name="i_Value"></param>
+        /// <returns></returns>
+        public static bool ValidateParamValueIsEnumName(string i_ParmDisplayName, Type i_EnumType, string i_Value)
+        {
+            string[] enumTypes = Enum.GetNames(i_EnumType);
+            string validTypes = string.Join(",", enumTypes);
+            if (!enumTypes.Contains(i_Value, StringComparer.OrdinalIgnoreCase))
+            {
+                throw new FormatException(string.Format("{0} must be one of these: {1}", i_ParmDisplayName, validTypes));
+            }
+
+            return true;
         }
     }
 }

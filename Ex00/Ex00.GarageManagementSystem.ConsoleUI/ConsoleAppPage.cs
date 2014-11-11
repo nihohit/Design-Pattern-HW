@@ -10,15 +10,18 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
     public abstract class ConsoleAppPage
     {
         #region consts
-
-        protected const string k_EnterVehicleLicenceNumberActionText = "Enter vehicle licence number: ";
+        protected const string k_VehicleLicenceNumberActionText = "Vehicle licence number: ";
         protected const string k_CancelActionString = "cancel";
         protected const string k_ReturnToMenuActionText = "Press 'Enter' to return to menu";
-        protected const string k_GeneralErrorTextFormat = "Something went wrong (ERROR: {0})";
+        protected const string k_ActionDescriptionFormat = "{0}) {1}";
+        protected const string k_GeneralErrorTextFormat = "ERROR: {0}";
         protected const string k_CannotFindVehicleErrorTextFormat = "Could not find vehicle {0} in the garage records.";
         protected const string k_InvalidActionNumErrorTextFormat = "Invalid {0}! Should choose {1} from list. (ERROR: {2})";
+        protected const string k_ActionOutOfActionListErrorTextFormat = "Error: must choose action number from the list above";
         protected const string k_InvalidInputGeneralErrorTextFormat = "Invalid {0}! (ERROR: {1})";
-        protected const string k_ActionDescriptionFormat = "{0}) {1}";
+        protected const string k_FormatExceptionTextFormat = "Format Error: {0}";
+        protected const string k_ArgumentExceptionTextFormat = "Argument Error: {0}";
+        protected const string k_ValueOutOfRangeExceptionTextFormat = "Out of Range Error: {0]";
 
         #endregion consts
 
@@ -44,7 +47,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
             }
         }
 
-        protected Garage GarageObject { get; private set; }
+        protected ICommunicateWithConsole GarageObject { get; private set; }
 
         // default value set at the member
         protected bool ShouldExitPage { get; set; }
@@ -60,7 +63,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
 
         #region public
 
-        public void OpenPage(Garage i_GarageObject)
+        public void OpenPage(ICommunicateWithConsole i_GarageObject)
         {
             GarageObject = i_GarageObject;
 
@@ -102,6 +105,7 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
 
             ShouldExitPage = false;
             ShouldClearPageText = true;
+            GarageObject = null;
         }
 
         #endregion public
@@ -127,12 +131,35 @@ namespace Ex00.GarageManagementSystem.ConsoleUI
             {
                 isVehicleInGarage = GarageObject.IsVehicleInGarage(i_Input);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                o_ErrorMsg = string.Format(k_InvalidInputGeneralErrorTextFormat, "licence number", ex.Message);
+                o_ErrorMsg = GetExceptionMessage(exception);
             }
 
             return isVehicleInGarage;
+        }
+
+        protected string GetExceptionMessage(Exception exception)
+        {
+            string errorMsg = "";
+            if (exception is FormatException)
+            {
+                errorMsg = k_FormatExceptionTextFormat.FormatWith(exception.Message);
+            }
+            else if (exception is ArgumentException)
+            {
+                errorMsg = k_ArgumentExceptionTextFormat.FormatWith(exception.Message);
+            }
+            else if (exception is ValueOutOfRangeException)
+            {
+                errorMsg = k_ValueOutOfRangeExceptionTextFormat.FormatWith(exception.Message);
+            }
+            else
+            {
+                errorMsg = k_GeneralErrorTextFormat.FormatWith(exception.Message);
+            }
+
+            return errorMsg;
         }
 
         protected string GetAsChoicesListTexts(IEnumerable<string> i_Choices, int i_StartIndex, out int o_NumberOfChoices)
