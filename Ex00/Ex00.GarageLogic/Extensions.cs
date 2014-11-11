@@ -103,6 +103,7 @@ namespace Ex00.GarageLogic
         /// <returns></returns>
         public static bool ValidateParamValueIsEnumName(string i_ParmDisplayName, Type i_EnumType, string i_Value, out string o_EnumStringValue)
         {
+            const bool v_ValidEnumName = true;
             string[] enumTypes = Enum.GetNames(i_EnumType);
             if (string.IsNullOrEmpty(i_Value))
             {
@@ -117,7 +118,7 @@ namespace Ex00.GarageLogic
             }
 
             o_EnumStringValue = enumTypes[valueNameIndex];
-            return true;
+            return v_ValidEnumName;
         }
     }
 }
