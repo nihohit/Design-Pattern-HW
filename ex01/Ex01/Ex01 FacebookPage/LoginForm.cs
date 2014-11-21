@@ -33,7 +33,7 @@ namespace Ex01_FacebookPage
             /// You can then save the result.AccessToken for future auto-connect to this user:
             LoginResult result = FacebookService.Login("501103096696183",
                 "user_about_me", "user_friends", "friends_about_me", "publish_stream", "user_events", "read_stream",
-                "user_status");
+                "user_status", "publish_actions");
             // These are NOT the complete list of permissions.
             // The documentation regarding facebook login and permissions can be found here: 
             // v2.0: https://developers.facebook.com/docs/facebook-login/permissions/v2.0
@@ -77,9 +77,11 @@ namespace Ex01_FacebookPage
 
             if (!string.IsNullOrEmpty(result.AccessToken))
             {
-                var tabsPage = new TabsPage(result.LoggedInUser);
-                tabsPage.Location = this.Location;
-                tabsPage.StartPosition = FormStartPosition.Manual;
+                var tabsPage = new TabsPage(result.LoggedInUser)
+                                   {
+                                       Location = this.Location,
+                                       StartPosition = FormStartPosition.Manual
+                                   };
                 tabsPage.FormClosing += delegate { this.Show(); };
                 tabsPage.Show();
                 this.Hide();
