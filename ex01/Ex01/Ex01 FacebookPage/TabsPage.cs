@@ -3,35 +3,34 @@ using System.Windows.Forms;
 
 namespace Ex01_FacebookPage
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Threading.Tasks;
 
     using FacebookWrapper.ObjectModel;
-    using System.Collections.Generic;
 
     public partial class TabsPage : Form
     {
         private readonly User r_User;
-        private FacebookObjectCollection<GeoPostedItem> m_currentActivityFeed;
-        private GeoPostedItem m_currentlySelectedItem;
+        private readonly List<Post> r_CurrentActivityFeed = new List<Post>();
+        private GeoPostedItem m_CurrentlySelectedPost;
+        private Comment m_CurrentlySelectedComment;
 
-        public TabsPage(User user)
+        public TabsPage(User i_User)
         {
             InitializeComponent();
-            this.Shown += (sender, args) => fetchNewsFeed();
+            this.Shown += (i_Sender, i_Args) => fetchNewsFeed();
 
-            this.r_User = user;
-            this.MyProfileCommentBox.Hide();
-            this.MyProfileCommentButton.Hide();
-            this.MyProfileLikebutton.Hide();
+            this.r_User = i_User;
+            tabSwitch(null, null);
         }
 
-        private void textBoxStatus_TextChanged(object sender, EventArgs e)
+        private void textBoxStatusTextChanged(object i_Sender, EventArgs i_EventArgs)
         {
-
         }
 
-        private void buttonSetStatus_Click(object sender, EventArgs e)
+        private void buttonSetStatusClick(object i_Sender, EventArgs i_EventArgs)
         {
             this.r_User.PostStatus(textBoxStatus.Text);
             var fetchItemsTask = new Task(this.fetchNewsFeed);
@@ -40,21 +39,110 @@ namespace Ex01_FacebookPage
 
         private void fetchNewsFeed()
         {
-            myActivityFeed.Refresh();
-            m_currentActivityFeed = r_User.GetActivity();
-            foreach (var activity in m_currentActivityFeed)
+            MyProfileActivityFeed.Items.Clear();
+            this.r_CurrentActivityFeed.Clear();
+            populateCollectionOfPosts(r_User.Posts, this.r_CurrentActivityFeed);
+            invokedPopulateListBox(this.r_CurrentActivityFeed, MyProfileActivityFeed);
+        }
+
+        private void myActivityFeedSelectedIndexChanged(object i_Sender, EventArgs i_EventArgs)
+        {
+            this.m_CurrentlySelectedPost = this.r_CurrentActivityFeed[MyProfileActivityFeed.SelectedIndex];
+            this.MyProfileCommentBox.Show();
+            MyProfileCommentBox.Clear();
+            this.MyProfileCommentButton.Show();
+            chooseLikeButtonToDisplay();
+            MyProfileViewComments.Show();
+            MyProfileViewComments.Items.Clear();
+            var populateCommentBoxTask = new Task(() => populateListBox(this.m_CurrentlySelectedPost.Comments, MyProfileViewComments));
+            populateCommentBoxTask.Start();
+        }
+
+        private void tabSwitch(object i_Sender, EventArgs i_EventArgs)
+        {
+            this.m_CurrentlySelectedPost = null;
+            this.MyProfileCommentBox.Hide();
+            this.MyProfileCommentButton.Hide();
+            this.MyProfileLikebutton.Hide();
+            this.MyProfileViewComments.Hide();
+            myProfileUnlikeButton.Hide();
+        }
+
+        private void myProfileCommentButtonClick(object i_Sender, EventArgs i_EventArgs)
+        {
+            Debug.Assert(this.m_CurrentlySelectedPost != null, "item is null");
+            if (string.IsNullOrEmpty(MyProfileCommentBox.Text))
             {
+                return;
+            }
+
+            this.m_CurrentlySelectedPost.Comment(MyProfileCommentBox.Text);
+        }
+
+        private void myProfileLikebuttonClick(object i_Sender, EventArgs i_EventArgs)
+        {
+            PostedItem item;
+            if (m_CurrentlySelectedComment == null)
+            {
+                Debug.Assert(this.m_CurrentlySelectedPost != null, "item is null");
+                item = this.m_CurrentlySelectedPost;
+            }
+            else
+            {
+                item = m_CurrentlySelectedComment;
+            }
+            Debug.Assert(!item.LikedBy.Contains(r_User), "item already liked by user");
+            bool check = item.Like();
+            MyProfileLikebutton.Hide();
+            myProfileUnlikeButton.Show();
+        }
+
+        private void myProfileUnlikeButtonClick(object sender, EventArgs e)
+        {
+            PostedItem item;
+            if (m_CurrentlySelectedComment == null)
+            {
+                Debug.Assert(this.m_CurrentlySelectedPost != null, "item is null");
+                item = this.m_CurrentlySelectedPost;
+            }
+            else
+            {
+                item = m_CurrentlySelectedComment;
+            }
+            Debug.Assert(item.LikedBy.Contains(r_User), "item not liked by user");
+            bool check = item.Unlike();
+            MyProfileLikebutton.Show();
+            myProfileUnlikeButton.Hide();
+        }
+
+        private void populateListBox<T>(IEnumerable<T> i_Items, ListBox i_Box) where T : PostedItem
+        {
+            i_Box.Invoke(new Action(() => invokedPopulateListBox(i_Items, i_Box)));
+        }
+
+        private void invokedPopulateListBox<T>(IEnumerable<T> i_Items, ListBox i_Box) where T : PostedItem
+        {
+            foreach (var activity in i_Items)
+            {
+                var comment = activity as Comment;
+                if (comment != null)
+                {
+                    i_Box.Items.Add(comment.Message);
+                    continue;
+                }
+
                 var post = activity as Post;
                 if (post != null)
                 {
                     if (post.Message != null)
                     {
-                        myActivityFeed.Items.Add(post.Message);
+                        i_Box.Items.Add(post.Message);
                     }
                     else if (post.Caption != null)
                     {
-                        myActivityFeed.Items.Add(post.Caption);
+                        i_Box.Items.Add(post.Caption);
                     }
+
                     continue;
                 }
 
@@ -63,8 +151,9 @@ namespace Ex01_FacebookPage
                 {
                     if (status.Message != null)
                     {
-                        myActivityFeed.Items.Add(status.Message);
+                        i_Box.Items.Add(status.Message);
                     }
+
                     continue;
                 }
 
@@ -73,43 +162,63 @@ namespace Ex01_FacebookPage
                 {
                     if (checkin.Message != null)
                     {
-                        myActivityFeed.Items.Add(checkin.Message);
+                        i_Box.Items.Add(checkin.Message);
                     }
+
                     continue;
+                }
+
+                i_Box.Items.Add(activity);
+            }
+        }
+
+        private void populateCollectionOfPosts(IEnumerable<Post> i_Posts, ICollection<Post> i_Collection)
+        {
+            foreach (var post in i_Posts)
+            {
+                if (post.Message != null)
+                {
+                    i_Collection.Add(post);
+                }
+                else if (post.Caption != null)
+                {
+                    i_Collection.Add(post);
                 }
             }
         }
 
-        private void myActivityFeed_SelectedIndexChanged(object sender, EventArgs e)
+        private bool likedByUser(PostedItem item)
         {
-            m_currentlySelectedItem = m_currentActivityFeed[myActivityFeed.SelectedIndex];
-            this.MyProfileCommentBox.Show();
-            this.MyProfileCommentButton.Show();
-            this.MyProfileLikebutton.Show();
+            return item.LikedBy.Contains(r_User);
         }
 
-        private void tabSwitch(object sender, EventArgs e)
+        private void chooseLikeButtonToDisplay()
         {
-            m_currentlySelectedItem = null;
-            this.MyProfileCommentBox.Hide();
-            this.MyProfileCommentButton.Hide();
-            this.MyProfileLikebutton.Hide();
-        }
-
-        private void MyProfileCommentButton_Click(object sender, EventArgs e)
-        {
-            Debug.Assert(m_currentlySelectedItem != null);
-            if (string.IsNullOrEmpty(MyProfileCommentBox.Text))
+            PostedItem item;
+            if (m_CurrentlySelectedComment == null)
             {
-                return;
+                if (m_CurrentlySelectedPost == null)
+                {
+                    MyProfileLikebutton.Hide();
+                    myProfileUnlikeButton.Hide();
+                    return;
+                }
+                item = this.m_CurrentlySelectedPost;
             }
-            m_currentlySelectedItem.Comment(MyProfileCommentBox.Text);
-        }
-
-        private void MyProfileLikebutton_Click(object sender, EventArgs e)
-        {
-            Debug.Assert(m_currentlySelectedItem != null);
-            m_currentlySelectedItem.Like();
+            else
+            {
+                item = m_CurrentlySelectedComment;
+            }
+            if (this.likedByUser(item))
+            {
+                MyProfileLikebutton.Hide();
+                myProfileUnlikeButton.Show();
+            }
+            else
+            {
+                MyProfileLikebutton.Show();
+                myProfileUnlikeButton.Hide();
+            }
         }
     }
 }
