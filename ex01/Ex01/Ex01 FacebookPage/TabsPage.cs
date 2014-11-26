@@ -11,9 +11,12 @@ namespace Ex01_FacebookPage
 
     public partial class TabsPage : Form
     {
+        #region fields
+
         private readonly User r_User;
         private readonly List<Post> r_CurrentActivityFeed = new List<Post>();
         private readonly List<Comment> r_CurrentCommentView = new List<Comment>();
+        private readonly List<User> r_FriendsList = new List<User>();
         private GeoPostedItem m_CurrentlySelectedPost;
         private Comment m_CurrentlySelectedComment;
 
@@ -23,7 +26,6 @@ namespace Ex01_FacebookPage
         private ListBox m_CurrentCommentViewBox;
 
         private Button m_CurrentLikeButton;
-        private Button m_CurrentUnlikeButton;
         private Button m_CurrentCommentButton;
 
         public List<Post> CurrentActivityFeed
@@ -33,6 +35,8 @@ namespace Ex01_FacebookPage
                 return r_CurrentActivityFeed;
             }
         }
+
+        #endregion
 
         #region general
 
@@ -57,6 +61,9 @@ namespace Ex01_FacebookPage
                 case 1:
                     switchToNewsFeed();
                     break;
+                case 2:
+                    FriendsViewBox.Invoke(new Action(fetchFriendList));
+                    break;
                 default:
                     return;
             }
@@ -69,7 +76,6 @@ namespace Ex01_FacebookPage
             m_CurrentCommentTextBox.Hide();
             m_CurrentCommentButton.Hide();
             m_CurrentLikeButton.Hide();
-            m_CurrentUnlikeButton.Hide();
             m_CurrentCommentViewBox.Hide();
         }
 
@@ -84,6 +90,7 @@ namespace Ex01_FacebookPage
             }
 
             m_CurrentlySelectedPost.Comment(text);
+            activityFeedSelectedIndexChanged(null, null);
         }
 
         private void likeButtonClick(object i_Sender, EventArgs i_EventArgs)
@@ -99,30 +106,22 @@ namespace Ex01_FacebookPage
                 item = m_CurrentlySelectedComment;
             }
 
-            Debug.Assert(!item.LikedBy.Contains(r_User), "item already liked by user");
-            item.Like();
-            MyProfileLikeButton.Hide();
-            myProfileUnlikeButton.Show();
+            try
+            {
+                if (likedByUser(item))
+                {
+                    bool result = item.Unlike();
+                }
+                else
+                {
+                    bool result = item.Like();
+                }
+            }
+            // The like/unlike actions are faulty and throw exceptions without the try/catch pattern.
+            catch (InvalidCastException) { }
+            item.ReFetch();
         }
 
-        private void unlikeButtonClick(object i_Sender, EventArgs i_EventArgs)
-        {
-            PostedItem item;
-            if (m_CurrentlySelectedComment == null)
-            {
-                Debug.Assert(m_CurrentlySelectedPost != null, "item is null");
-                item = m_CurrentlySelectedPost;
-            }
-            else
-            {
-                item = m_CurrentlySelectedComment;
-            }
-
-            Debug.Assert(item.LikedBy.Contains(r_User), "item not liked by user");
-            item.Unlike();
-            MyProfileLikeButton.Show();
-            myProfileUnlikeButton.Hide();
-        }
         #region list boxes
 
         private void populateListBox<T>(IEnumerable<T> i_Items, ListBox i_Box) where T : PostedItem
@@ -205,38 +204,7 @@ namespace Ex01_FacebookPage
 
         private bool likedByUser(PostedItem i_Item)
         {
-            return i_Item.LikedBy.Contains(r_User);
-        }
-
-        private void chooseLikeButtonToDisplay()
-        {
-            PostedItem item;
-            if (m_CurrentlySelectedComment == null)
-            {
-                if (m_CurrentlySelectedPost == null)
-                {
-                    m_CurrentLikeButton.Hide();
-                    m_CurrentUnlikeButton.Hide();
-                    return;
-                }
-
-                item = m_CurrentlySelectedPost;
-            }
-            else
-            {
-                item = m_CurrentlySelectedComment;
-            }
-
-            if (likedByUser(item))
-            {
-                m_CurrentLikeButton.Hide();
-                m_CurrentUnlikeButton.Show();
-            }
-            else
-            {
-                m_CurrentLikeButton.Show();
-                m_CurrentUnlikeButton.Hide();
-            }
+            return i_Item.LikedBy.Find(user => user.Id == r_User.Id) != null;
         }
 
         private void activityFeedSelectedIndexChanged(object i_Sender, EventArgs i_EventArgs)
@@ -246,7 +214,7 @@ namespace Ex01_FacebookPage
             m_CurrentCommentTextBox.Show();
             m_CurrentCommentTextBox.Clear();
             m_CurrentCommentButton.Show();
-            chooseLikeButtonToDisplay();
+            m_CurrentLikeButton.Show();
             m_CurrentCommentViewBox.Show();
             m_CurrentCommentViewBox.Items.Clear();
             r_CurrentCommentView.Clear();
@@ -258,7 +226,6 @@ namespace Ex01_FacebookPage
         private void commentFeedSelectedIndexChanged(object i_Sender, EventArgs i_EventArgs)
         {
             m_CurrentlySelectedComment = r_CurrentCommentView[m_CurrentCommentViewBox.SelectedIndex];
-            chooseLikeButtonToDisplay();
         }
 
         #endregion
@@ -287,7 +254,6 @@ namespace Ex01_FacebookPage
             m_CurrentActivityBox = MyProfileActivityBox;
             m_CurrentCommentButton = MyProfileCommentButton;
             m_CurrentLikeButton = MyProfileLikeButton;
-            m_CurrentUnlikeButton = myProfileUnlikeButton;
             m_CurrentCommentViewBox = MyProfileViewComments;
             fetchMyPosts();
         }
@@ -310,9 +276,23 @@ namespace Ex01_FacebookPage
             m_CurrentActivityBox = NewsFeedActivityBox;
             m_CurrentCommentButton = NewsFeedCommentButton;
             m_CurrentLikeButton = NewsFeedLikeButton;
-            m_CurrentUnlikeButton = NewsFeedUnlikeButton;
             m_CurrentCommentViewBox = NewsFeedViewComments;
             fetchNewsFeed();
+        }
+
+        #endregion
+
+        #region interest setter
+
+        private void fetchFriendList()
+        {
+            FriendsViewBox.Items.Clear();
+            r_FriendsList.Clear();
+            r_FriendsList.AddRange(r_User.Friends);
+            foreach(var friend in r_FriendsList)
+            {
+                FriendsViewBox.Items.Add(friend.Name);
+            }
         }
 
         #endregion
