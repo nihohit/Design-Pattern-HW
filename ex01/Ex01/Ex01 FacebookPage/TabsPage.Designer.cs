@@ -39,7 +39,7 @@
             this.buttonSetStatus = new System.Windows.Forms.Button();
             this.MyProfileActivityBox = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxStatus = new System.Windows.Forms.TextBox();
+            this.StatusTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.NewsFeedTab = new System.Windows.Forms.TabPage();
             this.NewsFeedLikeButton = new System.Windows.Forms.Button();
@@ -48,20 +48,33 @@
             this.NewsFeedCommentButton = new System.Windows.Forms.Button();
             this.NewsFeedActivityBox = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.InterestSetterTab = new System.Windows.Forms.TabPage();
+            this.InterestToolTab = new System.Windows.Forms.TabPage();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.InterestSetterTimeBoundLabel = new System.Windows.Forms.Label();
+            this.InterestedFriendsViewBox = new System.Windows.Forms.ListBox();
+            this.InterestedFriendsLabel = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.InterestActionsAmount = new System.Windows.Forms.NumericUpDown();
+            this.InterestFrequency = new System.Windows.Forms.NumericUpDown();
+            this.FrequencyOfInterestLabel = new System.Windows.Forms.Label();
+            this.InterestAmountLabel = new System.Windows.Forms.Label();
             this.FriendsViewBox = new System.Windows.Forms.ListBox();
             this.FriendsLabel = new System.Windows.Forms.Label();
             this.MyProfile.SuspendLayout();
             this.ProfileTab.SuspendLayout();
             this.NewsFeedTab.SuspendLayout();
-            this.InterestSetterTab.SuspendLayout();
+            this.InterestToolTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InterestActionsAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InterestFrequency)).BeginInit();
             this.SuspendLayout();
             // 
             // MyProfile
             // 
             this.MyProfile.Controls.Add(this.ProfileTab);
             this.MyProfile.Controls.Add(this.NewsFeedTab);
-            this.MyProfile.Controls.Add(this.InterestSetterTab);
+            this.MyProfile.Controls.Add(this.InterestToolTab);
             this.MyProfile.Location = new System.Drawing.Point(2, 13);
             this.MyProfile.Name = "MyProfile";
             this.MyProfile.SelectedIndex = 0;
@@ -78,7 +91,7 @@
             this.ProfileTab.Controls.Add(this.buttonSetStatus);
             this.ProfileTab.Controls.Add(this.MyProfileActivityBox);
             this.ProfileTab.Controls.Add(this.label1);
-            this.ProfileTab.Controls.Add(this.textBoxStatus);
+            this.ProfileTab.Controls.Add(this.StatusTextBox);
             this.ProfileTab.Controls.Add(this.label3);
             this.ProfileTab.Location = new System.Drawing.Point(4, 25);
             this.ProfileTab.Name = "ProfileTab";
@@ -174,15 +187,15 @@
             this.label1.TabIndex = 48;
             this.label1.Text = "My activity:";
             // 
-            // textBoxStatus
+            // StatusTextBox
             // 
-            this.textBoxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.StatusTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxStatus.Location = new System.Drawing.Point(99, 16);
-            this.textBoxStatus.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxStatus.Name = "textBoxStatus";
-            this.textBoxStatus.Size = new System.Drawing.Size(625, 22);
-            this.textBoxStatus.TabIndex = 47;
+            this.StatusTextBox.Location = new System.Drawing.Point(99, 16);
+            this.StatusTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.StatusTextBox.Name = "StatusTextBox";
+            this.StatusTextBox.Size = new System.Drawing.Size(625, 22);
+            this.StatusTextBox.TabIndex = 47;
             // 
             // label3
             // 
@@ -284,17 +297,167 @@
             this.label2.TabIndex = 56;
             this.label2.Text = "My news feed:";
             // 
-            // InterestSetterTab
+            // InterestToolTab
             // 
-            this.InterestSetterTab.Controls.Add(this.FriendsViewBox);
-            this.InterestSetterTab.Controls.Add(this.FriendsLabel);
-            this.InterestSetterTab.Location = new System.Drawing.Point(4, 25);
-            this.InterestSetterTab.Name = "InterestSetterTab";
-            this.InterestSetterTab.Padding = new System.Windows.Forms.Padding(3);
-            this.InterestSetterTab.Size = new System.Drawing.Size(1051, 616);
-            this.InterestSetterTab.TabIndex = 2;
-            this.InterestSetterTab.Text = "InterestSetter";
-            this.InterestSetterTab.UseVisualStyleBackColor = true;
+            this.InterestToolTab.Controls.Add(this.comboBox2);
+            this.InterestToolTab.Controls.Add(this.numericUpDown1);
+            this.InterestToolTab.Controls.Add(this.InterestSetterTimeBoundLabel);
+            this.InterestToolTab.Controls.Add(this.InterestedFriendsViewBox);
+            this.InterestToolTab.Controls.Add(this.InterestedFriendsLabel);
+            this.InterestToolTab.Controls.Add(this.comboBox1);
+            this.InterestToolTab.Controls.Add(this.InterestActionsAmount);
+            this.InterestToolTab.Controls.Add(this.InterestFrequency);
+            this.InterestToolTab.Controls.Add(this.FrequencyOfInterestLabel);
+            this.InterestToolTab.Controls.Add(this.InterestAmountLabel);
+            this.InterestToolTab.Controls.Add(this.FriendsViewBox);
+            this.InterestToolTab.Controls.Add(this.FriendsLabel);
+            this.InterestToolTab.Location = new System.Drawing.Point(4, 25);
+            this.InterestToolTab.Name = "InterestToolTab";
+            this.InterestToolTab.Padding = new System.Windows.Forms.Padding(3);
+            this.InterestToolTab.Size = new System.Drawing.Size(1051, 616);
+            this.InterestToolTab.TabIndex = 2;
+            this.InterestToolTab.Text = "Interest Tool";
+            this.InterestToolTab.UseVisualStyleBackColor = true;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Days",
+            "Weeks",
+            "Months",
+            "Years"});
+            this.comboBox2.Location = new System.Drawing.Point(637, 89);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 24);
+            this.comboBox2.TabIndex = 62;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(500, 89);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 22);
+            this.numericUpDown1.TabIndex = 61;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // InterestSetterTimeBoundLabel
+            // 
+            this.InterestSetterTimeBoundLabel.AutoSize = true;
+            this.InterestSetterTimeBoundLabel.Location = new System.Drawing.Point(317, 89);
+            this.InterestSetterTimeBoundLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.InterestSetterTimeBoundLabel.Name = "InterestSetterTimeBoundLabel";
+            this.InterestSetterTimeBoundLabel.Size = new System.Drawing.Size(180, 17);
+            this.InterestSetterTimeBoundLabel.TabIndex = 60;
+            this.InterestSetterTimeBoundLabel.Text = "In items from how long ago:";
+            // 
+            // InterestedFriendsViewBox
+            // 
+            this.InterestedFriendsViewBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.InterestedFriendsViewBox.DisplayMember = "name";
+            this.InterestedFriendsViewBox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InterestedFriendsViewBox.FormattingEnabled = true;
+            this.InterestedFriendsViewBox.ItemHeight = 24;
+            this.InterestedFriendsViewBox.Location = new System.Drawing.Point(774, 28);
+            this.InterestedFriendsViewBox.Margin = new System.Windows.Forms.Padding(4);
+            this.InterestedFriendsViewBox.Name = "InterestedFriendsViewBox";
+            this.InterestedFriendsViewBox.Size = new System.Drawing.Size(270, 532);
+            this.InterestedFriendsViewBox.TabIndex = 59;
+            // 
+            // InterestedFriendsLabel
+            // 
+            this.InterestedFriendsLabel.AutoSize = true;
+            this.InterestedFriendsLabel.Location = new System.Drawing.Point(771, 7);
+            this.InterestedFriendsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.InterestedFriendsLabel.Name = "InterestedFriendsLabel";
+            this.InterestedFriendsLabel.Size = new System.Drawing.Size(257, 17);
+            this.InterestedFriendsLabel.TabIndex = 58;
+            this.InterestedFriendsLabel.Text = "Friends Who Expressed Interest In You:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Minutes",
+            "Hours",
+            "Days"});
+            this.comboBox1.Location = new System.Drawing.Point(637, 61);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.TabIndex = 57;
+            // 
+            // InterestActionsAmount
+            // 
+            this.InterestActionsAmount.Location = new System.Drawing.Point(500, 28);
+            this.InterestActionsAmount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.InterestActionsAmount.Name = "InterestActionsAmount";
+            this.InterestActionsAmount.Size = new System.Drawing.Size(120, 22);
+            this.InterestActionsAmount.TabIndex = 56;
+            this.InterestActionsAmount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // InterestFrequency
+            // 
+            this.InterestFrequency.Location = new System.Drawing.Point(500, 61);
+            this.InterestFrequency.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.InterestFrequency.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.InterestFrequency.Name = "InterestFrequency";
+            this.InterestFrequency.Size = new System.Drawing.Size(120, 22);
+            this.InterestFrequency.TabIndex = 54;
+            this.InterestFrequency.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // FrequencyOfInterestLabel
+            // 
+            this.FrequencyOfInterestLabel.AutoSize = true;
+            this.FrequencyOfInterestLabel.Location = new System.Drawing.Point(317, 61);
+            this.FrequencyOfInterestLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.FrequencyOfInterestLabel.Name = "FrequencyOfInterestLabel";
+            this.FrequencyOfInterestLabel.Size = new System.Drawing.Size(149, 17);
+            this.FrequencyOfInterestLabel.TabIndex = 53;
+            this.FrequencyOfInterestLabel.Text = "Frequency Of Interest:";
+            // 
+            // InterestAmountLabel
+            // 
+            this.InterestAmountLabel.AutoSize = true;
+            this.InterestAmountLabel.Location = new System.Drawing.Point(317, 28);
+            this.InterestAmountLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.InterestAmountLabel.Name = "InterestAmountLabel";
+            this.InterestAmountLabel.Size = new System.Drawing.Size(176, 17);
+            this.InterestAmountLabel.TabIndex = 52;
+            this.InterestAmountLabel.Text = "Amount Of Interest Actions";
             // 
             // FriendsViewBox
             // 
@@ -333,8 +496,11 @@
             this.ProfileTab.PerformLayout();
             this.NewsFeedTab.ResumeLayout(false);
             this.NewsFeedTab.PerformLayout();
-            this.InterestSetterTab.ResumeLayout(false);
-            this.InterestSetterTab.PerformLayout();
+            this.InterestToolTab.ResumeLayout(false);
+            this.InterestToolTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InterestActionsAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InterestFrequency)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -346,7 +512,7 @@
         private System.Windows.Forms.TabPage NewsFeedTab;
         private System.Windows.Forms.ListBox MyProfileActivityBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxStatus;
+        private System.Windows.Forms.TextBox StatusTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonSetStatus;
         private System.Windows.Forms.TextBox MyProfileCommentBox;
@@ -361,8 +527,18 @@
         private System.Windows.Forms.Button NewsFeedLikeButton;
         private System.Windows.Forms.Button MyProfileShareButton;
         private System.Windows.Forms.TabPage InterestTab;
-        private System.Windows.Forms.TabPage InterestSetterTab;
+        private System.Windows.Forms.TabPage InterestToolTab;
         private System.Windows.Forms.ListBox FriendsViewBox;
         private System.Windows.Forms.Label FriendsLabel;
+        private System.Windows.Forms.Label FrequencyOfInterestLabel;
+        private System.Windows.Forms.Label InterestAmountLabel;
+        private System.Windows.Forms.NumericUpDown InterestActionsAmount;
+        private System.Windows.Forms.NumericUpDown InterestFrequency;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ListBox InterestedFriendsViewBox;
+        private System.Windows.Forms.Label InterestedFriendsLabel;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label InterestSetterTimeBoundLabel;
     }
 }
