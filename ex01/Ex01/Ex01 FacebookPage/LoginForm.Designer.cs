@@ -34,9 +34,10 @@
             // Login
             // 
             this.Login.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.Login.Location = new System.Drawing.Point(261, 237);
+            this.Login.Location = new System.Drawing.Point(196, 193);
+            this.Login.Margin = new System.Windows.Forms.Padding(2);
             this.Login.Name = "Login";
-            this.Login.Size = new System.Drawing.Size(340, 123);
+            this.Login.Size = new System.Drawing.Size(255, 100);
             this.Login.TabIndex = 0;
             this.Login.Text = "Login";
             this.Login.UseVisualStyleBackColor = true;
@@ -44,10 +45,11 @@
             // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(813, 602);
+            this.ClientSize = new System.Drawing.Size(610, 489);
             this.Controls.Add(this.Login);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LoginForm";
             this.Text = "LoginForm";
             this.ResumeLayout(false);

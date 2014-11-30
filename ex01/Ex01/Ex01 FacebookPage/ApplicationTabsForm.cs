@@ -9,25 +9,32 @@ namespace Ex01_FacebookPage
     using System.Threading.Tasks;
 
     using FacebookWrapper.ObjectModel;
+using FacebookApplication.Interfaces;
 
-    public partial class TabsPage : Form
+    public partial class ApplicationTabsForm : Form
     {
+        private readonly IFacebookApplicationManager r_FacebookApplicationManager;
         private readonly User r_User;
         private readonly List<Post> r_CurrentActivityFeed = new List<Post>();
         private GeoPostedItem m_CurrentlySelectedPost;
         private Comment m_CurrentlySelectedComment;
 
-        public TabsPage(User i_User)
+        public ApplicationTabsForm(IFacebookApplicationManager i_FacebookApplicationManager)
         {
             InitializeComponent();
+            r_FacebookApplicationManager = i_FacebookApplicationManager;
+            updateFacebookApplicationManagerInRelevantControls(i_FacebookApplicationManager);
+            this.Shown += (i_Sender, i_Args) => fetchFromFacebook();
             this.Shown += (i_Sender, i_Args) => fetchNewsFeed();
 
-            this.r_User = i_User;
+            this.r_User = r_FacebookApplicationManager.LoggedInUser;
             tabSwitch(null, null);
         }
 
-        private void textBoxStatusTextChanged(object i_Sender, EventArgs i_EventArgs)
+        private void updateFacebookApplicationManagerInRelevantControls(IFacebookApplicationManager i_FacebookApplicationManager)
         {
+            inboxPage.FacebookApplicationLogicManager = i_FacebookApplicationManager;
+            friendsPage1.FacebookApplicationLogicManager = i_FacebookApplicationManager;
         }
 
         private void buttonSetStatusClick(object i_Sender, EventArgs i_EventArgs)
@@ -35,6 +42,11 @@ namespace Ex01_FacebookPage
             this.r_User.PostStatus(textBoxStatus.Text);
             var fetchItemsTask = new Task(this.fetchNewsFeed);
             fetchItemsTask.Start();
+        }
+
+        private void fetchFromFacebook()
+        {
+            r_FacebookApplicationManager.FetchFromFacebook();
         }
 
         private void fetchNewsFeed()
@@ -220,5 +232,6 @@ namespace Ex01_FacebookPage
                 myProfileUnlikeButton.Hide();
             }
         }
+
     }
 }

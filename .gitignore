@@ -188,3 +188,5 @@ Status API Training Shop Blog About
 *.dll
 Ex00/Ex00.GarageLogic/Settings.StyleCop
 Ex00/Ex00.sln.DotSettings
+
+Ex00/Ex00.GarageManagementSystem.ConsoleUI/Settings.StyleCop
