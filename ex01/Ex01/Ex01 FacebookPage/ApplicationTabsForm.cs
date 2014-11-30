@@ -34,7 +34,7 @@ namespace Ex01_FacebookPage
 
         private void tabIndexChanged(object i_Sender, EventArgs i_EventArgs)
         {
-            switch (MyProfile.SelectedTab.TabIndex)
+            switch (myProfile.SelectedTab.TabIndex)
             {
                 case 0:
                     this.switchToProfile();
@@ -77,19 +77,19 @@ namespace Ex01_FacebookPage
 
         private void buttonSetStatusClick(object i_Sender, EventArgs i_EventArgs)
         {
-            r_User.PostStatus(StatusTextBox.Text);
-            StatusTextBox.Clear();
+            r_User.PostStatus(statusTextBox.Text);
+            statusTextBox.Clear();
             r_Logic.FetchPosts(r_User.Posts);
         }
 
         private void switchToProfile()
         {
             r_Logic.ContextChanged(
-                MyProfileCommentBox,
-                MyProfileActivityBox,
-                MyProfileViewComments,
-                MyProfileLikeButton,
-                MyProfileCommentButton);
+                myProfileCommentBox,
+                myProfileActivityBox,
+                myProfileViewComments,
+                myProfileLikeButton,
+                myProfileCommentButton);
             r_Logic.FetchPosts(r_User.Posts);
         }
 
@@ -102,11 +102,11 @@ namespace Ex01_FacebookPage
         private void switchToNewsFeed()
         {
             r_Logic.ContextChanged(
-                NewsFeedCommentBox,
-                NewsFeedActivityBox,
-                NewsFeedViewComments,
-                NewsFeedLikeButton,
-                NewsFeedCommentButton);
+                newsFeedCommentBox,
+                newsFeedActivityBox,
+                newsFeedViewComments,
+                newsFeedLikeButton,
+                newsFeedCommentButton);
             r_Logic.FetchPosts(r_User.NewsFeed);
         }
 

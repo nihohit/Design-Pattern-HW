@@ -30,24 +30,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.MyProfile = new System.Windows.Forms.TabControl();
+            this.myProfile = new System.Windows.Forms.TabControl();
             this.ProfileTab = new System.Windows.Forms.TabPage();
-            this.MyProfileViewComments = new System.Windows.Forms.ListBox();
-            this.MyProfileCommentBox = new System.Windows.Forms.TextBox();
-            this.MyProfileCommentButton = new System.Windows.Forms.Button();
-            this.MyProfileLikeButton = new System.Windows.Forms.Button();
+            this.myProfileViewComments = new System.Windows.Forms.ListBox();
+            this.myProfileCommentBox = new System.Windows.Forms.TextBox();
+            this.myProfileCommentButton = new System.Windows.Forms.Button();
+            this.myProfileLikeButton = new System.Windows.Forms.Button();
             this.buttonSetStatus = new System.Windows.Forms.Button();
-            this.MyProfileActivityBox = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.StatusTextBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.myProfileActivityBox = new System.Windows.Forms.ListBox();
+            this.myActivityLabel = new System.Windows.Forms.Label();
+            this.statusTextBox = new System.Windows.Forms.TextBox();
+            this.postStatusLabel = new System.Windows.Forms.Label();
             this.NewsFeedTab = new System.Windows.Forms.TabPage();
-            this.NewsFeedLikeButton = new System.Windows.Forms.Button();
-            this.NewsFeedViewComments = new System.Windows.Forms.ListBox();
-            this.NewsFeedCommentBox = new System.Windows.Forms.TextBox();
-            this.NewsFeedCommentButton = new System.Windows.Forms.Button();
-            this.NewsFeedActivityBox = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.newsFeedLikeButton = new System.Windows.Forms.Button();
+            this.newsFeedViewComments = new System.Windows.Forms.ListBox();
+            this.newsFeedCommentBox = new System.Windows.Forms.TextBox();
+            this.newsFeedCommentButton = new System.Windows.Forms.Button();
+            this.newsFeedActivityBox = new System.Windows.Forms.ListBox();
+            this.newsfeedLabel = new System.Windows.Forms.Label();
             this.inboxTabPage = new System.Windows.Forms.TabPage();
             this.inboxPage = new Ex01_FacebookPage.InboxPage();
             this.friendsTabPage = new System.Windows.Forms.TabPage();
@@ -65,7 +65,7 @@
             this.InterestAmountLabel = new System.Windows.Forms.Label();
             this.FriendsViewBox = new System.Windows.Forms.ListBox();
             this.FriendsLabel = new System.Windows.Forms.Label();
-            this.MyProfile.SuspendLayout();
+            this.myProfile.SuspendLayout();
             this.ProfileTab.SuspendLayout();
             this.NewsFeedTab.SuspendLayout();
             this.inboxTabPage.SuspendLayout();
@@ -76,34 +76,34 @@
             ((System.ComponentModel.ISupportInitialize)(this.InterestFrequency)).BeginInit();
             this.SuspendLayout();
             // 
-            // MyProfile
+            // myProfile
             // 
-            this.MyProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.myProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.MyProfile.Controls.Add(this.ProfileTab);
-            this.MyProfile.Controls.Add(this.NewsFeedTab);
-            this.MyProfile.Controls.Add(this.inboxTabPage);
-            this.MyProfile.Controls.Add(this.friendsTabPage);
-            this.MyProfile.Location = new System.Drawing.Point(3, 14);
-            this.MyProfile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MyProfile.Name = "MyProfile";
-            this.MyProfile.SelectedIndex = 0;
-            this.MyProfile.Size = new System.Drawing.Size(1059, 645);
-            this.MyProfile.TabIndex = 0;
-            this.MyProfile.SelectedIndexChanged += new System.EventHandler(this.tabIndexChanged);
+            this.myProfile.Controls.Add(this.ProfileTab);
+            this.myProfile.Controls.Add(this.NewsFeedTab);
+            this.myProfile.Controls.Add(this.inboxTabPage);
+            this.myProfile.Controls.Add(this.friendsTabPage);
+            this.myProfile.Location = new System.Drawing.Point(3, 14);
+            this.myProfile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.myProfile.Name = "myProfile";
+            this.myProfile.SelectedIndex = 0;
+            this.myProfile.Size = new System.Drawing.Size(1059, 645);
+            this.myProfile.TabIndex = 0;
+            this.myProfile.SelectedIndexChanged += new System.EventHandler(this.tabIndexChanged);
             // 
             // ProfileTab
             // 
-            this.ProfileTab.Controls.Add(this.MyProfileViewComments);
-            this.ProfileTab.Controls.Add(this.MyProfileCommentBox);
-            this.ProfileTab.Controls.Add(this.MyProfileCommentButton);
-            this.ProfileTab.Controls.Add(this.MyProfileLikeButton);
+            this.ProfileTab.Controls.Add(this.myProfileViewComments);
+            this.ProfileTab.Controls.Add(this.myProfileCommentBox);
+            this.ProfileTab.Controls.Add(this.myProfileCommentButton);
+            this.ProfileTab.Controls.Add(this.myProfileLikeButton);
             this.ProfileTab.Controls.Add(this.buttonSetStatus);
-            this.ProfileTab.Controls.Add(this.MyProfileActivityBox);
-            this.ProfileTab.Controls.Add(this.label1);
-            this.ProfileTab.Controls.Add(this.StatusTextBox);
-            this.ProfileTab.Controls.Add(this.label3);
+            this.ProfileTab.Controls.Add(this.myProfileActivityBox);
+            this.ProfileTab.Controls.Add(this.myActivityLabel);
+            this.ProfileTab.Controls.Add(this.statusTextBox);
+            this.ProfileTab.Controls.Add(this.postStatusLabel);
             this.ProfileTab.Location = new System.Drawing.Point(4, 25);
             this.ProfileTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ProfileTab.Name = "ProfileTab";
@@ -113,54 +113,54 @@
             this.ProfileTab.Text = "My Profile";
             this.ProfileTab.UseVisualStyleBackColor = true;
             // 
-            // MyProfileViewComments
+            // myProfileViewComments
             // 
-            this.MyProfileViewComments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.myProfileViewComments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.MyProfileViewComments.DisplayMember = "name";
-            this.MyProfileViewComments.Font = new System.Drawing.Font("Calibri", 9F);
-            this.MyProfileViewComments.FormattingEnabled = true;
-            this.MyProfileViewComments.ItemHeight = 18;
-            this.MyProfileViewComments.Location = new System.Drawing.Point(732, 48);
-            this.MyProfileViewComments.Margin = new System.Windows.Forms.Padding(4);
-            this.MyProfileViewComments.Name = "MyProfileViewComments";
-            this.MyProfileViewComments.Size = new System.Drawing.Size(295, 436);
-            this.MyProfileViewComments.TabIndex = 54;
-            this.MyProfileViewComments.SelectedIndexChanged += new System.EventHandler(this.commentFeedSelectedIndexChanged);
+            this.myProfileViewComments.DisplayMember = "name";
+            this.myProfileViewComments.Font = new System.Drawing.Font("Calibri", 9F);
+            this.myProfileViewComments.FormattingEnabled = true;
+            this.myProfileViewComments.ItemHeight = 18;
+            this.myProfileViewComments.Location = new System.Drawing.Point(732, 48);
+            this.myProfileViewComments.Margin = new System.Windows.Forms.Padding(4);
+            this.myProfileViewComments.Name = "myProfileViewComments";
+            this.myProfileViewComments.Size = new System.Drawing.Size(295, 436);
+            this.myProfileViewComments.TabIndex = 54;
+            this.myProfileViewComments.SelectedIndexChanged += new System.EventHandler(this.commentFeedSelectedIndexChanged);
             // 
-            // MyProfileCommentBox
+            // myProfileCommentBox
             // 
-            this.MyProfileCommentBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.myProfileCommentBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.MyProfileCommentBox.Location = new System.Drawing.Point(732, 494);
-            this.MyProfileCommentBox.Margin = new System.Windows.Forms.Padding(4);
-            this.MyProfileCommentBox.Name = "MyProfileCommentBox";
-            this.MyProfileCommentBox.Size = new System.Drawing.Size(295, 22);
-            this.MyProfileCommentBox.TabIndex = 53;
+            this.myProfileCommentBox.Location = new System.Drawing.Point(732, 494);
+            this.myProfileCommentBox.Margin = new System.Windows.Forms.Padding(4);
+            this.myProfileCommentBox.Name = "myProfileCommentBox";
+            this.myProfileCommentBox.Size = new System.Drawing.Size(295, 22);
+            this.myProfileCommentBox.TabIndex = 53;
             // 
-            // MyProfileCommentButton
+            // myProfileCommentButton
             // 
-            this.MyProfileCommentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.MyProfileCommentButton.Location = new System.Drawing.Point(732, 537);
-            this.MyProfileCommentButton.Margin = new System.Windows.Forms.Padding(4);
-            this.MyProfileCommentButton.Name = "MyProfileCommentButton";
-            this.MyProfileCommentButton.Size = new System.Drawing.Size(131, 53);
-            this.MyProfileCommentButton.TabIndex = 52;
-            this.MyProfileCommentButton.Text = "Comment";
-            this.MyProfileCommentButton.UseVisualStyleBackColor = true;
-            this.MyProfileCommentButton.Click += new System.EventHandler(this.commentButtonClick);
+            this.myProfileCommentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.myProfileCommentButton.Location = new System.Drawing.Point(732, 537);
+            this.myProfileCommentButton.Margin = new System.Windows.Forms.Padding(4);
+            this.myProfileCommentButton.Name = "myProfileCommentButton";
+            this.myProfileCommentButton.Size = new System.Drawing.Size(131, 53);
+            this.myProfileCommentButton.TabIndex = 52;
+            this.myProfileCommentButton.Text = "Comment";
+            this.myProfileCommentButton.UseVisualStyleBackColor = true;
+            this.myProfileCommentButton.Click += new System.EventHandler(this.commentButtonClick);
             // 
-            // MyProfileLikeButton
+            // myProfileLikeButton
             // 
-            this.MyProfileLikeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.MyProfileLikeButton.Location = new System.Drawing.Point(895, 537);
-            this.MyProfileLikeButton.Margin = new System.Windows.Forms.Padding(4);
-            this.MyProfileLikeButton.Name = "MyProfileLikeButton";
-            this.MyProfileLikeButton.Size = new System.Drawing.Size(132, 53);
-            this.MyProfileLikeButton.TabIndex = 51;
-            this.MyProfileLikeButton.Text = "Like";
-            this.MyProfileLikeButton.UseVisualStyleBackColor = true;
-            this.MyProfileLikeButton.Click += new System.EventHandler(this.likeButtonClick);
+            this.myProfileLikeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.myProfileLikeButton.Location = new System.Drawing.Point(895, 537);
+            this.myProfileLikeButton.Margin = new System.Windows.Forms.Padding(4);
+            this.myProfileLikeButton.Name = "myProfileLikeButton";
+            this.myProfileLikeButton.Size = new System.Drawing.Size(132, 53);
+            this.myProfileLikeButton.TabIndex = 51;
+            this.myProfileLikeButton.Text = "Like";
+            this.myProfileLikeButton.UseVisualStyleBackColor = true;
+            this.myProfileLikeButton.Click += new System.EventHandler(this.likeButtonClick);
             // 
             // buttonSetStatus
             // 
@@ -174,59 +174,59 @@
             this.buttonSetStatus.UseVisualStyleBackColor = true;
             this.buttonSetStatus.Click += new System.EventHandler(this.buttonSetStatusClick);
             // 
-            // MyProfileActivityBox
+            // myProfileActivityBox
             // 
-            this.MyProfileActivityBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.myProfileActivityBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.MyProfileActivityBox.DisplayMember = "name";
-            this.MyProfileActivityBox.Font = new System.Drawing.Font("Calibri", 10F);
-            this.MyProfileActivityBox.FormattingEnabled = true;
-            this.MyProfileActivityBox.ItemHeight = 21;
-            this.MyProfileActivityBox.Location = new System.Drawing.Point(99, 50);
-            this.MyProfileActivityBox.Margin = new System.Windows.Forms.Padding(4);
-            this.MyProfileActivityBox.Name = "MyProfileActivityBox";
-            this.MyProfileActivityBox.Size = new System.Drawing.Size(608, 508);
-            this.MyProfileActivityBox.TabIndex = 49;
-            this.MyProfileActivityBox.SelectedIndexChanged += new System.EventHandler(this.activityFeedSelectedIndexChanged);
+            this.myProfileActivityBox.DisplayMember = "name";
+            this.myProfileActivityBox.Font = new System.Drawing.Font("Calibri", 10F);
+            this.myProfileActivityBox.FormattingEnabled = true;
+            this.myProfileActivityBox.ItemHeight = 21;
+            this.myProfileActivityBox.Location = new System.Drawing.Point(99, 50);
+            this.myProfileActivityBox.Margin = new System.Windows.Forms.Padding(4);
+            this.myProfileActivityBox.Name = "myProfileActivityBox";
+            this.myProfileActivityBox.Size = new System.Drawing.Size(608, 508);
+            this.myProfileActivityBox.TabIndex = 49;
+            this.myProfileActivityBox.SelectedIndexChanged += new System.EventHandler(this.activityFeedSelectedIndexChanged);
             // 
-            // label1
+            // myActivityLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 50);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 17);
-            this.label1.TabIndex = 48;
-            this.label1.Text = "My activity:";
+            this.myActivityLabel.AutoSize = true;
+            this.myActivityLabel.Location = new System.Drawing.Point(7, 50);
+            this.myActivityLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.myActivityLabel.Name = "myActivityLabel";
+            this.myActivityLabel.Size = new System.Drawing.Size(77, 17);
+            this.myActivityLabel.TabIndex = 48;
+            this.myActivityLabel.Text = "My activity:";
             // 
-            // StatusTextBox
+            // statusTextBox
             // 
-            this.StatusTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.statusTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.StatusTextBox.Location = new System.Drawing.Point(99, 16);
-            this.StatusTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.StatusTextBox.Name = "StatusTextBox";
-            this.StatusTextBox.Size = new System.Drawing.Size(625, 22);
-            this.StatusTextBox.TabIndex = 47;
+            this.statusTextBox.Location = new System.Drawing.Point(99, 16);
+            this.statusTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.statusTextBox.Name = "statusTextBox";
+            this.statusTextBox.Size = new System.Drawing.Size(625, 22);
+            this.statusTextBox.TabIndex = 47;
             // 
-            // label3
+            // postStatusLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 20);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 17);
-            this.label3.TabIndex = 46;
-            this.label3.Text = "Post Status:";
+            this.postStatusLabel.AutoSize = true;
+            this.postStatusLabel.Location = new System.Drawing.Point(5, 20);
+            this.postStatusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.postStatusLabel.Name = "postStatusLabel";
+            this.postStatusLabel.Size = new System.Drawing.Size(84, 17);
+            this.postStatusLabel.TabIndex = 46;
+            this.postStatusLabel.Text = "Post Status:";
             // 
             // NewsFeedTab
             // 
-            this.NewsFeedTab.Controls.Add(this.NewsFeedLikeButton);
-            this.NewsFeedTab.Controls.Add(this.NewsFeedViewComments);
-            this.NewsFeedTab.Controls.Add(this.NewsFeedCommentBox);
-            this.NewsFeedTab.Controls.Add(this.NewsFeedCommentButton);
-            this.NewsFeedTab.Controls.Add(this.NewsFeedActivityBox);
-            this.NewsFeedTab.Controls.Add(this.label2);
+            this.NewsFeedTab.Controls.Add(this.newsFeedLikeButton);
+            this.NewsFeedTab.Controls.Add(this.newsFeedViewComments);
+            this.NewsFeedTab.Controls.Add(this.newsFeedCommentBox);
+            this.NewsFeedTab.Controls.Add(this.newsFeedCommentButton);
+            this.NewsFeedTab.Controls.Add(this.newsFeedActivityBox);
+            this.NewsFeedTab.Controls.Add(this.newsfeedLabel);
             this.NewsFeedTab.Location = new System.Drawing.Point(4, 25);
             this.NewsFeedTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.NewsFeedTab.Name = "NewsFeedTab";
@@ -236,79 +236,79 @@
             this.NewsFeedTab.Text = "NewsFeed";
             this.NewsFeedTab.UseVisualStyleBackColor = true;
             // 
-            // NewsFeedLikeButton
+            // newsFeedLikeButton
             // 
-            this.NewsFeedLikeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.NewsFeedLikeButton.Location = new System.Drawing.Point(907, 544);
-            this.NewsFeedLikeButton.Margin = new System.Windows.Forms.Padding(4);
-            this.NewsFeedLikeButton.Name = "NewsFeedLikeButton";
-            this.NewsFeedLikeButton.Size = new System.Drawing.Size(135, 57);
-            this.NewsFeedLikeButton.TabIndex = 62;
-            this.NewsFeedLikeButton.Text = "Like";
-            this.NewsFeedLikeButton.UseVisualStyleBackColor = true;
-            this.NewsFeedLikeButton.Click += new System.EventHandler(this.likeButtonClick);
+            this.newsFeedLikeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.newsFeedLikeButton.Location = new System.Drawing.Point(907, 544);
+            this.newsFeedLikeButton.Margin = new System.Windows.Forms.Padding(4);
+            this.newsFeedLikeButton.Name = "newsFeedLikeButton";
+            this.newsFeedLikeButton.Size = new System.Drawing.Size(135, 57);
+            this.newsFeedLikeButton.TabIndex = 62;
+            this.newsFeedLikeButton.Text = "Like";
+            this.newsFeedLikeButton.UseVisualStyleBackColor = true;
+            this.newsFeedLikeButton.Click += new System.EventHandler(this.likeButtonClick);
             // 
-            // NewsFeedViewComments
+            // newsFeedViewComments
             // 
-            this.NewsFeedViewComments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.newsFeedViewComments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.NewsFeedViewComments.DisplayMember = "name";
-            this.NewsFeedViewComments.Font = new System.Drawing.Font("Calibri", 9F);
-            this.NewsFeedViewComments.FormattingEnabled = true;
-            this.NewsFeedViewComments.ItemHeight = 18;
-            this.NewsFeedViewComments.Location = new System.Drawing.Point(747, 27);
-            this.NewsFeedViewComments.Margin = new System.Windows.Forms.Padding(4);
-            this.NewsFeedViewComments.Name = "NewsFeedViewComments";
-            this.NewsFeedViewComments.Size = new System.Drawing.Size(295, 454);
-            this.NewsFeedViewComments.TabIndex = 60;
-            this.NewsFeedViewComments.SelectedIndexChanged += new System.EventHandler(this.commentFeedSelectedIndexChanged);
+            this.newsFeedViewComments.DisplayMember = "name";
+            this.newsFeedViewComments.Font = new System.Drawing.Font("Calibri", 9F);
+            this.newsFeedViewComments.FormattingEnabled = true;
+            this.newsFeedViewComments.ItemHeight = 18;
+            this.newsFeedViewComments.Location = new System.Drawing.Point(747, 27);
+            this.newsFeedViewComments.Margin = new System.Windows.Forms.Padding(4);
+            this.newsFeedViewComments.Name = "newsFeedViewComments";
+            this.newsFeedViewComments.Size = new System.Drawing.Size(295, 454);
+            this.newsFeedViewComments.TabIndex = 60;
+            this.newsFeedViewComments.SelectedIndexChanged += new System.EventHandler(this.commentFeedSelectedIndexChanged);
             // 
-            // NewsFeedCommentBox
+            // newsFeedCommentBox
             // 
-            this.NewsFeedCommentBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.newsFeedCommentBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.NewsFeedCommentBox.Location = new System.Drawing.Point(747, 514);
-            this.NewsFeedCommentBox.Margin = new System.Windows.Forms.Padding(4);
-            this.NewsFeedCommentBox.Name = "NewsFeedCommentBox";
-            this.NewsFeedCommentBox.Size = new System.Drawing.Size(295, 22);
-            this.NewsFeedCommentBox.TabIndex = 59;
+            this.newsFeedCommentBox.Location = new System.Drawing.Point(747, 514);
+            this.newsFeedCommentBox.Margin = new System.Windows.Forms.Padding(4);
+            this.newsFeedCommentBox.Name = "newsFeedCommentBox";
+            this.newsFeedCommentBox.Size = new System.Drawing.Size(295, 22);
+            this.newsFeedCommentBox.TabIndex = 59;
             // 
-            // NewsFeedCommentButton
+            // newsFeedCommentButton
             // 
-            this.NewsFeedCommentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.NewsFeedCommentButton.Location = new System.Drawing.Point(747, 545);
-            this.NewsFeedCommentButton.Margin = new System.Windows.Forms.Padding(4);
-            this.NewsFeedCommentButton.Name = "NewsFeedCommentButton";
-            this.NewsFeedCommentButton.Size = new System.Drawing.Size(135, 57);
-            this.NewsFeedCommentButton.TabIndex = 58;
-            this.NewsFeedCommentButton.Text = "Comment";
-            this.NewsFeedCommentButton.UseVisualStyleBackColor = true;
-            this.NewsFeedCommentButton.Click += new System.EventHandler(this.commentButtonClick);
+            this.newsFeedCommentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.newsFeedCommentButton.Location = new System.Drawing.Point(747, 545);
+            this.newsFeedCommentButton.Margin = new System.Windows.Forms.Padding(4);
+            this.newsFeedCommentButton.Name = "newsFeedCommentButton";
+            this.newsFeedCommentButton.Size = new System.Drawing.Size(135, 57);
+            this.newsFeedCommentButton.TabIndex = 58;
+            this.newsFeedCommentButton.Text = "Comment";
+            this.newsFeedCommentButton.UseVisualStyleBackColor = true;
+            this.newsFeedCommentButton.Click += new System.EventHandler(this.commentButtonClick);
             // 
-            // NewsFeedActivityBox
+            // newsFeedActivityBox
             // 
-            this.NewsFeedActivityBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.newsFeedActivityBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.NewsFeedActivityBox.DisplayMember = "name";
-            this.NewsFeedActivityBox.Font = new System.Drawing.Font("Calibri", 10F);
-            this.NewsFeedActivityBox.FormattingEnabled = true;
-            this.NewsFeedActivityBox.ItemHeight = 21;
-            this.NewsFeedActivityBox.Location = new System.Drawing.Point(107, 20);
-            this.NewsFeedActivityBox.Margin = new System.Windows.Forms.Padding(4);
-            this.NewsFeedActivityBox.Name = "NewsFeedActivityBox";
-            this.NewsFeedActivityBox.Size = new System.Drawing.Size(608, 550);
-            this.NewsFeedActivityBox.TabIndex = 57;
-            this.NewsFeedActivityBox.SelectedIndexChanged += new System.EventHandler(this.activityFeedSelectedIndexChanged);
+            this.newsFeedActivityBox.DisplayMember = "name";
+            this.newsFeedActivityBox.Font = new System.Drawing.Font("Calibri", 10F);
+            this.newsFeedActivityBox.FormattingEnabled = true;
+            this.newsFeedActivityBox.ItemHeight = 21;
+            this.newsFeedActivityBox.Location = new System.Drawing.Point(107, 20);
+            this.newsFeedActivityBox.Margin = new System.Windows.Forms.Padding(4);
+            this.newsFeedActivityBox.Name = "newsFeedActivityBox";
+            this.newsFeedActivityBox.Size = new System.Drawing.Size(608, 550);
+            this.newsFeedActivityBox.TabIndex = 57;
+            this.newsFeedActivityBox.SelectedIndexChanged += new System.EventHandler(this.activityFeedSelectedIndexChanged);
             // 
-            // label2
+            // newsfeedLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 20);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 17);
-            this.label2.TabIndex = 56;
-            this.label2.Text = "My news feed:";
+            this.newsfeedLabel.AutoSize = true;
+            this.newsfeedLabel.Location = new System.Drawing.Point(7, 20);
+            this.newsfeedLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.newsfeedLabel.Name = "newsfeedLabel";
+            this.newsfeedLabel.Size = new System.Drawing.Size(98, 17);
+            this.newsfeedLabel.TabIndex = 56;
+            this.newsfeedLabel.Text = "My news feed:";
             // 
             // inboxTabPage
             // 
@@ -388,7 +388,7 @@
             "Years"});
             this.comboBox2.Location = new System.Drawing.Point(637, 89);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 24);
+            this.comboBox2.Size = new System.Drawing.Size(121, 25);
             this.comboBox2.TabIndex = 62;
             // 
             // numericUpDown1
@@ -456,7 +456,7 @@
             "Days"});
             this.comboBox1.Location = new System.Drawing.Point(637, 61);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.Size = new System.Drawing.Size(121, 25);
             this.comboBox1.TabIndex = 57;
             // 
             // InterestActionsAmount
@@ -544,11 +544,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1060, 660);
-            this.Controls.Add(this.MyProfile);
+            this.Controls.Add(this.myProfile);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ApplicationTabsForm";
             this.Text = "TabsPage";
-            this.MyProfile.ResumeLayout(false);
+            this.myProfile.ResumeLayout(false);
             this.ProfileTab.ResumeLayout(false);
             this.ProfileTab.PerformLayout();
             this.NewsFeedTab.ResumeLayout(false);
@@ -566,24 +566,24 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl MyProfile;
+        private System.Windows.Forms.TabControl myProfile;
         private System.Windows.Forms.TabPage ProfileTab;
         private System.Windows.Forms.TabPage NewsFeedTab;
-        private System.Windows.Forms.ListBox MyProfileActivityBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox StatusTextBox;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ListBox myProfileActivityBox;
+        private System.Windows.Forms.Label myActivityLabel;
+        private System.Windows.Forms.TextBox statusTextBox;
+        private System.Windows.Forms.Label postStatusLabel;
         private System.Windows.Forms.Button buttonSetStatus;
-        private System.Windows.Forms.TextBox MyProfileCommentBox;
-        private System.Windows.Forms.Button MyProfileCommentButton;
-        private System.Windows.Forms.Button MyProfileLikeButton;
-        private System.Windows.Forms.ListBox MyProfileViewComments;
-        private System.Windows.Forms.ListBox NewsFeedViewComments;
-        private System.Windows.Forms.TextBox NewsFeedCommentBox;
-        private System.Windows.Forms.Button NewsFeedCommentButton;
-        private System.Windows.Forms.ListBox NewsFeedActivityBox;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button NewsFeedLikeButton;
+        private System.Windows.Forms.TextBox myProfileCommentBox;
+        private System.Windows.Forms.Button myProfileCommentButton;
+        private System.Windows.Forms.Button myProfileLikeButton;
+        private System.Windows.Forms.ListBox myProfileViewComments;
+        private System.Windows.Forms.ListBox newsFeedViewComments;
+        private System.Windows.Forms.TextBox newsFeedCommentBox;
+        private System.Windows.Forms.Button newsFeedCommentButton;
+        private System.Windows.Forms.ListBox newsFeedActivityBox;
+        private System.Windows.Forms.Label newsfeedLabel;
+        private System.Windows.Forms.Button newsFeedLikeButton;
         private System.Windows.Forms.TabPage InterestToolTab;
         private System.Windows.Forms.ListBox FriendsViewBox;
         private System.Windows.Forms.Label FriendsLabel;
