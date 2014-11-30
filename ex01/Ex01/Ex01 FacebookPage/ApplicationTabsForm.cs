@@ -12,16 +12,16 @@ namespace Ex01_FacebookPage
 
         private readonly IFacebookApplicationManager r_FacebookApplicationManager;
         private readonly User r_User;
-        private readonly BasicFacebook r_Logic;
-        private readonly List<User> r_FriendsList = new List<User>();
+        private readonly BasicFacebookFunctionality r_BasicfacebookFunctionality;
 
         public ApplicationTabsForm(IFacebookApplicationManager i_FacebookApplicationManager)
         {
             InitializeComponent();
             r_FacebookApplicationManager = i_FacebookApplicationManager;
             updateFacebookApplicationManagerInRelevantControls(i_FacebookApplicationManager);
-            r_Logic = new BasicFacebook(i_FacebookApplicationManager.LoggedInUser);
+            this.r_BasicfacebookFunctionality = new BasicFacebookFunctionality(i_FacebookApplicationManager.LoggedInUser);
             r_User = i_FacebookApplicationManager.LoggedInUser;
+            interestPage.SetUser(r_User);
             switchToProfile();
         }
 
@@ -34,7 +34,7 @@ namespace Ex01_FacebookPage
 
         private void tabIndexChanged(object i_Sender, EventArgs i_EventArgs)
         {
-            switch (MyProfile.SelectedTab.TabIndex)
+            switch (myProfile.SelectedTab.TabIndex)
             {
                 case 0:
                     this.switchToProfile();
@@ -55,42 +55,42 @@ namespace Ex01_FacebookPage
 
         private void commentButtonClick(object i_Sender, EventArgs i_EventArgs)
         {
-            r_Logic.Comment();
+            this.r_BasicfacebookFunctionality.Comment();
         }
 
         private void likeButtonClick(object i_Sender, EventArgs i_EventArgs)
         {
-            r_Logic.Like();
+            this.r_BasicfacebookFunctionality.Like();
         }
 
         private void activityFeedSelectedIndexChanged(object i_Sender, EventArgs i_EventArgs)
         {
-            r_Logic.ActivitySelected();
+            this.r_BasicfacebookFunctionality.ActivitySelected();
         }
 
         private void commentFeedSelectedIndexChanged(object i_Sender, EventArgs i_EventArgs)
         {
-            r_Logic.CommentSelected();
+            this.r_BasicfacebookFunctionality.CommentSelected();
         }
 
         #endregion
 
         private void buttonSetStatusClick(object i_Sender, EventArgs i_EventArgs)
         {
-            r_User.PostStatus(StatusTextBox.Text);
-            StatusTextBox.Clear();
-            r_Logic.FetchPosts(r_User.Posts);
+            r_User.PostStatus(statusTextBox.Text);
+            statusTextBox.Clear();
+            this.r_BasicfacebookFunctionality.FetchPosts(r_User.Posts);
         }
 
         private void switchToProfile()
         {
-            r_Logic.ContextChanged(
-                MyProfileCommentBox,
-                MyProfileActivityBox,
-                MyProfileViewComments,
-                MyProfileLikeButton,
-                MyProfileCommentButton);
-            r_Logic.FetchPosts(r_User.Posts);
+            this.r_BasicfacebookFunctionality.ContextChanged(
+                myProfileCommentBox,
+                myProfileActivityBox,
+                myProfileViewComments,
+                myProfileLikeButton,
+                myProfileCommentButton);
+            this.r_BasicfacebookFunctionality.FetchPosts(r_User.Posts);
         }
 
         
@@ -101,13 +101,13 @@ namespace Ex01_FacebookPage
 
         private void switchToNewsFeed()
         {
-            r_Logic.ContextChanged(
-                NewsFeedCommentBox,
-                NewsFeedActivityBox,
-                NewsFeedViewComments,
-                NewsFeedLikeButton,
-                NewsFeedCommentButton);
-            r_Logic.FetchPosts(r_User.NewsFeed);
+            this.r_BasicfacebookFunctionality.ContextChanged(
+                newsFeedCommentBox,
+                newsFeedActivityBox,
+                newsFeedViewComments,
+                newsFeedLikeButton,
+                newsFeedCommentButton);
+            this.r_BasicfacebookFunctionality.FetchPosts(r_User.NewsFeed);
         }
 
         #endregion

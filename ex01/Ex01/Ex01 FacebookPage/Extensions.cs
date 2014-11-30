@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Forms;
 using FacebookApplication;
 
+using FacebookWrapper.ObjectModel;
+
 namespace Ex01_FacebookPage
 {
-    using FacebookWrapper.ObjectModel;
-
-    #region Extensions
+    using System;
 
     public static class Extensions
     {
@@ -16,7 +15,7 @@ namespace Ex01_FacebookPage
 
         public static DialogResult ShowErrorMessageBox(this Exception i_Exception, string i_Caption = "Error")
         {
-            return MessageBox.Show(i_Exception.Message, i_Caption,  MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return MessageBox.Show(i_Exception.Message, i_Caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public static DialogResult ShowWarningMessageBox(this Exception i_Exception, string i_Caption = "Warning")
@@ -25,6 +24,4 @@ namespace Ex01_FacebookPage
                 i_Caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
         }
     }
-
-    #endregion Extensions
 }

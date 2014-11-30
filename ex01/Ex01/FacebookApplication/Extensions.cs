@@ -1,13 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication
 {
     public static class Extensions
     {
+        public static string FormatWith(this string i_Str, params object[] i_FormattingInfo)
+        {
+            return string.Format(i_Str, i_FormattingInfo);
+        }
+
         public static void ValidateUserNotNull(this User i_LoggedInUser)
         {
             if (i_LoggedInUser == null)
@@ -48,9 +50,9 @@ namespace FacebookApplication
                 foreach (Message message in messages)
                 {
                     inboxThreadDisplayString += message.GetMessageDisplayString() + Environment.NewLine;
-                }    
+                }
             }
-            
+
             return inboxThreadDisplayString.Trim(Environment.NewLine.ToCharArray());
         }
 
@@ -67,6 +69,11 @@ namespace FacebookApplication
 
             inboxThreadFriendsNames = inboxThreadFriendsNames.Trim(',');
             return inboxThreadFriendsNames.Trim();
+        }
+
+        public static bool LikedByUser(this PostedItem i_Item, string i_UserId)
+        {
+            return i_Item.LikedBy.Find(i_User => i_User.Id == i_UserId) != null;
         }
     }
 }

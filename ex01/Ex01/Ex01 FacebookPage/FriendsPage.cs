@@ -18,13 +18,13 @@ namespace Ex01_FacebookPage
         private User[] m_Friends;
         public event EventHandler FilterChanged;
         private List<IUsersFilter> m_Filters;
-        
+
         public FriendsPage()
         {
             InitializeComponent();
         }
-        
-        protected override void m_FacebookApplicationManager_AfterFetch(object sender, EventArgs e)
+
+        protected override void m_FacebookApplicationManager_AfterFetch(object i_Sender, EventArgs e)
         {
             updateFriendsList();
         }
@@ -46,7 +46,7 @@ namespace Ex01_FacebookPage
                     break;
             }
 
-            
+
         }
         private void button1_Click(object sender, EventArgs e)
         {

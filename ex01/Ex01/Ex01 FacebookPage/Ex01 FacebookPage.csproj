@@ -56,7 +56,6 @@
     <Compile Include="ApplicationTabPage.Designer.cs">
       <DependentUpon>ApplicationTabPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="BasicFacebook.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="FriendsListsComboBox.cs">
       <SubType>UserControl</SubType>
@@ -75,6 +74,10 @@
     </Compile>
     <Compile Include="InboxPage.Designer.cs">
       <DependentUpon>InboxPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InterestPage.cs" />
+    <Compile Include="InterestPage.Designer.cs">
+      <DependentUpon>InterestPage.cs</DependentUpon>
     </Compile>
     <Compile Include="ListItemsContainer.cs" />
     <Compile Include="LoginForm.cs">
@@ -109,6 +112,9 @@
     <EmbeddedResource Include="InboxPage.resx">
       <DependentUpon>InboxPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InterestPage.resx">
+      <DependentUpon>InterestPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,9 +147,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FacebookApplication\FacebookApplicationLogic.csproj">
+    <ProjectReference Include="..\FacebookApplication\FacebookApplication.csproj">
       <Project>{b17e1111-fb46-432a-b8d0-58ec892583f6}</Project>
-      <Name>FacebookApplicationLogic</Name>
+      <Name>FacebookApplication</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

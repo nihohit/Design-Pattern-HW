@@ -29,7 +29,7 @@ namespace FacebookApplication
 
         private readonly IFriendListsManager r_FriendListsManager;
         private Dictionary<string, InboxThreadOnDemandDetails> m_InboxThreads;
-        
+
         #endregion members
         #region Properties
         #endregion Properties
@@ -102,7 +102,7 @@ namespace FacebookApplication
 
             return inboxThreadDisplayString;
         }
-        
+
         #endregion IInboxManager
         #region override
 
@@ -120,12 +120,12 @@ namespace FacebookApplication
         {
             fetchInbox(i_LoggedInUser);
         }
-        
+
         protected override void ThrowShouldFetchFromFacebookException()
         {
             ThrowShouldFetchFromFacebookException("mailbox");
         }
-        
+
         #endregion override protected methods
         #region private methods
 
@@ -165,7 +165,7 @@ namespace FacebookApplication
 
             return inboxThreadFriendLists;
         }
-        
+
         private void reset()
         {
             if (m_InboxThreads == null)
@@ -179,6 +179,6 @@ namespace FacebookApplication
         }
 
         #endregion private methods
-        
+
     }
 }

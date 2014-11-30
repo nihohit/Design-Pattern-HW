@@ -19,7 +19,7 @@ namespace Ex01_FacebookPage
             InitializeComponent();
         }
 
-        protected override void m_FacebookApplicationManager_AfterFetch(object sender, EventArgs e)
+        protected override void m_FacebookApplicationManager_AfterFetch(object i_Sender, EventArgs e)
         {
             friendsListsCombo.UpdateFriendsLists(FacebookApplicationLogicManager.GetRelevantFriendsListsForLoggedinUser());
         }
