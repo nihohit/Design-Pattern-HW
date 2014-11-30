@@ -30,7 +30,6 @@ namespace Ex01_FacebookPage
         {
             inboxPage.FacebookApplicationLogicManager = i_FacebookApplicationManager;
             friendsPage1.FacebookApplicationLogicManager = i_FacebookApplicationManager;
-            this.interestPage.FacebookApplicationLogicManager = i_FacebookApplicationManager;
         }
 
         private void tabIndexChanged(object i_Sender, EventArgs i_EventArgs)

@@ -3,22 +3,19 @@
 namespace Ex01_FacebookPage
 {
     using System.Linq;
+    using System.Windows.Forms;
 
     using FacebookApplication;
 
     using FacebookWrapper.ObjectModel;
 
-    public partial class InterestPage : ApplicationTabPage
+    public partial class InterestPage : UserControl
     {
         private InterestChecker m_InterestChecker;
 
         public InterestPage()
         {
             InitializeComponent();
-        }
-
-        protected override void m_FacebookApplicationManager_AfterFetch(object sender, EventArgs e)
-        {
         }
 
         public void SetUser(User i_User)

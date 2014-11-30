@@ -75,9 +75,7 @@
     <Compile Include="InboxPage.Designer.cs">
       <DependentUpon>InboxPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterestPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="InterestPage.cs" />
     <Compile Include="InterestPage.Designer.cs">
       <DependentUpon>InterestPage.cs</DependentUpon>
     </Compile>

@@ -81,8 +81,8 @@
             // 
             // myProfile
             // 
-            this.myProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.myProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.myProfile.Controls.Add(this.ProfileTab);
             this.myProfile.Controls.Add(this.NewsFeedTab);
@@ -119,7 +119,7 @@
             // 
             // myProfileViewComments
             // 
-            this.myProfileViewComments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.myProfileViewComments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.myProfileViewComments.DisplayMember = "name";
             this.myProfileViewComments.Font = new System.Drawing.Font("Calibri", 9F);
@@ -134,7 +134,7 @@
             // 
             // myProfileCommentBox
             // 
-            this.myProfileCommentBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.myProfileCommentBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.myProfileCommentBox.Location = new System.Drawing.Point(732, 494);
             this.myProfileCommentBox.Margin = new System.Windows.Forms.Padding(4);
@@ -180,7 +180,7 @@
             // 
             // myProfileActivityBox
             // 
-            this.myProfileActivityBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.myProfileActivityBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.myProfileActivityBox.DisplayMember = "name";
             this.myProfileActivityBox.Font = new System.Drawing.Font("Calibri", 10F);
@@ -205,7 +205,7 @@
             // 
             // statusTextBox
             // 
-            this.statusTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.statusTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.statusTextBox.Location = new System.Drawing.Point(99, 16);
             this.statusTextBox.Margin = new System.Windows.Forms.Padding(4);
@@ -254,7 +254,7 @@
             // 
             // newsFeedViewComments
             // 
-            this.newsFeedViewComments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.newsFeedViewComments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.newsFeedViewComments.DisplayMember = "name";
             this.newsFeedViewComments.Font = new System.Drawing.Font("Calibri", 9F);
@@ -269,7 +269,7 @@
             // 
             // newsFeedCommentBox
             // 
-            this.newsFeedCommentBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.newsFeedCommentBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.newsFeedCommentBox.Location = new System.Drawing.Point(747, 514);
             this.newsFeedCommentBox.Margin = new System.Windows.Forms.Padding(4);
@@ -291,7 +291,7 @@
             // 
             // newsFeedActivityBox
             // 
-            this.newsFeedActivityBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.newsFeedActivityBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.newsFeedActivityBox.DisplayMember = "name";
             this.newsFeedActivityBox.Font = new System.Drawing.Font("Calibri", 10F);
@@ -407,7 +407,7 @@
             // 
             // InterestedFriendsViewBox
             // 
-            this.InterestedFriendsViewBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.InterestedFriendsViewBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.InterestedFriendsViewBox.DisplayMember = "name";
             this.InterestedFriendsViewBox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -502,7 +502,7 @@
             // 
             // FriendsViewBox
             // 
-            this.FriendsViewBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.FriendsViewBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.FriendsViewBox.DisplayMember = "name";
             this.FriendsViewBox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -558,7 +558,6 @@
             // 
             this.interestPage.AutoScroll = true;
             this.interestPage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.interestPage.FacebookApplicationLogicManager = null;
             this.interestPage.Location = new System.Drawing.Point(3, 3);
             this.interestPage.Margin = new System.Windows.Forms.Padding(4);
             this.interestPage.Name = "interestPage";
