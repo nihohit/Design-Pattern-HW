@@ -20,7 +20,7 @@ namespace FacebookApplication
 
         public static string GetMessageDisplayString(this Message i_Message)
         {
-            string messageDisplayString = string.Empty;
+            string messageDisplayString;
             if (i_Message.Text == null)
             {
                 messageDisplayString = GetUnsupportedFormatMessageDisplayString(i_Message.CreatedTime);
@@ -29,6 +29,7 @@ namespace FacebookApplication
             {
                 messageDisplayString = string.Format("[{0}] {1}", i_Message.CreatedTime, i_Message.Text);
             }
+
             return messageDisplayString;
         }
 
