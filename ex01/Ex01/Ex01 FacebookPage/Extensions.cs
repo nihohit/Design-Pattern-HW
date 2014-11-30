@@ -12,7 +12,7 @@ namespace Ex01_FacebookPage
 
     public static class Extensions
     {
-        public delegate string GetIdReturnDisplayNameDelegate(string i_Id);
+        public delegate string GetIdReturnDisplayNameDelegate<T>(T i_Item) where T : class;
 
         public static DialogResult ShowErrorMessageBox(this Exception i_Exception, string i_Caption = "Error")
         {

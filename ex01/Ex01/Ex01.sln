@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex01 FacebookPage", "Ex01 FacebookPage\Ex01 FacebookPage.csproj", "{25802257-F556-480C-B13A-262D6BC8A252}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacebookApplication", "FacebookApplication\FacebookApplication.csproj", "{B17E1111-FB46-432A-B8D0-58EC892583F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacebookApplicationLogic", "FacebookApplication\FacebookApplicationLogic.csproj", "{B17E1111-FB46-432A-B8D0-58EC892583F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

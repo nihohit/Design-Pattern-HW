@@ -51,12 +51,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseUserFilter.cs" />
+    <Compile Include="UsersAgeFilter.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="FacebookApplicationManager.cs" />
     <Compile Include="FacebookFetchable.cs" />
     <Compile Include="FriendListsManager.cs" />
     <Compile Include="FriendsFetcher.cs" />
+    <Compile Include="FriendsFilter.cs" />
+    <Compile Include="FriendsFiltersManager.cs" />
     <Compile Include="InboxManager.cs" />
+    <Compile Include="Interfaces\IFriendFilter.cs" />
+    <Compile Include="Interfaces\IFriendsFiltersManager.cs" />
     <Compile Include="Interfaces\IFacebookApplicationManager.cs" />
     <Compile Include="Interfaces\IFriendListsManager.cs" />
     <Compile Include="Interfaces\IFriendsFetcher.cs" />
@@ -64,6 +70,7 @@
     <Compile Include="Interfaces\IFetchable.cs" />
     <Compile Include="Interfaces\IUsersFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsersFreindListsFilter.cs" />
     <Compile Include="UsersGenderFilter.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -31,8 +31,8 @@ namespace Ex01_FacebookPage
 
         private void updateFriendsList()
         {
-            Dictionary<Exception, FacebookObjectCollection<User>> usersThatThrowException;
-            IEnumerable<User> friends = FacebookApplicationLogicManager.GetFriends(m_Filters, out usersThatThrowException);
+            string usersThatThrowExceptionMessage;//TODO
+            IEnumerable<User> friends = FacebookApplicationLogicManager.GetFriends(null, out usersThatThrowExceptionMessage);//m_Filters
             m_Friends = new User[4];
             listBox1.Items.Clear();
             int i = 0;

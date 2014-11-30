@@ -9,7 +9,8 @@ namespace FacebookApplication.Interfaces
     public interface IFriendsFetcher : IFetchable
     {
         #region methods
-        IEnumerable<User> GetFriends(IEnumerable<IUsersFilter> i_filters, out Dictionary<Exception, FacebookObjectCollection<User>> o_UsersThatThrowException);
+
+        IEnumerable<User> GetFriends();
         #endregion methods
     }
 }

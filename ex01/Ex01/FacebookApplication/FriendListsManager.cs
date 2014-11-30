@@ -13,19 +13,27 @@ namespace FacebookApplication
 
         private Dictionary<string, FriendList> m_friendsListsForLoggedinUser;
         private Dictionary<string, FacebookObjectCollection<FriendList>> m_friendsListsByFriendsIds;
+
         #endregion members
+
         #region Properties
+
         #endregion Properties
+
         #region constructor
 
-        public FriendListsManager(TimeSpan? i_MinIntervalBetweenFetchActions) 
+        public FriendListsManager(TimeSpan? i_MinIntervalBetweenFetchActions)
             : base(i_MinIntervalBetweenFetchActions)
         {
             reset();
         }
+
         #endregion constructor
+
         #region public methods
+
         #region IFriendListsManager
+
         public IEnumerable<FriendList> GetRelevantFriendsListsForLoggedinUser()
         {
             if (m_friendsListsForLoggedinUser == null)
@@ -66,14 +74,16 @@ namespace FacebookApplication
 
         public FriendList CreateFriendList(string i_Name, IEnumerable<User> i_Members)
         {
- 	        UserLoggedInWhenFetched.ValidateUserNotNull();
+            UserLoggedInWhenFetched.ValidateUserNotNull();
             FriendList friendList = UserLoggedInWhenFetched.CreateFriendList(i_Name);
             friendList.AddMemeber(i_Members);
             return friendList;
         }
 
         #endregion IFriendsFetcher
+
         #region override
+
         public override void ResetFetchDetails()
         {
             reset();
@@ -81,7 +91,9 @@ namespace FacebookApplication
         }
 
         #endregion override
+
         #endregion public methods
+
         #region override protected methods
 
         protected override void FacebookFetch(User i_LoggedInUser)
@@ -95,6 +107,7 @@ namespace FacebookApplication
         }
 
         #endregion override protected methods
+
         #region private methods
 
         private void reset()
@@ -126,5 +139,5 @@ namespace FacebookApplication
         }
 
         #endregion private methods
-}
+    }
 }

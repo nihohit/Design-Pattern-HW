@@ -23,7 +23,7 @@ namespace FacebookApplication.Interfaces
         void LoginUser(string i_AppId, params string[] i_Permissions);
         void Reset();
         void FetchFromFacebook();
-        IEnumerable<User> GetFriends(IEnumerable<IUsersFilter> i_filters, out Dictionary<Exception, FacebookObjectCollection<User>> o_UsersThatThrowException);
+        IEnumerable<User> GetFriends(string i_FilterId, out string o_UsersThatCantBeFilteredMessage);
         IEnumerable<FriendList> GetRelevantFriendsListsForLoggedinUser();
         FriendList CreateFriendList(string i_Name, IEnumerable<User> i_Members);
         string GetInboxThreadDisplayString(string i_InboxThreadId);

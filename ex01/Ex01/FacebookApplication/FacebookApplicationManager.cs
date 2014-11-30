@@ -31,17 +31,20 @@ namespace FacebookApplication
 
         public IInboxManager LoggedInUserInboxManager { get; private set; }
 
+        public IFriendsFiltersManager LoggedInUserFriendsFiltersManager { get; private set; }
+
         #endregion IFacebookApplicationManager
         #endregion Properties
         #region constructor
 
         public FacebookApplicationManager()
         {
-            TimeSpan minIntervalBetweenFetchActions = TimeSpan.FromSeconds(10);
+            TimeSpan minIntervalBetweenFetchActions = TimeSpan.FromSeconds(30);
             LoggedInUser = null;
             LoggedInUserFriendsFetcher = new FriendsFetcher(minIntervalBetweenFetchActions);
             LoggedInUserFriendListsManager = new FriendListsManager(minIntervalBetweenFetchActions);
             LoggedInUserInboxManager = new InboxManager(LoggedInUserFriendListsManager, minIntervalBetweenFetchActions);
+            LoggedInUserFriendsFiltersManager = new FriendsFiltersManager(LoggedInUserFriendsFetcher, minIntervalBetweenFetchActions);
         }
         #endregion constructor
         #region public methods
@@ -84,6 +87,7 @@ namespace FacebookApplication
             FacebookService.s_CollectionLimit = friendsCollectionLimit;
             LoggedInUserFriendsFetcher.Fetch(LoggedInUser);
             LoggedInUserFriendListsManager.Fetch(LoggedInUser);
+            LoggedInUserFriendsFiltersManager.Fetch(LoggedInUser);
             FacebookService.s_CollectionLimit = origCollectionLimit;
             LoggedInUserInboxManager.Fetch(LoggedInUser);
             if (AfterFetch != null)
@@ -122,9 +126,22 @@ namespace FacebookApplication
             return LoggedInUserInboxManager.GetInboxThreadsForSpecificFriendList(i_FriendList);
         }
 
-        public IEnumerable<User> GetFriends(IEnumerable<IUsersFilter> i_filters, out Dictionary<Exception, FacebookObjectCollection<User>> o_UsersThatThrowException)
+        public IEnumerable<User> GetFriends(string i_FilterId, out string o_UsersThatCantBeFilteredMessage)
         {
-            return LoggedInUserFriendsFetcher.GetFriends(i_filters, out o_UsersThatThrowException);
+            IEnumerable<User> friends;
+            o_UsersThatCantBeFilteredMessage = string.Empty;
+            IFriendFilter filter = LoggedInUserFriendsFiltersManager.GetFriendFilter(i_FilterId);
+            if (filter == null)
+            {
+                friends = LoggedInUserFriendsFetcher.GetFriends();
+            }
+            else
+            {
+                friends = filter.FilterdFriends;
+                o_UsersThatCantBeFilteredMessage = filter.ErrorString;
+            }
+
+            return friends;
         }
         #endregion IFacebookApplicationManager
         #endregion public methods

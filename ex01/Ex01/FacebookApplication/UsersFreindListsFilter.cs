@@ -1,13 +1,12 @@
-﻿using System;
+﻿using FacebookWrapper.ObjectModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FacebookApplication.Interfaces;
-using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication
 {
-    public class UsersGenderFilter : BaseUserFilter
+    public class UsersFreindListsFilter : BaseUserFilter
     {
         #region members
 
@@ -15,16 +14,16 @@ namespace FacebookApplication
 
         #region Properties
 
-        public User.eGender Gender { get; private set; }
+        public FriendList FriendListBelongsTo { get; private set; }
+        public int MaxAge { get; private set; }
 
         #endregion Properties
 
-
         #region constructor
 
-        public UsersGenderFilter(User.eGender i_Gender)
+        public UsersFreindListsFilter(FriendList i_FriendList)
         {
-            Gender = i_Gender;
+            FriendListBelongsTo = i_FriendList;
         }
 
         #endregion constructor
@@ -33,9 +32,9 @@ namespace FacebookApplication
 
         protected override bool MantianConstrain(User i_User)
         {
-            return i_User.Gender == Gender;
+            return FriendListBelongsTo.Members.Contains(i_User);
         }
 
-        #endregion
+        #endregion 
     }
 }

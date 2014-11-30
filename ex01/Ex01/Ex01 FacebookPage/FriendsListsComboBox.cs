@@ -17,6 +17,25 @@ namespace Ex01_FacebookPage
         private FriendList[] m_FriendLists;
         public event EventHandler FriendsListChanged;
         public FriendList SelectedFriendList { get; private set; }
+
+        public string LabelText
+        {
+            get
+            {
+                return friendsListsLabel.Text;
+            }
+            set
+            {
+                friendsListsLabel.Text = value;
+                int origComboBoxLocationX = comboBox.Location.X;
+                comboBox.Location =
+                    new System.Drawing.Point(
+                        friendsListsLabel.Location.X + friendsListsLabel.Size.Width +
+                        Math.Max(friendsListsLabel.Margin.Right, comboBox.Margin.Left), comboBox.Location.Y);
+                comboBox.Size = new Size(comboBox.Size.Width + origComboBoxLocationX - comboBox.Location.X, comboBox.Size.Height);
+            }
+        }
+
         public bool AllFriendsSelected { get { return SelectedFriendList == null; } }
 
         public FriendsListsComboBox()

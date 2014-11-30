@@ -12,7 +12,7 @@ namespace Ex01_FacebookPage
 
         private readonly IFacebookApplicationManager r_FacebookApplicationManager;
         private readonly User r_User;
-        private readonly BasicFacebookLogic r_Logic;
+        private readonly BasicFacebook r_Logic;
         private readonly List<User> r_FriendsList = new List<User>();
 
         public ApplicationTabsForm(IFacebookApplicationManager i_FacebookApplicationManager)
@@ -20,7 +20,7 @@ namespace Ex01_FacebookPage
             InitializeComponent();
             r_FacebookApplicationManager = i_FacebookApplicationManager;
             updateFacebookApplicationManagerInRelevantControls(i_FacebookApplicationManager);
-            r_Logic = new BasicFacebookLogic(i_FacebookApplicationManager.LoggedInUser);
+            r_Logic = new BasicFacebook(i_FacebookApplicationManager.LoggedInUser);
             r_User = i_FacebookApplicationManager.LoggedInUser;
             switchToProfile();
         }

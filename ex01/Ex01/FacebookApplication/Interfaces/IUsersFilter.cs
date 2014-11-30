@@ -9,7 +9,7 @@ namespace FacebookApplication.Interfaces
     public interface IUsersFilter
     {
         #region methods
-        FacebookObjectCollection<User> FilterUsers(FacebookObjectCollection<User> i_Users, out Dictionary<Exception, FacebookObjectCollection<User>> o_UsersThatThrowException);
+        IEnumerable<User> FilterUsers(IEnumerable<User> i_Users, out Dictionary<string, FacebookObjectCollection<User>> o_UsersThatThrowExceptionByErrorMessgae);
         #endregion Properties
     }
 }

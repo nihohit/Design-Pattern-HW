@@ -14,41 +14,40 @@ namespace Ex01_FacebookPage
 {
     public partial class MessagesListBox : UserControl
     {
-        private InboxThread[] m_InboxThreads;
-        public event EventHandler CurrentInboxThreadChanged;
-        public InboxThread SelectedInboxThread { get; private set; }
+        private readonly ListItemsContainer<InboxThread> r_ListItemsContainer;
+        public event EventHandler CurrentInboxThreadChanged
+        {
+            add { r_ListItemsContainer.CurrentItemChanged += value; }
+            remove { r_ListItemsContainer.CurrentItemChanged -= value; }
+        }
+
+        public InboxThread SelectedInboxThread
+        {
+            get { return r_ListItemsContainer.SelectedItem; }
+        }
+
         public string UserIdThatInboxBelongsTo { get; private set; }
         
         public MessagesListBox()
         {
             InitializeComponent();
-            SelectedInboxThread = null;
-            m_InboxThreads = null;
+            r_ListItemsContainer = new ListItemsContainer<InboxThread>(insertInboxThread);
         }
 
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int selectedIndex = listBox.SelectedIndex;
-            SelectedInboxThread = (selectedIndex == -1) ? null : m_InboxThreads[selectedIndex];
-
-            if (CurrentInboxThreadChanged != null)
-            {
-                CurrentInboxThreadChanged(this, new EventArgs());
-            }
+            r_ListItemsContainer.CangeSelectedItem(listBox.SelectedIndex);
         }
 
         public void UpdateInboxThreads(IEnumerable<InboxThread> i_InboxThreads, string i_UserIdThatInboxBelongsTo)
         {
             UserIdThatInboxBelongsTo = i_UserIdThatInboxBelongsTo;
-            m_InboxThreads = i_InboxThreads == null ? null : new InboxThread[i_InboxThreads.Count()];
-            listBox.Items.Clear();
-            int i = 0;
-            foreach (InboxThread inboxThread in i_InboxThreads)
-            {
-                m_InboxThreads[i] = inboxThread;
-                listBox.Items.Insert(i, getInboxThreadDisplayName(inboxThread));
-                i++;
-            }
+            r_ListItemsContainer.UpdateItems(i_InboxThreads);
+        }
+
+        private void insertInboxThread(int i, InboxThread i_InboxThread)
+        {
+            listBox.Items.Insert(i, getInboxThreadDisplayName(i_InboxThread));
         }
 
         private string getInboxThreadDisplayName(InboxThread i_InboxThread)

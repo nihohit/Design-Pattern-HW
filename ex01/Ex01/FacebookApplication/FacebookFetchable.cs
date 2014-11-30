@@ -54,6 +54,7 @@ namespace FacebookApplication
             TimeSpan timePassedFromLastFetch = FetchedTime == null ? TimeSpan.MaxValue : DateTime.UtcNow - (DateTime)FetchedTime;
             if (ForcedFetch || (MinIntervalBetweenFetchActions <= timePassedFromLastFetch))
             {
+                i_LoggedInUser.ReFetch();
                 if (r_FetchAction != null)
                 {
                     r_FetchAction(i_LoggedInUser);

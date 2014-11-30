@@ -27,43 +27,9 @@ namespace FacebookApplication
         #endregion constructor
         #region public methods
         #region IFriendsFetcher
-        public IEnumerable<User> GetFriends(IEnumerable<IUsersFilter> i_filters, out Dictionary<Exception, FacebookObjectCollection<User>> o_UsersThatThrowException)
+        public IEnumerable<User> GetFriends()
         {
-            o_UsersThatThrowException = new Dictionary<Exception, FacebookObjectCollection<User>>();
-            FacebookObjectCollection<User> friends = new FacebookObjectCollection<User>(m_Friends.Count);
-            foreach (User user in m_Friends)
-            {
-                friends.Add(user);
-            }
-
-            if (i_filters != null)
-            {
-                foreach (IUsersFilter filter in i_filters)
-                {
-                    Dictionary<Exception, FacebookObjectCollection<User>> usersThatThrowExceptionWhenFiltered;
-                    friends = filter.FilterUsers(friends, out usersThatThrowExceptionWhenFiltered);
-                    if (usersThatThrowExceptionWhenFiltered != null && usersThatThrowExceptionWhenFiltered.Count > 0)
-                    {
-                        foreach (Exception exception in usersThatThrowExceptionWhenFiltered.Keys)
-                        {
-                            FacebookObjectCollection<User> usersThrowsThisSpecificException;
-                            if (!o_UsersThatThrowException.TryGetValue(exception, out usersThrowsThisSpecificException))
-                            {
-                                usersThrowsThisSpecificException = usersThatThrowExceptionWhenFiltered[exception];
-                            }
-                            else
-                            {
-                                foreach (User user in usersThatThrowExceptionWhenFiltered[exception])
-                                {
-                                    usersThrowsThisSpecificException.Add(user);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            return friends;
+            return m_Friends;
         }
         #endregion IFriendsFetcher
         #region override
