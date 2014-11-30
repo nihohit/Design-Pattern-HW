@@ -49,9 +49,7 @@
             this.newsFeedActivityBox = new System.Windows.Forms.ListBox();
             this.newsfeedLabel = new System.Windows.Forms.Label();
             this.inboxTabPage = new System.Windows.Forms.TabPage();
-            this.inboxPage = new Ex01_FacebookPage.InboxPage();
             this.friendsTabPage = new System.Windows.Forms.TabPage();
-            this.friendsPage1 = new Ex01_FacebookPage.FriendsPage();
             this.InterestToolTab = new System.Windows.Forms.TabPage();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
@@ -65,6 +63,10 @@
             this.InterestAmountLabel = new System.Windows.Forms.Label();
             this.FriendsViewBox = new System.Windows.Forms.ListBox();
             this.FriendsLabel = new System.Windows.Forms.Label();
+            this.interestCheckTab = new System.Windows.Forms.TabPage();
+            this.inboxPage = new Ex01_FacebookPage.InboxPage();
+            this.friendsPage1 = new Ex01_FacebookPage.FriendsPage();
+            this.interestPage = new Ex01_FacebookPage.InterestPage();
             this.myProfile.SuspendLayout();
             this.ProfileTab.SuspendLayout();
             this.NewsFeedTab.SuspendLayout();
@@ -74,6 +76,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InterestActionsAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InterestFrequency)).BeginInit();
+            this.interestCheckTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // myProfile
@@ -85,6 +88,7 @@
             this.myProfile.Controls.Add(this.NewsFeedTab);
             this.myProfile.Controls.Add(this.inboxTabPage);
             this.myProfile.Controls.Add(this.friendsTabPage);
+            this.myProfile.Controls.Add(this.interestCheckTab);
             this.myProfile.Location = new System.Drawing.Point(3, 14);
             this.myProfile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.myProfile.Name = "myProfile";
@@ -322,17 +326,6 @@
             this.inboxTabPage.Text = "Messages";
             this.inboxTabPage.UseVisualStyleBackColor = true;
             // 
-            // inboxPage
-            // 
-            this.inboxPage.AutoScroll = true;
-            this.inboxPage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.inboxPage.FacebookApplicationLogicManager = null;
-            this.inboxPage.Location = new System.Drawing.Point(3, 2);
-            this.inboxPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.inboxPage.Name = "inboxPage";
-            this.inboxPage.Size = new System.Drawing.Size(1045, 612);
-            this.inboxPage.TabIndex = 0;
-            // 
             // friendsTabPage
             // 
             this.friendsTabPage.Controls.Add(this.friendsPage1);
@@ -344,17 +337,6 @@
             this.friendsTabPage.TabIndex = 3;
             this.friendsTabPage.Text = "Friends";
             this.friendsTabPage.UseVisualStyleBackColor = true;
-            // 
-            // friendsPage1
-            // 
-            this.friendsPage1.AutoScroll = true;
-            this.friendsPage1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.friendsPage1.FacebookApplicationLogicManager = null;
-            this.friendsPage1.Location = new System.Drawing.Point(3, 2);
-            this.friendsPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.friendsPage1.Name = "friendsPage1";
-            this.friendsPage1.Size = new System.Drawing.Size(1045, 612);
-            this.friendsPage1.TabIndex = 0;
             // 
             // InterestToolTab
             // 
@@ -388,7 +370,7 @@
             "Years"});
             this.comboBox2.Location = new System.Drawing.Point(637, 89);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 25);
+            this.comboBox2.Size = new System.Drawing.Size(121, 24);
             this.comboBox2.TabIndex = 62;
             // 
             // numericUpDown1
@@ -456,7 +438,7 @@
             "Days"});
             this.comboBox1.Location = new System.Drawing.Point(637, 61);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 25);
+            this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 57;
             // 
             // InterestActionsAmount
@@ -539,6 +521,50 @@
             this.FriendsLabel.Size = new System.Drawing.Size(100, 23);
             this.FriendsLabel.TabIndex = 63;
             // 
+            // interestCheckTab
+            // 
+            this.interestCheckTab.Controls.Add(this.interestPage);
+            this.interestCheckTab.Location = new System.Drawing.Point(4, 25);
+            this.interestCheckTab.Name = "interestCheckTab";
+            this.interestCheckTab.Padding = new System.Windows.Forms.Padding(3);
+            this.interestCheckTab.Size = new System.Drawing.Size(1051, 616);
+            this.interestCheckTab.TabIndex = 4;
+            this.interestCheckTab.Text = "Interest Check";
+            this.interestCheckTab.UseVisualStyleBackColor = true;
+            // 
+            // inboxPage
+            // 
+            this.inboxPage.AutoScroll = true;
+            this.inboxPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inboxPage.FacebookApplicationLogicManager = null;
+            this.inboxPage.Location = new System.Drawing.Point(3, 2);
+            this.inboxPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.inboxPage.Name = "inboxPage";
+            this.inboxPage.Size = new System.Drawing.Size(1045, 612);
+            this.inboxPage.TabIndex = 0;
+            // 
+            // friendsPage1
+            // 
+            this.friendsPage1.AutoScroll = true;
+            this.friendsPage1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.friendsPage1.FacebookApplicationLogicManager = null;
+            this.friendsPage1.Location = new System.Drawing.Point(3, 2);
+            this.friendsPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.friendsPage1.Name = "friendsPage1";
+            this.friendsPage1.Size = new System.Drawing.Size(1045, 612);
+            this.friendsPage1.TabIndex = 0;
+            // 
+            // interestPage
+            // 
+            this.interestPage.AutoScroll = true;
+            this.interestPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.interestPage.FacebookApplicationLogicManager = null;
+            this.interestPage.Location = new System.Drawing.Point(3, 3);
+            this.interestPage.Margin = new System.Windows.Forms.Padding(4);
+            this.interestPage.Name = "interestPage";
+            this.interestPage.Size = new System.Drawing.Size(1045, 610);
+            this.interestPage.TabIndex = 0;
+            // 
             // ApplicationTabsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -560,13 +586,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InterestActionsAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InterestFrequency)).EndInit();
+            this.interestCheckTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl myProfile;
         private System.Windows.Forms.TabPage ProfileTab;
         private System.Windows.Forms.TabPage NewsFeedTab;
         private System.Windows.Forms.ListBox myProfileActivityBox;
@@ -601,5 +627,8 @@
         private System.Windows.Forms.TabPage friendsTabPage;
         private InboxPage inboxPage;
         private FriendsPage friendsPage1;
+        private System.Windows.Forms.TabPage interestCheckTab;
+        protected System.Windows.Forms.TabControl myProfile;
+        private InterestPage interestPage;
     }
 }

@@ -12,16 +12,16 @@ namespace Ex01_FacebookPage
 
         private readonly IFacebookApplicationManager r_FacebookApplicationManager;
         private readonly User r_User;
-        private readonly BasicFacebookLogic r_Logic;
-        private readonly List<User> r_FriendsList = new List<User>();
+        private readonly BasicFacebookFunctionality r_BasicfacebookFunctionality;
 
         public ApplicationTabsForm(IFacebookApplicationManager i_FacebookApplicationManager)
         {
             InitializeComponent();
             r_FacebookApplicationManager = i_FacebookApplicationManager;
             updateFacebookApplicationManagerInRelevantControls(i_FacebookApplicationManager);
-            r_Logic = new BasicFacebookLogic(i_FacebookApplicationManager.LoggedInUser);
+            this.r_BasicfacebookFunctionality = new BasicFacebookFunctionality(i_FacebookApplicationManager.LoggedInUser);
             r_User = i_FacebookApplicationManager.LoggedInUser;
+            interestPage.SetUser(r_User);
             switchToProfile();
         }
 
@@ -30,6 +30,7 @@ namespace Ex01_FacebookPage
         {
             inboxPage.FacebookApplicationLogicManager = i_FacebookApplicationManager;
             friendsPage1.FacebookApplicationLogicManager = i_FacebookApplicationManager;
+            this.interestPage.FacebookApplicationLogicManager = i_FacebookApplicationManager;
         }
 
         private void tabIndexChanged(object i_Sender, EventArgs i_EventArgs)
@@ -55,22 +56,22 @@ namespace Ex01_FacebookPage
 
         private void commentButtonClick(object i_Sender, EventArgs i_EventArgs)
         {
-            r_Logic.Comment();
+            this.r_BasicfacebookFunctionality.Comment();
         }
 
         private void likeButtonClick(object i_Sender, EventArgs i_EventArgs)
         {
-            r_Logic.Like();
+            this.r_BasicfacebookFunctionality.Like();
         }
 
         private void activityFeedSelectedIndexChanged(object i_Sender, EventArgs i_EventArgs)
         {
-            r_Logic.ActivitySelected();
+            this.r_BasicfacebookFunctionality.ActivitySelected();
         }
 
         private void commentFeedSelectedIndexChanged(object i_Sender, EventArgs i_EventArgs)
         {
-            r_Logic.CommentSelected();
+            this.r_BasicfacebookFunctionality.CommentSelected();
         }
 
         #endregion
@@ -79,21 +80,21 @@ namespace Ex01_FacebookPage
         {
             r_User.PostStatus(statusTextBox.Text);
             statusTextBox.Clear();
-            r_Logic.FetchPosts(r_User.Posts);
+            this.r_BasicfacebookFunctionality.FetchPosts(r_User.Posts);
         }
 
         private void switchToProfile()
         {
-            r_Logic.ContextChanged(
+            this.r_BasicfacebookFunctionality.ContextChanged(
                 myProfileCommentBox,
                 myProfileActivityBox,
                 myProfileViewComments,
                 myProfileLikeButton,
                 myProfileCommentButton);
-            r_Logic.FetchPosts(r_User.Posts);
+            this.r_BasicfacebookFunctionality.FetchPosts(r_User.Posts);
         }
 
-        
+
 
         #region newsfeed
 
@@ -101,16 +102,16 @@ namespace Ex01_FacebookPage
 
         private void switchToNewsFeed()
         {
-            r_Logic.ContextChanged(
+            this.r_BasicfacebookFunctionality.ContextChanged(
                 newsFeedCommentBox,
                 newsFeedActivityBox,
                 newsFeedViewComments,
                 newsFeedLikeButton,
                 newsFeedCommentButton);
-            r_Logic.FetchPosts(r_User.NewsFeed);
+            this.r_BasicfacebookFunctionality.FetchPosts(r_User.NewsFeed);
         }
 
         #endregion
-        #endregion 
+        #endregion
     }
 }

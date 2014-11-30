@@ -12,7 +12,7 @@ namespace Ex01_FacebookPage
 
     using FacebookApplication;
 
-    public class BasicFacebookLogic
+    public class BasicFacebookFunctionality
     {
         #region private fields
 
@@ -40,7 +40,7 @@ namespace Ex01_FacebookPage
 
         #region constructors
 
-        public BasicFacebookLogic(User i_User)
+        public BasicFacebookFunctionality(User i_User)
         {
             r_User = i_User;
         }
