@@ -53,14 +53,7 @@ namespace Ex01_FacebookPage
 
         private string getInboxThreadDisplayName(InboxThread i_InboxThread)
         {
-            FacebookObjectCollection<FacebookWrapper.ObjectModel.Message> messages = i_InboxThread.Messages;
-            FacebookWrapper.ObjectModel.Message lastMessage = (messages == null || messages.Count < 1) ? null : messages[messages.Count - 1];
-            string lastMessageText = lastMessage == null ? string.Empty : lastMessage.Text;
-            lastMessageText = string.IsNullOrEmpty(lastMessageText) ? "< message in unsupported format >" : lastMessageText; ////icon can return null
-            string lastMessageDisplayString = (lastMessage == null)
-                ? " "
-                : string.Format("{0}\tlast message: {1}", Environment.NewLine, lastMessage.GetMessageDisplayString());
-            string inboxThreadDisplayName = string.Format("Converstion with {0}{1}", i_InboxThread.GetInboxThreadFriendsNames(UserIdThatInboxBelongsTo), lastMessageDisplayString);
+            string inboxThreadDisplayName = string.Format("Converstion with {0}", i_InboxThread.GetInboxThreadFriendsNames(UserIdThatInboxBelongsTo));
             return inboxThreadDisplayName;
         }
     }

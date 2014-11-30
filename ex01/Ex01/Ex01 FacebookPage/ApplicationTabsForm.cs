@@ -1,4 +1,4 @@
-﻿using System;
+﻿ ﻿using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
@@ -8,36 +8,28 @@ namespace Ex01_FacebookPage
 {
     public partial class ApplicationTabsForm : Form
     {
+        #region fields
+
         private readonly IFacebookApplicationManager r_FacebookApplicationManager;
         private readonly User r_User;
-
         private readonly BasicFacebookLogic r_Logic;
-
         private readonly List<User> r_FriendsList = new List<User>();
-
-        #endregion
-
-        #region general
 
         public ApplicationTabsForm(IFacebookApplicationManager i_FacebookApplicationManager)
         {
             InitializeComponent();
             r_FacebookApplicationManager = i_FacebookApplicationManager;
             updateFacebookApplicationManagerInRelevantControls(i_FacebookApplicationManager);
-            r_Logic = new BasicFacebookLogic(r_FacebookApplicationManager.LoggedInUser);
-            r_User = r_FacebookApplicationManager.LoggedInUser;
+            r_Logic = new BasicFacebookLogic(i_FacebookApplicationManager.LoggedInUser);
+            r_User = i_FacebookApplicationManager.LoggedInUser;
             switchToProfile();
         }
 
-        private void updateFacebookApplicationManagerInRelevantControls(IFacebookApplicationManager i_FacebookApplicationManager)
+        private void updateFacebookApplicationManagerInRelevantControls(
+            IFacebookApplicationManager i_FacebookApplicationManager)
         {
             inboxPage.FacebookApplicationLogicManager = i_FacebookApplicationManager;
             friendsPage1.FacebookApplicationLogicManager = i_FacebookApplicationManager;
-        }
-
-        private void fetchFromFacebook()
-        {
-            r_FacebookApplicationManager.FetchFromFacebook();
         }
 
         private void tabIndexChanged(object i_Sender, EventArgs i_EventArgs)
@@ -51,20 +43,23 @@ namespace Ex01_FacebookPage
                     switchToNewsFeed();
                     break;
                 case 2:
-                    FriendsViewBox.Invoke(new Action(fetchFriendList));
+                    //inboxPage.FacebookApplicationLogicManager = i_FacebookApplicationManager;
+                    break;
+                case 3:
+                    //friendsPage1.FacebookApplicationLogicManager = i_FacebookApplicationManager;
                     break;
                 default:
-                return;
+                    return;
             }
         }
 
         private void commentButtonClick(object i_Sender, EventArgs i_EventArgs)
-            {
+        {
             r_Logic.Comment();
         }
 
         private void likeButtonClick(object i_Sender, EventArgs i_EventArgs)
-            {
+        {
             r_Logic.Like();
         }
 
@@ -74,23 +69,21 @@ namespace Ex01_FacebookPage
         }
 
         private void commentFeedSelectedIndexChanged(object i_Sender, EventArgs i_EventArgs)
-            {
+        {
             r_Logic.CommentSelected();
-                }
+        }
 
         #endregion
 
-        #region my profile
-
         private void buttonSetStatusClick(object i_Sender, EventArgs i_EventArgs)
-                    {
+        {
             r_User.PostStatus(StatusTextBox.Text);
             StatusTextBox.Clear();
             r_Logic.FetchPosts(r_User.Posts);
-                    }
+        }
 
         private void switchToProfile()
-                {
+        {
             r_Logic.ContextChanged(
                 MyProfileCommentBox,
                 MyProfileActivityBox,
@@ -98,14 +91,16 @@ namespace Ex01_FacebookPage
                 MyProfileLikeButton,
                 MyProfileCommentButton);
             r_Logic.FetchPosts(r_User.Posts);
-                    }
+        }
 
-        #endregion
+        
+
+        #region newsfeed
 
         #region Newsfeed
 
         private void switchToNewsFeed()
-                {
+        {
             r_Logic.ContextChanged(
                 NewsFeedCommentBox,
                 NewsFeedActivityBox,
@@ -116,20 +111,6 @@ namespace Ex01_FacebookPage
         }
 
         #endregion
-
-        #region interest setter
-
-        private void fetchFriendList()
-        {
-            FriendsViewBox.Items.Clear();
-            r_FriendsList.Clear();
-            r_FriendsList.AddRange(r_User.Friends);
-            foreach (var friend in r_FriendsList)
-            {
-                FriendsViewBox.Items.Add(friend.Name);
-            }
-        }
-
-        #endregion
+        #endregion 
     }
 }

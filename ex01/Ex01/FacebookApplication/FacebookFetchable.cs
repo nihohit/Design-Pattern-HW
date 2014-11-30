@@ -43,7 +43,7 @@ namespace FacebookApplication
         {
             MinIntervalBetweenFetchActions = i_MinIntervalBetweenFetchActions;
             r_FetchAction = FacebookFetch;
-            ResetFetchDetails();
+            reset();
         }
 
         #endregion constructor
