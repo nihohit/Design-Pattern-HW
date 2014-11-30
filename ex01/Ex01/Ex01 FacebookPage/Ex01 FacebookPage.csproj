@@ -56,7 +56,6 @@
     <Compile Include="ApplicationTabPage.Designer.cs">
       <DependentUpon>ApplicationTabPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="BasicFacebookLogic.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="FriendsListsComboBox.cs">
       <SubType>UserControl</SubType>

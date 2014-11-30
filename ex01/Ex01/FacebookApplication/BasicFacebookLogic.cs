@@ -8,6 +8,10 @@ using FacebookWrapper.ObjectModel;
 
 namespace Ex01_FacebookPage
 {
+    using System.Linq;
+
+    using FacebookApplication;
+
     public class BasicFacebookLogic
     {
         #region private fields
@@ -75,7 +79,7 @@ namespace Ex01_FacebookPage
             m_CurrentlySelectedComment = r_CurrentCommentView[m_CurrentCommentViewBox.SelectedIndex];
         }
 
-        internal void Comment()
+        public void Comment()
         {
             string text = m_CurrentCommentTextBox.Text;
 
@@ -89,7 +93,7 @@ namespace Ex01_FacebookPage
             ActivitySelected();
         }
 
-        internal void ActivitySelected()
+        public void ActivitySelected()
         {
             m_CurrentlySelectedComment = null;
             m_CurrentlySelectedPost = r_CurrentActivityFeed[m_CurrentActivityBox.SelectedIndex];
@@ -135,58 +139,55 @@ namespace Ex01_FacebookPage
 
         private void invokedPopulateListBox<T>(IEnumerable<T> i_Items, ListBox i_Box) where T : PostedItem
         {
-            foreach (var activity in i_Items)
+            i_Box.Items.AddRange(
+                i_Items.Select(i_Item => "{0}: {1}"
+                    .FormatWith(i_Item.From.Name, itemToString(i_Item)))
+                    .ToArray());
+        }
+
+        private string itemToString<T>(T i_Item)
+        {
+            var comment = i_Item as Comment;
+            if (comment != null)
             {
-                var comment = activity as Comment;
-                if (comment != null)
-                {
-                    i_Box.Items.Add(comment.Message);
-                    continue;
-                }
-
-                var post = activity as Post;
-                if (post != null)
-                {
-                    if (post.Message != null)
-                    {
-                        i_Box.Items.Add(post.Message);
-                    }
-                    else if (post.Caption != null)
-                    {
-                        i_Box.Items.Add(post.Caption);
-                    }
-                    else
-                    {
-                        i_Box.Items.Add(string.Format("[{0}]", post.Type));
-                    }
-
-                    continue;
-                }
-
-                var status = activity as Status;
-                if (status != null)
-                {
-                    if (status.Message != null)
-                    {
-                        i_Box.Items.Add(status.Message);
-                    }
-
-                    continue;
-                }
-
-                var checkin = activity as Checkin;
-                if (checkin != null)
-                {
-                    if (checkin.Message != null)
-                    {
-                        i_Box.Items.Add(checkin.Message);
-                    }
-
-                    continue;
-                }
-
-                i_Box.Items.Add(activity);
+                return comment.Message;
             }
+
+            var post = i_Item as Post;
+            if (post != null)
+            {
+                if (post.Message != null)
+                {
+                    return post.Message;
+                }
+
+                if (post.Caption != null)
+                {
+                    return post.Caption;
+                }
+
+                return string.Format("[{0}]", post.Type);
+            }
+
+            var status = i_Item as Status;
+            if (status != null)
+            {
+                if (status.Message != null)
+                {
+                    return status.Message;
+                }
+            }
+
+            var checkin = i_Item as Checkin;
+            if (checkin != null)
+            {
+                if (checkin.Message != null)
+                {
+                    return checkin.Message;
+                }
+            }
+
+            return i_Item.ToString();
         }
 
         private void populateCollectionOfPosts(IEnumerable<Post> i_Posts, ICollection<Post> i_Collection)
@@ -203,10 +204,6 @@ namespace Ex01_FacebookPage
                 }
             }
         }
-
-        #endregion
-
-        #endregion
 
         public void Like()
         {
@@ -239,5 +236,9 @@ namespace Ex01_FacebookPage
 
             item.ReFetch();
         }
+
+        #endregion
+
+        #endregion
     }
 }
