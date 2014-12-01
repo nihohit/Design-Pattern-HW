@@ -1,23 +1,23 @@
 ﻿ ﻿using System;
 using System.Windows.Forms;
-using System.Collections.Generic;
+
 using FacebookWrapper.ObjectModel;
 using FacebookApplication.Interfaces;
 
 namespace Ex01_FacebookPage
 {
+    using FacebookApplication;
+
     public partial class ApplicationTabsForm : Form
     {
         #region fields
 
-        private readonly IFacebookApplicationManager r_FacebookApplicationManager;
         private readonly User r_User;
         private readonly BasicFacebookFunctionality r_BasicfacebookFunctionality;
 
         public ApplicationTabsForm(IFacebookApplicationManager i_FacebookApplicationManager)
         {
             InitializeComponent();
-            r_FacebookApplicationManager = i_FacebookApplicationManager;
             updateFacebookApplicationManagerInRelevantControls(i_FacebookApplicationManager);
             this.r_BasicfacebookFunctionality = new BasicFacebookFunctionality(i_FacebookApplicationManager.LoggedInUser);
             r_User = i_FacebookApplicationManager.LoggedInUser;
@@ -33,7 +33,7 @@ namespace Ex01_FacebookPage
             friendsFiltersPage.FacebookApplicationLogicManager = i_FacebookApplicationManager;
         }
 
-        private void tabIndexChanged(object i_Sender, EventArgs i_EventArgs)
+        private void tabIndexChanged(object sender, EventArgs e)
         {
             switch (myProfile.SelectedTab.TabIndex)
             {
@@ -48,29 +48,29 @@ namespace Ex01_FacebookPage
             }
         }
 
-        private void commentButtonClick(object i_Sender, EventArgs i_EventArgs)
+        private void commentButtonClick(object sender, EventArgs e)
         {
             this.r_BasicfacebookFunctionality.Comment();
         }
 
-        private void likeButtonClick(object i_Sender, EventArgs i_EventArgs)
+        private void likeButtonClick(object sender, EventArgs e)
         {
             this.r_BasicfacebookFunctionality.Like();
         }
 
-        private void activityFeedSelectedIndexChanged(object i_Sender, EventArgs i_EventArgs)
+        private void activityFeedSelectedIndexChanged(object sender, EventArgs e)
         {
             this.r_BasicfacebookFunctionality.ActivitySelected();
         }
 
-        private void commentFeedSelectedIndexChanged(object i_Sender, EventArgs i_EventArgs)
+        private void commentFeedSelectedIndexChanged(object sender, EventArgs e)
         {
             this.r_BasicfacebookFunctionality.CommentSelected();
         }
 
         #endregion
 
-        private void buttonSetStatusClick(object i_Sender, EventArgs i_EventArgs)
+        private void buttonSetStatusClick(object sender, EventArgs e)
         {
             r_User.PostStatus(statusTextBox.Text);
             statusTextBox.Clear();
@@ -88,7 +88,7 @@ namespace Ex01_FacebookPage
             this.r_BasicfacebookFunctionality.FetchPosts(r_User.Posts);
         }
 
-        
+
 
         #region newsfeed
 
@@ -106,6 +106,6 @@ namespace Ex01_FacebookPage
         }
 
         #endregion
-        #endregion 
+        #endregion
     }
 }

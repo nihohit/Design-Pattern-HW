@@ -20,8 +20,11 @@ namespace Ex01_FacebookPage
 
         public static DialogResult ShowWarningMessageBox(this Exception i_Exception, string i_Caption = "Warning")
         {
-            return MessageBox.Show(i_Exception.Message + Environment.NewLine + "Are you sure you want to continue?",
-                i_Caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            return MessageBox.Show(
+                i_Exception.Message + Environment.NewLine + @"Are you sure you want to continue?",
+                i_Caption,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
         }
     }
 }

@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-using FacebookWrapper.ObjectModel;
-
-namespace Ex01_FacebookPage
+﻿namespace FacebookApplication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
+    using System.Threading.Tasks;
+    using System.Windows.Forms;
 
-    using FacebookApplication;
+    using FacebookWrapper.ObjectModel;
 
     public class BasicFacebookFunctionality
     {
@@ -42,7 +39,7 @@ namespace Ex01_FacebookPage
 
         public BasicFacebookFunctionality(User i_User)
         {
-            r_User = i_User;
+            this.r_User = i_User;
         }
 
         #endregion constructors
@@ -56,56 +53,56 @@ namespace Ex01_FacebookPage
             Button i_LikeButton,
             Button i_CommentButton)
         {
-            m_CurrentlySelectedPost = null;
-            m_CurrentlySelectedComment = null;
-            m_CurrentCommentTextBox = i_WriteComment;
-            m_CurrentActivityBox = i_Activity;
-            m_CurrentCommentViewBox = i_CommentsView;
-            m_CurrentLikeButton = i_LikeButton;
-            m_CurrentCommentButton = i_CommentButton;
+            this.m_CurrentlySelectedPost = null;
+            this.m_CurrentlySelectedComment = null;
+            this.m_CurrentCommentTextBox = i_WriteComment;
+            this.m_CurrentActivityBox = i_Activity;
+            this.m_CurrentCommentViewBox = i_CommentsView;
+            this.m_CurrentLikeButton = i_LikeButton;
+            this.m_CurrentCommentButton = i_CommentButton;
             this.HideContextualObjects();
         }
 
         public void HideContextualObjects()
         {
-            m_CurrentCommentTextBox.Hide();
-            m_CurrentCommentButton.Hide();
-            m_CurrentLikeButton.Hide();
-            m_CurrentCommentViewBox.Hide();
+            this.m_CurrentCommentTextBox.Hide();
+            this.m_CurrentCommentButton.Hide();
+            this.m_CurrentLikeButton.Hide();
+            this.m_CurrentCommentViewBox.Hide();
         }
 
         public void CommentSelected()
         {
-            m_CurrentlySelectedComment = r_CurrentCommentView[m_CurrentCommentViewBox.SelectedIndex];
+            this.m_CurrentlySelectedComment = this.r_CurrentCommentView[this.m_CurrentCommentViewBox.SelectedIndex];
         }
 
         public void Comment()
         {
-            string text = m_CurrentCommentTextBox.Text;
+            string text = this.m_CurrentCommentTextBox.Text;
 
-            Debug.Assert(m_CurrentlySelectedPost != null, "post is null");
+            Debug.Assert(this.m_CurrentlySelectedPost != null, "post is null");
             if (string.IsNullOrEmpty(text))
             {
                 return;
             }
 
-            m_CurrentlySelectedPost.Comment(text);
-            ActivitySelected();
+            this.m_CurrentlySelectedPost.Comment(text);
+            this.ActivitySelected();
         }
 
         public void ActivitySelected()
         {
-            m_CurrentlySelectedComment = null;
-            m_CurrentlySelectedPost = r_CurrentActivityFeed[m_CurrentActivityBox.SelectedIndex];
-            m_CurrentCommentTextBox.Show();
-            m_CurrentCommentTextBox.Clear();
-            m_CurrentCommentButton.Show();
-            m_CurrentLikeButton.Show();
-            m_CurrentCommentViewBox.Show();
-            m_CurrentCommentViewBox.Items.Clear();
-            r_CurrentCommentView.Clear();
-            r_CurrentCommentView.AddRange(m_CurrentlySelectedPost.Comments);
-            var populateCommentBoxTask = new Task(() => populateListBox(r_CurrentCommentView, m_CurrentCommentViewBox));
+            this.m_CurrentlySelectedComment = null;
+            this.m_CurrentlySelectedPost = this.r_CurrentActivityFeed[this.m_CurrentActivityBox.SelectedIndex];
+            this.m_CurrentCommentTextBox.Show();
+            this.m_CurrentCommentTextBox.Clear();
+            this.m_CurrentCommentButton.Show();
+            this.m_CurrentLikeButton.Show();
+            this.m_CurrentCommentViewBox.Show();
+            this.m_CurrentCommentViewBox.Items.Clear();
+            this.r_CurrentCommentView.Clear();
+            this.r_CurrentCommentView.AddRange(this.m_CurrentlySelectedPost.Comments);
+            var populateCommentBoxTask = new Task(() => this.populateListBox(this.r_CurrentCommentView, this.m_CurrentCommentViewBox));
             populateCommentBoxTask.Start();
         }
 
@@ -115,10 +112,10 @@ namespace Ex01_FacebookPage
 
         public void FetchPosts(IEnumerable<Post> i_Posts)
         {
-            m_CurrentActivityBox.Items.Clear();
-            r_CurrentActivityFeed.Clear();
-            populateCollectionOfPosts(i_Posts, r_CurrentActivityFeed);
-            invokedPopulateListBox(r_CurrentActivityFeed, m_CurrentActivityBox);
+            this.m_CurrentActivityBox.Items.Clear();
+            this.r_CurrentActivityFeed.Clear();
+            this.populateCollectionOfPosts(i_Posts, this.r_CurrentActivityFeed);
+            this.invokedPopulateListBox(this.r_CurrentActivityFeed, this.m_CurrentActivityBox);
         }
 
         #endregion
@@ -127,21 +124,21 @@ namespace Ex01_FacebookPage
 
         private bool likedByUser(PostedItem i_Item)
         {
-            return i_Item.LikedBy.Find(i_User => i_User.Id == r_User.Id) != null;
+            return i_Item.LikedBy.Find(i_User => i_User.Id == this.r_User.Id) != null;
         }
 
         #region list boxes
 
         private void populateListBox<T>(IEnumerable<T> i_Items, ListBox i_Box) where T : PostedItem
         {
-            i_Box.Invoke(new Action(() => invokedPopulateListBox(i_Items, i_Box)));
+            i_Box.Invoke(new Action(() => this.invokedPopulateListBox(i_Items, i_Box)));
         }
 
         private void invokedPopulateListBox<T>(IEnumerable<T> i_Items, ListBox i_Box) where T : PostedItem
         {
             i_Box.Items.AddRange(
                 i_Items.Select(i_Item => "{0}: {1}"
-                    .FormatWith(i_Item.From.Name, itemToString(i_Item)))
+                    .FormatWith(i_Item.From.Name, this.itemToString(i_Item)))
                     .ToArray());
         }
 
@@ -208,19 +205,19 @@ namespace Ex01_FacebookPage
         public void Like()
         {
             PostedItem item;
-            if (m_CurrentlySelectedComment == null)
+            if (this.m_CurrentlySelectedComment == null)
             {
-                Debug.Assert(m_CurrentlySelectedPost != null, "item is null");
-                item = m_CurrentlySelectedPost;
+                Debug.Assert(this.m_CurrentlySelectedPost != null, "item is null");
+                item = this.m_CurrentlySelectedPost;
             }
             else
             {
-                item = m_CurrentlySelectedComment;
+                item = this.m_CurrentlySelectedComment;
             }
 
             try
             {
-                if (likedByUser(item))
+                if (this.likedByUser(item))
                 {
                     item.Unlike();
                 }
