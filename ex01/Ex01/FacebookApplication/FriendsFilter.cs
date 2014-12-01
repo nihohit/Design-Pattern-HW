@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
 using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
 
@@ -13,7 +10,7 @@ namespace FacebookApplication
         #region members
 
         private readonly Dictionary<string, User> r_FilteredFriends;
-        
+
         #endregion members
         #region Properties
         #region IFriendFilter
@@ -26,8 +23,8 @@ namespace FacebookApplication
         }
 
         public IEnumerable<IUsersFilter> UserFilters { get; private set; }
-        public string ErrorString { get; private set; }
 
+        public string ErrorString { get; private set; }
 
         #endregion IFriendFilter
         #endregion Properties
@@ -57,37 +54,34 @@ namespace FacebookApplication
                     {
                         foreach (User friend in friendsThatThrowExceptionWhenTriedToFilterByErrorMessage[errorMessage])
                         {
-                            ErrorString += string.Format("{0} could not be filtered becouse: {1}{2}", friend.Name,
-                                errorMessage, Environment.NewLine);
+                            ErrorString += string.Format(
+                                "{0} could not be filtered becouse: {1}{2}",
+                                friend.Name,
+                                errorMessage,
+                                Environment.NewLine);
                         }
                     }
                 }
             }
+
             foreach (User friend in friends)
             {
                 r_FilteredFriends.Add(friend.Id, friend);
             }
+
             ErrorString = ErrorString.Trim(Environment.NewLine.ToCharArray());
         }
 
-
         public override string ToString()
         {
-            String displayString = string.Format("'{0}': ", Name);
+            string displayString = string.Format("'{0}': ", Name);
             foreach (IUsersFilter userFilter in UserFilters)
             {
-                displayString += userFilter.ToString() + ", ";
+                displayString += userFilter + ", ";
             }
 
             return displayString.Trim().Trim(',');
         }
         #endregion public methods
-        #region private methods
-
-
-        #endregion private methods
-
-        
-
-}
+    }
 }

@@ -1,11 +1,7 @@
-﻿using FacebookApplication.Interfaces;
-using FacebookWrapper;
-using FacebookWrapper.ObjectModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+using FacebookApplication.Interfaces;
+using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication
 {
@@ -68,6 +64,5 @@ namespace FacebookApplication
         }
 
         #endregion private methods
-        
     }
 }

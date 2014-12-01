@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
 
@@ -11,8 +9,9 @@ namespace FacebookApplication
     {
         #region members
 
-        private Dictionary<string, FriendList> m_friendsListsForLoggedinUser;
-        private Dictionary<string, List<string>> m_friendsListsByFriendsIds;
+        private Dictionary<string, FriendList> m_FriendsListsForLoggedinUser;
+
+        private Dictionary<string, List<string>> m_FriendsListsByFriendsIds;
 
         #endregion members
 
@@ -36,23 +35,23 @@ namespace FacebookApplication
 
         public IEnumerable<FriendList> GetRelevantFriendsListsForLoggedinUser()
         {
-            if (m_friendsListsForLoggedinUser == null)
+            if (this.m_FriendsListsForLoggedinUser == null)
             {
                 ThrowShouldFetchFromFacebookException();
             }
 
-            return m_friendsListsForLoggedinUser.Values;
+            return this.m_FriendsListsForLoggedinUser.Values;
         }
 
         public IEnumerable<string> GetAllFriendListsWhichFriendBelongsTo(string i_FriendId)
         {
-            if (m_friendsListsByFriendsIds == null)
+            if (this.m_FriendsListsByFriendsIds == null)
             {
                 ThrowShouldFetchFromFacebookException();
             }
 
             List<string> friendsListsFriendBelongsToIds;
-            if (!m_friendsListsByFriendsIds.TryGetValue(i_FriendId, out friendsListsFriendBelongsToIds))
+            if (!this.m_FriendsListsByFriendsIds.TryGetValue(i_FriendId, out friendsListsFriendBelongsToIds))
             {
                 friendsListsFriendBelongsToIds = new List<string>(0);
             }
@@ -112,25 +111,25 @@ namespace FacebookApplication
 
         private void reset()
         {
-            m_friendsListsByFriendsIds = null;
-            m_friendsListsForLoggedinUser = null;
+            this.m_FriendsListsByFriendsIds = null;
+            this.m_FriendsListsForLoggedinUser = null;
         }
 
         private void fetchFriendLists(User i_LoggedInUser)
         {
             FacebookObjectCollection<FriendList> friendsListsForLoggedinUser = i_LoggedInUser.FriendLists;
-            m_friendsListsForLoggedinUser = new Dictionary<string, FriendList>();
-            m_friendsListsByFriendsIds = new Dictionary<string, List<string>>();
+            this.m_FriendsListsForLoggedinUser = new Dictionary<string, FriendList>();
+            this.m_FriendsListsByFriendsIds = new Dictionary<string, List<string>>();
             foreach (FriendList friendList in friendsListsForLoggedinUser)
             {
-                m_friendsListsForLoggedinUser.Add(friendList.Id, friendList);
+                this.m_FriendsListsForLoggedinUser.Add(friendList.Id, friendList);
                 foreach (User friend in friendList.Members)
                 {
                     List<string> friendsListsIds;
-                    if (!m_friendsListsByFriendsIds.TryGetValue(friend.Id, out friendsListsIds))
+                    if (!this.m_FriendsListsByFriendsIds.TryGetValue(friend.Id, out friendsListsIds))
                     {
                         friendsListsIds = new List<string>();
-                        m_friendsListsByFriendsIds.Add(friend.Id, friendsListsIds);
+                        this.m_FriendsListsByFriendsIds.Add(friend.Id, friendsListsIds);
                     }
 
                     friendsListsIds.Add(friendList.Id);

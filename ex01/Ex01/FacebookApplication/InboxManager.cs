@@ -1,8 +1,7 @@
-﻿using System.Linq;
-using FacebookApplication.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using FacebookWrapper;
+using System.Linq;
+using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication
@@ -54,7 +53,7 @@ namespace FacebookApplication
 
             return inboxThreads;
         }
-        
+
         public string GetInboxThreadDisplayString(string i_InboxThreadId)
         {
             string inboxThreadDisplayString = string.Empty;
@@ -111,7 +110,7 @@ namespace FacebookApplication
                     }
                 }
             }
-            
+
             return friendListInboxThreads;
         }
 
@@ -132,6 +131,5 @@ namespace FacebookApplication
         }
 
         #endregion private methods
-        
     }
 }

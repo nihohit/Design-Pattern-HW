@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
 namespace Ex01_FacebookPage
@@ -18,7 +10,7 @@ namespace Ex01_FacebookPage
             InitializeComponent();
         }
 
-        protected override void m_FacebookApplicationManager_AfterFetch(object i_Sender, EventArgs e)
+        protected override void m_FacebookApplicationManager_AfterFetch(object sender, EventArgs e)
         {
             friendsListsComboBox.UpdateFriendsLists(
                 FacebookApplicationLogicManager.GetRelevantFriendsListsForLoggedinUser());
@@ -50,9 +42,14 @@ namespace Ex01_FacebookPage
         {
             User.eGender gender;
             Enum.TryParse<User.eGender>(genderComboBox.SelectedValue.ToString(), out gender);
-            FacebookApplicationLogicManager.AddFriendFilter(textBox1.Text, genderCheckBox.Checked, gender,
-                ageCheckBox.Checked, Decimal.ToInt32(minAgeNumericUpDown.Value),
-                Decimal.ToInt32(maxAgeNumericUpDown.Value), friendsListCheckBox.Checked,
+            FacebookApplicationLogicManager.AddFriendFilter(
+                textBox1.Text,
+                genderCheckBox.Checked,
+                gender,
+                ageCheckBox.Checked,
+                decimal.ToInt32(minAgeNumericUpDown.Value),
+                decimal.ToInt32(maxAgeNumericUpDown.Value),
+                friendsListCheckBox.Checked,
                 friendsListsComboBox.SelectedFriendList);
 
         }

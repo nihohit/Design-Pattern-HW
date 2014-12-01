@@ -28,9 +28,10 @@ namespace Ex01_FacebookPage
             m_InterestChecker = new InterestChecker(i_User);
         }
 
-        private void checkButtonClick(object sender, EventArgs e)
+        private void checkButton_Click(object sender, EventArgs e)
         {
-            var results = m_InterestChecker.FindInterestedFriendsNames(lastInterestDate.Value,
+            var results = m_InterestChecker.FindInterestedFriendsNames(
+                lastInterestDate.Value,
                 Convert.ToInt32(itemAmountToCheck.Value)).ToArray();
             interestedFreindsBox.Items.Clear();
             interestedFreindsBox.Items.AddRange(results);

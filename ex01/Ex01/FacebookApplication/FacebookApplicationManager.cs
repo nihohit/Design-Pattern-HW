@@ -1,11 +1,9 @@
-﻿using Facebook;
+﻿using System;
+using System.Collections.Generic;
+using Facebook;
 using FacebookApplication.Interfaces;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace FacebookApplication
 {
@@ -15,20 +13,25 @@ namespace FacebookApplication
         #endregion members
         #region Events
         #region IFacebookApplicationManager
+
         public event EventHandler AfterReset;
+
         public event EventHandler AfterLoggin;
+
         public event EventHandler AfterFetch;
+
         public event EventHandler FriendFilterAdded
         {
             add { LoggedInUserFriendsFiltersManager.FilterAdded += value; }
             remove { LoggedInUserFriendsFiltersManager.FilterAdded -= value; }
         }
+
         public event EventHandler FriendFilterRemoved
         {
             add { LoggedInUserFriendsFiltersManager.FilterRmoved += value; }
             remove { LoggedInUserFriendsFiltersManager.FilterRmoved -= value; }
         }
-        
+
         #endregion IFacebookApplicationManager
         #endregion Events
         #region Properties
@@ -39,7 +42,7 @@ namespace FacebookApplication
         public IFriendsFetcher LoggedInUserFriendsFetcher { get; private set; }
 
         public IFriendListsManager LoggedInUserFriendListsManager { get; private set; }
-        
+
         public IInboxManager LoggedInUserInboxManager { get; private set; }
 
         public IFriendsFiltersManager LoggedInUserFriendsFiltersManager { get; private set; }
@@ -67,7 +70,6 @@ namespace FacebookApplication
             if (!string.IsNullOrEmpty(result.AccessToken))
             {
                 LoggedInUser = result.LoggedInUser;
-
             }
             else
             {
@@ -111,16 +113,17 @@ namespace FacebookApplication
         {
             return LoggedInUserFriendListsManager.CreateFriendList(i_Name, i_Members);
         }
-        
+
         public IEnumerable<FriendList> GetRelevantFriendsListsForLoggedinUser()
         {
             return LoggedInUserFriendListsManager.GetRelevantFriendsListsForLoggedinUser();
         }
+
         public string GetInboxThreadFriendsNames(string i_InboxThreadId)
         {
             return LoggedInUserInboxManager.GetInboxThreadFriendsNames(i_InboxThreadId);
         }
-        
+
         public string GetInboxThreadDisplayString(string i_InboxThreadId)
         {
             return LoggedInUserInboxManager.GetInboxThreadDisplayString(i_InboxThreadId);
@@ -208,8 +211,5 @@ namespace FacebookApplication
         #endregion public methods
         #region private methods
         #endregion private methods
-
-
-        
     }
 }

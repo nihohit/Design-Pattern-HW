@@ -1,14 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using FacebookApplication;
-using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
 
 namespace Ex01_FacebookPage
@@ -20,7 +11,7 @@ namespace Ex01_FacebookPage
             InitializeComponent();
         }
 
-        protected override void m_FacebookApplicationManager_AfterFetch(object i_Sender, EventArgs e)
+        protected override void m_FacebookApplicationManager_AfterFetch(object sender, EventArgs e)
         {
             friendsFiltersComboBox.UpdateFriendsFilters();
         }
@@ -33,7 +24,8 @@ namespace Ex01_FacebookPage
         private void friendsFiltersComboBox_FriendsFiltersChanged(object sender, EventArgs e)
         {
             string usersThatCantBeFilteredMessage;
-            IEnumerable<User> friends = FacebookApplicationLogicManager.GetFriends(friendsFiltersComboBox.SelectedFriendFilterId,
+            IEnumerable<User> friends = FacebookApplicationLogicManager.GetFriends(
+                friendsFiltersComboBox.SelectedFriendFilterId,
                 out usersThatCantBeFilteredMessage);
             friendsListBox.UpdateFriends(friends);
 

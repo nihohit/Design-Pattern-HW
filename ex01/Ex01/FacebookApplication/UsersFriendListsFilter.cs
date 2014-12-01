@@ -1,9 +1,7 @@
-﻿using FacebookApplication.Interfaces;
-using FacebookWrapper.ObjectModel;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using FacebookApplication.Interfaces;
+using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication
 {
@@ -17,6 +15,7 @@ namespace FacebookApplication
         #region Properties
 
         public FriendList FriendListBelongsTo { get; private set; }
+
         public int MaxAge { get; private set; }
 
         #endregion Properties
@@ -35,16 +34,13 @@ namespace FacebookApplication
 
         protected override bool MantianConstrain(User i_User)
         {
-            IEnumerable<string> frindBelongToListsIds =
-                r_FriendListsManager.GetAllFriendListsWhichFriendBelongsTo(i_User.Id);
-
             return r_FriendListsManager.GetAllFriendListsWhichFriendBelongsTo(i_User.Id).Contains(FriendListBelongsTo.Id);
         }
-        
+
         public override string ToString()
         {
             return string.Format("Belongs to {0}", FriendListBelongsTo.Name);
         }
-        #endregion 
+        #endregion
     }
 }

@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
@@ -13,9 +9,11 @@ namespace Ex01_FacebookPage
 {
     public partial class FriendsListsComboBox : UserControl
     {
-        private const string c_AllFriendsOptionDisplayName = "All friends";
+        private const string k_CAllFriendsOptionDisplayName = "All friends";
         private FriendList[] m_FriendLists;
+
         public event EventHandler FriendsListChanged;
+
         public FriendList SelectedFriendList { get; private set; }
 
         public string LabelText
@@ -26,10 +24,14 @@ namespace Ex01_FacebookPage
                 friendsListsLabel.Text = value;
                 int origComboBoxLocationX = comboBox.Location.X;
                 comboBox.Location =
-                    new System.Drawing.Point(
+                    new Point(
                         friendsListsLabel.Location.X + friendsListsLabel.Size.Width +
-                        Math.Max(friendsListsLabel.Margin.Right, comboBox.Margin.Left), comboBox.Location.Y);
-                comboBox.Size = new Size(comboBox.Size.Width + origComboBoxLocationX - comboBox.Location.X,
+                        Math.Max(
+                        friendsListsLabel.Margin.Right,
+                        comboBox.Margin.Left),
+                        comboBox.Location.Y);
+                comboBox.Size = new Size(
+                    comboBox.Size.Width + origComboBoxLocationX - comboBox.Location.X,
                     comboBox.Size.Height);
             }
         }
@@ -48,21 +50,22 @@ namespace Ex01_FacebookPage
 
         public void UpdateFriendsLists(IEnumerable<FriendList> i_FriendsLists)
         {
-            m_FriendLists = i_FriendsLists == null ? null : new FriendList[i_FriendsLists.Count()];
+            var friendsListsAsArray = i_FriendsLists as FriendList[] ?? i_FriendsLists.ToArray();
+            m_FriendLists = i_FriendsLists == null ? null : new FriendList[friendsListsAsArray.Count()];
             comboBox.Items.Clear();
             int i = 0;
-            foreach (FriendList friendList in i_FriendsLists)
+            foreach (FriendList friendList in friendsListsAsArray)
             {
-                string friendListDisplayName = friendList.Name == c_AllFriendsOptionDisplayName
-                    ? c_AllFriendsOptionDisplayName + " (friends list)"
+                string friendListDisplayName = friendList.Name == k_CAllFriendsOptionDisplayName
+                    ? k_CAllFriendsOptionDisplayName + " (friends list)"
                     : friendList.Name;
                 m_FriendLists[i] = friendList;
                 comboBox.Items.Insert(i, friendListDisplayName);
                 i++;
             }
 
-            comboBox.SelectedIndex = comboBox.Items.Add(c_AllFriendsOptionDisplayName);
-            comboBox.SelectedItem = c_AllFriendsOptionDisplayName;
+            comboBox.SelectedIndex = comboBox.Items.Add(k_CAllFriendsOptionDisplayName);
+            comboBox.SelectedItem = k_CAllFriendsOptionDisplayName;
         }
 
         private void comboBox_SelectedIndexChanged(object sender, EventArgs e)

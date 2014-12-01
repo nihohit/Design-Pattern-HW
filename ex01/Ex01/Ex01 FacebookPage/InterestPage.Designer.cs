@@ -118,7 +118,7 @@
             this.checkButton.TabIndex = 60;
             this.checkButton.Text = "Check";
             this.checkButton.UseVisualStyleBackColor = true;
-            this.checkButton.Click += new System.EventHandler(this.checkButtonClick);
+            this.checkButton.Click += new System.EventHandler(this.checkButton_Click);
             // 
             // InterestPage
             // 

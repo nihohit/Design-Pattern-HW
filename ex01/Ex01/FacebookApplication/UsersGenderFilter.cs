@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FacebookApplication.Interfaces;
-using FacebookWrapper.ObjectModel;
+﻿using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication
 {
@@ -18,7 +13,6 @@ namespace FacebookApplication
         public User.eGender Gender { get; private set; }
 
         #endregion Properties
-
 
         #region constructor
 
@@ -35,7 +29,7 @@ namespace FacebookApplication
         {
             return i_User.Gender == Gender;
         }
-        
+
         public override string ToString()
         {
             return Gender.ToString();

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
 
@@ -11,7 +8,7 @@ namespace FacebookApplication
     {
         #region members
 
-        private readonly Action<User> r_FetchAction; 
+        private readonly Action<User> r_FetchAction;
 
         #endregion members
         #region Events
@@ -25,8 +22,11 @@ namespace FacebookApplication
         #region IFetchable
 
         public DateTime? FetchedTime { get; private set; }
+
         public User UserLoggedInWhenFetched { get; private set; }
+
         public TimeSpan? MinIntervalBetweenFetchActions { get; private set; }
+
         public bool ForcedFetch
         {
             get
@@ -34,7 +34,7 @@ namespace FacebookApplication
                 return MinIntervalBetweenFetchActions == null;
             }
         }
-        
+
         #endregion IFetchable
         #endregion Properties
         #region constructor
@@ -83,7 +83,8 @@ namespace FacebookApplication
 
         protected void ThrowShouldFetchFromFacebookException(string i_NameOfSpecificInfoToFetch)
         {
-            string msg = string.Format("Need to fetch {0} from facebook",
+            string msg = string.Format(
+                "Need to fetch {0} from facebook",
                 string.IsNullOrEmpty(i_NameOfSpecificInfoToFetch) ? " information" : i_NameOfSpecificInfoToFetch);
             throw new ApplicationException(msg);
         }
@@ -95,9 +96,9 @@ namespace FacebookApplication
                 Fetched.Invoke(this, e);
             }
         }
-        
+
         protected abstract void FacebookFetch(User i_LoggedInUser);
-        
+
         #endregion protected methods
         #region private methods
         private void reset()

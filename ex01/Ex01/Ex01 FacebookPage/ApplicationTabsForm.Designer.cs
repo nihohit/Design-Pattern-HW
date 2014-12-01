@@ -99,7 +99,7 @@
             this.myProfile.SelectedIndex = 0;
             this.myProfile.Size = new System.Drawing.Size(794, 524);
             this.myProfile.TabIndex = 0;
-            this.myProfile.SelectedIndexChanged += new System.EventHandler(this.tabIndexChanged);
+            this.myProfile.SelectedIndexChanged += new System.EventHandler(this.tab_IndexChanged);
             // 
             // ProfileTab
             // 
@@ -133,7 +133,7 @@
             this.myProfileViewComments.Name = "myProfileViewComments";
             this.myProfileViewComments.Size = new System.Drawing.Size(222, 354);
             this.myProfileViewComments.TabIndex = 54;
-            this.myProfileViewComments.SelectedIndexChanged += new System.EventHandler(this.commentFeedSelectedIndexChanged);
+            this.myProfileViewComments.SelectedIndexChanged += new System.EventHandler(this.commentFeed_SelectedIndexChanged);
             // 
             // myProfileCommentBox
             // 
@@ -153,7 +153,7 @@
             this.myProfileCommentButton.TabIndex = 52;
             this.myProfileCommentButton.Text = "Comment";
             this.myProfileCommentButton.UseVisualStyleBackColor = true;
-            this.myProfileCommentButton.Click += new System.EventHandler(this.commentButtonClick);
+            this.myProfileCommentButton.Click += new System.EventHandler(this.commentButton_Click);
             // 
             // myProfileLikeButton
             // 
@@ -164,7 +164,7 @@
             this.myProfileLikeButton.TabIndex = 51;
             this.myProfileLikeButton.Text = "Like";
             this.myProfileLikeButton.UseVisualStyleBackColor = true;
-            this.myProfileLikeButton.Click += new System.EventHandler(this.likeButtonClick);
+            this.myProfileLikeButton.Click += new System.EventHandler(this.likeButton_Click);
             // 
             // buttonSetStatus
             // 
@@ -175,7 +175,7 @@
             this.buttonSetStatus.TabIndex = 50;
             this.buttonSetStatus.Text = "Post";
             this.buttonSetStatus.UseVisualStyleBackColor = true;
-            this.buttonSetStatus.Click += new System.EventHandler(this.buttonSetStatusClick);
+            this.buttonSetStatus.Click += new System.EventHandler(this.buttonSetStatus_Click);
             // 
             // myProfileActivityBox
             // 
@@ -189,7 +189,7 @@
             this.myProfileActivityBox.Name = "myProfileActivityBox";
             this.myProfileActivityBox.Size = new System.Drawing.Size(457, 409);
             this.myProfileActivityBox.TabIndex = 49;
-            this.myProfileActivityBox.SelectedIndexChanged += new System.EventHandler(this.activityFeedSelectedIndexChanged);
+            this.myProfileActivityBox.SelectedIndexChanged += new System.EventHandler(this.activityFeed_SelectedIndexChanged);
             // 
             // myActivityLabel
             // 
@@ -244,7 +244,7 @@
             this.newsFeedLikeButton.TabIndex = 62;
             this.newsFeedLikeButton.Text = "Like";
             this.newsFeedLikeButton.UseVisualStyleBackColor = true;
-            this.newsFeedLikeButton.Click += new System.EventHandler(this.likeButtonClick);
+            this.newsFeedLikeButton.Click += new System.EventHandler(this.likeButton_Click);
             // 
             // newsFeedViewComments
             // 
@@ -258,7 +258,7 @@
             this.newsFeedViewComments.Name = "newsFeedViewComments";
             this.newsFeedViewComments.Size = new System.Drawing.Size(222, 368);
             this.newsFeedViewComments.TabIndex = 60;
-            this.newsFeedViewComments.SelectedIndexChanged += new System.EventHandler(this.commentFeedSelectedIndexChanged);
+            this.newsFeedViewComments.SelectedIndexChanged += new System.EventHandler(this.commentFeed_SelectedIndexChanged);
             // 
             // newsFeedCommentBox
             // 
@@ -278,7 +278,7 @@
             this.newsFeedCommentButton.TabIndex = 58;
             this.newsFeedCommentButton.Text = "Comment";
             this.newsFeedCommentButton.UseVisualStyleBackColor = true;
-            this.newsFeedCommentButton.Click += new System.EventHandler(this.commentButtonClick);
+            this.newsFeedCommentButton.Click += new System.EventHandler(this.commentButton_Click);
             // 
             // newsFeedActivityBox
             // 
@@ -292,7 +292,7 @@
             this.newsFeedActivityBox.Name = "newsFeedActivityBox";
             this.newsFeedActivityBox.Size = new System.Drawing.Size(457, 439);
             this.newsFeedActivityBox.TabIndex = 57;
-            this.newsFeedActivityBox.SelectedIndexChanged += new System.EventHandler(this.activityFeedSelectedIndexChanged);
+            this.newsFeedActivityBox.SelectedIndexChanged += new System.EventHandler(this.activityFeed_SelectedIndexChanged);
             // 
             // newsfeedLabel
             // 

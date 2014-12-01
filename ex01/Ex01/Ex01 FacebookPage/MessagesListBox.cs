@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FacebookApplication;
 using FacebookWrapper.ObjectModel;
@@ -15,6 +9,7 @@ namespace Ex01_FacebookPage
     public partial class MessagesListBox : UserControl
     {
         private readonly ListItemsContainer<InboxThread> r_ListItemsContainer;
+
         public event EventHandler CurrentInboxThreadChanged
         {
             add { r_ListItemsContainer.CurrentItemChanged += value; }
@@ -27,7 +22,7 @@ namespace Ex01_FacebookPage
         }
 
         public string UserIdThatInboxBelongsTo { get; private set; }
-        
+
         public MessagesListBox()
         {
             InitializeComponent();
@@ -45,9 +40,9 @@ namespace Ex01_FacebookPage
             r_ListItemsContainer.UpdateItems(i_InboxThreads);
         }
 
-        private void insertInboxThread(int i, InboxThread i_InboxThread)
+        private void insertInboxThread(int i_Index, InboxThread i_InboxThread)
         {
-            listBox.Items.Insert(i, getInboxThreadDisplayName(i_InboxThread));
+            listBox.Items.Insert(i_Index, getInboxThreadDisplayName(i_InboxThread));
         }
 
         private string getInboxThreadDisplayName(InboxThread i_InboxThread)
