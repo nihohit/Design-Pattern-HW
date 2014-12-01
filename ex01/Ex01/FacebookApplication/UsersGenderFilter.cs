@@ -35,6 +35,11 @@ namespace FacebookApplication
         {
             return i_User.Gender == Gender;
         }
+        
+        public override string ToString()
+        {
+            return Gender.ToString();
+        }
 
         #endregion
     }

@@ -21,14 +21,20 @@ namespace Ex01_FacebookPage
 
         protected override void m_FacebookApplicationManager_AfterFetch(object i_Sender, EventArgs e)
         {
-            friendsListsCombo.UpdateFriendsLists(FacebookApplicationLogicManager.GetRelevantFriendsListsForLoggedinUser());
+            friendsFiltersCombo.UpdateFriendsFilters();
         }
 
-        private void friendsListsCombo_FriendsListChanged(object sender, EventArgs e)
+        protected override void OnFacebookApplicationLogicManagerChanged()
         {
-            IEnumerable<InboxThread> inboxThreads = friendsListsCombo.AllFriendsSelected
+            friendsFiltersCombo.FacebookApplicationLogicManager = FacebookApplicationLogicManager;
+        }
+
+        private void friendsListsCombo_FriendsFiltersChanged(object sender, EventArgs e)
+        {
+            string usersThatCantBeFilteredMessage;
+            IEnumerable<InboxThread> inboxThreads = friendsFiltersCombo.AllFriendsSelected
                 ? FacebookApplicationLogicManager.GetAllInboxThreads()
-                : FacebookApplicationLogicManager.GetInboxThreadsForSpecificFriendList(friendsListsCombo.SelectedFriendList);
+                : FacebookApplicationLogicManager.GetInboxThreadsForSpecificFilter(friendsFiltersCombo.SelectedFriendFilterId.Trim(), out usersThatCantBeFilteredMessage);
             inboxMessagesListBox.UpdateInboxThreads(inboxThreads, FacebookApplicationLogicManager.LoggedInUser.Id);
 
         }

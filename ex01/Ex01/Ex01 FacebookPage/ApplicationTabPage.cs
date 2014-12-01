@@ -24,15 +24,28 @@ namespace Ex01_FacebookPage
                     if (m_FacebookApplicationManager != null)
                     {
                         m_FacebookApplicationManager.AfterFetch -= m_FacebookApplicationManager_AfterFetch;
+                        OnBeforeFacebookApplicationLogicManagerChanging();
                     }
 
                     m_FacebookApplicationManager = value;
                     if (m_FacebookApplicationManager != null)
                     {
                         m_FacebookApplicationManager.AfterFetch += m_FacebookApplicationManager_AfterFetch;
+                        OnFacebookApplicationLogicManagerChanged();
                     }
                 }
+                
             }
+        }
+
+        protected virtual void OnBeforeFacebookApplicationLogicManagerChanging()
+        {
+            
+        }
+
+        protected virtual void OnFacebookApplicationLogicManagerChanged()
+        {
+
         }
 
         public ApplicationTabPage()

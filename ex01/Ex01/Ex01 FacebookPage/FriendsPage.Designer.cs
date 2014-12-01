@@ -28,95 +28,82 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.friendsFiltersComboBox = new Ex01_FacebookPage.FriendsFiltersComboBox();
+            this.friendsListBox = new Ex01_FacebookPage.FriendsListBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.pictureBoxFriend = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriend)).BeginInit();
             this.SuspendLayout();
             // 
-            // listBox1
+            // friendsFiltersComboBox
             // 
-            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.friendsFiltersComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.friendsFiltersComboBox.FacebookApplicationLogicManager = null;
+            this.friendsFiltersComboBox.LabelText = "Filter :";
+            this.friendsFiltersComboBox.Location = new System.Drawing.Point(4, 6);
+            this.friendsFiltersComboBox.Name = "friendsFiltersComboBox";
+            this.friendsFiltersComboBox.Size = new System.Drawing.Size(386, 21);
+            this.friendsFiltersComboBox.TabIndex = 0;
+            this.friendsFiltersComboBox.FriendsFiltersChanged += new System.EventHandler(this.friendsFiltersComboBox_FriendsFiltersChanged);
+            // 
+            // friendsListBox
+            // 
+            this.friendsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.friendsListBox.Location = new System.Drawing.Point(0, 0);
+            this.friendsListBox.Name = "friendsListBox";
+            this.friendsListBox.Size = new System.Drawing.Size(238, 184);
+            this.friendsListBox.TabIndex = 55;
+            this.friendsListBox.CurrentFriendChanged += new System.EventHandler(this.friendsListBox_CurrentFriendChanged);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(4, 59);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(393, 121);
-            this.listBox1.TabIndex = 55;
+            this.splitContainer1.Location = new System.Drawing.Point(3, 33);
+            this.splitContainer1.Name = "splitContainer1";
             // 
-            // checkBox1
+            // splitContainer1.Panel1
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(4, 6);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(98, 17);
-            this.checkBox1.TabIndex = 56;
-            this.checkBox1.Text = "Filter by gender";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.splitContainer1.Panel1.Controls.Add(this.friendsListBox);
             // 
-            // comboBox1
+            // splitContainer1.Panel2
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Man",
-            "Female"});
-            this.comboBox1.Location = new System.Drawing.Point(109, 4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 57;
-            this.comboBox1.Text = "Male";
+            this.splitContainer1.Panel2.Controls.Add(this.pictureBoxFriend);
+            this.splitContainer1.Size = new System.Drawing.Size(387, 184);
+            this.splitContainer1.SplitterDistance = 238;
+            this.splitContainer1.TabIndex = 56;
             // 
-            // button1
+            // pictureBoxFriend
             // 
-            this.button1.Location = new System.Drawing.Point(4, 30);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(126, 23);
-            this.button1.TabIndex = 58;
-            this.button1.Text = "Apply Filter";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(271, 186);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(126, 23);
-            this.button2.TabIndex = 59;
-            this.button2.Text = "Create Friends List";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox1.Location = new System.Drawing.Point(4, 187);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(261, 20);
-            this.textBox1.TabIndex = 60;
+            this.pictureBoxFriend.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBoxFriend.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxFriend.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxFriend.Name = "pictureBoxFriend";
+            this.pictureBoxFriend.Size = new System.Drawing.Size(145, 184);
+            this.pictureBoxFriend.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxFriend.TabIndex = 43;
+            this.pictureBoxFriend.TabStop = false;
             // 
             // FriendsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.friendsFiltersComboBox);
             this.Name = "FriendsPage";
-            this.Controls.SetChildIndex(this.listBox1, 0);
-            this.Controls.SetChildIndex(this.checkBox1, 0);
-            this.Controls.SetChildIndex(this.comboBox1, 0);
-            this.Controls.SetChildIndex(this.button1, 0);
-            this.Controls.SetChildIndex(this.button2, 0);
-            this.Controls.SetChildIndex(this.textBox1, 0);
+            this.Controls.SetChildIndex(this.friendsFiltersComboBox, 0);
+            this.Controls.SetChildIndex(this.splitContainer1, 0);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriend)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -124,11 +111,9 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
+        private FriendsFiltersComboBox friendsFiltersComboBox;
+        private FriendsListBox friendsListBox;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.PictureBox pictureBoxFriend;
     }
 }

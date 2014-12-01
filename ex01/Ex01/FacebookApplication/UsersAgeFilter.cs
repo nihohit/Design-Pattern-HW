@@ -39,6 +39,11 @@ namespace FacebookApplication
             return (MinAge <= age) && (age <= MaxAge);
         }
 
+        public override string ToString()
+        {
+            return string.Format("Age between {0} to {1}", MinAge, MaxAge);
+        }
+
         #endregion 
     }
 }

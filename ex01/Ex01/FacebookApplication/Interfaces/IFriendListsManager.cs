@@ -10,7 +10,7 @@ namespace FacebookApplication.Interfaces
     {
         #region methods
         IEnumerable<FriendList> GetRelevantFriendsListsForLoggedinUser();
-        IEnumerable<FriendList> GetAllFriendListsWhichFriendBelongsTo(string i_FriendId);
+        IEnumerable<string> GetAllFriendListsWhichFriendBelongsTo(string i_FriendId);
         string GetFriendListsDisplayName(IEnumerable<FriendList> i_FriendLists);
         FriendList CreateFriendList(string i_Name, IEnumerable<User> i_Members);
         #endregion methods

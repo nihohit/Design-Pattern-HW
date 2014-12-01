@@ -13,10 +13,28 @@ namespace FacebookApplication
 
         private readonly Dictionary<string, IFriendFilter> r_Filters;
         private readonly IFriendsFetcher r_FriendsFetcher;
+        private int m_CurrentId;
 
         #endregion members
-        #region Properties
-        
+        #region events (IFriendsFiltersManager)
+
+        public event EventHandler FilterAdded;
+
+        public event EventHandler FilterRmoved;
+
+        #endregion events
+        #region Properties (IFriendsFiltersManager)
+
+        public IEnumerable<IFriendFilter> FriendsFilters
+        {
+            get { return r_Filters.Values; }
+        }
+
+        public IEnumerable<string> FriendsFiltersIds
+        {
+            get { return r_Filters.Keys; }
+        }
+
         #endregion Properties
         #region constructor
 
@@ -25,24 +43,46 @@ namespace FacebookApplication
         {
             r_FriendsFetcher = i_FriendsFetcher;
             r_Filters = new Dictionary<string, IFriendFilter>();
+            m_CurrentId = 0;
         }
 
         #endregion constructor
         #region public methods
         #region IFriendFilterManager
-        public string AddFriendFilter(string i_Name, int i_MinAge, int i_MaxAge, FacebookWrapper.ObjectModel.User.eGender i_Gender)
+        public string AddFriendFilter(string i_Name, IEnumerable<IUsersFilter> i_UserFilters)
         {
-            throw new NotImplementedException();
+            IFriendFilter filter = new FriendsFilter(i_Name, i_UserFilters);
+            string filterId = m_CurrentId.ToString();
+            r_Filters.Add(filterId, filter);
+            m_CurrentId++;
+            if (FilterAdded != null)
+            {
+                FilterAdded(this, new EventArgs());
+            }
+
+            return filterId;
         }
 
-        public string RemoveFriendFilter(string i_FilterId)
+        public bool RemoveFriendFilter(string i_FilterId)
         {
-            throw new NotImplementedException();
+            bool removed = r_Filters.Remove(i_FilterId);
+            if (removed && FilterRmoved != null)
+            {
+                FilterRmoved(this, new EventArgs());
+            }
+
+            return removed;
         }
 
         public IFriendFilter GetFriendFilter(string i_FilterId)
         {
-            throw new NotImplementedException();
+            IFriendFilter friendFilter = null;
+            if (!string.IsNullOrEmpty(i_FilterId))
+            {
+                r_Filters.TryGetValue(i_FilterId, out friendFilter);
+            }
+
+            return friendFilter;
         }
         #endregion
         #endregion
@@ -60,13 +100,11 @@ namespace FacebookApplication
 
         protected override void ThrowShouldFetchFromFacebookException()
         {
-            ThrowShouldFetchFromFacebookException("friends lists");
+            ThrowShouldFetchFromFacebookException("friends");
         }
 
         #endregion override protected methods
         #region private methods
         #endregion private methods
-
-
     }
 }

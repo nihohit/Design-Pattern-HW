@@ -30,6 +30,7 @@ namespace Ex01_FacebookPage
         {
             inboxPage.FacebookApplicationLogicManager = i_FacebookApplicationManager;
             friendsPage1.FacebookApplicationLogicManager = i_FacebookApplicationManager;
+            friendsFiltersPage.FacebookApplicationLogicManager = i_FacebookApplicationManager;
         }
 
         private void tabIndexChanged(object i_Sender, EventArgs i_EventArgs)
@@ -41,12 +42,6 @@ namespace Ex01_FacebookPage
                     break;
                 case 1:
                     switchToNewsFeed();
-                    break;
-                case 2:
-                    //inboxPage.FacebookApplicationLogicManager = i_FacebookApplicationManager;
-                    break;
-                case 3:
-                    //friendsPage1.FacebookApplicationLogicManager = i_FacebookApplicationManager;
                     break;
                 default:
                     return;

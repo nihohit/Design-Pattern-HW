@@ -73,7 +73,7 @@
     <Compile Include="Interfaces\IFetchable.cs" />
     <Compile Include="Interfaces\IUsersFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UsersFreindListsFilter.cs" />
+    <Compile Include="UsersFriendListsFilter.cs" />
     <Compile Include="UserComparer.cs" />
     <Compile Include="UsersGenderFilter.cs" />
   </ItemGroup>

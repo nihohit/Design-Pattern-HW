@@ -12,7 +12,7 @@ namespace FacebookApplication
         #region members
 
         private Dictionary<string, FriendList> m_friendsListsForLoggedinUser;
-        private Dictionary<string, FacebookObjectCollection<FriendList>> m_friendsListsByFriendsIds;
+        private Dictionary<string, List<string>> m_friendsListsByFriendsIds;
 
         #endregion members
 
@@ -44,20 +44,20 @@ namespace FacebookApplication
             return m_friendsListsForLoggedinUser.Values;
         }
 
-        public IEnumerable<FriendList> GetAllFriendListsWhichFriendBelongsTo(string i_FriendId)
+        public IEnumerable<string> GetAllFriendListsWhichFriendBelongsTo(string i_FriendId)
         {
             if (m_friendsListsByFriendsIds == null)
             {
                 ThrowShouldFetchFromFacebookException();
             }
 
-            FacebookObjectCollection<FriendList> friendsListsFriendBelongsTo;
-            if (!m_friendsListsByFriendsIds.TryGetValue(i_FriendId, out friendsListsFriendBelongsTo))
+            List<string> friendsListsFriendBelongsToIds;
+            if (!m_friendsListsByFriendsIds.TryGetValue(i_FriendId, out friendsListsFriendBelongsToIds))
             {
-                friendsListsFriendBelongsTo = new FacebookObjectCollection<FriendList>(0);
+                friendsListsFriendBelongsToIds = new List<string>(0);
             }
 
-            return friendsListsFriendBelongsTo;
+            return friendsListsFriendBelongsToIds;
         }
 
         public string GetFriendListsDisplayName(IEnumerable<FriendList> i_FriendLists)
@@ -120,20 +120,20 @@ namespace FacebookApplication
         {
             FacebookObjectCollection<FriendList> friendsListsForLoggedinUser = i_LoggedInUser.FriendLists;
             m_friendsListsForLoggedinUser = new Dictionary<string, FriendList>();
-            m_friendsListsByFriendsIds = new Dictionary<string, FacebookObjectCollection<FriendList>>();
+            m_friendsListsByFriendsIds = new Dictionary<string, List<string>>();
             foreach (FriendList friendList in friendsListsForLoggedinUser)
             {
                 m_friendsListsForLoggedinUser.Add(friendList.Id, friendList);
                 foreach (User friend in friendList.Members)
                 {
-                    FacebookObjectCollection<FriendList> friendsLists;
-                    if (!m_friendsListsByFriendsIds.TryGetValue(friend.Id, out friendsLists))
+                    List<string> friendsListsIds;
+                    if (!m_friendsListsByFriendsIds.TryGetValue(friend.Id, out friendsListsIds))
                     {
-                        friendsLists = new FacebookObjectCollection<FriendList>();
-                        m_friendsListsByFriendsIds.Add(friend.Id, friendsLists);
+                        friendsListsIds = new List<string>();
+                        m_friendsListsByFriendsIds.Add(friend.Id, friendsListsIds);
                     }
 
-                    friendsLists.Add(friendList);
+                    friendsListsIds.Add(friendList.Id);
                 }
             }
         }

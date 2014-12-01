@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.friendsListsCombo = new Ex01_FacebookPage.FriendsListsComboBox();
+            this.friendsFiltersCombo = new Ex01_FacebookPage.FriendsFiltersComboBox();
             this.inboxMessagesListBox = new Ex01_FacebookPage.MessagesListBox();
             this.selectedMessageTextBox = new System.Windows.Forms.TextBox();
             this.massagesLabel = new System.Windows.Forms.Label();
@@ -41,14 +41,14 @@
             // 
             // friendsListsCombo
             // 
-            this.friendsListsCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.friendsFiltersCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.friendsListsCombo.LabelText = "Show conversation that include a member in:";
-            this.friendsListsCombo.Location = new System.Drawing.Point(3, 3);
-            this.friendsListsCombo.Name = "friendsListsCombo";
-            this.friendsListsCombo.Size = new System.Drawing.Size(653, 21);
-            this.friendsListsCombo.TabIndex = 55;
-            this.friendsListsCombo.FriendsListChanged += new System.EventHandler(this.friendsListsCombo_FriendsListChanged);
+            this.friendsFiltersCombo.LabelText = "Show conversation that include a member in:";
+            this.friendsFiltersCombo.Location = new System.Drawing.Point(3, 3);
+            this.friendsFiltersCombo.Name = "friendsListsCombo";
+            this.friendsFiltersCombo.Size = new System.Drawing.Size(653, 21);
+            this.friendsFiltersCombo.TabIndex = 55;
+            this.friendsFiltersCombo.FriendsFiltersChanged += new System.EventHandler(this.friendsListsCombo_FriendsFiltersChanged);
             // 
             // inboxMessagesListBox
             // 
@@ -104,10 +104,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.massagesLabel);
-            this.Controls.Add(this.friendsListsCombo);
+            this.Controls.Add(this.friendsFiltersCombo);
             this.Name = "InboxPage";
             this.Size = new System.Drawing.Size(658, 377);
-            this.Controls.SetChildIndex(this.friendsListsCombo, 0);
+            this.Controls.SetChildIndex(this.friendsFiltersCombo, 0);
             this.Controls.SetChildIndex(this.massagesLabel, 0);
             this.Controls.SetChildIndex(this.splitContainer, 0);
             this.splitContainer.Panel1.ResumeLayout(false);
@@ -122,7 +122,7 @@
 
         #endregion
 
-        private FriendsListsComboBox friendsListsCombo;
+        private FriendsFiltersComboBox friendsFiltersCombo;
         private MessagesListBox inboxMessagesListBox;
         private System.Windows.Forms.TextBox selectedMessageTextBox;
         private System.Windows.Forms.Label massagesLabel;

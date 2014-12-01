@@ -9,91 +9,59 @@ namespace FacebookApplication
 {
     public class InboxManager : FacebookFetchable, IInboxManager
     {
-        public struct InboxThreadOnDemandDetails
-        {
-            public readonly InboxThread r_InboxThread;
-            public readonly IEnumerable<FriendList> r_ThreadFriendLists;
-            public readonly string r_ThreadFriendListsDisplayName;
-            public readonly string r_InboxThreadFriendsNames;
-
-            public InboxThreadOnDemandDetails(InboxThread i_InboxThread, IEnumerable<FriendList> i_ThreadFriendLists,
-                string i_ThreadFriendListsDisplayName, string i_InboxThreadFriendsNames)
-            {
-                r_InboxThread = i_InboxThread;
-                r_ThreadFriendLists = i_ThreadFriendLists;
-                r_ThreadFriendListsDisplayName = i_ThreadFriendListsDisplayName;
-                r_InboxThreadFriendsNames = i_InboxThreadFriendsNames;
-            }
-        }
         #region members
 
-        private readonly IFriendListsManager r_FriendListsManager;
-        private Dictionary<string, InboxThreadOnDemandDetails> m_InboxThreads;
+        private readonly Dictionary<string, InboxThread> r_InboxThreads;
 
         #endregion members
         #region Properties
         #endregion Properties
         #region constructor
 
-        public InboxManager(IFriendListsManager i_FriendListsManager, TimeSpan? i_MinIntervalBetweenFetchActions = null)
+        public InboxManager(TimeSpan? i_MinIntervalBetweenFetchActions = null)
             : base(i_MinIntervalBetweenFetchActions)
         {
-            r_FriendListsManager = i_FriendListsManager;
-            reset();
+            r_InboxThreads = new Dictionary<string, InboxThread>();
         }
 
         #endregion constructor
         #region public methods
         #region IInboxManager
-        public IEnumerable<FriendList> GetRelevantFriendsListsForInboxThread(string i_InboxThreadId)
-        {
-            InboxThreadOnDemandDetails inboxThreadOnDemandDetails;
-            if (!m_InboxThreads.TryGetValue(i_InboxThreadId, out inboxThreadOnDemandDetails))
-            {
-                throw new ArgumentException(string.Format("Cannot find inbox thread {0}", i_InboxThreadId));
-            }
-
-            return inboxThreadOnDemandDetails.r_ThreadFriendLists;
-        }
 
         public string GetInboxThreadFriendsNames(string i_InboxThreadId)
         {
-            InboxThreadOnDemandDetails inboxThreadOnDemandDetails;
-            if (!m_InboxThreads.TryGetValue(i_InboxThreadId, out inboxThreadOnDemandDetails))
+            string friendsNames = string.Empty;
+            InboxThread inboxThread;
+            if (r_InboxThreads.TryGetValue(i_InboxThreadId, out inboxThread))
             {
-                throw new ArgumentException(string.Format("Cannot find inbox thread {0}", i_InboxThreadId));
+                friendsNames = inboxThread.GetInboxThreadMessagesDisplayString();
             }
 
-            return inboxThreadOnDemandDetails.r_InboxThreadFriendsNames;
+            return friendsNames;
         }
 
-        public IEnumerable<InboxThread> GetAllInboxThreads()
+        public IEnumerable<InboxThread> GetInboxThreads(IFriendFilter i_FriendFilter)
         {
-            return GetInboxThreadsForSpecificFriendList(null);
-        }
-
-        public IEnumerable<InboxThread> GetInboxThreadsForSpecificFriendList(FriendList i_FriendList)
-        {
-            FacebookObjectCollection<InboxThread> friendListInboxThreads = new FacebookObjectCollection<InboxThread>();
-            foreach (string inboxThreadId in m_InboxThreads.Keys)
+            IEnumerable<InboxThread> inboxThreads;
+            if (i_FriendFilter == null)
             {
-                IEnumerable<FriendList> friendsLists = (i_FriendList == null) ? null : GetRelevantFriendsListsForInboxThread(inboxThreadId);
-                if (i_FriendList == null || friendsLists.Contains(i_FriendList))
-                {
-                    friendListInboxThreads.Add(m_InboxThreads[inboxThreadId].r_InboxThread);
-                }
+                inboxThreads = r_InboxThreads.Values;
+            }
+            else
+            {
+                inboxThreads = getInboxThreadsForSpecificFriendFilter(i_FriendFilter);
             }
 
-            return friendListInboxThreads;
+            return inboxThreads;
         }
-
+        
         public string GetInboxThreadDisplayString(string i_InboxThreadId)
         {
             string inboxThreadDisplayString = string.Empty;
-            InboxThreadOnDemandDetails iInboxThreadOnDemandDetails;
-            if (m_InboxThreads.TryGetValue(i_InboxThreadId, out iInboxThreadOnDemandDetails))
+            InboxThread inboxThread;
+            if (r_InboxThreads.TryGetValue(i_InboxThreadId, out inboxThread))
             {
-                iInboxThreadOnDemandDetails.r_InboxThread.GetInboxThreadMessagesDisplayString();
+                inboxThread.GetInboxThreadMessagesDisplayString();
             }
             else
             {
@@ -129,56 +97,41 @@ namespace FacebookApplication
         #endregion override protected methods
         #region private methods
 
-        private void fetchInbox(User i_LoggedInUser)
+        private IEnumerable<InboxThread> getInboxThreadsForSpecificFriendFilter(IFriendFilter i_FriendFilter)
         {
-            m_InboxThreads.Clear();
-            i_LoggedInUser.ValidateUserNotNull();
-            r_FriendListsManager.Fetch(i_LoggedInUser);
-            FacebookObjectCollection<InboxThread> inboxThreads = i_LoggedInUser.InboxThreads;
-            foreach (InboxThread inboxThread in inboxThreads)
+            FacebookObjectCollection<InboxThread> friendListInboxThreads = new FacebookObjectCollection<InboxThread>();
+            foreach (InboxThread inboxThread in r_InboxThreads.Values)
             {
-                IEnumerable<FriendList> relevantFriendsListsForInboxThread = getRelevantFriendsListsForInboxThread(inboxThread, i_LoggedInUser.Id);
-                string threadFriendListsDisplayName = r_FriendListsManager.GetFriendListsDisplayName(relevantFriendsListsForInboxThread);
-                string inboxThreadFriendsNames = inboxThread.GetInboxThreadFriendsNames(i_LoggedInUser.Id);
-                m_InboxThreads.Add(inboxThread.Id, new InboxThreadOnDemandDetails(inboxThread, relevantFriendsListsForInboxThread, threadFriendListsDisplayName, inboxThreadFriendsNames));
-            }
-        }
-
-        private IEnumerable<FriendList> getRelevantFriendsListsForInboxThread(InboxThread i_InboxThread, string i_UserLoggedInWhenFetchedId)
-        {
-            FacebookObjectCollection<FriendList> inboxThreadFriendLists = new FacebookObjectCollection<FriendList>();
-            foreach (User friend in i_InboxThread.To)
-            {
-                if (friend.Id != i_UserLoggedInWhenFetchedId)
+                foreach (User friend in inboxThread.To)
                 {
-                    IEnumerable<FriendList> friendFriendLists =
-                        r_FriendListsManager.GetAllFriendListsWhichFriendBelongsTo(friend.Id);
-                    foreach (FriendList friendList in friendFriendLists)
+                    if (i_FriendFilter.FilterdFriends.Contains(friend))
                     {
-                        if (!inboxThreadFriendLists.Contains(friendList))
-                        {
-                            inboxThreadFriendLists.Add(friendList);
-                        }
+                        friendListInboxThreads.Add(inboxThread);
+                        break;
                     }
                 }
             }
+            
+            return friendListInboxThreads;
+        }
 
-            return inboxThreadFriendLists;
+        private void fetchInbox(User i_LoggedInUser)
+        {
+            r_InboxThreads.Clear();
+            i_LoggedInUser.ValidateUserNotNull();
+            FacebookObjectCollection<InboxThread> inboxThreads = i_LoggedInUser.InboxThreads;
+            foreach (InboxThread inboxThread in inboxThreads)
+            {
+                r_InboxThreads.Add(inboxThread.Id, inboxThread);
+            }
         }
 
         private void reset()
         {
-            if (m_InboxThreads == null)
-            {
-                m_InboxThreads = new Dictionary<string, InboxThreadOnDemandDetails>();
-            }
-            else
-            {
-                m_InboxThreads.Clear();
-            }
+            r_InboxThreads.Clear();
         }
 
         #endregion private methods
-
+        
     }
 }

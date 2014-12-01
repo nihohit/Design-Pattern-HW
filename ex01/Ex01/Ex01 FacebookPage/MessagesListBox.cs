@@ -31,12 +31,12 @@ namespace Ex01_FacebookPage
         public MessagesListBox()
         {
             InitializeComponent();
-            r_ListItemsContainer = new ListItemsContainer<InboxThread>(insertInboxThread);
+            r_ListItemsContainer = new ListItemsContainer<InboxThread>(insertInboxThread, () => listBox.Items.Clear());
         }
 
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            r_ListItemsContainer.CangeSelectedItem(listBox.SelectedIndex);
+            r_ListItemsContainer.ChangeSelectedItem(listBox.SelectedIndex);
         }
 
         public void UpdateInboxThreads(IEnumerable<InboxThread> i_InboxThreads, string i_UserIdThatInboxBelongsTo)

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication
@@ -56,19 +58,27 @@ namespace FacebookApplication
             return inboxThreadDisplayString.Trim(Environment.NewLine.ToCharArray());
         }
 
-        public static string GetInboxThreadFriendsNames(this InboxThread i_InboxThread, string i_UserIdThatInboxBelongsTo)
+        public static string GetInboxThreadFriendsNames(this InboxThread i_InboxThread, string i_UserIdThatInboxBelongsTo, out FacebookObjectCollection<User> o_Friends)
         {
+            o_Friends = new FacebookObjectCollection<User>();
             string inboxThreadFriendsNames = string.Empty;
             foreach (User friend in i_InboxThread.To)
             {
                 if (i_UserIdThatInboxBelongsTo != friend.Id)
                 {
+                    o_Friends.Add(friend);
                     inboxThreadFriendsNames += " " + friend.Name + ",";
                 }
             }
 
             inboxThreadFriendsNames = inboxThreadFriendsNames.Trim(',');
             return inboxThreadFriendsNames.Trim();
+        }
+
+        public static string GetInboxThreadFriendsNames(this InboxThread i_InboxThread, string i_UserIdThatInboxBelongsTo)
+        {
+            FacebookObjectCollection<User> friends;
+            return i_InboxThread.GetInboxThreadFriendsNames(i_UserIdThatInboxBelongsTo, out friends);
         }
 
         public static bool LikedByUser(this PostedItem i_Item, string i_UserId)

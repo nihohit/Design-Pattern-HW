@@ -1,6 +1,6 @@
 ﻿namespace Ex01_FacebookPage
 {
-    partial class FriendsListsComboBox
+    partial class FriendsFiltersComboBox
     {
         /// <summary> 
         /// Required designer variable.
@@ -40,26 +40,26 @@
             this.comboBox.FormattingEnabled = true;
             this.comboBox.Location = new System.Drawing.Point(38, 0);
             this.comboBox.Name = "comboBox";
-            this.comboBox.Size = new System.Drawing.Size(141, 21);
-            this.comboBox.TabIndex = 60;
+            this.comboBox.Size = new System.Drawing.Size(145, 21);
+            this.comboBox.TabIndex = 58;
             this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             // 
             // friendsListsLabel
             // 
             this.friendsListsLabel.AutoSize = true;
-            this.friendsListsLabel.Location = new System.Drawing.Point(-2, 3);
+            this.friendsListsLabel.Location = new System.Drawing.Point(-3, 3);
             this.friendsListsLabel.Name = "friendsListsLabel";
             this.friendsListsLabel.Size = new System.Drawing.Size(35, 13);
-            this.friendsListsLabel.TabIndex = 59;
+            this.friendsListsLabel.TabIndex = 57;
             this.friendsListsLabel.Text = "Filter :";
             // 
-            // FriendsListsComboBox
+            // FriendsFiltersComboBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.comboBox);
             this.Controls.Add(this.friendsListsLabel);
-            this.Name = "FriendsListsComboBox";
+            this.Name = "FriendsFiltersComboBox";
             this.Size = new System.Drawing.Size(183, 21);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -70,6 +70,5 @@
 
         private System.Windows.Forms.ComboBox comboBox;
         private System.Windows.Forms.Label friendsListsLabel;
-
     }
 }

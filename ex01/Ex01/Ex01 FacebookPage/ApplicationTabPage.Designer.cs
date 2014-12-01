@@ -36,10 +36,9 @@
             this.linkUpdateFromFacebook.AutoSize = true;
             this.linkUpdateFromFacebook.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.linkUpdateFromFacebook.LinkArea = new System.Windows.Forms.LinkArea(0, 19);
-            this.linkUpdateFromFacebook.Location = new System.Drawing.Point(0, 273);
-            this.linkUpdateFromFacebook.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.linkUpdateFromFacebook.Location = new System.Drawing.Point(0, 220);
             this.linkUpdateFromFacebook.Name = "linkUpdateFromFacebook";
-            this.linkUpdateFromFacebook.Size = new System.Drawing.Size(183, 35);
+            this.linkUpdateFromFacebook.Size = new System.Drawing.Size(155, 30);
             this.linkUpdateFromFacebook.TabIndex = 54;
             this.linkUpdateFromFacebook.TabStop = true;
             this.linkUpdateFromFacebook.Text = "Fetch from facebook\r\n(This may take a few minutes)";
@@ -48,13 +47,12 @@
             // 
             // ApplicationTabPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.Controls.Add(this.linkUpdateFromFacebook);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ApplicationTabPage";
-            this.Size = new System.Drawing.Size(533, 308);
+            this.Size = new System.Drawing.Size(400, 250);
             this.ResumeLayout(false);
             this.PerformLayout();
 

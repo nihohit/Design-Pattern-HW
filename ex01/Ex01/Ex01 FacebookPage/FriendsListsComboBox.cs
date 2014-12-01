@@ -20,10 +20,7 @@ namespace Ex01_FacebookPage
 
         public string LabelText
         {
-            get
-            {
-                return friendsListsLabel.Text;
-            }
+            get { return friendsListsLabel.Text; }
             set
             {
                 friendsListsLabel.Text = value;
@@ -32,11 +29,15 @@ namespace Ex01_FacebookPage
                     new System.Drawing.Point(
                         friendsListsLabel.Location.X + friendsListsLabel.Size.Width +
                         Math.Max(friendsListsLabel.Margin.Right, comboBox.Margin.Left), comboBox.Location.Y);
-                comboBox.Size = new Size(comboBox.Size.Width + origComboBoxLocationX - comboBox.Location.X, comboBox.Size.Height);
+                comboBox.Size = new Size(comboBox.Size.Width + origComboBoxLocationX - comboBox.Location.X,
+                    comboBox.Size.Height);
             }
         }
 
-        public bool AllFriendsSelected { get { return SelectedFriendList == null; } }
+        public bool AllFriendsSelected
+        {
+            get { return SelectedFriendList == null; }
+        }
 
         public FriendsListsComboBox()
         {
@@ -52,20 +53,25 @@ namespace Ex01_FacebookPage
             int i = 0;
             foreach (FriendList friendList in i_FriendsLists)
             {
-                string friendListDisplayName = friendList.Name == c_AllFriendsOptionDisplayName ? c_AllFriendsOptionDisplayName + " (friends list)" : friendList.Name;
+                string friendListDisplayName = friendList.Name == c_AllFriendsOptionDisplayName
+                    ? c_AllFriendsOptionDisplayName + " (friends list)"
+                    : friendList.Name;
                 m_FriendLists[i] = friendList;
                 comboBox.Items.Insert(i, friendListDisplayName);
                 i++;
             }
 
             comboBox.SelectedIndex = comboBox.Items.Add(c_AllFriendsOptionDisplayName);
+            comboBox.SelectedItem = c_AllFriendsOptionDisplayName;
         }
 
         private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedIndex = comboBox.SelectedIndex;
             //// if All friends (c_AllFriendsOptionDisplayName) choosen SelectedFriendList will be null
-            SelectedFriendList = (selectedIndex == -1 || selectedIndex > ( m_FriendLists.Length - 1 ) ) ? null : m_FriendLists[selectedIndex];
+            SelectedFriendList = (selectedIndex == -1 || selectedIndex > (m_FriendLists.Length - 1))
+                ? null
+                : m_FriendLists[selectedIndex];
 
             if (FriendsListChanged != null)
             {

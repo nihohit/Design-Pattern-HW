@@ -18,6 +18,17 @@ namespace FacebookApplication
         public event EventHandler AfterReset;
         public event EventHandler AfterLoggin;
         public event EventHandler AfterFetch;
+        public event EventHandler FriendFilterAdded
+        {
+            add { LoggedInUserFriendsFiltersManager.FilterAdded += value; }
+            remove { LoggedInUserFriendsFiltersManager.FilterAdded -= value; }
+        }
+        public event EventHandler FriendFilterRemoved
+        {
+            add { LoggedInUserFriendsFiltersManager.FilterRmoved += value; }
+            remove { LoggedInUserFriendsFiltersManager.FilterRmoved -= value; }
+        }
+        
         #endregion IFacebookApplicationManager
         #endregion Events
         #region Properties
@@ -28,7 +39,7 @@ namespace FacebookApplication
         public IFriendsFetcher LoggedInUserFriendsFetcher { get; private set; }
 
         public IFriendListsManager LoggedInUserFriendListsManager { get; private set; }
-
+        
         public IInboxManager LoggedInUserInboxManager { get; private set; }
 
         public IFriendsFiltersManager LoggedInUserFriendsFiltersManager { get; private set; }
@@ -43,7 +54,7 @@ namespace FacebookApplication
             LoggedInUser = null;
             LoggedInUserFriendsFetcher = new FriendsFetcher(minIntervalBetweenFetchActions);
             LoggedInUserFriendListsManager = new FriendListsManager(minIntervalBetweenFetchActions);
-            LoggedInUserInboxManager = new InboxManager(LoggedInUserFriendListsManager, minIntervalBetweenFetchActions);
+            LoggedInUserInboxManager = new InboxManager(minIntervalBetweenFetchActions);
             LoggedInUserFriendsFiltersManager = new FriendsFiltersManager(LoggedInUserFriendsFetcher, minIntervalBetweenFetchActions);
         }
         #endregion constructor
@@ -100,12 +111,11 @@ namespace FacebookApplication
         {
             return LoggedInUserFriendListsManager.CreateFriendList(i_Name, i_Members);
         }
-
+        
         public IEnumerable<FriendList> GetRelevantFriendsListsForLoggedinUser()
         {
             return LoggedInUserFriendListsManager.GetRelevantFriendsListsForLoggedinUser();
         }
-        
         public string GetInboxThreadFriendsNames(string i_InboxThreadId)
         {
             return LoggedInUserInboxManager.GetInboxThreadFriendsNames(i_InboxThreadId);
@@ -118,12 +128,14 @@ namespace FacebookApplication
 
         public IEnumerable<InboxThread> GetAllInboxThreads()
         {
-            return LoggedInUserInboxManager.GetAllInboxThreads();
+            return LoggedInUserInboxManager.GetInboxThreads(null);
         }
 
-        public IEnumerable<InboxThread> GetInboxThreadsForSpecificFriendList(FriendList i_FriendList)
+        public IEnumerable<InboxThread> GetInboxThreadsForSpecificFilter(string i_FriendFilterId, out string o_UsersThatCantBeFilteredMessage)
         {
-            return LoggedInUserInboxManager.GetInboxThreadsForSpecificFriendList(i_FriendList);
+            IFriendFilter friendFilter = LoggedInUserFriendsFiltersManager.GetFriendFilter(i_FriendFilterId);
+            o_UsersThatCantBeFilteredMessage = friendFilter.ErrorString;
+            return LoggedInUserInboxManager.GetInboxThreads(friendFilter);
         }
 
         public IEnumerable<User> GetFriends(string i_FilterId, out string o_UsersThatCantBeFilteredMessage)
@@ -143,9 +155,61 @@ namespace FacebookApplication
 
             return friends;
         }
+
+        public string AddFriendFilter(string i_Name, bool i_FilterGender, User.eGender i_Gender, bool i_FilterAge, int i_MinAge, int i_MaxAge, bool i_FilterByFriendList, FriendList i_FriendList)
+        {
+            List<IUsersFilter> usersFilters = new List<IUsersFilter>();
+            if (!(i_FilterAge || i_FilterByFriendList || i_FilterGender))
+            {
+                throw new ArgumentException("Cannot add empty filter");
+            }
+
+            if (i_FilterAge)
+            {
+                usersFilters.Add(new UsersAgeFilter(i_MinAge, i_MaxAge));
+            }
+
+            if (i_FilterByFriendList)
+            {
+                usersFilters.Add(new UsersFriendListsFilter(i_FriendList, LoggedInUserFriendListsManager));
+            }
+
+            if (i_FilterGender)
+            {
+                usersFilters.Add(new UsersGenderFilter(i_Gender));
+            }
+
+            return LoggedInUserFriendsFiltersManager.AddFriendFilter(i_Name, usersFilters);
+        }
+
+        public bool RemoveFriendFilter(string i_FriendFilterId)
+        {
+            return LoggedInUserFriendsFiltersManager.RemoveFriendFilter(i_FriendFilterId);
+        }
+
+        public string GetFriendFilterName(string i_FilterId)
+        {
+            IFriendFilter filter = LoggedInUserFriendsFiltersManager.GetFriendFilter(i_FilterId);
+            return (filter == null) ? null : filter.Name;
+        }
+
+        public string GetFriendFilterDisplayString(string i_FilterId)
+        {
+            IFriendFilter filter = LoggedInUserFriendsFiltersManager.GetFriendFilter(i_FilterId);
+            return (filter == null) ? null : filter.ToString();
+        }
+
+        public IEnumerable<string> GetFriendFiltersIds()
+        {
+            return LoggedInUserFriendsFiltersManager.FriendsFiltersIds;
+        }
+
         #endregion IFacebookApplicationManager
         #endregion public methods
         #region private methods
         #endregion private methods
+
+
+        
     }
 }

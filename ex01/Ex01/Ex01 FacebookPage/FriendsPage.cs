@@ -15,10 +15,6 @@ namespace Ex01_FacebookPage
 {
     public partial class FriendsPage : ApplicationTabPage
     {
-        private User[] m_Friends;
-        public event EventHandler FilterChanged;
-        private List<IUsersFilter> m_Filters;
-
         public FriendsPage()
         {
             InitializeComponent();
@@ -26,45 +22,34 @@ namespace Ex01_FacebookPage
 
         protected override void m_FacebookApplicationManager_AfterFetch(object i_Sender, EventArgs e)
         {
-            updateFriendsList();
+            friendsFiltersComboBox.UpdateFriendsFilters();
         }
 
-        private void updateFriendsList()
+        protected override void OnFacebookApplicationLogicManagerChanged()
         {
-            string usersThatThrowExceptionMessage;//TODO
-            IEnumerable<User> friends = FacebookApplicationLogicManager.GetFriends(null, out usersThatThrowExceptionMessage);//m_Filters
-            m_Friends = new User[4];
-            listBox1.Items.Clear();
-            int i = 0;
-            foreach (User friend in friends)
-            {
-                string friendDisplayName = friend.Name;
-                m_Friends[i] = friend;
-                listBox1.Items.Insert(i, friend.Name);
-                i++;
-                if (i > 3)
-                    break;
-            }
+            friendsFiltersComboBox.FacebookApplicationLogicManager = FacebookApplicationLogicManager;
+        }
 
+        private void friendsFiltersComboBox_FriendsFiltersChanged(object sender, EventArgs e)
+        {
+            string usersThatCantBeFilteredMessage;
+            IEnumerable<User> friends = FacebookApplicationLogicManager.GetFriends(friendsFiltersComboBox.SelectedFriendFilterId,
+                out usersThatCantBeFilteredMessage);
+            friendsListBox.UpdateFriends(friends);
 
         }
-        private void button1_Click(object sender, EventArgs e)
+
+        private void friendsListBox_CurrentFriendChanged(object sender, EventArgs e)
         {
-            m_Filters = new List<IUsersFilter>();
-            if (comboBox1.Text == "Male")
+            User selectedFriend = friendsListBox.SelectedFriend;
+            if (selectedFriend != null && selectedFriend.PictureNormalURL != null)
             {
-                m_Filters.Add(new UsersGenderFilter(User.eGender.male));
+                pictureBoxFriend.LoadAsync(selectedFriend.PictureNormalURL);
             }
             else
             {
-                m_Filters.Add(new UsersGenderFilter(User.eGender.female));
+                pictureBoxFriend.Image = pictureBoxFriend.ErrorImage;
             }
-            updateFriendsList();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            FacebookApplicationLogicManager.CreateFriendList(textBox1.Text, m_Friends);
         }
     }
 }

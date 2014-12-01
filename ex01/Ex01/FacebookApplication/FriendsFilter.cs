@@ -33,8 +33,9 @@ namespace FacebookApplication
         #endregion Properties
         #region constructor
 
-        public FriendsFilter(IEnumerable<IUsersFilter> i_UserFilters)
+        public FriendsFilter(string i_Name, IEnumerable<IUsersFilter> i_UserFilters)
         {
+            Name = i_Name;
             UserFilters = i_UserFilters;
             r_FilteredFriends = new Dictionary<string, User>();
         }
@@ -69,6 +70,17 @@ namespace FacebookApplication
             ErrorString = ErrorString.Trim(Environment.NewLine.ToCharArray());
         }
 
+
+        public override string ToString()
+        {
+            String displayString = string.Format("'{0}': ", Name);
+            foreach (IUsersFilter userFilter in UserFilters)
+            {
+                displayString += userFilter.ToString() + ", ";
+            }
+
+            return displayString.Trim().Trim(',');
+        }
         #endregion public methods
         #region private methods
 

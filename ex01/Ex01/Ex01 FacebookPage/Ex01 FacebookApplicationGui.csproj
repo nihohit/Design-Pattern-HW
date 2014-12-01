@@ -57,6 +57,24 @@
       <DependentUpon>ApplicationTabPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
+    <Compile Include="FriendsFiltersComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FriendsFiltersComboBox.Designer.cs">
+      <DependentUpon>FriendsFiltersComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FriendsFiltersPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FriendsFiltersPage.Designer.cs">
+      <DependentUpon>FriendsFiltersPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FriendsListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FriendsListBox.Designer.cs">
+      <DependentUpon>FriendsListBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="FriendsListsComboBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -104,6 +122,15 @@
     </Compile>
     <EmbeddedResource Include="ApplicationTabPage.resx">
       <DependentUpon>ApplicationTabPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FriendsFiltersComboBox.resx">
+      <DependentUpon>FriendsFiltersComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FriendsFiltersPage.resx">
+      <DependentUpon>FriendsFiltersPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FriendsListBox.resx">
+      <DependentUpon>FriendsListBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FriendsListsComboBox.resx">
       <DependentUpon>FriendsListsComboBox.cs</DependentUpon>
