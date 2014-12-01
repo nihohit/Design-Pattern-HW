@@ -31,7 +31,7 @@ namespace Ex01_FacebookPage
 
         private static void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs args)
         {
-            ((Exception)args.ExceptionObject).ShowErrorMessageBox();
+            ((Exception)args.ExceptionObject).ShowErrorMessageBox("Unhandled error. Application will crash.");
         }
     }
 }
