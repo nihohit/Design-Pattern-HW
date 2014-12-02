@@ -35,13 +35,13 @@ namespace Ex01_FacebookPage
                         OnFacebookApplicationLogicManagerChanged();
                     }
                 }
-                
+
             }
         }
-        
+
         protected virtual void OnBeforeFacebookApplicationLogicManagerChanging()
         {
-            
+
         }
 
         protected virtual void OnFacebookApplicationLogicManagerChanged()
@@ -76,26 +76,26 @@ namespace Ex01_FacebookPage
                     {
                         this.TopLevelControl.FetchAndShowWaitWindow(
                         () => { FacebookApplicationLogicManager.FetchFromFacebook(pair.Key, pair.Value); }, pair.Key.ToString());
-                        
+
                     }
                 }
-                
+
             }
             catch (Exception exception)
             {
                 if (exception is NullReferenceException && FacebookApplicationLogicManager == null)
                 {
-                    exception = new NullReferenceException("Cannot fetch becouse facebook manager was not set in the page", exception);
+                    exception = new NullReferenceException("Cannot fetch because facebook manager was not set in the page", exception);
                 }
                 exception.ShowErrorMessageBox();
-            } 
+            }
         }
 
         protected virtual Dictionary<eFetchOption, int> GetFetchTypesToFetchWithTheirCollectionLimit()
         {
             return null;
         }
-        
+
         protected virtual void m_FacebookApplicationManager_AfterFetch(object i_Sender, FetchEventArgs e)
         {
             throw new NotImplementedException("Should override method");

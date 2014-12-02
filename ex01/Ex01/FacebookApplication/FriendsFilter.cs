@@ -11,7 +11,7 @@ namespace FacebookApplication
         #region members
 
         private readonly Dictionary<string, User> r_FilteredFriends;
-        
+
         #endregion members
         #region Properties
         #region IFriendFilter
@@ -65,7 +65,7 @@ namespace FacebookApplication
                                 User friend in friendsThatThrowExceptionWhenTriedToFilterByErrorMessage[errorMessage])
                             {
                                 ErrorString += string.Format(
-                                    "{0} could not be filtered becouse: {1}{2}",
+                                    "{0} could not be filtered because: {1}{2}",
                                     friend.Name,
                                     errorMessage,
                                     Environment.NewLine);
@@ -94,5 +94,5 @@ namespace FacebookApplication
             return displayString.Trim().Trim(',');
         }
         #endregion public methods
-}
+    }
 }
