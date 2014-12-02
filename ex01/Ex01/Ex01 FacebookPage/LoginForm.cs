@@ -7,7 +7,7 @@ namespace Ex01_FacebookPage
 {
     public partial class LoginForm : Form
     {
-        private const string k_AppId = "540432436034011"; // "501103096696183";
+        private const string k_AppId = "540432436034011"; // "501103096696183"; //facebook stop supporting manage_friendlists, so cannot get members with our application any more
 
         private readonly IFacebookApplicationManager r_FacebookApplicationManager;
 

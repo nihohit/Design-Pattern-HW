@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Facebook;
 using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
 
@@ -104,8 +105,16 @@ namespace FacebookApplication
         private void fetchFriendLists(User i_LoggedInUser)
         {
             FacebookObjectCollection<FriendList> friendsListsForLoggedinUser = i_LoggedInUser.FriendLists;
+            string friendsListWithFetchError = null;
             foreach (FriendList friendList in friendsListsForLoggedinUser)
             {
+                if (friendList.Members == null)
+                {
+                    friendsListWithFetchError = friendsListWithFetchError ?? "Could not Fetch members of:";
+                    friendsListWithFetchError += " " + friendList.Name + ",";
+                    continue;
+                }
+
                 r_FriendsListsForLoggedinUser.Add(friendList.Id, friendList);
                 foreach (User friend in friendList.Members)
                 {
@@ -118,6 +127,11 @@ namespace FacebookApplication
 
                     friendsListsIds.Add(friendList.Id);
                 }
+            }
+
+            if (friendsListWithFetchError != null)
+            {
+                throw new FacebookApiException(friendsListWithFetchError);
             }
         }
 

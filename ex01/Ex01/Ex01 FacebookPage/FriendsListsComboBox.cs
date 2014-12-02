@@ -55,10 +55,13 @@ namespace Ex01_FacebookPage
             int i = 0;
             foreach (FriendList friendList in friendsListsAsArray)
             {
-                string friendListDisplayName = friendList.Name;
-                m_FriendLists[i] = friendList;
-                comboBox.Items.Insert(i, friendListDisplayName);
-                i++;
+                if (friendList.Members.Count > 0)
+                {
+                    string friendListDisplayName = friendList.Name;
+                    m_FriendLists[i] = friendList;
+                    comboBox.Items.Insert(i, friendListDisplayName);
+                    i++;
+                }
             }
         }
 
