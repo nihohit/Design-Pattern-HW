@@ -48,12 +48,7 @@ namespace FacebookApplication
         {
             fetchFriends(i_LoggedInUser);
         }
-
-        protected override void ThrowShouldFetchFromFacebookException()
-        {
-            ThrowShouldFetchFromFacebookException("friends");
-        }
-
+        
         #endregion override protected methods
         #region private methods
 

@@ -17,7 +17,7 @@ namespace FacebookApplication
         #region IFacebookApplicationManager
         public event EventHandler AfterReset;
         public event EventHandler AfterLoggin;
-        public event EventHandler AfterFetch;
+        public event EventHandler<FetchEventArgs> AfterFetch;
         public event EventHandler FriendFilterAdded
         {
             add { LoggedInUserFriendsFiltersManager.FilterAdded += value; }
@@ -73,8 +73,7 @@ namespace FacebookApplication
             {
                 throw new FacebookOAuthException(result.ErrorMessage);
             }
-
-            FetchFromFacebook();
+            
             if (AfterLoggin != null)
             {
                 AfterLoggin(this, new EventArgs());
@@ -91,19 +90,39 @@ namespace FacebookApplication
             }
         }
 
-        public void FetchFromFacebook()
+        public void FetchFromFacebook(eFetchOption i_FetchOption)
         {
-            int friendsCollectionLimit = 1000;
+            FetchFromFacebook(i_FetchOption, -1);
+        }
+
+        public void FetchFromFacebook(eFetchOption i_FetchOption, int i_CollectionLimit)
+        {
             int origCollectionLimit = FacebookService.s_CollectionLimit;
-            FacebookService.s_CollectionLimit = friendsCollectionLimit;
-            LoggedInUserFriendsFetcher.Fetch(LoggedInUser);
-            LoggedInUserFriendListsManager.Fetch(LoggedInUser);
-            LoggedInUserFriendsFiltersManager.Fetch(LoggedInUser);
+            if (i_CollectionLimit > 0)
+            {
+                FacebookService.s_CollectionLimit = i_CollectionLimit;
+            }
+
+            if (i_FetchOption == eFetchOption.All || i_FetchOption == eFetchOption.Friends)
+            {
+                LoggedInUserFriendsFetcher.Fetch(LoggedInUser);
+                LoggedInUserFriendsFiltersManager.Fetch(LoggedInUser);
+            }
+
+            if (i_FetchOption == eFetchOption.All || i_FetchOption == eFetchOption.FriendsLists)
+            {
+                LoggedInUserFriendListsManager.Fetch(LoggedInUser);
+            }
+
+            if (i_FetchOption == eFetchOption.All || i_FetchOption == eFetchOption.Inbox)
+            {
+                LoggedInUserInboxManager.Fetch(LoggedInUser);
+            }
+
             FacebookService.s_CollectionLimit = origCollectionLimit;
-            LoggedInUserInboxManager.Fetch(LoggedInUser);
             if (AfterFetch != null)
             {
-                AfterFetch(this, new EventArgs());
+                AfterFetch(this, new FetchEventArgs(i_FetchOption, i_CollectionLimit));
             }
         }
 

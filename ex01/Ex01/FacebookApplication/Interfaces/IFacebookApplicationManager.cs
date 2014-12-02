@@ -11,7 +11,7 @@ namespace FacebookApplication.Interfaces
         #region Events
         event EventHandler AfterReset;
         event EventHandler AfterLoggin;
-        event EventHandler AfterFetch;
+        event EventHandler<FetchEventArgs> AfterFetch;
         event EventHandler FriendFilterAdded;
         event EventHandler FriendFilterRemoved;
         #endregion Events
@@ -25,7 +25,8 @@ namespace FacebookApplication.Interfaces
         #region methods
         void LoginUser(string i_AppId, params string[] i_Permissions);
         void Reset();
-        void FetchFromFacebook();
+        void FetchFromFacebook(eFetchOption i_FetchOption);
+        void FetchFromFacebook(eFetchOption i_FetchOption, int i_CollectionLimit);
         IEnumerable<User> GetFriends(string i_FilterId, out string o_UsersThatCantBeFilteredMessage);
         IEnumerable<FriendList> GetRelevantFriendsListsForLoggedinUser();
         FriendList CreateFriendList(string i_Name, IEnumerable<User> i_Members);
@@ -42,5 +43,14 @@ namespace FacebookApplication.Interfaces
         IEnumerable<string> GetFriendFiltersIds();
 
         #endregion methods
+    }
+
+    public enum eFetchOption
+    {
+        All,
+        Friends,
+        FriendsLists,
+        Inbox,
+
     }
 }

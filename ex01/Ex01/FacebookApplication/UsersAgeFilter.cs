@@ -1,4 +1,5 @@
-﻿using FacebookApplication.Interfaces;
+﻿using Facebook;
+using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,11 @@ namespace FacebookApplication
 
         protected override bool MantianConstrain(User i_User)
         {
+            if (i_User.Birthday == null)
+            {
+                throw new FacebookOAuthException("Cannot see user age");
+            }
+
             DateTime birthday = DateTime.Parse(i_User.Birthday);
             int age = DateTime.Today.Year - birthday.Year;
             return (MinAge <= age) && (age <= MaxAge);

@@ -19,10 +19,25 @@ namespace Ex01_FacebookPage
         {
             InitializeComponent();
         }
-
-        protected override void m_FacebookApplicationManager_AfterFetch(object i_Sender, EventArgs e)
+        
+        protected override Dictionary<eFetchOption, int> GetFetchTypesToFetchWithTheirCollectionLimit()
         {
-            friendsFiltersComboBox.UpdateFriendsFilters();
+            Dictionary<eFetchOption, int> typesAndCollectionLimit = new Dictionary<eFetchOption, int>();
+            typesAndCollectionLimit.Add(FacebookApplication.Interfaces.eFetchOption.Friends, Extensions.sc_FriendsCollectionLimit);
+            return typesAndCollectionLimit;
+        }
+
+        protected override void m_FacebookApplicationManager_AfterFetch(object i_Sender, FetchEventArgs e)
+        {
+            if (e.r_FetchOption == eFetchOption.All || e.r_FetchOption == eFetchOption.Friends)
+            {
+                friendsFiltersComboBox.UpdateFriendsFilters();
+            }
+
+            if (e.r_FetchOption == eFetchOption.All || e.r_FetchOption == eFetchOption.Friends)
+            {
+                friendsFiltersComboBox.UpdateFriendsFilters();
+            }
         }
 
         protected override void OnFacebookApplicationLogicManagerChanged()
@@ -32,14 +47,15 @@ namespace Ex01_FacebookPage
 
         private void friendsFiltersComboBox_FriendsFiltersChanged(object sender, EventArgs e)
         {
-            string usersThatCantBeFilteredMessage;
-            IEnumerable<User> friends = FacebookApplicationLogicManager.GetFriends(friendsFiltersComboBox.SelectedFriendFilterId,
-                out usersThatCantBeFilteredMessage);
-            friendsListBox.UpdateFriends(friends);
-
+            updateFriendsList();
         }
 
         private void friendsListBox_CurrentFriendChanged(object sender, EventArgs e)
+        {
+            updatePictureBoxFriend();
+        }
+
+        private void updatePictureBoxFriend()
         {
             User selectedFriend = friendsListBox.SelectedFriend;
             if (selectedFriend != null && selectedFriend.PictureNormalURL != null)
@@ -49,6 +65,18 @@ namespace Ex01_FacebookPage
             else
             {
                 pictureBoxFriend.Image = pictureBoxFriend.ErrorImage;
+            }
+        }
+
+        private void updateFriendsList()
+        {
+            string usersThatCantBeFilteredMessage = null;
+            IEnumerable<User> friends = FacebookApplicationLogicManager.GetFriends(friendsFiltersComboBox.SelectedFriendFilterId,
+                out usersThatCantBeFilteredMessage);
+            friendsListBox.UpdateFriends(friends);
+            if (!string.IsNullOrEmpty(usersThatCantBeFilteredMessage))
+            {
+               usersThatCantBeFilteredMessage.ShowLongMessageBox();
             }
         }
     }

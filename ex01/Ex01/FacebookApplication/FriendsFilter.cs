@@ -20,6 +20,11 @@ namespace FacebookApplication
 
         public string Name { get; private set; }
 
+        public IEnumerable<string> FilterdFriendsIds
+        {
+            get { return r_FilteredFriends.Keys; }
+        }
+
         public IEnumerable<User> FilterdFriends
         {
             get { return r_FilteredFriends.Values; }
@@ -33,7 +38,7 @@ namespace FacebookApplication
         #endregion Properties
         #region constructor
 
-        public FriendsFilter(string i_Name, IEnumerable<IUsersFilter> i_UserFilters)
+        public FriendsFilter(string i_Name, IEnumerable<IUsersFilter> i_UserFilters, IEnumerable<User> i_Friends)
         {
             Name = i_Name;
             UserFilters = i_UserFilters;
@@ -47,26 +52,30 @@ namespace FacebookApplication
             r_FilteredFriends.Clear();
             ErrorString = string.Empty;
             IEnumerable<User> friends = i_Friends;
-            foreach (IUsersFilter filter in UserFilters)
+            if (i_Friends != null && i_Friends.Count() > 1)
             {
-                Dictionary<string, FacebookObjectCollection<User>> friendsThatThrowExceptionWhenTriedToFilterByErrorMessage;
-                friends = filter.FilterUsers(friends, out friendsThatThrowExceptionWhenTriedToFilterByErrorMessage);
-                if (friendsThatThrowExceptionWhenTriedToFilterByErrorMessage != null)
+                foreach (IUsersFilter filter in UserFilters)
                 {
-                    foreach (string errorMessage in friendsThatThrowExceptionWhenTriedToFilterByErrorMessage.Keys)
+                    Dictionary<string, FacebookObjectCollection<User>> friendsThatThrowExceptionWhenTriedToFilterByErrorMessage;
+                    friends = filter.FilterUsers(friends, out friendsThatThrowExceptionWhenTriedToFilterByErrorMessage);
+                    if (friendsThatThrowExceptionWhenTriedToFilterByErrorMessage != null)
                     {
-                        foreach (User friend in friendsThatThrowExceptionWhenTriedToFilterByErrorMessage[errorMessage])
+                        foreach (string errorMessage in friendsThatThrowExceptionWhenTriedToFilterByErrorMessage.Keys)
                         {
-                            ErrorString += string.Format("{0} could not be filtered becouse: {1}{2}", friend.Name,
-                                errorMessage, Environment.NewLine);
+                            foreach (User friend in friendsThatThrowExceptionWhenTriedToFilterByErrorMessage[errorMessage])
+                            {
+                                ErrorString += string.Format("{0} could not be filtered becouse: {1}{2}", friend.Name,
+                                    errorMessage, Environment.NewLine);
+                            }
                         }
                     }
                 }
+                foreach (User friend in friends)
+                {
+                    r_FilteredFriends.Add(friend.Id, friend);
+                }
             }
-            foreach (User friend in friends)
-            {
-                r_FilteredFriends.Add(friend.Id, friend);
-            }
+            
             ErrorString = ErrorString.Trim(Environment.NewLine.ToCharArray());
         }
 

@@ -11,8 +11,8 @@ namespace FacebookApplication
     {
         #region members
 
-        private Dictionary<string, FriendList> m_friendsListsForLoggedinUser;
-        private Dictionary<string, List<string>> m_friendsListsByFriendsIds;
+        private readonly Dictionary<string, FriendList> r_friendsListsForLoggedinUser;
+        private readonly Dictionary<string, List<string>> r_friendsListsByFriendsIds;
 
         #endregion members
 
@@ -25,7 +25,8 @@ namespace FacebookApplication
         public FriendListsManager(TimeSpan? i_MinIntervalBetweenFetchActions)
             : base(i_MinIntervalBetweenFetchActions)
         {
-            reset();
+            r_friendsListsByFriendsIds = new Dictionary<string, List<string>>();
+            r_friendsListsForLoggedinUser = new Dictionary<string, FriendList>();
         }
 
         #endregion constructor
@@ -36,23 +37,13 @@ namespace FacebookApplication
 
         public IEnumerable<FriendList> GetRelevantFriendsListsForLoggedinUser()
         {
-            if (m_friendsListsForLoggedinUser == null)
-            {
-                ThrowShouldFetchFromFacebookException();
-            }
-
-            return m_friendsListsForLoggedinUser.Values;
+            return r_friendsListsForLoggedinUser.Values;;
         }
 
         public IEnumerable<string> GetAllFriendListsWhichFriendBelongsTo(string i_FriendId)
         {
-            if (m_friendsListsByFriendsIds == null)
-            {
-                ThrowShouldFetchFromFacebookException();
-            }
-
             List<string> friendsListsFriendBelongsToIds;
-            if (!m_friendsListsByFriendsIds.TryGetValue(i_FriendId, out friendsListsFriendBelongsToIds))
+            if (!r_friendsListsByFriendsIds.TryGetValue(i_FriendId, out friendsListsFriendBelongsToIds))
             {
                 friendsListsFriendBelongsToIds = new List<string>(0);
             }
@@ -100,37 +91,30 @@ namespace FacebookApplication
         {
             fetchFriendLists(i_LoggedInUser);
         }
-
-        protected override void ThrowShouldFetchFromFacebookException()
-        {
-            ThrowShouldFetchFromFacebookException("friends lists");
-        }
-
+        
         #endregion override protected methods
 
         #region private methods
 
         private void reset()
         {
-            m_friendsListsByFriendsIds = null;
-            m_friendsListsForLoggedinUser = null;
+            r_friendsListsByFriendsIds.Clear();
+            r_friendsListsForLoggedinUser.Clear();
         }
 
         private void fetchFriendLists(User i_LoggedInUser)
         {
             FacebookObjectCollection<FriendList> friendsListsForLoggedinUser = i_LoggedInUser.FriendLists;
-            m_friendsListsForLoggedinUser = new Dictionary<string, FriendList>();
-            m_friendsListsByFriendsIds = new Dictionary<string, List<string>>();
             foreach (FriendList friendList in friendsListsForLoggedinUser)
             {
-                m_friendsListsForLoggedinUser.Add(friendList.Id, friendList);
+                r_friendsListsForLoggedinUser.Add(friendList.Id, friendList);
                 foreach (User friend in friendList.Members)
                 {
                     List<string> friendsListsIds;
-                    if (!m_friendsListsByFriendsIds.TryGetValue(friend.Id, out friendsListsIds))
+                    if (!r_friendsListsByFriendsIds.TryGetValue(friend.Id, out friendsListsIds))
                     {
                         friendsListsIds = new List<string>();
-                        m_friendsListsByFriendsIds.Add(friend.Id, friendsListsIds);
+                        r_friendsListsByFriendsIds.Add(friend.Id, friendsListsIds);
                     }
 
                     friendsListsIds.Add(friendList.Id);

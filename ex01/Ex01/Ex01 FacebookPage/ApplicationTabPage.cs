@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FacebookApplication.Interfaces;
+using FacebookApplication;
 
 namespace Ex01_FacebookPage
 {
@@ -37,7 +38,7 @@ namespace Ex01_FacebookPage
                 
             }
         }
-
+        
         protected virtual void OnBeforeFacebookApplicationLogicManagerChanging()
         {
             
@@ -62,7 +63,23 @@ namespace Ex01_FacebookPage
         {
             try
             {
-                FacebookApplicationLogicManager.FetchFromFacebook();
+                Dictionary<eFetchOption, int> typesToFetchWithTheirCollectionLimit =
+                    GetFetchTypesToFetchWithTheirCollectionLimit();
+                if (typesToFetchWithTheirCollectionLimit == null || typesToFetchWithTheirCollectionLimit.Count < 1)
+                {
+                    this.TopLevelControl.FetchAndShowWaitWindow(
+                        () => { FacebookApplicationLogicManager.FetchFromFacebook(eFetchOption.All, -1); });
+                }
+                else
+                {
+                    foreach (KeyValuePair<eFetchOption, int> pair in typesToFetchWithTheirCollectionLimit)
+                    {
+                        this.TopLevelControl.FetchAndShowWaitWindow(
+                        () => { FacebookApplicationLogicManager.FetchFromFacebook(pair.Key, pair.Value); }, pair.Key.ToString());
+                        
+                    }
+                }
+                
             }
             catch (Exception exception)
             {
@@ -74,7 +91,12 @@ namespace Ex01_FacebookPage
             } 
         }
 
-        protected virtual void m_FacebookApplicationManager_AfterFetch(object i_Sender, EventArgs e)
+        protected virtual Dictionary<eFetchOption, int> GetFetchTypesToFetchWithTheirCollectionLimit()
+        {
+            return null;
+        }
+        
+        protected virtual void m_FacebookApplicationManager_AfterFetch(object i_Sender, FetchEventArgs e)
         {
             throw new NotImplementedException("Should override method");
         }

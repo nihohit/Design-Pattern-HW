@@ -37,13 +37,18 @@ namespace Ex01_FacebookPage
         {
             m_Items = i_Items == null ? null : new T[i_Items.Count()];
             r_ListBoxItemClearMethod();
-            int i = 0;
-            foreach (T item in i_Items)
+            if (i_Items != null)
             {
-                m_Items[i] = item;
-                r_ListBoxAddItemMethod(i, item);//listBox.Items.Insert(i, getInboxThreadDisplayName(inboxThread));
-                i++;
+                int i = 0;
+                foreach (T item in i_Items)
+                {
+                    m_Items[i] = item;
+                    r_ListBoxAddItemMethod(i, item); //listBox.Items.Insert(i, getInboxThreadDisplayName(inboxThread));
+                    i++;
+                }
             }
+
+            ChangeSelectedItem(-1);
         }
     }
 }

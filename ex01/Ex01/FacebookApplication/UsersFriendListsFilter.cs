@@ -17,7 +17,6 @@ namespace FacebookApplication
         #region Properties
 
         public FriendList FriendListBelongsTo { get; private set; }
-        public int MaxAge { get; private set; }
 
         #endregion Properties
 

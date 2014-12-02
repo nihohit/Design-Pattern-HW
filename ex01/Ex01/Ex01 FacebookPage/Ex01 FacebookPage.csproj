@@ -38,6 +38,8 @@
     <Reference Include="FbGraphApiWrapper">
       <HintPath>..\FbGraphApiWrapper.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -57,6 +59,12 @@
       <DependentUpon>ApplicationTabPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
+    <Compile Include="FetchingFromFacebookForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FetchingFromFacebookForm.Designer.cs">
+      <DependentUpon>FetchingFromFacebookForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FriendsFiltersComboBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -106,6 +114,12 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LongMessageToUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LongMessageToUserForm.Designer.cs">
+      <DependentUpon>LongMessageToUserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MessagesListBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -122,6 +136,9 @@
     </Compile>
     <EmbeddedResource Include="ApplicationTabPage.resx">
       <DependentUpon>ApplicationTabPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FetchingFromFacebookForm.resx">
+      <DependentUpon>FetchingFromFacebookForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FriendsFiltersComboBox.resx">
       <DependentUpon>FriendsFiltersComboBox.cs</DependentUpon>
@@ -146,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LongMessageToUserForm.resx">
+      <DependentUpon>LongMessageToUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MessagesListBox.resx">
       <DependentUpon>MessagesListBox.cs</DependentUpon>
@@ -176,9 +196,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FacebookApplication\FacebookApplicationLogic.csproj">
+    <ProjectReference Include="..\FacebookApplication\FacebookApplication.csproj">
       <Project>{b17e1111-fb46-432a-b8d0-58ec892583f6}</Project>
-      <Name>FacebookApplicationLogic</Name>
+      <Name>FacebookApplication</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

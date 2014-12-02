@@ -13,8 +13,7 @@ namespace FacebookApplication
 
         private readonly Dictionary<string, IFriendFilter> r_Filters;
         private readonly IFriendsFetcher r_FriendsFetcher;
-        private int m_CurrentId;
-
+        
         #endregion members
         #region events (IFriendsFiltersManager)
 
@@ -43,7 +42,6 @@ namespace FacebookApplication
         {
             r_FriendsFetcher = i_FriendsFetcher;
             r_Filters = new Dictionary<string, IFriendFilter>();
-            m_CurrentId = 0;
         }
 
         #endregion constructor
@@ -51,16 +49,24 @@ namespace FacebookApplication
         #region IFriendFilterManager
         public string AddFriendFilter(string i_Name, IEnumerable<IUsersFilter> i_UserFilters)
         {
-            IFriendFilter filter = new FriendsFilter(i_Name, i_UserFilters);
-            string filterId = m_CurrentId.ToString();
-            r_Filters.Add(filterId, filter);
-            m_CurrentId++;
+            if (string.IsNullOrEmpty(i_Name))
+            {
+                throw new ArgumentException("Filter name not valid");
+            }
+
+            if (r_Filters.ContainsKey(i_Name))
+            {
+                throw new ArgumentException("Filter with this name already exist");
+            }
+
+            IFriendFilter filter = new FriendsFilter(i_Name, i_UserFilters, r_FriendsFetcher.GetFriends());
+            r_Filters.Add(i_Name, filter);
             if (FilterAdded != null)
             {
                 FilterAdded(this, new EventArgs());
             }
 
-            return filterId;
+            return i_Name;
         }
 
         public bool RemoveFriendFilter(string i_FilterId)
@@ -96,11 +102,6 @@ namespace FacebookApplication
             {
                 friendFilter.UpdateFriends(friends);
             }
-        }
-
-        protected override void ThrowShouldFetchFromFacebookException()
-        {
-            ThrowShouldFetchFromFacebookException("friends");
         }
 
         #endregion override protected methods

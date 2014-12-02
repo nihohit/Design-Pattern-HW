@@ -1,16 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex01 FacebookApplicationGui", "Ex01 FacebookPage\Ex01 FacebookApplicationGui.csproj", "{25802257-F556-480C-B13A-262D6BC8A252}"
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex01 FacebookPage", "Ex01 FacebookPage\Ex01 FacebookPage.csproj", "{25802257-F556-480C-B13A-262D6BC8A252}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacebookApplicationLogic", "FacebookApplication\FacebookApplicationLogic.csproj", "{B17E1111-FB46-432A-B8D0-58EC892583F6}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3E8B8C34-3CE1-433A-8518-8604E6E32788}"
-	ProjectSection(SolutionItems) = preProject
-		A15 Ex01 ShacharLangbeheim 066679580 KerenorBerkers 043464072.docx = A15 Ex01 ShacharLangbeheim 066679580 KerenorBerkers 043464072.docx
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacebookApplication", "FacebookApplication\FacebookApplication.csproj", "{B17E1111-FB46-432A-B8D0-58EC892583F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

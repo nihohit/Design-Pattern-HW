@@ -14,6 +14,7 @@ namespace FacebookApplication.Interfaces
         string Name { get; }
         IEnumerable<IUsersFilter> UserFilters { get; }
         IEnumerable<User> FilterdFriends { get; }
+        IEnumerable<string> FilterdFriendsIds { get; }
         string ErrorString { get; }
 
         #endregion properties

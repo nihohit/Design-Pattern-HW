@@ -13,7 +13,6 @@ namespace Ex01_FacebookPage
 {
     public partial class FriendsListsComboBox : UserControl
     {
-        private const string c_AllFriendsOptionDisplayName = "All friends";
         private FriendList[] m_FriendLists;
         public event EventHandler FriendsListChanged;
         public FriendList SelectedFriendList { get; private set; }
@@ -53,16 +52,11 @@ namespace Ex01_FacebookPage
             int i = 0;
             foreach (FriendList friendList in i_FriendsLists)
             {
-                string friendListDisplayName = friendList.Name == c_AllFriendsOptionDisplayName
-                    ? c_AllFriendsOptionDisplayName + " (friends list)"
-                    : friendList.Name;
+                string friendListDisplayName = friendList.Name;
                 m_FriendLists[i] = friendList;
                 comboBox.Items.Insert(i, friendListDisplayName);
                 i++;
             }
-
-            comboBox.SelectedIndex = comboBox.Items.Add(c_AllFriendsOptionDisplayName);
-            comboBox.SelectedItem = c_AllFriendsOptionDisplayName;
         }
 
         private void comboBox_SelectedIndexChanged(object sender, EventArgs e)

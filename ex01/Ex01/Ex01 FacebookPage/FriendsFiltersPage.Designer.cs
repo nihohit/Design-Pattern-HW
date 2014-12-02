@@ -42,7 +42,7 @@
             this.maxAgeNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.minAgeNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.friendsListsComboBox = new Ex01_FacebookPage.FriendsListsComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.filterNameTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.maxAgeNumericUpDown)).BeginInit();
@@ -201,12 +201,12 @@
             this.friendsListsComboBox.Size = new System.Drawing.Size(265, 21);
             this.friendsListsComboBox.TabIndex = 66;
             // 
-            // textBox1
+            // filterNameTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(79, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(265, 20);
-            this.textBox1.TabIndex = 67;
+            this.filterNameTextBox.Location = new System.Drawing.Point(79, 6);
+            this.filterNameTextBox.Name = "filterNameTextBox";
+            this.filterNameTextBox.Size = new System.Drawing.Size(265, 20);
+            this.filterNameTextBox.TabIndex = 67;
             // 
             // label5
             // 
@@ -222,7 +222,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.filterNameTextBox);
             this.Controls.Add(this.friendsListsComboBox);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.addFilterButton);
@@ -242,7 +242,7 @@
             this.Controls.SetChildIndex(this.addFilterButton, 0);
             this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.friendsListsComboBox, 0);
-            this.Controls.SetChildIndex(this.textBox1, 0);
+            this.Controls.SetChildIndex(this.filterNameTextBox, 0);
             this.Controls.SetChildIndex(this.label5, 0);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -269,7 +269,7 @@
         private System.Windows.Forms.NumericUpDown maxAgeNumericUpDown;
         private System.Windows.Forms.NumericUpDown minAgeNumericUpDown;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox filterNameTextBox;
         private System.Windows.Forms.Label label5;
     }
 }

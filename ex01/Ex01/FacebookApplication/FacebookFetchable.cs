@@ -76,18 +76,6 @@ namespace FacebookApplication
         #endregion public methods
         #region protected methods
 
-        protected virtual void ThrowShouldFetchFromFacebookException()
-        {
-            ThrowShouldFetchFromFacebookException(null);
-        }
-
-        protected void ThrowShouldFetchFromFacebookException(string i_NameOfSpecificInfoToFetch)
-        {
-            string msg = string.Format("Need to fetch {0} from facebook",
-                string.IsNullOrEmpty(i_NameOfSpecificInfoToFetch) ? " information" : i_NameOfSpecificInfoToFetch);
-            throw new ApplicationException(msg);
-        }
-
         protected virtual void OnFetched(EventArgs e)
         {
             if (Fetched != null)

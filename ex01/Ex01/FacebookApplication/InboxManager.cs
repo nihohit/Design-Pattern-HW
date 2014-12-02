@@ -88,12 +88,7 @@ namespace FacebookApplication
         {
             fetchInbox(i_LoggedInUser);
         }
-
-        protected override void ThrowShouldFetchFromFacebookException()
-        {
-            ThrowShouldFetchFromFacebookException("mailbox");
-        }
-
+        
         #endregion override protected methods
         #region private methods
 
@@ -104,7 +99,7 @@ namespace FacebookApplication
             {
                 foreach (User friend in inboxThread.To)
                 {
-                    if (i_FriendFilter.FilterdFriends.Contains(friend))
+                    if (i_FriendFilter.FilterdFriendsIds.Contains(friend.Id))
                     {
                         friendListInboxThreads.Add(inboxThread);
                         break;
