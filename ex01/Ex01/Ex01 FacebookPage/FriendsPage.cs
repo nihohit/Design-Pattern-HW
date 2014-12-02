@@ -15,19 +15,26 @@ namespace Ex01_FacebookPage
 
         protected override Dictionary<eFetchOption, int> GetFetchTypesToFetchWithTheirCollectionLimit()
         {
-            Dictionary<eFetchOption, int> typesAndCollectionLimit = new Dictionary<eFetchOption, int>();
-            typesAndCollectionLimit.Add(FacebookApplication.Interfaces.eFetchOption.Friends, Extensions.sc_FriendsCollectionLimit);
+            Dictionary<eFetchOption, int> typesAndCollectionLimit = new Dictionary<eFetchOption, int>
+                                                                        {
+                                                                            {
+                                                                                eFetchOption
+                                                                                .Friends,
+                                                                                Extensions
+                                                                                .k_FriendsCollectionLimit
+                                                                            }
+                                                                        };
             return typesAndCollectionLimit;
         }
 
-        protected override void m_FacebookApplicationManager_AfterFetch(object sender, FetchEventArgs e)
+        protected override void facebookApplicationManager_AfterFetch(object sender, FetchEventArgs e)
         {
-            if (e.r_FetchOption == eFetchOption.All || e.r_FetchOption == eFetchOption.Friends)
+            if (e.FetchOption == eFetchOption.All || e.FetchOption == eFetchOption.Friends)
             {
                 friendsFiltersComboBox.UpdateFriendsFilters();
             }
 
-            if (e.r_FetchOption == eFetchOption.All || e.r_FetchOption == eFetchOption.Friends)
+            if (e.FetchOption == eFetchOption.All || e.FetchOption == eFetchOption.Friends)
             {
                 friendsFiltersComboBox.UpdateFriendsFilters();
             }
@@ -64,12 +71,13 @@ namespace Ex01_FacebookPage
         private void updateFriendsList()
         {
             string usersThatCantBeFilteredMessage = null;
-            IEnumerable<User> friends = FacebookApplicationLogicManager.GetFriends(friendsFiltersComboBox.SelectedFriendFilterId,
+            IEnumerable<User> friends = FacebookApplicationLogicManager.GetFriends(
+                friendsFiltersComboBox.SelectedFriendFilterId,
                 out usersThatCantBeFilteredMessage);
             friendsListBox.UpdateFriends(friends);
             if (!string.IsNullOrEmpty(usersThatCantBeFilteredMessage))
             {
-               usersThatCantBeFilteredMessage.ShowLongMessageBox();
+                usersThatCantBeFilteredMessage.ShowLongMessageBox();
             }
         }
     }

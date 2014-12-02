@@ -36,7 +36,7 @@ namespace FacebookApplication
         #endregion Properties
         #region constructor
 
-        public FriendsFilter(string i_Name, IEnumerable<IUsersFilter> i_UserFilters, IEnumerable<User> i_Friends)
+        public FriendsFilter(string i_Name, IEnumerable<IUsersFilter> i_UserFilters)
         {
             Name = i_Name;
             UserFilters = i_UserFilters;

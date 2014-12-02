@@ -13,17 +13,17 @@ namespace Ex01_FacebookPage
         {
             InitializeComponent();
         }
-        
+
         protected override Dictionary<eFetchOption, int> GetFetchTypesToFetchWithTheirCollectionLimit()
         {
             Dictionary<eFetchOption, int> typesAndCollectionLimit = new Dictionary<eFetchOption, int>();
-            typesAndCollectionLimit.Add(FacebookApplication.Interfaces.eFetchOption.FriendsLists, -1);
+            typesAndCollectionLimit.Add(eFetchOption.FriendsLists, -1);
             return typesAndCollectionLimit;
         }
-        
-        protected override void m_FacebookApplicationManager_AfterFetch(object i_Sender, FetchEventArgs e)
+
+        protected override void facebookApplicationManager_AfterFetch(object sender, FetchEventArgs e)
         {
-            if (e.r_FetchOption == eFetchOption.All || e.r_FetchOption == eFetchOption.FriendsLists)
+            if (e.FetchOption == eFetchOption.All || e.FetchOption == eFetchOption.FriendsLists)
             {
                 friendsListsComboBox.UpdateFriendsLists(
                     FacebookApplicationLogicManager.GetRelevantFriendsListsForLoggedinUser());
@@ -59,29 +59,29 @@ namespace Ex01_FacebookPage
         {
             if (string.IsNullOrEmpty(filterNameTextBox.Text))
             {
-                MessageBox.Show("Enter filter name");
+                MessageBox.Show(@"Enter filter name");
             }
             else if (friendsListCheckBox.Checked && friendsListsComboBox.SelectedFriendList == null)
             {
-                MessageBox.Show("Choose Friend List. (if empty fetch from facebook with the link on page buttom)");
+                MessageBox.Show(@"Choose Friend List. (if empty fetch from facebook with the link on page buttom)");
             }
             else if (!friendsListCheckBox.Checked && !genderCheckBox.Checked && !ageCheckBox.Checked)
             {
-                MessageBox.Show("Choose a filter");
+                MessageBox.Show(@"Choose a filter");
             }
             else
             {
                 User.eGender gender;
-                Enum.TryParse<User.eGender>(genderComboBox.SelectedValue.ToString(), out gender);
+                Enum.TryParse(genderComboBox.SelectedValue.ToString(), out gender);
                 try
                 {
                     FacebookApplicationLogicManager.AddFriendFilter(
-                        filterNameTextBox.Text, 
-                        genderCheckBox.Checked, 
+                        filterNameTextBox.Text,
+                        genderCheckBox.Checked,
                         gender,
                         ageCheckBox.Checked,
                         decimal.ToInt32(minAgeNumericUpDown.Value),
-                        decimal.ToInt32(maxAgeNumericUpDown.Value), 
+                        decimal.ToInt32(maxAgeNumericUpDown.Value),
                         friendsListCheckBox.Checked,
                         friendsListsComboBox.SelectedFriendList);
                 }

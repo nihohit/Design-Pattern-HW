@@ -37,7 +37,7 @@ namespace FacebookApplication
 
         public IEnumerable<FriendList> GetRelevantFriendsListsForLoggedinUser()
         {
-            return r_FriendsListsForLoggedinUser.Values;;
+            return r_FriendsListsForLoggedinUser.Values;
         }
 
         public IEnumerable<string> GetAllFriendListsWhichFriendBelongsTo(string i_FriendId)

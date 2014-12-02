@@ -5,13 +5,14 @@ namespace FacebookApplication
 {
     public class FetchEventArgs : EventArgs
     {
-        public readonly eFetchOption r_FetchOption;
-        public readonly int r_CollectionLimit;
+        public eFetchOption FetchOption { get; private set; }
+
+        public int CollectionLimit { get; private set; }
 
         public FetchEventArgs(eFetchOption i_FetchOption, int i_CollectionLimit)
         {
-            r_FetchOption = i_FetchOption;
-            r_CollectionLimit = i_CollectionLimit;
+            this.FetchOption = i_FetchOption;
+            this.CollectionLimit = i_CollectionLimit;
         }
     }
 }

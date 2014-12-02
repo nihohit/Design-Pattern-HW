@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using FacebookWrapper.ObjectModel;
 using FacebookApplication.Interfaces;
 
 namespace Ex01_FacebookPage
 {
     public partial class FriendsFiltersComboBox : UserControl
     {
-        private const string c_AllFriendsOptionDisplayName = "All friends";
+        private const string k_AllFriendsOptionDisplayName = "All friends";
         private readonly ListItemsContainer<string> r_ListItemsContainer;
+
         public event EventHandler FriendsFiltersChanged
         {
             add { r_ListItemsContainer.CurrentItemChanged += value; }
@@ -24,7 +19,7 @@ namespace Ex01_FacebookPage
 
         public string SelectedFriendFilterId
         {
-            get { return r_ListItemsContainer.SelectedItem == c_AllFriendsOptionDisplayName ? null : r_ListItemsContainer.SelectedItem; }
+            get { return r_ListItemsContainer.SelectedItem == k_AllFriendsOptionDisplayName ? null : r_ListItemsContainer.SelectedItem; }
         }
 
         public string LabelText
@@ -33,6 +28,7 @@ namespace Ex01_FacebookPage
             {
                 return friendsListsLabel.Text;
             }
+
             set
             {
                 friendsListsLabel.Text = value;
@@ -40,12 +36,16 @@ namespace Ex01_FacebookPage
                 comboBox.Location =
                     new System.Drawing.Point(
                         friendsListsLabel.Location.X + friendsListsLabel.Size.Width +
-                        Math.Max(friendsListsLabel.Margin.Right, comboBox.Margin.Left), comboBox.Location.Y);
+                        Math.Max(
+                            friendsListsLabel.Margin.Right,
+                            comboBox.Margin.Left),
+                        comboBox.Location.Y);
                 comboBox.Size = new Size(comboBox.Size.Width + origComboBoxLocationX - comboBox.Location.X, comboBox.Size.Height);
             }
         }
 
         private IFacebookApplicationManager m_FacebookApplicationManager;
+
         public IFacebookApplicationManager FacebookApplicationLogicManager
         {
             get { return m_FacebookApplicationManager; }
@@ -79,8 +79,13 @@ namespace Ex01_FacebookPage
             UpdateFriendsFilters();
         }
 
-
-        public bool AllFriendsSelected { get { return SelectedFriendFilterId == null; } }
+        public bool AllFriendsSelected
+        {
+            get
+            {
+                return SelectedFriendFilterId == null;
+            }
+        }
 
         public FriendsFiltersComboBox()
         {
@@ -92,10 +97,10 @@ namespace Ex01_FacebookPage
         {
             comboBox.Items.Clear();
             List<string> filters = new List<string>();
-            filters.Add(c_AllFriendsOptionDisplayName);
+            filters.Add(k_AllFriendsOptionDisplayName);
             filters.AddRange(FacebookApplicationLogicManager.GetFriendFiltersIds());
             r_ListItemsContainer.UpdateItems(filters);
-            comboBox.SelectedItem = c_AllFriendsOptionDisplayName;
+            comboBox.SelectedItem = k_AllFriendsOptionDisplayName;
         }
 
         private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -103,12 +108,12 @@ namespace Ex01_FacebookPage
             r_ListItemsContainer.ChangeSelectedItem(comboBox.SelectedIndex);
         }
 
-        private void insertFriendFilter(int i, string i_FilterId)
+        private void insertFriendFilter(int i_Index, string i_FilterId)
         {
-            string filterName = (i_FilterId == c_AllFriendsOptionDisplayName)
+            string filterName = (i_FilterId == k_AllFriendsOptionDisplayName)
                 ? i_FilterId
                 : FacebookApplicationLogicManager.GetFriendFilterName(i_FilterId);
-            comboBox.Items.Insert(i, filterName);
+            comboBox.Items.Insert(i_Index, filterName);
         }
     }
 }

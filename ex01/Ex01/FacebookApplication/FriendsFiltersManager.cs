@@ -11,7 +11,7 @@ namespace FacebookApplication
 
         private readonly Dictionary<string, IFriendFilter> r_Filters;
         private readonly IFriendsFetcher r_FriendsFetcher;
-        
+
         #endregion members
         #region events (IFriendsFiltersManager)
 
@@ -57,7 +57,7 @@ namespace FacebookApplication
                 throw new ArgumentException("Filter with this name already exist");
             }
 
-            IFriendFilter filter = new FriendsFilter(i_Name, i_UserFilters, r_FriendsFetcher.GetFriends());
+            IFriendFilter filter = new FriendsFilter(i_Name, i_UserFilters);
             r_Filters.Add(i_Name, filter);
             if (FilterAdded != null)
             {

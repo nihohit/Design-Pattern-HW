@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FacebookApplication.Interfaces;
 using FacebookApplication;
@@ -15,6 +9,7 @@ namespace Ex01_FacebookPage
     public partial class ApplicationTabPage : UserControl
     {
         private IFacebookApplicationManager m_FacebookApplicationManager;
+
         public IFacebookApplicationManager FacebookApplicationLogicManager
         {
             get { return m_FacebookApplicationManager; }
@@ -24,29 +19,26 @@ namespace Ex01_FacebookPage
                 {
                     if (m_FacebookApplicationManager != null)
                     {
-                        m_FacebookApplicationManager.AfterFetch -= m_FacebookApplicationManager_AfterFetch;
+                        m_FacebookApplicationManager.AfterFetch -= this.facebookApplicationManager_AfterFetch;
                         OnBeforeFacebookApplicationLogicManagerChanging();
                     }
 
                     m_FacebookApplicationManager = value;
                     if (m_FacebookApplicationManager != null)
                     {
-                        m_FacebookApplicationManager.AfterFetch += m_FacebookApplicationManager_AfterFetch;
+                        m_FacebookApplicationManager.AfterFetch += this.facebookApplicationManager_AfterFetch;
                         OnFacebookApplicationLogicManagerChanged();
                     }
                 }
-
             }
         }
 
         protected virtual void OnBeforeFacebookApplicationLogicManagerChanging()
         {
-
         }
 
         protected virtual void OnFacebookApplicationLogicManagerChanged()
         {
-
         }
 
         public ApplicationTabPage()
@@ -74,12 +66,11 @@ namespace Ex01_FacebookPage
                 {
                     foreach (KeyValuePair<eFetchOption, int> pair in typesToFetchWithTheirCollectionLimit)
                     {
+                        KeyValuePair<eFetchOption, int> pair1 = pair;
                         this.TopLevelControl.FetchAndShowWaitWindow(
-                        () => { FacebookApplicationLogicManager.FetchFromFacebook(pair.Key, pair.Value); }, pair.Key.ToString());
-
+                        () => this.FacebookApplicationLogicManager.FetchFromFacebook(pair1.Key, pair1.Value), pair.Key.ToString());
                     }
                 }
-
             }
             catch (Exception exception)
             {
@@ -87,6 +78,7 @@ namespace Ex01_FacebookPage
                 {
                     exception = new NullReferenceException("Cannot fetch because facebook manager was not set in the page", exception);
                 }
+
                 exception.ShowErrorMessageBox();
             }
         }
@@ -96,7 +88,7 @@ namespace Ex01_FacebookPage
             return null;
         }
 
-        protected virtual void m_FacebookApplicationManager_AfterFetch(object i_Sender, FetchEventArgs e)
+        protected virtual void facebookApplicationManager_AfterFetch(object i_Sender, FetchEventArgs e)
         {
             throw new NotImplementedException("Should override method");
         }

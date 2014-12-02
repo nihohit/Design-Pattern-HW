@@ -45,7 +45,7 @@
             this.lastInterestDate.Name = "lastInterestDate";
             this.lastInterestDate.Size = new System.Drawing.Size(102, 22);
             this.lastInterestDate.TabIndex = 0;
-            this.lastInterestDate.Value = new System.DateTime(2014, 11, 30, 16, 12, 33, 0);
+            this.lastInterestDate.Value = new System.DateTime(2014, 12, 1, 0, 0, 0, 0);
             // 
             // interestedFreindsBox
             // 
@@ -133,13 +133,6 @@
             this.Controls.Add(this.lastInterestDate);
             this.Name = "InterestPage";
             this.Size = new System.Drawing.Size(548, 405);
-            this.Controls.SetChildIndex(this.lastInterestDate, 0);
-            this.Controls.SetChildIndex(this.interestedFreindsBox, 0);
-            this.Controls.SetChildIndex(this.fromLabel, 0);
-            this.Controls.SetChildIndex(this.amountBox, 0);
-            this.Controls.SetChildIndex(this.itemAmountToCheck, 0);
-            this.Controls.SetChildIndex(this.warningLabel, 0);
-            this.Controls.SetChildIndex(this.checkButton, 0);
             ((System.ComponentModel.ISupportInitialize)(this.itemAmountToCheck)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

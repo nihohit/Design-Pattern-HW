@@ -6,9 +6,10 @@ namespace Ex01_FacebookPage
 {
     public class ListItemsContainer<T> where T : class
     {
+        private readonly Action<int, T> r_ListBoxAddItemMethod;
+        private readonly Action r_ListBoxItemClearMethod;
+
         private T[] m_Items;
-        private Action<int, T> r_ListBoxAddItemMethod;
-        private Action r_ListBoxItemClearMethod;
 
         public event EventHandler CurrentItemChanged;
 
@@ -38,14 +39,14 @@ namespace Ex01_FacebookPage
             r_ListBoxItemClearMethod();
             if (i_Items != null)
             {
-            int i = 0;
-            foreach (T item in i_Items)
-            {
-                m_Items[i] = item;
-                r_ListBoxAddItemMethod(i, item);//listBox.Items.Insert(i, getInboxThreadDisplayName(inboxThread));
-                i++;
+                int i = 0;
+                foreach (T item in i_Items)
+                {
+                    m_Items[i] = item;
+                    r_ListBoxAddItemMethod(i, item);//listBox.Items.Insert(i, getInboxThreadDisplayName(inboxThread));
+                    i++;
+                }
             }
-        }
 
             ChangeSelectedItem(-1);
         }

@@ -16,16 +16,16 @@ namespace Ex01_FacebookPage
         protected override Dictionary<eFetchOption, int> GetFetchTypesToFetchWithTheirCollectionLimit()
         {
             Dictionary<eFetchOption, int> typesAndCollectionLimit = new Dictionary<eFetchOption, int>();
-            typesAndCollectionLimit.Add(FacebookApplication.Interfaces.eFetchOption.Friends, Extensions.sc_FriendsCollectionLimit);
-            typesAndCollectionLimit.Add(FacebookApplication.Interfaces.eFetchOption.Inbox, -1);
+            typesAndCollectionLimit.Add(eFetchOption.Friends, Extensions.k_FriendsCollectionLimit);
+            typesAndCollectionLimit.Add(eFetchOption.Inbox, -1);
             return typesAndCollectionLimit;
         }
 
-        protected override void m_FacebookApplicationManager_AfterFetch(object i_Sender, FetchEventArgs e)
+        protected override void facebookApplicationManager_AfterFetch(object sender, FetchEventArgs e)
         {
-            if (e.r_FetchOption == eFetchOption.All || e.r_FetchOption == eFetchOption.Friends || e.r_FetchOption == eFetchOption.Inbox)
+            if (e.FetchOption == eFetchOption.All || e.FetchOption == eFetchOption.Friends || e.FetchOption == eFetchOption.Inbox)
             {
-                if (e.r_FetchOption != eFetchOption.Inbox)
+                if (e.FetchOption != eFetchOption.Inbox)
                 {
                     friendsFiltersCombo.UpdateFriendsFilters();
                 }
