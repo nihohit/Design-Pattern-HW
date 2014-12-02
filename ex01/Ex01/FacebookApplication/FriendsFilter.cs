@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
 
@@ -51,21 +52,24 @@ namespace FacebookApplication
             IEnumerable<User> friends = i_Friends;
             if (i_Friends != null && i_Friends.Count() > 1)
             {
-            foreach (IUsersFilter filter in UserFilters)
-            {
-                Dictionary<string, FacebookObjectCollection<User>> friendsThatThrowExceptionWhenTriedToFilterByErrorMessage;
-                friends = filter.FilterUsers(friends, out friendsThatThrowExceptionWhenTriedToFilterByErrorMessage);
-                if (friendsThatThrowExceptionWhenTriedToFilterByErrorMessage != null)
+                foreach (IUsersFilter filter in UserFilters)
                 {
-                    foreach (string errorMessage in friendsThatThrowExceptionWhenTriedToFilterByErrorMessage.Keys)
+                    Dictionary<string, FacebookObjectCollection<User>>
+                        friendsThatThrowExceptionWhenTriedToFilterByErrorMessage;
+                    friends = filter.FilterUsers(friends, out friendsThatThrowExceptionWhenTriedToFilterByErrorMessage);
+                    if (friendsThatThrowExceptionWhenTriedToFilterByErrorMessage != null)
                     {
-                        foreach (User friend in friendsThatThrowExceptionWhenTriedToFilterByErrorMessage[errorMessage])
+                        foreach (string errorMessage in friendsThatThrowExceptionWhenTriedToFilterByErrorMessage.Keys)
                         {
-                            ErrorString += string.Format(
-                                "{0} could not be filtered becouse: {1}{2}",
-                                friend.Name,
-                                errorMessage,
-                                Environment.NewLine);
+                            foreach (
+                                User friend in friendsThatThrowExceptionWhenTriedToFilterByErrorMessage[errorMessage])
+                            {
+                                ErrorString += string.Format(
+                                    "{0} could not be filtered becouse: {1}{2}",
+                                    friend.Name,
+                                    errorMessage,
+                                    Environment.NewLine);
+                            }
                         }
                     }
                 }
@@ -75,6 +79,7 @@ namespace FacebookApplication
             {
                 r_FilteredFriends.Add(friend.Id, friend);
             }
+
             ErrorString = ErrorString.Trim(Environment.NewLine.ToCharArray());
         }
 

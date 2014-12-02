@@ -34,13 +34,12 @@ namespace Ex01_FacebookPage
 
         public void UpdateItems(IEnumerable<T> i_Items)
         {
-            var itemsAsArray = i_Items as T[] ?? i_Items.ToArray();
-            m_Items = i_Items == null ? null : new T[itemsAsArray.Count()];
+            m_Items = i_Items == null ? null : new T[i_Items.Count()];
             r_ListBoxItemClearMethod();
             if (i_Items != null)
             {
             int i = 0;
-            foreach (T item in itemsAsArray)
+            foreach (T item in i_Items)
             {
                 m_Items[i] = item;
                 r_ListBoxAddItemMethod(i, item);//listBox.Items.Insert(i, getInboxThreadDisplayName(inboxThread));

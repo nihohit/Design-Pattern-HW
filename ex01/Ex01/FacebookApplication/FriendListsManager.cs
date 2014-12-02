@@ -9,9 +9,9 @@ namespace FacebookApplication
     {
         #region members
 
-        private readonly Dictionary<string, FriendList> r_friendsListsForLoggedinUser;
+        private readonly Dictionary<string, FriendList> r_FriendsListsForLoggedinUser;
 
-        private readonly Dictionary<string, List<string>> r_friendsListsByFriendsIds;
+        private readonly Dictionary<string, List<string>> r_FriendsListsByFriendsIds;
 
         #endregion members
 
@@ -24,8 +24,8 @@ namespace FacebookApplication
         public FriendListsManager(TimeSpan? i_MinIntervalBetweenFetchActions)
             : base(i_MinIntervalBetweenFetchActions)
         {
-            r_friendsListsByFriendsIds = new Dictionary<string, List<string>>();
-            r_friendsListsForLoggedinUser = new Dictionary<string, FriendList>();
+            r_FriendsListsByFriendsIds = new Dictionary<string, List<string>>();
+            r_FriendsListsForLoggedinUser = new Dictionary<string, FriendList>();
         }
 
         #endregion constructor
@@ -36,18 +36,13 @@ namespace FacebookApplication
 
         public IEnumerable<FriendList> GetRelevantFriendsListsForLoggedinUser()
         {
-            return r_friendsListsForLoggedinUser.Values;;
+            return r_FriendsListsForLoggedinUser.Values;;
         }
 
         public IEnumerable<string> GetAllFriendListsWhichFriendBelongsTo(string i_FriendId)
         {
-            if (m_friendsListsByFriendsIds == null)
-            {
-                ThrowShouldFetchFromFacebookException();
-            }
-
             List<string> friendsListsFriendBelongsToIds;
-            if (!m_FriendsListsByFriendsIds.TryGetValue(i_FriendId, out friendsListsFriendBelongsToIds))
+            if (!r_FriendsListsByFriendsIds.TryGetValue(i_FriendId, out friendsListsFriendBelongsToIds))
             {
                 friendsListsFriendBelongsToIds = new List<string>(0);
             }
@@ -102,8 +97,8 @@ namespace FacebookApplication
 
         private void reset()
         {
-            m_FriendsListsByFriendsIds = null;
-            m_FriendsListsForLoggedinUser = null;
+            r_FriendsListsByFriendsIds.Clear();
+            r_FriendsListsForLoggedinUser.Clear();
         }
 
         private void fetchFriendLists(User i_LoggedInUser)

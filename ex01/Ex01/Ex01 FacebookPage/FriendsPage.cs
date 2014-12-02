@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
+using FacebookApplication.Interfaces;
+using FacebookApplication;
 
 namespace Ex01_FacebookPage
 {

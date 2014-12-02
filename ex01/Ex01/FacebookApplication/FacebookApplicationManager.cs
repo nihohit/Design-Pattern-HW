@@ -180,6 +180,11 @@ namespace FacebookApplication
 
         public string AddFriendFilter(string i_Name, bool i_FilterGender, User.eGender i_Gender, bool i_FilterAge, int i_MinAge, int i_MaxAge, bool i_FilterByFriendList, FriendList i_FriendList)
         {
+            if (string.IsNullOrEmpty(i_Name))
+            {
+                throw new ArgumentException("Missing filter name");
+            }
+
             List<IUsersFilter> usersFilters = new List<IUsersFilter>();
             if (!(i_FilterAge || i_FilterByFriendList || i_FilterGender))
             {

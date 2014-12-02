@@ -1,5 +1,7 @@
-﻿using FacebookApplication.Interfaces;
+﻿using Facebook;
+using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
+using System;
 
 namespace FacebookApplication
 {
