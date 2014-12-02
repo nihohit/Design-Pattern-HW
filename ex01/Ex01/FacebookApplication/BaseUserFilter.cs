@@ -1,28 +1,18 @@
-﻿using FacebookApplication.Interfaces;
-using FacebookWrapper.ObjectModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using FacebookApplication.Interfaces;
+using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication
 {
     public abstract class BaseUserFilter : IUsersFilter
     {
-
-        #region constructor
-
-        public BaseUserFilter()
-        {
-        }
-
-        #endregion constructor
-
         #region public methods
 
         #region IUsersFilter
 
-        public IEnumerable<User> FilterUsers(IEnumerable<User> i_Users,
+        public IEnumerable<User> FilterUsers(
+            IEnumerable<User> i_Users,
             out Dictionary<string, FacebookObjectCollection<User>> o_UsersThatThrowException)
         {
             o_UsersThatThrowException = new Dictionary<string, FacebookObjectCollection<User>>();
@@ -59,7 +49,7 @@ namespace FacebookApplication
         #endregion public methods
 
         #region protected methods
-        
+
         protected abstract bool MantianConstrain(User i_User);
 
         #endregion

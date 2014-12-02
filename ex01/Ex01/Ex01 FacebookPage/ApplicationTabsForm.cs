@@ -1,6 +1,5 @@
 ﻿ ﻿using System;
 using System.Windows.Forms;
-
 using FacebookWrapper.ObjectModel;
 using FacebookApplication.Interfaces;
 
@@ -33,7 +32,7 @@ namespace Ex01_FacebookPage
             friendsFiltersPage.FacebookApplicationLogicManager = i_FacebookApplicationManager;
         }
 
-        private void tabIndexChanged(object sender, EventArgs e)
+        private void tab_IndexChanged(object sender, EventArgs e)
         {
             switch (myProfile.SelectedTab.TabIndex)
             {
@@ -48,29 +47,29 @@ namespace Ex01_FacebookPage
             }
         }
 
-        private void commentButtonClick(object sender, EventArgs e)
+        private void commentButton_Click(object sender, EventArgs e)
         {
             this.r_BasicfacebookFunctionality.Comment();
         }
 
-        private void likeButtonClick(object sender, EventArgs e)
+        private void likeButton_Click(object sender, EventArgs e)
         {
             this.r_BasicfacebookFunctionality.Like();
         }
 
-        private void activityFeedSelectedIndexChanged(object sender, EventArgs e)
+        private void activityFeed_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.r_BasicfacebookFunctionality.ActivitySelected();
         }
 
-        private void commentFeedSelectedIndexChanged(object sender, EventArgs e)
+        private void commentFeed_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.r_BasicfacebookFunctionality.CommentSelected();
         }
 
         #endregion
 
-        private void buttonSetStatusClick(object sender, EventArgs e)
+        private void buttonSetStatus_Click(object sender, EventArgs e)
         {
             r_User.PostStatus(statusTextBox.Text);
             statusTextBox.Clear();
@@ -88,12 +87,6 @@ namespace Ex01_FacebookPage
             this.r_BasicfacebookFunctionality.FetchPosts(r_User.Posts);
         }
 
-
-
-        #region newsfeed
-
-        #region Newsfeed
-
         private void switchToNewsFeed()
         {
             this.r_BasicfacebookFunctionality.ContextChanged(
@@ -104,8 +97,5 @@ namespace Ex01_FacebookPage
                 newsFeedCommentButton);
             this.r_BasicfacebookFunctionality.FetchPosts(r_User.NewsFeed);
         }
-
-        #endregion
-        #endregion
     }
 }

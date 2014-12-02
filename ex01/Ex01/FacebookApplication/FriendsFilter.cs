@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
 using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
 
@@ -31,8 +28,8 @@ namespace FacebookApplication
         }
 
         public IEnumerable<IUsersFilter> UserFilters { get; private set; }
-        public string ErrorString { get; private set; }
 
+        public string ErrorString { get; private set; }
 
         #endregion IFriendFilter
         #endregion Properties
@@ -54,49 +51,43 @@ namespace FacebookApplication
             IEnumerable<User> friends = i_Friends;
             if (i_Friends != null && i_Friends.Count() > 1)
             {
-                foreach (IUsersFilter filter in UserFilters)
+            foreach (IUsersFilter filter in UserFilters)
+            {
+                Dictionary<string, FacebookObjectCollection<User>> friendsThatThrowExceptionWhenTriedToFilterByErrorMessage;
+                friends = filter.FilterUsers(friends, out friendsThatThrowExceptionWhenTriedToFilterByErrorMessage);
+                if (friendsThatThrowExceptionWhenTriedToFilterByErrorMessage != null)
                 {
-                    Dictionary<string, FacebookObjectCollection<User>> friendsThatThrowExceptionWhenTriedToFilterByErrorMessage;
-                    friends = filter.FilterUsers(friends, out friendsThatThrowExceptionWhenTriedToFilterByErrorMessage);
-                    if (friendsThatThrowExceptionWhenTriedToFilterByErrorMessage != null)
+                    foreach (string errorMessage in friendsThatThrowExceptionWhenTriedToFilterByErrorMessage.Keys)
                     {
-                        foreach (string errorMessage in friendsThatThrowExceptionWhenTriedToFilterByErrorMessage.Keys)
+                        foreach (User friend in friendsThatThrowExceptionWhenTriedToFilterByErrorMessage[errorMessage])
                         {
-                            foreach (User friend in friendsThatThrowExceptionWhenTriedToFilterByErrorMessage[errorMessage])
-                            {
-                                ErrorString += string.Format("{0} could not be filtered becouse: {1}{2}", friend.Name,
-                                    errorMessage, Environment.NewLine);
-                            }
+                            ErrorString += string.Format(
+                                "{0} could not be filtered becouse: {1}{2}",
+                                friend.Name,
+                                errorMessage,
+                                Environment.NewLine);
                         }
                     }
                 }
-                foreach (User friend in friends)
-                {
-                    r_FilteredFriends.Add(friend.Id, friend);
-                }
             }
-            
+
+            foreach (User friend in friends)
+            {
+                r_FilteredFriends.Add(friend.Id, friend);
+            }
             ErrorString = ErrorString.Trim(Environment.NewLine.ToCharArray());
         }
 
-
         public override string ToString()
         {
-            String displayString = string.Format("'{0}': ", Name);
+            string displayString = string.Format("'{0}': ", Name);
             foreach (IUsersFilter userFilter in UserFilters)
             {
-                displayString += userFilter.ToString() + ", ";
+                displayString += userFilter + ", ";
             }
 
             return displayString.Trim().Trim(',');
         }
         #endregion public methods
-        #region private methods
-
-
-        #endregion private methods
-
-        
-
 }
 }

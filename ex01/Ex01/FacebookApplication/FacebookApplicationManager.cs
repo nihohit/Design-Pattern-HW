@@ -1,11 +1,9 @@
-﻿using Facebook;
+﻿using System;
+using System.Collections.Generic;
+using Facebook;
 using FacebookApplication.Interfaces;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace FacebookApplication
 {
@@ -15,14 +13,19 @@ namespace FacebookApplication
         #endregion members
         #region Events
         #region IFacebookApplicationManager
+
         public event EventHandler AfterReset;
+
         public event EventHandler AfterLoggin;
+
         public event EventHandler<FetchEventArgs> AfterFetch;
+
         public event EventHandler FriendFilterAdded
         {
             add { LoggedInUserFriendsFiltersManager.FilterAdded += value; }
             remove { LoggedInUserFriendsFiltersManager.FilterAdded -= value; }
         }
+
         public event EventHandler FriendFilterRemoved
         {
             add { LoggedInUserFriendsFiltersManager.FilterRmoved += value; }
@@ -67,13 +70,12 @@ namespace FacebookApplication
             if (!string.IsNullOrEmpty(result.AccessToken))
             {
                 LoggedInUser = result.LoggedInUser;
-
             }
             else
             {
                 throw new FacebookOAuthException(result.ErrorMessage);
             }
-            
+
             if (AfterLoggin != null)
             {
                 AfterLoggin(this, new EventArgs());
@@ -105,13 +107,13 @@ namespace FacebookApplication
 
             if (i_FetchOption == eFetchOption.All || i_FetchOption == eFetchOption.Friends)
             {
-                LoggedInUserFriendsFetcher.Fetch(LoggedInUser);
+            LoggedInUserFriendsFetcher.Fetch(LoggedInUser);
                 LoggedInUserFriendsFiltersManager.Fetch(LoggedInUser);
             }
 
             if (i_FetchOption == eFetchOption.All || i_FetchOption == eFetchOption.FriendsLists)
             {
-                LoggedInUserFriendListsManager.Fetch(LoggedInUser);
+            LoggedInUserFriendListsManager.Fetch(LoggedInUser);
             }
 
             if (i_FetchOption == eFetchOption.All || i_FetchOption == eFetchOption.Inbox)
@@ -135,6 +137,7 @@ namespace FacebookApplication
         {
             return LoggedInUserFriendListsManager.GetRelevantFriendsListsForLoggedinUser();
         }
+
         public string GetInboxThreadFriendsNames(string i_InboxThreadId)
         {
             return LoggedInUserInboxManager.GetInboxThreadFriendsNames(i_InboxThreadId);
@@ -227,8 +230,5 @@ namespace FacebookApplication
         #endregion public methods
         #region private methods
         #endregion private methods
-
-
-        
     }
 }

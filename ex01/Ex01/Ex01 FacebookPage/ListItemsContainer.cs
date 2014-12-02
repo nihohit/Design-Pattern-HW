@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Ex01_FacebookPage
 {
@@ -12,7 +9,9 @@ namespace Ex01_FacebookPage
         private T[] m_Items;
         private Action<int, T> r_ListBoxAddItemMethod;
         private Action r_ListBoxItemClearMethod;
+
         public event EventHandler CurrentItemChanged;
+
         public T SelectedItem { get; private set; }
 
         public ListItemsContainer(Action<int, T> i_ListBoxAddItemMethod, Action i_ListBoxItemClearMethod)
@@ -23,9 +22,9 @@ namespace Ex01_FacebookPage
             m_Items = null;
         }
 
-        public void ChangeSelectedItem(int selectedIndex)
+        public void ChangeSelectedItem(int i_SelectedIndex)
         {
-            SelectedItem = (selectedIndex == -1) ? null : m_Items[selectedIndex];
+            SelectedItem = (i_SelectedIndex == -1) ? null : m_Items[i_SelectedIndex];
 
             if (CurrentItemChanged != null)
             {
@@ -35,18 +34,19 @@ namespace Ex01_FacebookPage
 
         public void UpdateItems(IEnumerable<T> i_Items)
         {
-            m_Items = i_Items == null ? null : new T[i_Items.Count()];
+            var itemsAsArray = i_Items as T[] ?? i_Items.ToArray();
+            m_Items = i_Items == null ? null : new T[itemsAsArray.Count()];
             r_ListBoxItemClearMethod();
             if (i_Items != null)
             {
-                int i = 0;
-                foreach (T item in i_Items)
-                {
-                    m_Items[i] = item;
-                    r_ListBoxAddItemMethod(i, item); //listBox.Items.Insert(i, getInboxThreadDisplayName(inboxThread));
-                    i++;
-                }
+            int i = 0;
+            foreach (T item in itemsAsArray)
+            {
+                m_Items[i] = item;
+                r_ListBoxAddItemMethod(i, item);//listBox.Items.Insert(i, getInboxThreadDisplayName(inboxThread));
+                i++;
             }
+        }
 
             ChangeSelectedItem(-1);
         }

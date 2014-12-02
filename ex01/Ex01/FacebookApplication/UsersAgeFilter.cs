@@ -1,10 +1,5 @@
-﻿using Facebook;
-using FacebookApplication.Interfaces;
+﻿using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace FacebookApplication
 {
@@ -17,6 +12,7 @@ namespace FacebookApplication
         #region Properties
 
         public int MinAge { get; private set; }
+
         public int MaxAge { get; private set; }
 
         #endregion Properties

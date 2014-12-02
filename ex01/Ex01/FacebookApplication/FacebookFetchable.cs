@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
 
@@ -25,8 +22,11 @@ namespace FacebookApplication
         #region IFetchable
 
         public DateTime? FetchedTime { get; private set; }
+
         public User UserLoggedInWhenFetched { get; private set; }
+
         public TimeSpan? MinIntervalBetweenFetchActions { get; private set; }
+
         public bool ForcedFetch
         {
             get

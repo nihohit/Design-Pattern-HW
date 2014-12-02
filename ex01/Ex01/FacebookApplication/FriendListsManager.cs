@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
 
@@ -12,6 +10,7 @@ namespace FacebookApplication
         #region members
 
         private readonly Dictionary<string, FriendList> r_friendsListsForLoggedinUser;
+
         private readonly Dictionary<string, List<string>> r_friendsListsByFriendsIds;
 
         #endregion members
@@ -42,8 +41,13 @@ namespace FacebookApplication
 
         public IEnumerable<string> GetAllFriendListsWhichFriendBelongsTo(string i_FriendId)
         {
+            if (m_friendsListsByFriendsIds == null)
+            {
+                ThrowShouldFetchFromFacebookException();
+            }
+
             List<string> friendsListsFriendBelongsToIds;
-            if (!r_friendsListsByFriendsIds.TryGetValue(i_FriendId, out friendsListsFriendBelongsToIds))
+            if (!m_FriendsListsByFriendsIds.TryGetValue(i_FriendId, out friendsListsFriendBelongsToIds))
             {
                 friendsListsFriendBelongsToIds = new List<string>(0);
             }
@@ -91,15 +95,15 @@ namespace FacebookApplication
         {
             fetchFriendLists(i_LoggedInUser);
         }
-        
+
         #endregion override protected methods
 
         #region private methods
 
         private void reset()
         {
-            r_friendsListsByFriendsIds.Clear();
-            r_friendsListsForLoggedinUser.Clear();
+            m_FriendsListsByFriendsIds = null;
+            m_FriendsListsForLoggedinUser = null;
         }
 
         private void fetchFriendLists(User i_LoggedInUser)
@@ -107,14 +111,14 @@ namespace FacebookApplication
             FacebookObjectCollection<FriendList> friendsListsForLoggedinUser = i_LoggedInUser.FriendLists;
             foreach (FriendList friendList in friendsListsForLoggedinUser)
             {
-                r_friendsListsForLoggedinUser.Add(friendList.Id, friendList);
+                r_FriendsListsForLoggedinUser.Add(friendList.Id, friendList);
                 foreach (User friend in friendList.Members)
                 {
                     List<string> friendsListsIds;
-                    if (!r_friendsListsByFriendsIds.TryGetValue(friend.Id, out friendsListsIds))
+                    if (!r_FriendsListsByFriendsIds.TryGetValue(friend.Id, out friendsListsIds))
                     {
                         friendsListsIds = new List<string>();
-                        r_friendsListsByFriendsIds.Add(friend.Id, friendsListsIds);
+                        r_FriendsListsByFriendsIds.Add(friend.Id, friendsListsIds);
                     }
 
                     friendsListsIds.Add(friendList.Id);

@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using FacebookApplication;
-using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
+using FacebookApplication.Interfaces;
 
 namespace Ex01_FacebookPage
 {
@@ -19,21 +10,12 @@ namespace Ex01_FacebookPage
         {
             InitializeComponent();
         }
-        
-        protected override Dictionary<eFetchOption, int> GetFetchTypesToFetchWithTheirCollectionLimit()
+
+        protected override void m_FacebookApplicationManager_AfterFetch(object i_Sender, EventArgs e)
         {
-            Dictionary<eFetchOption, int> typesAndCollectionLimit = new Dictionary<eFetchOption, int>();
-            typesAndCollectionLimit.Add(FacebookApplication.Interfaces.eFetchOption.FriendsLists, -1);
-            return typesAndCollectionLimit;
+            friendsListsComboBox.UpdateFriendsLists(
+                FacebookApplicationLogicManager.GetRelevantFriendsListsForLoggedinUser());
         }
-        
-        protected override void m_FacebookApplicationManager_AfterFetch(object i_Sender, FetchEventArgs e)
-        {
-            if (e.r_FetchOption == eFetchOption.All || e.r_FetchOption == eFetchOption.FriendsLists)
-            {
-                friendsListsComboBox.UpdateFriendsLists(
-                    FacebookApplicationLogicManager.GetRelevantFriendsListsForLoggedinUser());
-            }
         }
 
         protected override void OnFacebookApplicationLogicManagerChanged()
@@ -77,13 +59,18 @@ namespace Ex01_FacebookPage
             }
             else
             {
-                User.eGender gender;
-                Enum.TryParse<User.eGender>(genderComboBox.SelectedValue.ToString(), out gender);
+            User.eGender gender;
+            Enum.TryParse<User.eGender>(genderComboBox.SelectedValue.ToString(), out gender);
                 try
                 {
-                    FacebookApplicationLogicManager.AddFriendFilter(filterNameTextBox.Text, genderCheckBox.Checked, gender,
-                    ageCheckBox.Checked, Decimal.ToInt32(minAgeNumericUpDown.Value),
-                    Decimal.ToInt32(maxAgeNumericUpDown.Value), friendsListCheckBox.Checked,
+                    FacebookApplicationLogicManager.AddFriendFilter(
+                    filterNameTextBox.Text, 
+                    genderCheckBox.Checked, 
+                    gender,
+                    ageCheckBox.Checked, 
+                    decimal.ToInt32(minAgeNumericUpDown.Value),
+                    decimal.ToInt32(maxAgeNumericUpDown.Value), 
+                    friendsListCheckBox.Checked,
                     friendsListsComboBox.SelectedFriendList);
                 }
                 catch (Exception exception)

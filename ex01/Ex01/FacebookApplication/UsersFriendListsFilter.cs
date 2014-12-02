@@ -1,9 +1,7 @@
-﻿using FacebookApplication.Interfaces;
-using FacebookWrapper.ObjectModel;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using FacebookApplication.Interfaces;
+using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication
 {
@@ -37,7 +35,7 @@ namespace FacebookApplication
             IEnumerable<string> frindBelongToListsIds =
                 r_FriendListsManager.GetAllFriendListsWhichFriendBelongsTo(i_User.Id);
 
-            return r_FriendListsManager.GetAllFriendListsWhichFriendBelongsTo(i_User.Id).Contains(FriendListBelongsTo.Id);
+            return frindBelongToListsIds.Contains(FriendListBelongsTo.Id);
         }
         
         public override string ToString()

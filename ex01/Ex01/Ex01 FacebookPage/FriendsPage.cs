@@ -1,14 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using FacebookApplication;
-using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
 
 namespace Ex01_FacebookPage
@@ -19,7 +10,7 @@ namespace Ex01_FacebookPage
         {
             InitializeComponent();
         }
-        
+
         protected override Dictionary<eFetchOption, int> GetFetchTypesToFetchWithTheirCollectionLimit()
         {
             Dictionary<eFetchOption, int> typesAndCollectionLimit = new Dictionary<eFetchOption, int>();
@@ -27,7 +18,7 @@ namespace Ex01_FacebookPage
             return typesAndCollectionLimit;
         }
 
-        protected override void m_FacebookApplicationManager_AfterFetch(object i_Sender, FetchEventArgs e)
+        protected override void m_FacebookApplicationManager_AfterFetch(object sender, FetchEventArgs e)
         {
             if (e.r_FetchOption == eFetchOption.All || e.r_FetchOption == eFetchOption.Friends)
             {

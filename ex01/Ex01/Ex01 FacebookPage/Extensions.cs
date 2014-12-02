@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Windows.Forms;
-using FacebookApplication;
-
-using FacebookWrapper.ObjectModel;
+﻿using System.Windows.Forms;
 
 namespace Ex01_FacebookPage
 {
