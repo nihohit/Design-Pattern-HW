@@ -79,9 +79,11 @@ namespace Ex01_FacebookPage
                         filterNameTextBox.Text,
                         genderCheckBox.Checked,
                         gender,
+                        addIfGenderNotVisible.Checked,
                         ageCheckBox.Checked,
                         decimal.ToInt32(minAgeNumericUpDown.Value),
                         decimal.ToInt32(maxAgeNumericUpDown.Value),
+                        addIfAgeNotVisible.Checked,
                         friendsListCheckBox.Checked,
                         friendsListsComboBox.SelectedFriendList);
                 }
