@@ -61,15 +61,11 @@ namespace FacebookApplication
                     {
                         foreach (string errorMessage in friendsThatThrowExceptionWhenTriedToFilterByErrorMessage.Keys)
                         {
-                            foreach (
-                                User friend in friendsThatThrowExceptionWhenTriedToFilterByErrorMessage[errorMessage])
-                            {
-                                ErrorString += string.Format(
-                                    "{0} could not be filtered because: {1}{2}",
-                                    friend.Name,
-                                    errorMessage,
-                                    Environment.NewLine);
-                            }
+                            ErrorString += string.Format(
+                                "{0} couldn't be filtered because: {1}{2}",
+                                string.Join(", ", friendsThatThrowExceptionWhenTriedToFilterByErrorMessage[errorMessage].Select(i_User => i_User.Name)),
+                                errorMessage,
+                                Environment.NewLine);
                         }
                     }
                 }
