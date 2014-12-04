@@ -40,7 +40,7 @@
             this.comboBox.FormattingEnabled = true;
             this.comboBox.Location = new System.Drawing.Point(38, 0);
             this.comboBox.Name = "comboBox";
-            this.comboBox.Size = new System.Drawing.Size(141, 21);
+            this.comboBox.Size = new System.Drawing.Size(142, 21);
             this.comboBox.TabIndex = 60;
             this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             // 
