@@ -71,9 +71,19 @@ namespace Ex01_FacebookPage
 
         private void buttonSetStatus_Click(object sender, EventArgs e)
         {
-            r_User.PostStatus(statusTextBox.Text);
-            statusTextBox.Clear();
-            this.r_BasicfacebookFunctionality.FetchPosts(r_User.Posts);
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(statusTextBox.Text))
+                {
+                    r_User.PostStatus(statusTextBox.Text);
+                    statusTextBox.Clear();
+                    this.r_BasicfacebookFunctionality.FetchPosts(r_User.Posts);
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ShowErrorMessageBox();
+            }
         }
 
         private void switchToProfile()
