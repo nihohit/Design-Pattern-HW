@@ -74,7 +74,7 @@ namespace Ex01_FacebookPage
                 Enum.TryParse(genderComboBox.SelectedValue.ToString(), out gender);
                 try
                 {
-                    FacebookApplicationLogicManager.AddFriendFilter(
+                    var newFilter = FilterFactory.CreateFilter(
                         filterNameTextBox.Text,
                         genderCheckBox.Checked,
                         gender,
@@ -84,7 +84,10 @@ namespace Ex01_FacebookPage
                         decimal.ToInt32(maxAgeNumericUpDown.Value),
                         addIfAgeNotVisible.Checked,
                         friendsListCheckBox.Checked,
-                        friendsListsComboBox.SelectedFriendList);
+                        friendsListsComboBox.SelectedFriendList,
+                        FacebookApplicationLogicManager.LoggedInUserFriendListsManager);
+
+                    FacebookApplicationLogicManager.AddFriendFilter(newFilter);
                 }
                 catch (Exception exception)
                 {

@@ -57,17 +57,7 @@ namespace FacebookApplication.Interfaces
             string i_FriendFilterId,
             out string o_UsersThatCantBeFilteredMessage);
 
-        string AddFriendFilter(
-            string i_Name,
-            bool i_FilterGender,
-            User.eGender i_Gender,
-            bool i_AddIfGenderNotVisible,
-            bool i_FilterAge,
-            int i_MinAge,
-            int i_MaxAge,
-            bool i_AddIfAgeNotVisible,
-            bool i_FilterByFriendList,
-            FriendList i_FriendList);
+        string AddFriendFilter(FriendsFilter i_FriendsFilter);
 
         bool RemoveFriendFilter(string i_FriendFilterId);
 

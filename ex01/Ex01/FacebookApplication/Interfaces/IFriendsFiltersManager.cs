@@ -21,7 +21,7 @@ namespace FacebookApplication.Interfaces
         #endregion events
         #region methods
 
-        string AddFriendFilter(string i_Name, IEnumerable<IUsersFilter> i_UserFilters);
+        string AddFriendFilter(FriendsFilter i_FriendsFilter);
 
         bool RemoveFriendFilter(string i_FilterId);
 

@@ -175,35 +175,9 @@ namespace FacebookApplication
             return friends;
         }
 
-        public string AddFriendFilter(string i_Name, bool i_FilterGender, User.eGender i_Gender, bool i_AddIfGenderNotVisible, bool i_FilterAge, int i_MinAge, int i_MaxAge, bool i_AddIfAgeNotVisible, bool i_FilterByFriendList, FriendList i_FriendList)
+        public string AddFriendFilter(FriendsFilter i_FriendsFilter)
         {
-            if (string.IsNullOrEmpty(i_Name))
-            {
-                throw new ArgumentException("Missing filter name");
-            }
-
-            var usersFilters = new List<IUsersFilter>();
-            if (!(i_FilterAge || i_FilterByFriendList || i_FilterGender))
-            {
-                throw new ArgumentException("Cannot add empty filter");
-            }
-
-            if (i_FilterAge)
-            {
-                usersFilters.Add(new UsersAgeFilter(i_MinAge, i_MaxAge, i_AddIfAgeNotVisible));
-            }
-
-            if (i_FilterByFriendList)
-            {
-                usersFilters.Add(new UsersFriendListsFilter(i_FriendList, LoggedInUserFriendListsManager));
-            }
-
-            if (i_FilterGender)
-            {
-                usersFilters.Add(new UsersGenderFilter(i_Gender, i_AddIfGenderNotVisible));
-            }
-
-            return LoggedInUserFriendsFiltersManager.AddFriendFilter(i_Name, usersFilters);
+            return LoggedInUserFriendsFiltersManager.AddFriendFilter(i_FriendsFilter);
         }
 
         public bool RemoveFriendFilter(string i_FriendFilterId)

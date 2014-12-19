@@ -45,26 +45,26 @@ namespace FacebookApplication
         #endregion constructor
         #region public methods
         #region IFriendFilterManager
-        public string AddFriendFilter(string i_Name, IEnumerable<IUsersFilter> i_UserFilters)
+        public string AddFriendFilter(FriendsFilter i_FriendsFilter)
         {
-            if (string.IsNullOrEmpty(i_Name))
+            var name = i_FriendsFilter.Name;
+            if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentException("Filter name not valid");
             }
 
-            if (r_Filters.ContainsKey(i_Name))
+            if (r_Filters.ContainsKey(name))
             {
                 throw new ArgumentException("Filter with this name already exist");
             }
 
-            IFriendFilter filter = new FriendsFilter(i_Name, i_UserFilters);
-            r_Filters.Add(i_Name, filter);
+            r_Filters.Add(name, i_FriendsFilter);
             if (FilterAdded != null)
             {
                 FilterAdded(this, new EventArgs());
             }
 
-            return i_Name;
+            return name;
         }
 
         public bool RemoveFriendFilter(string i_FilterId)
