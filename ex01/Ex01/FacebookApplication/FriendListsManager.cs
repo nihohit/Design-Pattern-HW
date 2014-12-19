@@ -87,9 +87,9 @@ namespace FacebookApplication
 
         #region override protected methods
 
-        protected override void FacebookFetch(User i_LoggedInUser)
+        protected override void FacebookFetch()
         {
-            fetchFriendLists(i_LoggedInUser);
+            fetchFriendLists();
         }
 
         #endregion override protected methods
@@ -102,9 +102,9 @@ namespace FacebookApplication
             r_FriendsListsForLoggedinUser.Clear();
         }
 
-        private void fetchFriendLists(User i_LoggedInUser)
+        private void fetchFriendLists()
         {
-            FacebookObjectCollection<FriendList> friendsListsForLoggedinUser = i_LoggedInUser.FriendLists;
+            FacebookObjectCollection<FriendList> friendsListsForLoggedinUser = UserWrapper.Instance.FriendLists;
             string friendsListWithFetchError = null;
             foreach (FriendList friendList in friendsListsForLoggedinUser)
             {

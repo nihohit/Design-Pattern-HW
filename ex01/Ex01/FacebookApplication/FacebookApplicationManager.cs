@@ -31,18 +31,16 @@ namespace FacebookApplication
             add { LoggedInUserFriendsFiltersManager.FilterRmoved += value; }
             remove { LoggedInUserFriendsFiltersManager.FilterRmoved -= value; }
         }
-        
+
         #endregion IFacebookApplicationManager
         #endregion Events
         #region Properties
         #region IFacebookApplicationManager
 
-        public User LoggedInUser { get; private set; }
-
         public IFriendsFetcher LoggedInUserFriendsFetcher { get; private set; }
 
         public IFriendListsManager LoggedInUserFriendListsManager { get; private set; }
-        
+
         public IInboxManager LoggedInUserInboxManager { get; private set; }
 
         public IFriendsFiltersManager LoggedInUserFriendsFiltersManager { get; private set; }
@@ -54,7 +52,6 @@ namespace FacebookApplication
         public FacebookApplicationManager()
         {
             TimeSpan minIntervalBetweenFetchActions = TimeSpan.FromSeconds(30);
-            LoggedInUser = null;
             LoggedInUserFriendsFetcher = new FriendsFetcher(minIntervalBetweenFetchActions);
             LoggedInUserFriendListsManager = new FriendListsManager(minIntervalBetweenFetchActions);
             LoggedInUserInboxManager = new InboxManager(minIntervalBetweenFetchActions);
@@ -69,7 +66,7 @@ namespace FacebookApplication
             LoginResult result = FacebookService.Login(i_AppId, i_Permissions);
             if (!string.IsNullOrEmpty(result.AccessToken))
             {
-                LoggedInUser = result.LoggedInUser;
+                UserWrapper.Instance.LoginUser(result.LoggedInUser);
             }
             else
             {
@@ -84,7 +81,7 @@ namespace FacebookApplication
 
         public void Reset()
         {
-            LoggedInUser = null;
+            UserWrapper.Instance.LoginUser(null);
             LoggedInUserFriendListsManager.ResetFetchDetails();
             if (AfterReset != null)
             {
@@ -107,18 +104,18 @@ namespace FacebookApplication
 
             if (i_FetchOption == eFetchOption.All || i_FetchOption == eFetchOption.Friends)
             {
-            LoggedInUserFriendsFetcher.Fetch(LoggedInUser);
-                LoggedInUserFriendsFiltersManager.Fetch(LoggedInUser);
+                LoggedInUserFriendsFetcher.Fetch();
+                LoggedInUserFriendsFiltersManager.Fetch();
             }
 
             if (i_FetchOption == eFetchOption.All || i_FetchOption == eFetchOption.FriendsLists)
             {
-            LoggedInUserFriendListsManager.Fetch(LoggedInUser);
+                LoggedInUserFriendListsManager.Fetch();
             }
 
             if (i_FetchOption == eFetchOption.All || i_FetchOption == eFetchOption.Inbox)
             {
-                LoggedInUserInboxManager.Fetch(LoggedInUser);
+                LoggedInUserInboxManager.Fetch();
             }
 
             FacebookService.s_CollectionLimit = origCollectionLimit;
@@ -132,7 +129,7 @@ namespace FacebookApplication
         {
             return LoggedInUserFriendListsManager.CreateFriendList(i_Name, i_Members);
         }
-        
+
         public IEnumerable<FriendList> GetRelevantFriendsListsForLoggedinUser()
         {
             return LoggedInUserFriendListsManager.GetRelevantFriendsListsForLoggedinUser();
@@ -142,7 +139,7 @@ namespace FacebookApplication
         {
             return LoggedInUserInboxManager.GetInboxThreadFriendsNames(i_InboxThreadId);
         }
-        
+
         public string GetInboxThreadDisplayString(string i_InboxThreadId)
         {
             return LoggedInUserInboxManager.GetInboxThreadDisplayString(i_InboxThreadId);
@@ -185,7 +182,7 @@ namespace FacebookApplication
                 throw new ArgumentException("Missing filter name");
             }
 
-            List<IUsersFilter> usersFilters = new List<IUsersFilter>();
+            var usersFilters = new List<IUsersFilter>();
             if (!(i_FilterAge || i_FilterByFriendList || i_FilterGender))
             {
                 throw new ArgumentException("Cannot add empty filter");

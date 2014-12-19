@@ -1,6 +1,5 @@
 ﻿ ﻿using System;
 using System.Windows.Forms;
-using FacebookWrapper.ObjectModel;
 using FacebookApplication.Interfaces;
 
 namespace Ex01_FacebookPage
@@ -11,16 +10,13 @@ namespace Ex01_FacebookPage
     {
         #region fields
 
-        private readonly User r_User;
         private readonly BasicFacebookFunctionality r_BasicfacebookFunctionality;
 
         public ApplicationTabsForm(IFacebookApplicationManager i_FacebookApplicationManager)
         {
             InitializeComponent();
             updateFacebookApplicationManagerInRelevantControls(i_FacebookApplicationManager);
-            this.r_BasicfacebookFunctionality = new BasicFacebookFunctionality(i_FacebookApplicationManager.LoggedInUser);
-            r_User = i_FacebookApplicationManager.LoggedInUser;
-            interestPage.SetUser(r_User);
+            this.r_BasicfacebookFunctionality = new BasicFacebookFunctionality();
             switchToProfile();
         }
 
@@ -71,18 +67,10 @@ namespace Ex01_FacebookPage
 
         private void buttonSetStatus_Click(object sender, EventArgs e)
         {
-            try
+            if (UserWrapper.Instance.PostStatus(statusTextBox.Text))
             {
-                if (!string.IsNullOrWhiteSpace(statusTextBox.Text))
-                {
-                    r_User.PostStatus(statusTextBox.Text);
-                    statusTextBox.Clear();
-                    this.r_BasicfacebookFunctionality.FetchPosts(r_User.Posts);
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.ShowErrorMessageBox();
+                statusTextBox.Clear();
+                this.r_BasicfacebookFunctionality.FetchPosts(UserWrapper.Instance.Posts);
             }
         }
 
@@ -94,7 +82,7 @@ namespace Ex01_FacebookPage
                 myProfileViewComments,
                 myProfileLikeButton,
                 myProfileCommentButton);
-            this.r_BasicfacebookFunctionality.FetchPosts(r_User.Posts);
+            this.r_BasicfacebookFunctionality.FetchPosts(UserWrapper.Instance.Posts);
         }
 
         private void switchToNewsFeed()
@@ -105,7 +93,7 @@ namespace Ex01_FacebookPage
                 newsFeedViewComments,
                 newsFeedLikeButton,
                 newsFeedCommentButton);
-            this.r_BasicfacebookFunctionality.FetchPosts(r_User.NewsFeed);
+            this.r_BasicfacebookFunctionality.FetchPosts(UserWrapper.Instance.NewsFeed);
         }
     }
 }

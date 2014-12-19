@@ -67,8 +67,8 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Fetching from Facebook";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FetchingFromFacebookForm_FormClosing);
-            this.Shown += new System.EventHandler(this.FetchingFromFacebookForm_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fetchingFromFacebookForm_FormClosing);
+            this.Shown += new System.EventHandler(this.fetchingFromFacebookForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

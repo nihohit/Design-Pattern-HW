@@ -55,6 +55,7 @@
     <Compile Include="BasicFacebookFunctionality.cs" />
     <Compile Include="BaseUserFilter.cs" />
     <Compile Include="FetchEventArgs.cs" />
+    <Compile Include="Singleton.cs" />
     <Compile Include="UsersAgeFilter.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="FacebookApplicationManager.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="UsersFriendListsFilter.cs" />
     <Compile Include="UserComparer.cs" />
     <Compile Include="UsersGenderFilter.cs" />
+    <Compile Include="UserWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

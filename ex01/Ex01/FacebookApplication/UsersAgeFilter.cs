@@ -6,8 +6,9 @@ namespace FacebookApplication
 {
     public class UsersAgeFilter : BaseUserFilter
     {
-        private bool m_AddWithoutVisibleAge;
         #region members
+
+        private readonly bool r_AddWithoutVisibleAge;
 
         #endregion members
 
@@ -25,7 +26,7 @@ namespace FacebookApplication
         {
             MinAge = i_MinAge;
             MaxAge = i_MaxAge;
-            m_AddWithoutVisibleAge = i_AddIfAgeNotVisible;
+            this.r_AddWithoutVisibleAge = i_AddIfAgeNotVisible;
         }
 
         #endregion constructor
@@ -36,10 +37,11 @@ namespace FacebookApplication
         {
             if (i_User.Birthday == null)
             {
-                if(m_AddWithoutVisibleAge)
+                if (this.r_AddWithoutVisibleAge)
                 {
                     return true;
                 }
+
                 throw new FacebookOAuthException("Cannot see user age");
             }
 
@@ -50,7 +52,7 @@ namespace FacebookApplication
 
         public override string ToString()
         {
-            return string.Format("Age between {0} to {1}{2}", MinAge, MaxAge, m_AddWithoutVisibleAge ? " or age is not defined" : string.Empty);
+            return string.Format("Age between {0} to {1}{2}", MinAge, MaxAge, this.r_AddWithoutVisibleAge ? " or age is not defined" : string.Empty);
         }
 
         #endregion

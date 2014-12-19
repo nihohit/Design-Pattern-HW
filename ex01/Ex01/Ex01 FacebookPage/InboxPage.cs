@@ -15,9 +15,17 @@ namespace Ex01_FacebookPage
 
         protected override Dictionary<eFetchOption, int> GetFetchTypesToFetchWithTheirCollectionLimit()
         {
-            Dictionary<eFetchOption, int> typesAndCollectionLimit = new Dictionary<eFetchOption, int>();
-            typesAndCollectionLimit.Add(eFetchOption.Friends, Extensions.k_FriendsCollectionLimit);
-            typesAndCollectionLimit.Add(eFetchOption.Inbox, -1);
+            var typesAndCollectionLimit = new Dictionary<eFetchOption, int>
+            {
+                {
+                    eFetchOption.Friends,
+                    Extensions.k_FriendsCollectionLimit
+                },
+                {
+                    eFetchOption.Inbox,
+                    -1
+                }
+            };
             return typesAndCollectionLimit;
         }
 
@@ -63,7 +71,7 @@ namespace Ex01_FacebookPage
             IEnumerable<InboxThread> inboxThreads = friendsFiltersCombo.AllFriendsSelected
                 ? FacebookApplicationLogicManager.GetAllInboxThreads()
                 : FacebookApplicationLogicManager.GetInboxThreadsForSpecificFilter(friendsFiltersCombo.SelectedFriendFilterId.Trim(), out usersThatCantBeFilteredMessage);
-            inboxMessagesListBox.UpdateInboxThreads(inboxThreads, FacebookApplicationLogicManager.LoggedInUser.Id);
+            inboxMessagesListBox.UpdateInboxThreads(inboxThreads, UserWrapper.Instance.Id);
             updateSelectedMessageTextBox();
             if (!string.IsNullOrEmpty(usersThatCantBeFilteredMessage))
             {

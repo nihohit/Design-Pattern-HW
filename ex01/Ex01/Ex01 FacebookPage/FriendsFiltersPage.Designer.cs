@@ -263,7 +263,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FriendsFiltersPage";
             this.Size = new System.Drawing.Size(470, 250);
-            this.Load += new System.EventHandler(this.FriendsFiltersPage_Load);
+            this.Load += new System.EventHandler(this.friendsFiltersPage_Load);
             this.Controls.SetChildIndex(this.filtersListBox, 0);
             this.Controls.SetChildIndex(this.genderCheckBox, 0);
             this.Controls.SetChildIndex(this.genderComboBox, 0);

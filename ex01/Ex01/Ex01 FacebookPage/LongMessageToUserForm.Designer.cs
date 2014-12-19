@@ -66,7 +66,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "LongMessageToUserForm";
             this.ShowIcon = false;
-            this.Load += new System.EventHandler(this.LongMessageToUserForm_Load);
+            this.Load += new System.EventHandler(this.longMessageToUserForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

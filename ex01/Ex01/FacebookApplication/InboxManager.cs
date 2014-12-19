@@ -41,15 +41,10 @@ namespace FacebookApplication
 
         public IEnumerable<InboxThread> GetInboxThreads(IFriendFilter i_FriendFilter)
         {
-            IEnumerable<InboxThread> inboxThreads;
-            if (i_FriendFilter == null)
-            {
-                inboxThreads = r_InboxThreads.Values;
-            }
-            else
-            {
-                inboxThreads = getInboxThreadsForSpecificFriendFilter(i_FriendFilter);
-            }
+            IEnumerable<InboxThread> inboxThreads =
+                i_FriendFilter == null ?
+                this.r_InboxThreads.Values :
+                this.getInboxThreadsForSpecificFriendFilter(i_FriendFilter);
 
             return inboxThreads;
         }
@@ -83,37 +78,31 @@ namespace FacebookApplication
         #endregion public methods
         #region override protected methods
 
-        protected override void FacebookFetch(User i_LoggedInUser)
+        protected override void FacebookFetch()
         {
-            fetchInbox(i_LoggedInUser);
+            fetchInbox();
         }
-        
+
         #endregion override protected methods
         #region private methods
 
         private IEnumerable<InboxThread> getInboxThreadsForSpecificFriendFilter(IFriendFilter i_FriendFilter)
         {
-            FacebookObjectCollection<InboxThread> friendListInboxThreads = new FacebookObjectCollection<InboxThread>();
-            foreach (InboxThread inboxThread in r_InboxThreads.Values)
+            var friendListInboxThreads = new FacebookObjectCollection<InboxThread>();
+            foreach (InboxThread inboxThread in
+                r_InboxThreads.Values.Where(i_InboxThread =>
+                    i_InboxThread.To.Any(i_Friend => i_FriendFilter.FilterdFriendsIds.Contains(i_Friend.Id))))
             {
-                foreach (User friend in inboxThread.To)
-                {
-                    if (i_FriendFilter.FilterdFriendsIds.Contains(friend.Id))
-                    {
-                        friendListInboxThreads.Add(inboxThread);
-                        break;
-                    }
-                }
+                friendListInboxThreads.Add(inboxThread);
             }
 
             return friendListInboxThreads;
         }
 
-        private void fetchInbox(User i_LoggedInUser)
+        private void fetchInbox()
         {
             r_InboxThreads.Clear();
-            i_LoggedInUser.ValidateUserNotNull();
-            FacebookObjectCollection<InboxThread> inboxThreads = i_LoggedInUser.InboxThreads;
+            FacebookObjectCollection<InboxThread> inboxThreads = UserWrapper.Instance.InboxThreads;
             foreach (InboxThread inboxThread in inboxThreads)
             {
                 r_InboxThreads.Add(inboxThread.Id, inboxThread);

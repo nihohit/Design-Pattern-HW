@@ -18,13 +18,13 @@ namespace Ex01_FacebookPage
             this.Size = new Size(this.Width + waitLabel.Width - origLabelWidth, this.Height);
         }
 
-        private void FetchingFromFacebookForm_Load(object sender, EventArgs e)
+        private void fetchingFromFacebookForm_Load(object sender, EventArgs e)
         {
             Application.DoEvents();
             this.Close();
         }
 
-        private void FetchingFromFacebookForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void fetchingFromFacebookForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             r_FetchActionMethod();
         }

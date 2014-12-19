@@ -17,8 +17,6 @@
 
         private readonly List<Comment> r_CurrentCommentView = new List<Comment>();
 
-        private readonly User r_User;
-
         private GeoPostedItem m_CurrentlySelectedPost;
 
         private Comment m_CurrentlySelectedComment;
@@ -34,15 +32,6 @@
         private Button m_CurrentCommentButton;
 
         #endregion private fields
-
-        #region constructors
-
-        public BasicFacebookFunctionality(User i_User)
-        {
-            this.r_User = i_User;
-        }
-
-        #endregion constructors
 
         #region general methods
 
@@ -121,11 +110,6 @@
         #endregion
 
         #region private methods
-
-        private bool likedByUser(PostedItem i_Item)
-        {
-            return i_Item.LikedBy.Find(i_User => i_User.Id == this.r_User.Id) != null;
-        }
 
         #region list boxes
 
@@ -217,7 +201,7 @@
 
             try
             {
-                if (this.likedByUser(item))
+                if (UserWrapper.Instance.LikedByUser(item))
                 {
                     item.Unlike();
                 }

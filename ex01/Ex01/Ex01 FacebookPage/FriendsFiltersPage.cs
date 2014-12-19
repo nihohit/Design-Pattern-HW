@@ -16,8 +16,7 @@ namespace Ex01_FacebookPage
 
         protected override Dictionary<eFetchOption, int> GetFetchTypesToFetchWithTheirCollectionLimit()
         {
-            Dictionary<eFetchOption, int> typesAndCollectionLimit = new Dictionary<eFetchOption, int>();
-            typesAndCollectionLimit.Add(eFetchOption.FriendsLists, -1);
+            var typesAndCollectionLimit = new Dictionary<eFetchOption, int> { { eFetchOption.FriendsLists, -1 } };
             return typesAndCollectionLimit;
         }
 
@@ -34,12 +33,12 @@ namespace Ex01_FacebookPage
         {
             friendsListsComboBox.UpdateFriendsLists(
                 FacebookApplicationLogicManager.GetRelevantFriendsListsForLoggedinUser());
-            FacebookApplicationLogicManager.FriendFilterAdded += FacebookApplicationLogicManager_CheckedChanged;
+            FacebookApplicationLogicManager.FriendFilterAdded += this.facebookApplicationLogicManager_CheckedChanged;
         }
 
         protected override void OnBeforeFacebookApplicationLogicManagerChanging()
         {
-            FacebookApplicationLogicManager.FriendFilterAdded -= FacebookApplicationLogicManager_CheckedChanged;
+            FacebookApplicationLogicManager.FriendFilterAdded -= this.facebookApplicationLogicManager_CheckedChanged;
         }
 
         private void genderCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -47,7 +46,7 @@ namespace Ex01_FacebookPage
             genderComboBox.Enabled = genderCheckBox.Checked;
         }
 
-        private void FriendsFiltersPage_Load(object sender, EventArgs e)
+        private void friendsFiltersPage_Load(object sender, EventArgs e)
         {
             genderComboBox.DataSource = Enum.GetValues(typeof(User.eGender));
             genderCheckBox.Checked = false;
@@ -104,7 +103,7 @@ namespace Ex01_FacebookPage
             friendsListsComboBox.Enabled = friendsListCheckBox.Checked;
         }
 
-        private void FacebookApplicationLogicManager_CheckedChanged(object sender, EventArgs e)
+        private void facebookApplicationLogicManager_CheckedChanged(object sender, EventArgs e)
         {
             updateFiltersLists();
         }

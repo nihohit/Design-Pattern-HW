@@ -13,7 +13,7 @@ namespace Ex01_FacebookPage
             Message = i_Message;
         }
 
-        private void LongMessageToUserForm_Load(object sender, EventArgs e)
+        private void longMessageToUserForm_Load(object sender, EventArgs e)
         {
             textBox1.Text = Message;
         }

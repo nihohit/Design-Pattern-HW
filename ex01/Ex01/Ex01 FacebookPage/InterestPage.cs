@@ -7,30 +7,19 @@ namespace Ex01_FacebookPage
 
     using FacebookApplication;
 
-    using FacebookWrapper.ObjectModel;
-
     public partial class InterestPage : UserControl
     {
-        private InterestChecker m_InterestChecker;
+        private readonly InterestChecker r_InterestChecker;
 
         public InterestPage()
         {
             InitializeComponent();
-        }
-
-        public void SetUser(User i_User)
-        {
-            if (m_InterestChecker != null)
-            {
-                throw new Exception("Interest checker already initialised.");
-            }
-
-            m_InterestChecker = new InterestChecker(i_User);
+            this.r_InterestChecker = new InterestChecker();
         }
 
         private void checkButton_Click(object sender, EventArgs e)
         {
-            var results = m_InterestChecker.FindInterestedFriendsNames(
+            var results = this.r_InterestChecker.FindInterestedFriendsNames(
                 lastInterestDate.Value,
                 Convert.ToInt32(itemAmountToCheck.Value)).ToArray();
             interestedFreindsBox.Items.Clear();

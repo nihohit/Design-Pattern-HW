@@ -3,6 +3,10 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication
 {
+    using System.Windows.Forms;
+
+    using Message = FacebookWrapper.ObjectModel.Message;
+
     public static class Extensions
     {
         public static string FormatWith(this string i_Str, params object[] i_FormattingInfo)
@@ -20,15 +24,10 @@ namespace FacebookApplication
 
         public static string GetMessageDisplayString(this Message i_Message)
         {
-            string messageDisplayString;
-            if (i_Message.Text == null)
-            {
-                messageDisplayString = GetUnsupportedFormatMessageDisplayString(i_Message.CreatedTime);
-            }
-            else
-            {
-                messageDisplayString = string.Format("[{0}] {1}", i_Message.CreatedTime, i_Message.Text);
-            }
+            string messageDisplayString =
+                i_Message.Text == null ?
+                    GetUnsupportedFormatMessageDisplayString(i_Message.CreatedTime) :
+                    string.Format("[{0}] {1}", i_Message.CreatedTime, i_Message.Text);
 
             return messageDisplayString;
         }
@@ -57,7 +56,10 @@ namespace FacebookApplication
             return inboxThreadDisplayString.Trim(Environment.NewLine.ToCharArray());
         }
 
-        public static string GetInboxThreadFriendsNames(this InboxThread i_InboxThread, string i_UserIdThatInboxBelongsTo, out FacebookObjectCollection<User> o_Friends)
+        public static string GetInboxThreadFriendsNames(
+            this InboxThread i_InboxThread,
+            string i_UserIdThatInboxBelongsTo,
+            out FacebookObjectCollection<User> o_Friends)
         {
             o_Friends = new FacebookObjectCollection<User>();
             string inboxThreadFriendsNames = string.Empty;
@@ -83,6 +85,11 @@ namespace FacebookApplication
         public static bool LikedByUser(this PostedItem i_Item, string i_UserId)
         {
             return i_Item.LikedBy.Find(i_User => i_User.Id == i_UserId) != null;
+        }
+
+        public static DialogResult ShowErrorMessageBox(this Exception i_Exception, string i_Caption = "Error")
+        {
+            return MessageBox.Show(i_Exception.Message, i_Caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

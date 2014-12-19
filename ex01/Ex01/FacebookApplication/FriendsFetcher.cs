@@ -40,17 +40,17 @@ namespace FacebookApplication
         #endregion public methods
         #region override protected methods
 
-        protected override void FacebookFetch(User i_LoggedInUser)
+        protected override void FacebookFetch()
         {
-            fetchFriends(i_LoggedInUser);
+            fetchFriends();
         }
         
         #endregion override protected methods
         #region private methods
 
-        private void fetchFriends(User i_LoggedInUser)
+        private void fetchFriends()
         {
-            m_Friends = i_LoggedInUser.Friends;
+            m_Friends = UserWrapper.Instance.Friends;
         }
 
         private void reset()

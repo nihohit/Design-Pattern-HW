@@ -43,7 +43,7 @@ namespace Ex01_FacebookPage
                 foreach (T item in i_Items)
                 {
                     m_Items[i] = item;
-                    r_ListBoxAddItemMethod(i, item);//listBox.Items.Insert(i, getInboxThreadDisplayName(inboxThread));
+                    r_ListBoxAddItemMethod(i, item);
                     i++;
                 }
             }

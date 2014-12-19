@@ -34,7 +34,7 @@ namespace Ex01_FacebookPage
                 friendsListsLabel.Text = value;
                 int origComboBoxLocationX = comboBox.Location.X;
                 comboBox.Location =
-                    new System.Drawing.Point(
+                    new Point(
                         friendsListsLabel.Location.X + friendsListsLabel.Size.Width +
                         Math.Max(
                             friendsListsLabel.Margin.Right,
@@ -55,26 +55,26 @@ namespace Ex01_FacebookPage
                 {
                     if (m_FacebookApplicationManager != null)
                     {
-                        m_FacebookApplicationManager.FriendFilterAdded -= m_FacebookApplicationManager_FriendFilterAdded;
-                        m_FacebookApplicationManager.FriendFilterRemoved -= m_FacebookApplicationManager_FriendFilterRemoved;
+                        m_FacebookApplicationManager.FriendFilterAdded -= this.facebookApplicationManager_FriendFilterAdded;
+                        m_FacebookApplicationManager.FriendFilterRemoved -= this.facebookApplicationManager_FriendFilterRemoved;
                     }
 
                     m_FacebookApplicationManager = value;
                     if (m_FacebookApplicationManager != null)
                     {
-                        m_FacebookApplicationManager.FriendFilterAdded += m_FacebookApplicationManager_FriendFilterAdded;
-                        m_FacebookApplicationManager.FriendFilterRemoved += m_FacebookApplicationManager_FriendFilterRemoved;
+                        m_FacebookApplicationManager.FriendFilterAdded += this.facebookApplicationManager_FriendFilterAdded;
+                        m_FacebookApplicationManager.FriendFilterRemoved += this.facebookApplicationManager_FriendFilterRemoved;
                     }
                 }
             }
         }
 
-        private void m_FacebookApplicationManager_FriendFilterAdded(object sender, EventArgs e)
+        private void facebookApplicationManager_FriendFilterAdded(object sender, EventArgs e)
         {
             UpdateFriendsFilters();
         }
 
-        private void m_FacebookApplicationManager_FriendFilterRemoved(object sender, EventArgs e)
+        private void facebookApplicationManager_FriendFilterRemoved(object sender, EventArgs e)
         {
             UpdateFriendsFilters();
         }
@@ -96,8 +96,7 @@ namespace Ex01_FacebookPage
         public void UpdateFriendsFilters()
         {
             comboBox.Items.Clear();
-            List<string> filters = new List<string>();
-            filters.Add(k_AllFriendsOptionDisplayName);
+            var filters = new List<string> { k_AllFriendsOptionDisplayName };
             filters.AddRange(FacebookApplicationLogicManager.GetFriendFiltersIds());
             r_ListItemsContainer.UpdateItems(filters);
             comboBox.SelectedItem = k_AllFriendsOptionDisplayName;

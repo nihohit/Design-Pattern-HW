@@ -88,7 +88,7 @@ namespace Ex01_FacebookPage
             return null;
         }
 
-        protected virtual void facebookApplicationManager_AfterFetch(object i_Sender, FetchEventArgs e)
+        protected virtual void facebookApplicationManager_AfterFetch(object sender, FetchEventArgs e)
         {
             throw new NotImplementedException("Should override method");
         }

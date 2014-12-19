@@ -5,8 +5,9 @@ namespace FacebookApplication
 {
     public class UsersGenderFilter : BaseUserFilter
     {
-        private bool m_AddIfCantSeeGender;
         #region members
+
+        private readonly bool r_AddIfCantSeeGender;
 
         #endregion members
 
@@ -21,7 +22,7 @@ namespace FacebookApplication
         public UsersGenderFilter(User.eGender i_Gender, bool i_AddIfCantSeeGender)
         {
             Gender = i_Gender;
-            m_AddIfCantSeeGender = i_AddIfCantSeeGender;
+            this.r_AddIfCantSeeGender = i_AddIfCantSeeGender;
         }
 
         #endregion constructor
@@ -30,20 +31,22 @@ namespace FacebookApplication
 
         protected override bool MantianConstrain(User i_User)
         {
-            if(i_User.Gender == null)
+            if (i_User.Gender == null)
             {
-                if(m_AddIfCantSeeGender)
+                if (this.r_AddIfCantSeeGender)
                 {
                     return true;
                 }
+
                 throw new FacebookOAuthException("Cannot see user gender");
             }
+
             return i_User.Gender == Gender;
         }
 
         public override string ToString()
         {
-            return Gender.ToString() + (m_AddIfCantSeeGender ? " or gender is not defined" : string.Empty);
+            return Gender.ToString() + (this.r_AddIfCantSeeGender ? " or gender is not defined" : string.Empty);
         }
 
         #endregion

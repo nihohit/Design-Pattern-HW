@@ -16,11 +16,6 @@ namespace Ex01_FacebookPage
             fetchingFromFacebookForm.ShowDialog(i_Win32Window);
         }
 
-        public static DialogResult ShowErrorMessageBox(this Exception i_Exception, string i_Caption = "Error")
-        {
-            return MessageBox.Show(i_Exception.Message, i_Caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
         public static void ShowLongMessageBox(this string i_Message, string i_Caption = "Message")
         {
             LongMessageToUserForm longMessageToUserForm = new LongMessageToUserForm(i_Message) { Text = i_Caption };

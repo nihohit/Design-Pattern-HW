@@ -5,6 +5,8 @@ namespace Ex01_FacebookPage
 {
     using System.Threading;
 
+    using FacebookApplication;
+
     public static class Program
     {
         /// <summary>

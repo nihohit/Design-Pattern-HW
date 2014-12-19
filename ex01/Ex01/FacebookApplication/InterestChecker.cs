@@ -12,20 +12,9 @@ namespace FacebookApplication
     {
         #region private fields
 
-        private readonly User r_User;
-
         private readonly IEqualityComparer<User> r_UserComparer = new UserComparer();
 
         #endregion private fields
-
-        #region constructors
-
-        public InterestChecker(User i_User)
-        {
-            r_User = i_User;
-        }
-
-        #endregion constructors
 
         #region public methods
 
@@ -48,14 +37,8 @@ namespace FacebookApplication
 
         private IEnumerable<string> findInterestedFriendsNames(DateTime i_ShownInterestSince)
         {
-            var currentActivity = new List<PostedItem>();
-            r_User.ReFetch();
-            currentActivity.AddRange(r_User.WallPosts);
-            currentActivity.AddRange(r_User.Posts);
-            currentActivity.AddRange(r_User.PostedLinks);
-            currentActivity.AddRange(r_User.Statuses);
-            currentActivity.AddRange(r_User.Albums);
-            currentActivity.AddRange(r_User.Videos);
+            UserWrapper.Instance.ReFetch();
+            var currentActivity = UserWrapper.Instance.AllActivity;
 
             var currentPosts = currentActivity.Where(i_Post => i_Post.CreatedTime >= i_ShownInterestSince.Date).ToList();
             var usersWhoLikedPosts = currentPosts.SelectMany(i_Post => i_Post.LikedBy);
@@ -66,7 +49,7 @@ namespace FacebookApplication
 
             // return all distinct users who liked or commented on posts 
             // that were created after the interest time requested.
-            return combinedDistinctUsers.Where(i_User => i_User.Id != r_User.Id).Select(i_User => i_User.Name);
+            return combinedDistinctUsers.Where(i_User => !i_User.Id.Equals(UserWrapper.Instance.Id)).Select(i_User => i_User.Name);
         }
 
         #endregion private methods

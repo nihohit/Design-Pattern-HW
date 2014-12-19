@@ -92,9 +92,9 @@ namespace FacebookApplication
         #endregion
         #region override protected methods
 
-        protected override void FacebookFetch(User i_LoggedInUser)
+        protected override void FacebookFetch()
         {
-            r_FriendsFetcher.Fetch(i_LoggedInUser);
+            r_FriendsFetcher.Fetch();
             IEnumerable<User> friends = r_FriendsFetcher.GetFriends();
             foreach (IFriendFilter friendFilter in r_Filters.Values)
             {

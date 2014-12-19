@@ -15,15 +15,13 @@ namespace Ex01_FacebookPage
 
         protected override Dictionary<eFetchOption, int> GetFetchTypesToFetchWithTheirCollectionLimit()
         {
-            Dictionary<eFetchOption, int> typesAndCollectionLimit = new Dictionary<eFetchOption, int>
-                                                                        {
-                                                                            {
-                                                                                eFetchOption
-                                                                                .Friends,
-                                                                                Extensions
-                                                                                .k_FriendsCollectionLimit
-                                                                            }
-                                                                        };
+            var typesAndCollectionLimit = new Dictionary<eFetchOption, int>
+            {
+                {
+                    eFetchOption.Friends,
+                    Extensions.k_FriendsCollectionLimit
+                }
+            };
             return typesAndCollectionLimit;
         }
 

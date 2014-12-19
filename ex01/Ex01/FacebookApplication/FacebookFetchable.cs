@@ -8,7 +8,7 @@ namespace FacebookApplication
     {
         #region members
 
-        private readonly Action<User> r_FetchAction; 
+        private readonly Action r_FetchAction;
 
         #endregion members
         #region Events
@@ -34,7 +34,7 @@ namespace FacebookApplication
                 return MinIntervalBetweenFetchActions == null;
             }
         }
-        
+
         #endregion IFetchable
         #endregion Properties
         #region constructor
@@ -49,20 +49,19 @@ namespace FacebookApplication
         #endregion constructor
         #region public methods
         #region IFetchable
-        public void Fetch(User i_LoggedInUser)
+        public void Fetch()
         {
             TimeSpan timePassedFromLastFetch = FetchedTime == null ? TimeSpan.MaxValue : DateTime.UtcNow - (DateTime)FetchedTime;
             if (ForcedFetch || (MinIntervalBetweenFetchActions <= timePassedFromLastFetch))
             {
                 ResetFetchDetails();
-                i_LoggedInUser.ReFetch();
+                UserWrapper.Instance.ReFetch();
                 if (r_FetchAction != null)
                 {
-                    r_FetchAction(i_LoggedInUser);
+                    r_FetchAction();
                 }
 
                 FetchedTime = DateTime.UtcNow;
-                UserLoggedInWhenFetched = i_LoggedInUser;
                 OnFetched(new EventArgs());
             }
         }
@@ -83,9 +82,9 @@ namespace FacebookApplication
                 Fetched.Invoke(this, e);
             }
         }
-        
-        protected abstract void FacebookFetch(User i_LoggedInUser);
-        
+
+        protected abstract void FacebookFetch();
+
         #endregion protected methods
         #region private methods
         private void reset()
