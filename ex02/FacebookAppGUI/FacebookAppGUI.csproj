@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{25802257-F556-480C-B13A-262D6BC8A252}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FacebookAppGUI</RootNamespace>
+    <AssemblyName>Ex01 FacebookPage</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Facebook">
+      <HintPath>..\FacebookDLLs\Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="FbGraphApiWrapper">
+      <HintPath>..\FacebookDLLs\FbGraphApiWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationTabPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ApplicationTabPage.Designer.cs">
+      <DependentUpon>ApplicationTabPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions.cs" />
+    <Compile Include="FormFetchingFromFacebook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFetchingFromFacebook.Designer.cs">
+      <DependentUpon>FormFetchingFromFacebook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FriendsFiltersComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FriendsFiltersComboBox.Designer.cs">
+      <DependentUpon>FriendsFiltersComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FriendsFiltersPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FriendsFiltersPage.Designer.cs">
+      <DependentUpon>FriendsFiltersPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FriendsListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FriendsListBox.Designer.cs">
+      <DependentUpon>FriendsListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FriendsListsComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FriendsListsComboBox.Designer.cs">
+      <DependentUpon>FriendsListsComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FriendsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FriendsPage.Designer.cs">
+      <DependentUpon>FriendsPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InboxPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InboxPage.Designer.cs">
+      <DependentUpon>InboxPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InterestPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InterestPage.Designer.cs">
+      <DependentUpon>InterestPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListItemsContainer.cs" />
+    <Compile Include="FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLongMessageToUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLongMessageToUser.Designer.cs">
+      <DependentUpon>FormLongMessageToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MessagesListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MessagesListBox.Designer.cs">
+      <DependentUpon>MessagesListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FormApplicationTabs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormApplicationTabs.Designer.cs">
+      <DependentUpon>FormApplicationTabs.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ApplicationTabPage.resx">
+      <DependentUpon>ApplicationTabPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFetchingFromFacebook.resx">
+      <DependentUpon>FormFetchingFromFacebook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FriendsFiltersComboBox.resx">
+      <DependentUpon>FriendsFiltersComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FriendsFiltersPage.resx">
+      <DependentUpon>FriendsFiltersPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FriendsListBox.resx">
+      <DependentUpon>FriendsListBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FriendsListsComboBox.resx">
+      <DependentUpon>FriendsListsComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FriendsPage.resx">
+      <DependentUpon>FriendsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InboxPage.resx">
+      <DependentUpon>InboxPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterestPage.resx">
+      <DependentUpon>InterestPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLongMessageToUser.resx">
+      <DependentUpon>FormLongMessageToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MessagesListBox.resx">
+      <DependentUpon>MessagesListBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="FormApplicationTabs.resx">
+      <DependentUpon>FormApplicationTabs.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FacebookApplication\FacebookApplication.csproj">
+      <Project>{b17e1111-fb46-432a-b8d0-58ec892583f6}</Project>
+      <Name>FacebookApplication</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
