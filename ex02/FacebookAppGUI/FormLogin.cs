@@ -9,7 +9,7 @@ namespace FacebookAppGUI
     {
         private const string k_AppId = "540432436034011"; // "501103096696183"; //facebook stop supporting manage_friendlists, so cannot get members with our application any more
 
-        private readonly IFacebookApplicationManager r_FacebookApplicationManager;
+        private readonly IFiltersFicherManager r_FacebookApplicationManager;
 
         private readonly string[] r_Permissions =
         {
@@ -21,7 +21,7 @@ namespace FacebookAppGUI
         public FormLogin()
         {
             InitializeComponent();
-            this.r_FacebookApplicationManager = new FacebookApplicationManager();
+            this.r_FacebookApplicationManager = new FiltersFicherManager();
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -33,7 +33,7 @@ namespace FacebookAppGUI
         {
             try
             {
-                this.r_FacebookApplicationManager.LoginUser(k_AppId, r_Permissions);
+                UserWrapper.Instance.LoginUser(k_AppId, r_Permissions);
                 FormApplicationTabs tabsPage = new FormApplicationTabs(this.r_FacebookApplicationManager)
                 {
                     Location = this.Location,

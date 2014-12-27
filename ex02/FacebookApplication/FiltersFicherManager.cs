@@ -7,17 +7,13 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication
 {
-    public class FacebookApplicationManager : IFacebookApplicationManager
+    public class FiltersFicherManager : IFiltersFicherManager
     {
         #region members
         #endregion members
         #region Events
         #region IFacebookApplicationManager
-
-        public event EventHandler AfterReset;
-
-        public event EventHandler AfterLoggin;
-
+        
         public event EventHandler<FetchEventArgs> AfterFetch;
 
         public event EventHandler FriendFilterAdded
@@ -49,7 +45,7 @@ namespace FacebookApplication
         #endregion Properties
         #region constructor
 
-        public FacebookApplicationManager()
+        public FiltersFicherManager()
         {
             TimeSpan minIntervalBetweenFetchActions = TimeSpan.FromSeconds(30);
             LoggedInUserFriendsFetcher = new FriendsFetcher(minIntervalBetweenFetchActions);
@@ -60,35 +56,7 @@ namespace FacebookApplication
         #endregion constructor
         #region public methods
         #region IFacebookApplicationManager
-        public void LoginUser(string i_AppId, params string[] i_Permissions)
-        {
-            Reset();
-            LoginResult result = FacebookService.Login(i_AppId, i_Permissions);
-            if (!string.IsNullOrEmpty(result.AccessToken))
-            {
-                UserWrapper.Instance.LoginUser(result.LoggedInUser);
-            }
-            else
-            {
-                throw new FacebookOAuthException(result.ErrorMessage);
-            }
-
-            if (AfterLoggin != null)
-            {
-                AfterLoggin(this, new EventArgs());
-            }
-        }
-
-        public void Reset()
-        {
-            UserWrapper.Instance.LoginUser(null);
-            LoggedInUserFriendListsManager.ResetFetchDetails();
-            if (AfterReset != null)
-            {
-                AfterReset(this, new EventArgs());
-            }
-        }
-
+        
         public void FetchFromFacebook(eFetchOption i_FetchOption)
         {
             FetchFromFacebook(i_FetchOption, -1);

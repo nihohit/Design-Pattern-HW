@@ -27,11 +27,17 @@ namespace FacebookApplication
         {
             r_FriendsListsByFriendsIds = new Dictionary<string, List<string>>();
             r_FriendsListsForLoggedinUser = new Dictionary<string, FriendList>();
+            UserWrapper.Instance.BeforeLoggin += (sender, e) => { ResetFetchDetails(); };
         }
 
         #endregion constructor
 
         #region public methods
+
+        public void Dispose()
+        {
+            UserWrapper.Instance.BeforeLoggin -= (sender, e) => { ResetFetchDetails(); };
+        }
 
         #region IFriendListsManager
 

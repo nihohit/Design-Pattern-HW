@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace FacebookApplication
 {
+    using Facebook;
+    using FacebookWrapper;
     using FacebookWrapper.ObjectModel;
 
     public class UserWrapper
@@ -14,6 +16,16 @@ namespace FacebookApplication
         private User m_User;
 
         #endregion private fields
+        
+        #region Events
+
+        public event EventHandler BeforeLoggin;
+
+        public event EventHandler AfterLoggin;
+
+        public event EventHandler<FetchEventArgs> AfterFetch;
+        
+        #endregion Events
 
         #region properties
 
@@ -156,14 +168,33 @@ namespace FacebookApplication
 
         #region public methods
 
-        public void LoginUser(User i_User)
+        public void LoginUser(string i_AppId, params string[] i_Permissions)
         {
+            if (BeforeLoggin != null)
+            {
+                BeforeLoggin(this, new EventArgs());
+            }
+
             lock (r_Lock)
             {
-                m_User = i_User;
+                m_User = null;
+                LoginResult result = FacebookService.Login(i_AppId, i_Permissions);
+                if (!string.IsNullOrEmpty(result.AccessToken))
+                {
+                    m_User = result.LoggedInUser;
+                }
+                else
+                {
+                    throw new FacebookOAuthException(result.ErrorMessage);
+                }
+            }
+
+            if (AfterLoggin != null)
+            {
+                AfterLoggin(this, new EventArgs());
             }
         }
-
+        
         public bool LikedByUser(PostedItem i_Item)
         {
             lock (r_Lock)

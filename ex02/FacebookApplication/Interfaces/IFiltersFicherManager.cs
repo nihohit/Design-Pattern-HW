@@ -4,12 +4,9 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication.Interfaces
 {
-    public interface IFacebookApplicationManager
+    public interface IFiltersFicherManager
     {
         #region Events
-        event EventHandler AfterReset;
-
-        event EventHandler AfterLoggin;
 
         event EventHandler<FetchEventArgs> AfterFetch;
 
@@ -32,10 +29,6 @@ namespace FacebookApplication.Interfaces
         #endregion Properties
 
         #region methods
-
-        void LoginUser(string i_AppId, params string[] i_Permissions);
-
-        void Reset();
 
         void FetchFromFacebook(eFetchOption i_FetchOption);
 
@@ -68,13 +61,5 @@ namespace FacebookApplication.Interfaces
         IEnumerable<string> GetFriendFiltersIds();
 
         #endregion methods
-    }
-
-    public enum eFetchOption
-    {
-        All,
-        Friends,
-        FriendsLists,
-        Inbox,
     }
 }

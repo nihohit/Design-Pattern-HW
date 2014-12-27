@@ -53,13 +53,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicFacebookFunctionality.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Filters\BaseUserFilter.cs" />
     <Compile Include="FetchEventArgs.cs" />
     <Compile Include="Filters\FilterFactory.cs" />
     <Compile Include="Singleton.cs" />
     <Compile Include="Filters\UsersAgeFilter.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="FacebookApplicationManager.cs" />
+    <Compile Include="FiltersFicherManager.cs" />
     <Compile Include="FacebookFetchable.cs" />
     <Compile Include="FriendListsManager.cs" />
     <Compile Include="FriendsFetcher.cs" />
@@ -69,7 +70,7 @@
     <Compile Include="InterestChecker.cs" />
     <Compile Include="Interfaces\IFriendFilter.cs" />
     <Compile Include="Interfaces\IFriendsFiltersManager.cs" />
-    <Compile Include="Interfaces\IFacebookApplicationManager.cs" />
+    <Compile Include="Interfaces\IFiltersFicherManager.cs" />
     <Compile Include="Interfaces\IFriendListsManager.cs" />
     <Compile Include="Interfaces\IFriendsFetcher.cs" />
     <Compile Include="Interfaces\IInboxManager.cs" />
