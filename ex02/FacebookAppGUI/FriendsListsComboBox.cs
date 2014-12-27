@@ -49,7 +49,7 @@ namespace FacebookAppGUI
 
         public void UpdateFriendsLists(IEnumerable<FriendList> i_FriendsLists)
         {
-            var friendsListsAsArray = i_FriendsLists as FriendList[] ?? i_FriendsLists.ToArray();
+            FriendList[] friendsListsAsArray = i_FriendsLists as FriendList[] ?? i_FriendsLists.ToArray();
             m_FriendLists = i_FriendsLists == null ? null : new FriendList[friendsListsAsArray.Count()];
             comboBox.Items.Clear();
             int i = 0;

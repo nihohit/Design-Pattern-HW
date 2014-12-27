@@ -96,7 +96,7 @@ namespace FacebookAppGUI
         public void UpdateFriendsFilters()
         {
             comboBox.Items.Clear();
-            var filters = new List<string> { k_AllFriendsOptionDisplayName };
+            List<string> filters = new List<string> { k_AllFriendsOptionDisplayName };
             filters.AddRange(FacebookApplicationLogicManager.GetFriendFiltersIds());
             r_ListItemsContainer.UpdateItems(filters);
             comboBox.SelectedItem = k_AllFriendsOptionDisplayName;

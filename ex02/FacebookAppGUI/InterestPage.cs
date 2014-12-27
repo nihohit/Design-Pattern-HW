@@ -19,7 +19,7 @@ namespace FacebookAppGUI
 
         private void checkButton_Click(object sender, EventArgs e)
         {
-            var results = this.r_InterestChecker.FindInterestedFriendsNames(
+            string[] results = this.r_InterestChecker.FindInterestedFriendsNames(
                 lastInterestDate.Value,
                 Convert.ToInt32(itemAmountToCheck.Value)).ToArray();
             interestedFreindsBox.Items.Clear();

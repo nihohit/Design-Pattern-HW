@@ -16,7 +16,7 @@ namespace FacebookAppGUI
 
         protected override Dictionary<eFetchOption, int> GetFetchTypesToFetchWithTheirCollectionLimit()
         {
-            var typesAndCollectionLimit = new Dictionary<eFetchOption, int> { { eFetchOption.FriendsLists, -1 } };
+            Dictionary<eFetchOption, int> typesAndCollectionLimit = new Dictionary<eFetchOption, int> { { eFetchOption.FriendsLists, -1 } };
             return typesAndCollectionLimit;
         }
 
@@ -74,7 +74,7 @@ namespace FacebookAppGUI
                 Enum.TryParse(genderComboBox.SelectedValue.ToString(), out gender);
                 try
                 {
-                    var newFilter = FilterFactory.CreateFilter(
+                    FriendsFilter newFilter = FilterFactory.CreateFilter(
                         filterNameTextBox.Text,
                         genderCheckBox.Checked,
                         gender,

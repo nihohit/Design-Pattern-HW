@@ -23,7 +23,7 @@ namespace FacebookApplication
             FriendList i_FriendList,
             IFriendListsManager i_FriendsListManager)
         {
-            var usersFilters = new List<IUsersFilter>();
+            List<IUsersFilter> usersFilters = new List<IUsersFilter>();
 
             if (string.IsNullOrEmpty(i_Name))
             {

@@ -91,7 +91,7 @@
             this.m_CurrentCommentViewBox.Items.Clear();
             this.r_CurrentCommentView.Clear();
             this.r_CurrentCommentView.AddRange(this.m_CurrentlySelectedPost.Comments);
-            var populateCommentBoxTask = new Task(() => this.populateListBox(this.r_CurrentCommentView, this.m_CurrentCommentViewBox));
+            Task populateCommentBoxTask = new Task(() => this.populateListBox(this.r_CurrentCommentView, this.m_CurrentCommentViewBox));
             populateCommentBoxTask.Start();
         }
 
@@ -128,13 +128,13 @@
 
         private string itemToString<T>(T i_Item)
         {
-            var comment = i_Item as Comment;
+            Comment comment = i_Item as Comment;
             if (comment != null)
             {
                 return comment.Message;
             }
 
-            var post = i_Item as Post;
+            Post post = i_Item as Post;
             if (post != null)
             {
                 if (post.Message != null)
@@ -150,7 +150,7 @@
                 return string.Format("[{0}]", post.Type);
             }
 
-            var status = i_Item as Status;
+            Status status = i_Item as Status;
             if (status != null)
             {
                 if (status.Message != null)
@@ -159,7 +159,7 @@
                 }
             }
 
-            var checkin = i_Item as Checkin;
+            Checkin checkin = i_Item as Checkin;
             if (checkin != null)
             {
                 if (checkin.Message != null)
@@ -173,7 +173,7 @@
 
         private void populateCollectionOfPosts(IEnumerable<Post> i_Posts, ICollection<Post> i_Collection)
         {
-            foreach (var post in i_Posts)
+            foreach (Post post in i_Posts)
             {
                 if (post.Message != null)
                 {

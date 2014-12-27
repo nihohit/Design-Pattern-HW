@@ -34,7 +34,7 @@ namespace FacebookAppGUI
             try
             {
                 this.r_FacebookApplicationManager.LoginUser(k_AppId, r_Permissions);
-                var tabsPage = new FormApplicationTabs(this.r_FacebookApplicationManager)
+                FormApplicationTabs tabsPage = new FormApplicationTabs(this.r_FacebookApplicationManager)
                 {
                     Location = this.Location,
                     StartPosition = FormStartPosition.Manual

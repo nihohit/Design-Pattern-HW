@@ -68,7 +68,7 @@ namespace FacebookApplication
                         return new PostedItem[0];
                     }
 
-                    var currentActivity = new List<PostedItem>();
+                    List<PostedItem> currentActivity = new List<PostedItem>();
                     currentActivity.AddRange(m_User.WallPosts);
                     currentActivity.AddRange(m_User.Posts);
                     currentActivity.AddRange(m_User.PostedLinks);

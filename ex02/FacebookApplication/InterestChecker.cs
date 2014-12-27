@@ -20,8 +20,8 @@ namespace FacebookApplication
 
         public IEnumerable<string> FindInterestedFriendsNames(DateTime i_ShownInterestSince, int i_AmountOfEntriesToCheck)
         {
-            var currentLimit = FacebookService.s_CollectionLimit;
-            var finds = findInterestedFriendsNames(i_ShownInterestSince);
+            int currentLimit = FacebookService.s_CollectionLimit;
+            IEnumerable<string> finds = findInterestedFriendsNames(i_ShownInterestSince);
             FacebookService.s_CollectionLimit = currentLimit;
             return finds;
         }
@@ -38,14 +38,14 @@ namespace FacebookApplication
         private IEnumerable<string> findInterestedFriendsNames(DateTime i_ShownInterestSince)
         {
             UserWrapper.Instance.ReFetch();
-            var currentActivity = UserWrapper.Instance.AllActivity;
+            IEnumerable<PostedItem> currentActivity = UserWrapper.Instance.AllActivity;
 
-            var currentPosts = currentActivity.Where(i_Post => i_Post.CreatedTime >= i_ShownInterestSince.Date).ToList();
-            var usersWhoLikedPosts = currentPosts.SelectMany(i_Post => i_Post.LikedBy);
-            var usersWhoCommentedOnPosts =
+            List <PostedItem> currentPosts = currentActivity.Where(i_Post => i_Post.CreatedTime >= i_ShownInterestSince.Date).ToList();
+            IEnumerable<User> usersWhoLikedPosts = currentPosts.SelectMany(i_Post => i_Post.LikedBy);
+            IEnumerable<User> usersWhoCommentedOnPosts =
                 currentPosts.SelectMany(
                     i_Post => i_Post.Comments.Select(i_Comment => i_Comment.From)).ToArray();
-            var combinedDistinctUsers = usersWhoLikedPosts.Union(usersWhoCommentedOnPosts).Distinct(r_UserComparer);
+            IEnumerable<User> combinedDistinctUsers = usersWhoLikedPosts.Union(usersWhoCommentedOnPosts).Distinct(r_UserComparer);
 
             // return all distinct users who liked or commented on posts 
             // that were created after the interest time requested.

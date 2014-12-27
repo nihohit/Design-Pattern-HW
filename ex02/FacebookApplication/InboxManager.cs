@@ -88,7 +88,7 @@ namespace FacebookApplication
 
         private IEnumerable<InboxThread> getInboxThreadsForSpecificFriendFilter(IFriendFilter i_FriendFilter)
         {
-            var friendListInboxThreads = new FacebookObjectCollection<InboxThread>();
+            FacebookObjectCollection<InboxThread> friendListInboxThreads = new FacebookObjectCollection<InboxThread>();
             foreach (InboxThread inboxThread in
                 r_InboxThreads.Values.Where(i_InboxThread =>
                     i_InboxThread.To.Any(i_Friend => i_FriendFilter.FilterdFriendsIds.Contains(i_Friend.Id))))

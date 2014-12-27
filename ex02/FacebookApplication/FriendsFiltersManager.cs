@@ -47,7 +47,7 @@ namespace FacebookApplication
         #region IFriendFilterManager
         public string AddFriendFilter(FriendsFilter i_FriendsFilter)
         {
-            var name = i_FriendsFilter.Name;
+            string name = i_FriendsFilter.Name;
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentException("Filter name not valid");
