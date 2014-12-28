@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="BasicFacebookFunctionality.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Filters\AdvancedFilter.cs" />
     <Compile Include="Filters\BaseUserFilter.cs" />
     <Compile Include="FetchEventArgs.cs" />
     <Compile Include="Filters\FilterFactory.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Filters\UsersFriendListsFilter.cs" />
     <Compile Include="UserComparer.cs" />
     <Compile Include="Filters\UsersGenderFilter.cs" />
+    <Compile Include="UsersFilterBuilder.cs" />
     <Compile Include="UserWrapper.cs" />
   </ItemGroup>
   <ItemGroup>

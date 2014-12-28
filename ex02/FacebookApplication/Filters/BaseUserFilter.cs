@@ -13,9 +13,9 @@ namespace FacebookApplication
 
         public IEnumerable<User> FilterUsers(
             IEnumerable<User> i_Users,
-            out Dictionary<string, FacebookObjectCollection<User>> o_UsersThatThrowException)
+            out Dictionary<string, string> o_UsersThatThrowExceptionNamesByError)
         {
-            o_UsersThatThrowException = new Dictionary<string, FacebookObjectCollection<User>>();
+            o_UsersThatThrowExceptionNamesByError = new Dictionary<string, string>();
             FacebookObjectCollection<User> filteredUsers = new FacebookObjectCollection<User>();
             foreach (User user in i_Users)
             {
@@ -28,16 +28,9 @@ namespace FacebookApplication
                 }
                 catch (Exception exception)
                 {
-                    FacebookObjectCollection<User> usersThatThrowException;
-                    if (!o_UsersThatThrowException.TryGetValue(exception.Message, out usersThatThrowException))
-                    {
-                        usersThatThrowException = new FacebookObjectCollection<User>();
-                        o_UsersThatThrowException.Add(
-                            string.IsNullOrEmpty(exception.Message) ? "unknown error" : exception.Message,
-                            usersThatThrowException);
-                    }
-
-                    usersThatThrowException.Add(user);
+                    string exceptionMessage = string.IsNullOrEmpty(exception.Message) ? "unknown error" : exception.Message;
+                    bool firstUserForExceptionMessage = !o_UsersThatThrowExceptionNamesByError.ContainsKey(exception.Message);
+                    o_UsersThatThrowExceptionNamesByError[exceptionMessage] = firstUserForExceptionMessage ? user.Name : o_UsersThatThrowExceptionNamesByError[exceptionMessage] + ", " + user.Name;
                 }
             }
 

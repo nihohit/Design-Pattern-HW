@@ -74,18 +74,17 @@ namespace FacebookAppGUI
                 Enum.TryParse(genderComboBox.SelectedValue.ToString(), out gender);
                 try
                 {
-                    FriendsFilter newFilter = FilterFactory.CreateFilter(
-                        filterNameTextBox.Text,
-                        genderCheckBox.Checked,
-                        gender,
-                        addIfGenderNotVisible.Checked,
-                        ageCheckBox.Checked,
-                        decimal.ToInt32(minAgeNumericUpDown.Value),
-                        decimal.ToInt32(maxAgeNumericUpDown.Value),
-                        addIfAgeNotVisible.Checked,
-                        friendsListCheckBox.Checked,
-                        friendsListsComboBox.SelectedFriendList,
-                        FacebookApplicationLogicManager.LoggedInUserFriendListsManager);
+                    FriendsFilter newFilter = new FriendsFilter(filterNameTextBox.Text,
+                        FilterFactory.CreateFilter(genderCheckBox.Checked,
+                                                   gender,
+                                                   addIfGenderNotVisible.Checked,
+                                                   ageCheckBox.Checked,
+                                                   decimal.ToInt32(minAgeNumericUpDown.Value),
+                                                   decimal.ToInt32(maxAgeNumericUpDown.Value),
+                                                   addIfAgeNotVisible.Checked,
+                                                   friendsListCheckBox.Checked,
+                                                   friendsListsComboBox.SelectedFriendList,
+                                                   FacebookApplicationLogicManager.LoggedInUserFriendListsManager));
 
                     FacebookApplicationLogicManager.AddFriendFilter(newFilter);
                 }
