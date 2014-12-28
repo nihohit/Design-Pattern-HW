@@ -44,9 +44,9 @@ namespace FacebookAppGUI
             }
         }
 
-        private IFiltersFicherManager m_FacebookApplicationManager;
+        private IFiltersFeatureManager m_FacebookApplicationManager;
 
-        public IFiltersFicherManager FacebookApplicationLogicManager
+        public IFiltersFeatureManager FacebookApplicationLogicManager
         {
             get { return m_FacebookApplicationManager; }
             set

@@ -12,7 +12,7 @@ namespace FacebookAppGUI
 
         private readonly BasicFacebookFunctionality r_BasicfacebookFunctionality;
 
-        public FormApplicationTabs(IFiltersFicherManager i_FacebookApplicationManager)
+        public FormApplicationTabs(IFiltersFeatureManager i_FacebookApplicationManager)
         {
             InitializeComponent();
             updateFacebookApplicationManagerInRelevantControls(i_FacebookApplicationManager);
@@ -21,7 +21,7 @@ namespace FacebookAppGUI
         }
 
         private void updateFacebookApplicationManagerInRelevantControls(
-            IFiltersFicherManager i_FacebookApplicationManager)
+            IFiltersFeatureManager i_FacebookApplicationManager)
         {
             inboxPage.FacebookApplicationLogicManager = i_FacebookApplicationManager;
             friendsPage1.FacebookApplicationLogicManager = i_FacebookApplicationManager;

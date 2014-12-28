@@ -8,9 +8,9 @@ namespace FacebookAppGUI
 {
     public partial class ApplicationTabPage : UserControl
     {
-        private IFiltersFicherManager m_FacebookApplicationManager;
+        private IFiltersFeatureManager m_FacebookApplicationManager;
 
-        public IFiltersFicherManager FacebookApplicationLogicManager
+        public IFiltersFeatureManager FacebookApplicationLogicManager
         {
             get { return m_FacebookApplicationManager; }
             set

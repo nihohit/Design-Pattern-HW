@@ -37,10 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Facebook">
-      <HintPath>..\FacebookDLLs\Facebook.dll</HintPath>
+      <HintPath>..\..\ex01\Ex01\Ex01\bin\Debug\Facebook.dll</HintPath>
     </Reference>
     <Reference Include="FbGraphApiWrapper">
-      <HintPath>..\FacebookDLLs\FbGraphApiWrapper.dll</HintPath>
+      <HintPath>..\..\ex01\Ex01\Ex01\bin\Debug\FbGraphApiWrapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -61,7 +61,7 @@
     <Compile Include="Singleton.cs" />
     <Compile Include="Filters\UsersAgeFilter.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="FiltersFicherManager.cs" />
+    <Compile Include="FiltersFeatureManager.cs" />
     <Compile Include="FacebookFetchable.cs" />
     <Compile Include="FriendListsManager.cs" />
     <Compile Include="FriendsFetcher.cs" />
@@ -71,7 +71,7 @@
     <Compile Include="InterestChecker.cs" />
     <Compile Include="Interfaces\IFriendFilter.cs" />
     <Compile Include="Interfaces\IFriendsFiltersManager.cs" />
-    <Compile Include="Interfaces\IFiltersFicherManager.cs" />
+    <Compile Include="Interfaces\IFiltersFeatureManager.cs" />
     <Compile Include="Interfaces\IFriendListsManager.cs" />
     <Compile Include="Interfaces\IFriendsFetcher.cs" />
     <Compile Include="Interfaces\IInboxManager.cs" />
@@ -81,7 +81,6 @@
     <Compile Include="Filters\UsersFriendListsFilter.cs" />
     <Compile Include="UserComparer.cs" />
     <Compile Include="Filters\UsersGenderFilter.cs" />
-    <Compile Include="UsersFilterBuilder.cs" />
     <Compile Include="UserWrapper.cs" />
   </ItemGroup>
   <ItemGroup>

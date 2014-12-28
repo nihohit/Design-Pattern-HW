@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Facebook;
+using FacebookWrapper;
+using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication
 {
-    using Facebook;
-    using FacebookWrapper;
-    using FacebookWrapper.ObjectModel;
+    using System.Reflection.Emit;
 
     public class UserWrapper
     {
@@ -16,7 +17,7 @@ namespace FacebookApplication
         private User m_User;
 
         #endregion private fields
-        
+
         #region Events
 
         public event EventHandler BeforeLoggin;
@@ -24,7 +25,7 @@ namespace FacebookApplication
         public event EventHandler AfterLoggin;
 
         public event EventHandler<FetchEventArgs> AfterFetch;
-        
+
         #endregion Events
 
         #region properties
@@ -70,8 +71,8 @@ namespace FacebookApplication
                         }
                     }
                 }
-                
-                return m_User.NewsFeed;                
+
+                return m_User.NewsFeed;
             }
         }
 
@@ -113,7 +114,7 @@ namespace FacebookApplication
                     }
                 }
 
-                return m_User.Friends;                
+                return m_User.Friends;
             }
         }
 
@@ -131,8 +132,8 @@ namespace FacebookApplication
                         }
                     }
                 }
-                
-                return m_User.FriendLists;                
+
+                return m_User.FriendLists;
             }
         }
 
@@ -150,8 +151,8 @@ namespace FacebookApplication
                         }
                     }
                 }
-                
-                return m_User.InboxThreads;                
+
+                return m_User.InboxThreads;
             }
         }
 
@@ -159,21 +160,16 @@ namespace FacebookApplication
         {
             get
             {
+                string returnValue = string.Empty;
                 lock (r_Lock)
                 {
-                    if (m_User == null)
+                    if (m_User != null)
                     {
-                        lock (r_Lock)
-                        {
-                            if (m_User == null)
-                            {
-                                return string.Empty;
-                            }
-                        }
+                        returnValue = m_User.Id;
                     }
                 }
-                
-                return m_User.Id;               
+
+                return returnValue;
             }
         }
 
@@ -215,7 +211,7 @@ namespace FacebookApplication
                 AfterLoggin(this, new EventArgs());
             }
         }
-        
+
         public bool LikedByUser(PostedItem i_Item)
         {
             lock (r_Lock)
