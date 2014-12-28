@@ -41,15 +41,18 @@ namespace FacebookApplication
         {
             get
             {
-                lock (r_Lock)
+                if (m_User == null)
                 {
-                    if (m_User == null)
+                    lock (r_Lock)
                     {
-                        return new Post[0];
+                        if (m_User == null)
+                        {
+                            return new Post[0];
+                        }
                     }
-
-                    return m_User.Posts;
                 }
+
+                return m_User.Posts;
             }
         }
 
@@ -57,15 +60,18 @@ namespace FacebookApplication
         {
             get
             {
-                lock (r_Lock)
+                if (m_User == null)
                 {
-                    if (m_User == null)
+                    lock (r_Lock)
                     {
-                        return new Post[0];
+                        if (m_User == null)
+                        {
+                            return new Post[0];
+                        }
                     }
-
-                    return m_User.NewsFeed;
                 }
+                
+                return m_User.NewsFeed;                
             }
         }
 
@@ -96,15 +102,18 @@ namespace FacebookApplication
         {
             get
             {
-                lock (r_Lock)
+                if (m_User == null)
                 {
-                    if (m_User == null)
+                    lock (r_Lock)
                     {
-                        throw new ArgumentNullException("User");
+                        if (m_User == null)
+                        {
+                            throw new ArgumentNullException("User");
+                        }
                     }
-
-                    return m_User.Friends;
                 }
+
+                return m_User.Friends;                
             }
         }
 
@@ -112,15 +121,18 @@ namespace FacebookApplication
         {
             get
             {
-                lock (r_Lock)
+                if (m_User == null)
                 {
-                    if (m_User == null)
+                    lock (r_Lock)
                     {
-                        throw new ArgumentNullException("User");
+                        if (m_User == null)
+                        {
+                            throw new ArgumentNullException("User");
+                        }
                     }
-
-                    return m_User.FriendLists;
                 }
+                
+                return m_User.FriendLists;                
             }
         }
 
@@ -128,15 +140,18 @@ namespace FacebookApplication
         {
             get
             {
-                lock (r_Lock)
+                if (m_User == null)
                 {
-                    if (m_User == null)
+                    lock (r_Lock)
                     {
-                        throw new ArgumentNullException("User");
+                        if (m_User == null)
+                        {
+                            throw new ArgumentNullException("User");
+                        }
                     }
-
-                    return m_User.InboxThreads;
                 }
+                
+                return m_User.InboxThreads;                
             }
         }
 
@@ -148,11 +163,17 @@ namespace FacebookApplication
                 {
                     if (m_User == null)
                     {
-                        return string.Empty;
+                        lock (r_Lock)
+                        {
+                            if (m_User == null)
+                            {
+                                return string.Empty;
+                            }
+                        }
                     }
-
-                    return m_User.Id;
                 }
+                
+                return m_User.Id;               
             }
         }
 
