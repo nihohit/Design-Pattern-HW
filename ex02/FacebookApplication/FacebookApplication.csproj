@@ -59,7 +59,7 @@
     <Compile Include="Filters\AdvancedFilter.cs" />
     <Compile Include="Filters\BaseUserFilter.cs" />
     <Compile Include="FetchEventArgs.cs" />
-    <Compile Include="Filters\FilterFactory.cs" />
+    <Compile Include="Filters\FilterBuilder.cs" />
     <Compile Include="Singleton.cs" />
     <Compile Include="Filters\UsersAgeFilter.cs" />
     <Compile Include="Extensions.cs" />

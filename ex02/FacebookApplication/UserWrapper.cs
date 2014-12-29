@@ -6,7 +6,6 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication
 {
-    using System.Reflection.Emit;
     using System.Threading.Tasks;
 
     public class UserWrapper

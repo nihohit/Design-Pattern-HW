@@ -77,7 +77,7 @@ namespace FacebookAppGUI
                 try
                 {
                     FriendsFilter newFilter = new FriendsFilter(filterNameTextBox.Text,
-                        FilterFactory.CreateFilter(genderCheckBox.Checked,
+                        FilterBuilder.CreateFilter(genderCheckBox.Checked,
                                                    gender,
                                                    addIfGenderNotVisible.Checked,
                                                    ageCheckBox.Checked,
