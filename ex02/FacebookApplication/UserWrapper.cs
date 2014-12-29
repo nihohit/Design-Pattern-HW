@@ -7,6 +7,7 @@ using FacebookWrapper.ObjectModel;
 namespace FacebookApplication
 {
     using System.Reflection.Emit;
+    using System.Threading.Tasks;
 
     public class UserWrapper
     {
@@ -23,8 +24,6 @@ namespace FacebookApplication
         public event EventHandler BeforeLoggin;
 
         public event EventHandler AfterLoggin;
-
-        public event EventHandler<FetchEventArgs> AfterFetch;
 
         #endregion Events
 
@@ -238,7 +237,14 @@ namespace FacebookApplication
                 return false;
             }
 
+            ReFetch();
+
             return true;
+        }
+
+        public Task<bool> PostStatusAsync(string i_Status)
+        {
+            return new Task<bool>(() => this.PostStatus(i_Status));
         }
 
         public void ReFetch()

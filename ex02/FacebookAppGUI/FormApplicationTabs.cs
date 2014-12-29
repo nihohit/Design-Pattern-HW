@@ -4,6 +4,8 @@ using FacebookApplication.Interfaces;
 
 namespace FacebookAppGUI
 {
+    using System.Threading.Tasks;
+
     using FacebookApplication;
 
     public partial class FormApplicationTabs : Form
@@ -67,11 +69,18 @@ namespace FacebookAppGUI
 
         private void buttonSetStatus_Click(object sender, EventArgs e)
         {
-            if (UserWrapper.Instance.PostStatus(statusTextBox.Text))
-            {
-                statusTextBox.Clear();
-                this.r_BasicfacebookFunctionality.FetchPosts(UserWrapper.Instance.Posts);
-            }
+            var postText = statusTextBox.Text;
+            if (!string.IsNullOrWhiteSpace(postText))
+                new Task(
+                    () =>
+                    {
+                        if (UserWrapper.Instance.PostStatus(postText))
+                        {
+                            this.r_BasicfacebookFunctionality.FetchPosts(UserWrapper.Instance.Posts);
+                        }
+                    }).Start();
+
+            statusTextBox.Clear();
         }
 
         private void switchToProfile()
@@ -82,7 +91,7 @@ namespace FacebookAppGUI
                 myProfileViewComments,
                 myProfileLikeButton,
                 myProfileCommentButton);
-            this.r_BasicfacebookFunctionality.FetchPosts(UserWrapper.Instance.Posts);
+            this.r_BasicfacebookFunctionality.InvokedFetchPosts(UserWrapper.Instance.Posts);
         }
 
         private void switchToNewsFeed()
@@ -93,7 +102,7 @@ namespace FacebookAppGUI
                 newsFeedViewComments,
                 newsFeedLikeButton,
                 newsFeedCommentButton);
-            this.r_BasicfacebookFunctionality.FetchPosts(UserWrapper.Instance.NewsFeed);
+            this.r_BasicfacebookFunctionality.InvokedFetchPosts(UserWrapper.Instance.NewsFeed);
         }
     }
 }

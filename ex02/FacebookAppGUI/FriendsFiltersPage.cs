@@ -7,6 +7,8 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppGUI
 {
+    using FacebookApplication.Filters;
+
     public partial class FriendsFiltersPage : ApplicationTabPage
     {
         public FriendsFiltersPage()

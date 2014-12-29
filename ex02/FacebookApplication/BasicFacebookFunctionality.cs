@@ -13,6 +13,8 @@
     {
         #region private fields
 
+        private readonly object r_Lock = new object();
+
         private readonly List<Post> r_CurrentActivityFeed = new List<Post>();
 
         private readonly List<Comment> r_CurrentCommentView = new List<Comment>();
@@ -42,14 +44,17 @@
             Button i_LikeButton,
             Button i_CommentButton)
         {
-            this.m_CurrentlySelectedPost = null;
-            this.m_CurrentlySelectedComment = null;
-            this.m_CurrentCommentTextBox = i_WriteComment;
-            this.m_CurrentActivityBox = i_Activity;
-            this.m_CurrentCommentViewBox = i_CommentsView;
-            this.m_CurrentLikeButton = i_LikeButton;
-            this.m_CurrentCommentButton = i_CommentButton;
-            this.HideContextualObjects();
+            lock (r_Lock)
+            {
+                this.m_CurrentlySelectedPost = null;
+                this.m_CurrentlySelectedComment = null;
+                this.m_CurrentCommentTextBox = i_WriteComment;
+                this.m_CurrentActivityBox = i_Activity;
+                this.m_CurrentCommentViewBox = i_CommentsView;
+                this.m_CurrentLikeButton = i_LikeButton;
+                this.m_CurrentCommentButton = i_CommentButton;
+                this.HideContextualObjects();
+            }
         }
 
         public void HideContextualObjects()
@@ -67,32 +72,44 @@
 
         public void Comment()
         {
-            string text = this.m_CurrentCommentTextBox.Text;
+            commentAsync().Start();
+        }
 
-            Debug.Assert(this.m_CurrentlySelectedPost != null, "post is null");
-            if (string.IsNullOrEmpty(text))
-            {
-                return;
-            }
+        private Task commentAsync()
+        {
+            return new Task(
+                () =>
+                {
+                    string text = this.m_CurrentCommentTextBox.Text;
 
-            this.m_CurrentlySelectedPost.Comment(text);
-            this.ActivitySelected();
+                    Debug.Assert(this.m_CurrentlySelectedPost != null, "post is null");
+                    if (string.IsNullOrEmpty(text))
+                    {
+                        return;
+                    }
+
+                    this.m_CurrentlySelectedPost.Comment(text);
+                    m_CurrentActivityBox.Invoke(new Action(this.ActivitySelected));
+                });
         }
 
         public void ActivitySelected()
         {
-            this.m_CurrentlySelectedComment = null;
-            this.m_CurrentlySelectedPost = this.r_CurrentActivityFeed[this.m_CurrentActivityBox.SelectedIndex];
-            this.m_CurrentCommentTextBox.Show();
-            this.m_CurrentCommentTextBox.Clear();
-            this.m_CurrentCommentButton.Show();
-            this.m_CurrentLikeButton.Show();
-            this.m_CurrentCommentViewBox.Show();
-            this.m_CurrentCommentViewBox.Items.Clear();
-            this.r_CurrentCommentView.Clear();
-            this.r_CurrentCommentView.AddRange(this.m_CurrentlySelectedPost.Comments);
-            Task populateCommentBoxTask = new Task(() => this.populateListBox(this.r_CurrentCommentView, this.m_CurrentCommentViewBox));
-            populateCommentBoxTask.Start();
+            lock (r_Lock)
+            {
+                this.m_CurrentlySelectedComment = null;
+                this.m_CurrentlySelectedPost = this.r_CurrentActivityFeed
+                    [m_CurrentActivityBox.SelectedIndex];
+                this.m_CurrentCommentTextBox.Show();
+                this.m_CurrentCommentTextBox.Clear();
+                this.m_CurrentCommentButton.Show();
+                this.m_CurrentLikeButton.Show();
+                this.m_CurrentCommentViewBox.Show();
+                this.m_CurrentCommentViewBox.Items.Clear();
+                this.r_CurrentCommentView.Clear();
+                this.r_CurrentCommentView.AddRange(this.m_CurrentlySelectedPost.Comments);
+                this.populateListBox(this.r_CurrentCommentView, this.m_CurrentCommentViewBox);
+            }
         }
 
         #endregion general methods
@@ -101,10 +118,18 @@
 
         public void FetchPosts(IEnumerable<Post> i_Posts)
         {
-            this.m_CurrentActivityBox.Items.Clear();
-            this.r_CurrentActivityFeed.Clear();
-            this.populateCollectionOfPosts(i_Posts, this.r_CurrentActivityFeed);
-            this.invokedPopulateListBox(this.r_CurrentActivityFeed, this.m_CurrentActivityBox);
+            m_CurrentActivityBox.Invoke(new Action(() => InvokedFetchPosts(i_Posts)));
+        }
+
+        public void InvokedFetchPosts(IEnumerable<Post> i_Posts)
+        {
+            lock (r_Lock)
+            {
+                this.m_CurrentActivityBox.Items.Clear();
+                this.r_CurrentActivityFeed.Clear();
+                this.populateCollectionOfPosts(i_Posts, this.r_CurrentActivityFeed);
+                this.populateListBox(this.r_CurrentActivityFeed, this.m_CurrentActivityBox);
+            }
         }
 
         #endregion
@@ -114,11 +139,6 @@
         #region list boxes
 
         private void populateListBox<T>(IEnumerable<T> i_Items, ListBox i_Box) where T : PostedItem
-        {
-            i_Box.Invoke(new Action(() => this.invokedPopulateListBox(i_Items, i_Box)));
-        }
-
-        private void invokedPopulateListBox<T>(IEnumerable<T> i_Items, ListBox i_Box) where T : PostedItem
         {
             i_Box.Items.AddRange(
                 i_Items.Select(i_Item => "{0}: {1}"
@@ -188,34 +208,47 @@
 
         public void Like()
         {
-            PostedItem item;
-            if (this.m_CurrentlySelectedComment == null)
-            {
-                Debug.Assert(this.m_CurrentlySelectedPost != null, "item is null");
-                item = this.m_CurrentlySelectedPost;
-            }
-            else
-            {
-                item = this.m_CurrentlySelectedComment;
-            }
+            likeAsync().Start();
+        }
 
-            try
-            {
-                if (UserWrapper.Instance.LikedByUser(item))
+        private Task likeAsync()
+        {
+            return new Task(
+                () =>
                 {
-                    item.Unlike();
-                }
-                else
-                {
-                    item.Like();
-                }
-            }
-            catch (InvalidCastException)
-            {
-                // The like/unlike actions are faulty and throw exceptions without the try/catch pattern.
-            }
+                    PostedItem item;
+                    if (this.m_CurrentlySelectedComment == null)
+                    {
+                        Debug.Assert(this.m_CurrentlySelectedPost != null, "item is null");
+                        item = this.m_CurrentlySelectedPost;
+                    }
+                    else
+                    {
+                        item = this.m_CurrentlySelectedComment;
+                    }
 
-            item.ReFetch();
+                    try
+                    {
+                        if (UserWrapper.Instance.LikedByUser(item))
+                        {
+                            item.Unlike();
+                        }
+                        else
+                        {
+                            item.Like();
+                        }
+                    }
+                    catch (InvalidCastException)
+                    {
+                        // The like/unlike actions are faulty and throw exceptions without the try/catch pattern.
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.ShowErrorMessageBox();
+                    }
+
+                    item.ReFetch();
+                });
         }
 
         #endregion
