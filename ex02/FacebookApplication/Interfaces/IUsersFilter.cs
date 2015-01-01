@@ -8,7 +8,7 @@ namespace FacebookApplication.Interfaces
         #region methods
         IEnumerable<User> FilterUsers(
             IEnumerable<User> i_Users,
-            out Dictionary<string, string> o_UsersThatThrowExceptionNamesByError);
+            out Dictionary<string, List<string>> o_UsersThatThrowExceptionNamesByError);
         #endregion Properties
     }
 }

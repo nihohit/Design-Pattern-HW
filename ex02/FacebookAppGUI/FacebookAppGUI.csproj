@@ -182,6 +182,10 @@
     <EmbeddedResource Include="FormApplicationTabs.resx">
       <DependentUpon>FormApplicationTabs.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="FacebookApplication.FriendsFilter.datasource" />
+    <None Include="FacebookApplication.Interfaces.IFiltersFeatureManager.datasource" />
+    <None Include="FacebookApplication.Interfaces.IFriendFilter.datasource" />
+    <None Include="FacebookWrapper.ObjectModel.User.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

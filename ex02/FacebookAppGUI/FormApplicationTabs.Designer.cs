@@ -317,7 +317,7 @@
             // 
             this.friendsFiltersPage.AutoScroll = true;
             this.friendsFiltersPage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.friendsFiltersPage.FacebookApplicationLogicManager = null;
+            this.friendsFiltersPage.FiltersFeatureManager = null;
             this.friendsFiltersPage.Location = new System.Drawing.Point(0, 0);
             this.friendsFiltersPage.Name = "friendsFiltersPage";
             this.friendsFiltersPage.Size = new System.Drawing.Size(786, 498);
@@ -339,7 +339,7 @@
             // 
             this.inboxPage.AutoScroll = true;
             this.inboxPage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.inboxPage.FacebookApplicationLogicManager = null;
+            this.inboxPage.FiltersFeatureManager = null;
             this.inboxPage.Location = new System.Drawing.Point(2, 2);
             this.inboxPage.Margin = new System.Windows.Forms.Padding(2);
             this.inboxPage.Name = "inboxPage";
@@ -362,7 +362,7 @@
             // 
             this.friendsPage1.AutoScroll = true;
             this.friendsPage1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.friendsPage1.FacebookApplicationLogicManager = null;
+            this.friendsPage1.FiltersFeatureManager = null;
             this.friendsPage1.Location = new System.Drawing.Point(2, 2);
             this.friendsPage1.Margin = new System.Windows.Forms.Padding(2);
             this.friendsPage1.Name = "friendsPage1";

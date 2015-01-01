@@ -44,7 +44,7 @@ namespace FacebookAppGUI
 
         protected override void OnFacebookApplicationLogicManagerChanged()
         {
-            friendsFiltersCombo.FacebookApplicationLogicManager = FacebookApplicationLogicManager;
+            friendsFiltersCombo.FacebookApplicationLogicManager = FiltersFeatureManager;
         }
 
         private void friendsListsCombo_FriendsFiltersChanged(object sender, EventArgs e)
@@ -69,8 +69,8 @@ namespace FacebookAppGUI
         {
             string usersThatCantBeFilteredMessage = null;
             IEnumerable<InboxThread> inboxThreads = friendsFiltersCombo.AllFriendsSelected
-                ? FacebookApplicationLogicManager.GetAllInboxThreads()
-                : FacebookApplicationLogicManager.GetInboxThreadsForSpecificFilter(friendsFiltersCombo.SelectedFriendFilterId.Trim(), out usersThatCantBeFilteredMessage);
+                ? FiltersFeatureManager.GetAllInboxThreads()
+                : FiltersFeatureManager.GetInboxThreadsForSpecificFilter(friendsFiltersCombo.SelectedFriendFilterId.Trim(), out usersThatCantBeFilteredMessage);
             inboxMessagesListBox.UpdateInboxThreads(inboxThreads, UserWrapper.Instance.Id);
             updateSelectedMessageTextBox();
             if (!string.IsNullOrEmpty(usersThatCantBeFilteredMessage))

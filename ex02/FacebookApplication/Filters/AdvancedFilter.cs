@@ -5,32 +5,44 @@ using System.Text;
 using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
 
-namespace FacebookApplication.Filters
+namespace FacebookApplication
 {
-    public class AdvancedFilter : IUsersFilter
+    public abstract class AdvancedFilter : IUsersFilter
     {
+        public static string k_All = "All";
+        public static string k_None = "None";
+
         private readonly List<IUsersFilter> r_UserFilters = new List<IUsersFilter>();
         
-        public AdvancedFilter(List<IUsersFilter> i_UserFilters)
+        protected AdvancedFilter(List<IUsersFilter> i_UserFilters)
         {
-            r_UserFilters = i_UserFilters;            
+            if (i_UserFilters != null)
+            {
+                r_UserFilters = i_UserFilters;
+            }
         }
 
-        public IEnumerable<User> FilterUsers(IEnumerable<User> i_Users, out Dictionary<string, string> o_UsersThatThrowExceptionNamesByError)
+        public IEnumerable<User> FilterUsers(IEnumerable<User> i_Users, out Dictionary<string, List<string>> o_UsersThatThrowExceptionNamesByError)
         {
-            o_UsersThatThrowExceptionNamesByError = new Dictionary<string, string>();
-            IEnumerable<User> filteredUsers = i_Users;
-            Dictionary<string, string> usersThatThrowExceptionNamesByError;
+            o_UsersThatThrowExceptionNamesByError = new Dictionary<string, List<string>>();
+            IEnumerable<User> filteredUsers = GetFriendsBeforeFilterApplied(i_Users);
+            Dictionary<string, List<string>> usersThatThrowExceptionNamesByError;
             foreach (IUsersFilter filter in r_UserFilters)
             {
-                filteredUsers = filter.FilterUsers(filteredUsers, out usersThatThrowExceptionNamesByError);
+                filteredUsers = ApplyCurrentFilter(filter, i_Users, filteredUsers, out usersThatThrowExceptionNamesByError);
                 if (usersThatThrowExceptionNamesByError != null)
                 {
-                    foreach (string usersNames in usersThatThrowExceptionNamesByError.Keys)
+                    foreach (string error in usersThatThrowExceptionNamesByError.Keys)
                     {
-                        o_UsersThatThrowExceptionNamesByError[usersNames] = o_UsersThatThrowExceptionNamesByError.ContainsKey(usersNames) ?
-                            o_UsersThatThrowExceptionNamesByError[usersNames] + ", " : string.Empty;
-                        o_UsersThatThrowExceptionNamesByError[usersNames] += usersThatThrowExceptionNamesByError[usersNames];
+                        o_UsersThatThrowExceptionNamesByError[error] = o_UsersThatThrowExceptionNamesByError.ContainsKey(error) ?
+                            o_UsersThatThrowExceptionNamesByError[error] : new List<string>();
+                        foreach (string userName in usersThatThrowExceptionNamesByError[error])
+                        {
+                            if (!o_UsersThatThrowExceptionNamesByError[error].Contains(userName))
+                            {
+                                o_UsersThatThrowExceptionNamesByError[error].Add(userName);
+                            }
+                        }
                     }
                 }
             }
@@ -38,15 +50,36 @@ namespace FacebookApplication.Filters
             return filteredUsers;
         }
 
+        protected abstract IEnumerable<User> ApplyCurrentFilter(IUsersFilter i_Filter, IEnumerable<User> i_Users,
+            IEnumerable<User> i_UsersAfterPreviousFiltersApplied,
+            out Dictionary<string, List<string>> o_UsersThatThrowExceptionNamesByError);
+
+        protected abstract IEnumerable<User> GetFriendsBeforeFilterApplied(IEnumerable<User> i_Users);
+
+        protected abstract string GetDisplayWhenNoFilters();
+
+        protected abstract string GetDisplayStringForToString(IUsersFilter i_Filter);
+
+        protected abstract string TrimDisplayString(string i_DisplayString);
+
         public override string ToString()
         {
-            string displayString = string.Empty;
-            foreach (IUsersFilter userFilter in r_UserFilters)
+            string toString = string.Empty;
+            if (r_UserFilters == null || r_UserFilters.Count < 1)
             {
-                displayString += userFilter + ", ";
+                toString = GetDisplayWhenNoFilters();
+            }
+            else
+            {
+                foreach (IUsersFilter userFilter in r_UserFilters)
+                {
+                    toString += GetDisplayStringForToString(userFilter);
+                }
+
+                toString = TrimDisplayString(toString);
             }
 
-            return displayString.Trim().Trim(',');
+            return toString;
         }
     }
 }

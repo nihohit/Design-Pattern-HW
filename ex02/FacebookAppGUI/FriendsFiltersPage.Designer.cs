@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.filtersListBox = new System.Windows.Forms.ListBox();
+            this.components = new System.ComponentModel.Container();
             this.genderComboBox = new System.Windows.Forms.ComboBox();
             this.genderCheckBox = new System.Windows.Forms.CheckBox();
             this.ageCheckBox = new System.Windows.Forms.CheckBox();
@@ -42,30 +42,28 @@
             this.maxAgeNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.minAgeNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.friendsListsComboBox = new FacebookAppGUI.FriendsListsComboBox();
-            this.filterNameTextBox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.addIfAgeNotVisible = new System.Windows.Forms.CheckBox();
             this.addIfGenderNotVisible = new System.Windows.Forms.CheckBox();
+            this.friendsFiltersDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.friendsFiltersIdsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fetchedTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userLoggedInWhenFetchedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.minIntervalBetweenFetchActionsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.forcedFetchDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.iFiltersFeatureManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.iFriendFilterBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.filtersListBox = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.maxAgeNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minAgeNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iFiltersFeatureManagerBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iFriendFilterBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // filtersListBox
-            // 
-            this.filtersListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.filtersListBox.FormattingEnabled = true;
-            this.filtersListBox.Location = new System.Drawing.Point(4, 155);
-            this.filtersListBox.Name = "filtersListBox";
-            this.filtersListBox.Size = new System.Drawing.Size(457, 56);
-            this.filtersListBox.TabIndex = 55;
             // 
             // genderComboBox
             // 
             this.genderComboBox.FormattingEnabled = true;
-            this.genderComboBox.Location = new System.Drawing.Point(79, 32);
+            this.genderComboBox.Location = new System.Drawing.Point(79, 3);
             this.genderComboBox.Name = "genderComboBox";
             this.genderComboBox.Size = new System.Drawing.Size(265, 21);
             this.genderComboBox.TabIndex = 59;
@@ -76,7 +74,7 @@
             this.genderCheckBox.AutoSize = true;
             this.genderCheckBox.Checked = true;
             this.genderCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.genderCheckBox.Location = new System.Drawing.Point(3, 34);
+            this.genderCheckBox.Location = new System.Drawing.Point(3, 5);
             this.genderCheckBox.Name = "genderCheckBox";
             this.genderCheckBox.Size = new System.Drawing.Size(61, 17);
             this.genderCheckBox.TabIndex = 58;
@@ -89,7 +87,7 @@
             this.ageCheckBox.AutoSize = true;
             this.ageCheckBox.Checked = true;
             this.ageCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ageCheckBox.Location = new System.Drawing.Point(4, 68);
+            this.ageCheckBox.Location = new System.Drawing.Point(4, 39);
             this.ageCheckBox.Name = "ageCheckBox";
             this.ageCheckBox.Size = new System.Drawing.Size(48, 17);
             this.ageCheckBox.TabIndex = 60;
@@ -102,7 +100,7 @@
             this.friendsListCheckBox.AutoSize = true;
             this.friendsListCheckBox.Checked = true;
             this.friendsListCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.friendsListCheckBox.Location = new System.Drawing.Point(3, 103);
+            this.friendsListCheckBox.Location = new System.Drawing.Point(3, 74);
             this.friendsListCheckBox.Name = "friendsListCheckBox";
             this.friendsListCheckBox.Size = new System.Drawing.Size(76, 17);
             this.friendsListCheckBox.TabIndex = 62;
@@ -112,7 +110,7 @@
             // 
             // addFilterButton
             // 
-            this.addFilterButton.Location = new System.Drawing.Point(3, 126);
+            this.addFilterButton.Location = new System.Drawing.Point(3, 97);
             this.addFilterButton.Name = "addFilterButton";
             this.addFilterButton.Size = new System.Drawing.Size(97, 23);
             this.addFilterButton.TabIndex = 64;
@@ -128,7 +126,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.maxAgeNumericUpDown);
             this.panel1.Controls.Add(this.minAgeNumericUpDown);
-            this.panel1.Location = new System.Drawing.Point(79, 59);
+            this.panel1.Location = new System.Drawing.Point(79, 30);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(265, 34);
             this.panel1.TabIndex = 65;
@@ -198,34 +196,18 @@
             this.friendsListsComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.friendsListsComboBox.LabelText = "";
-            this.friendsListsComboBox.Location = new System.Drawing.Point(79, 99);
-            this.friendsListsComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.friendsListsComboBox.Location = new System.Drawing.Point(79, 70);
+            this.friendsListsComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.friendsListsComboBox.Name = "friendsListsComboBox";
-            this.friendsListsComboBox.Size = new System.Drawing.Size(382, 21);
+            this.friendsListsComboBox.Size = new System.Drawing.Size(388, 21);
             this.friendsListsComboBox.TabIndex = 66;
-            // 
-            // filterNameTextBox
-            // 
-            this.filterNameTextBox.Location = new System.Drawing.Point(79, 6);
-            this.filterNameTextBox.Name = "filterNameTextBox";
-            this.filterNameTextBox.Size = new System.Drawing.Size(265, 20);
-            this.filterNameTextBox.TabIndex = 67;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 9);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 13);
-            this.label5.TabIndex = 70;
-            this.label5.Text = "Filter Name :";
             // 
             // addIfAgeNotVisible
             // 
             this.addIfAgeNotVisible.AutoSize = true;
             this.addIfAgeNotVisible.Checked = true;
             this.addIfAgeNotVisible.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.addIfAgeNotVisible.Location = new System.Drawing.Point(350, 59);
+            this.addIfAgeNotVisible.Location = new System.Drawing.Point(350, 30);
             this.addIfAgeNotVisible.Name = "addIfAgeNotVisible";
             this.addIfAgeNotVisible.Size = new System.Drawing.Size(103, 17);
             this.addIfAgeNotVisible.TabIndex = 71;
@@ -237,21 +219,84 @@
             this.addIfGenderNotVisible.AutoSize = true;
             this.addIfGenderNotVisible.Checked = true;
             this.addIfGenderNotVisible.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.addIfGenderNotVisible.Location = new System.Drawing.Point(350, 32);
+            this.addIfGenderNotVisible.Location = new System.Drawing.Point(350, 3);
             this.addIfGenderNotVisible.Name = "addIfGenderNotVisible";
             this.addIfGenderNotVisible.Size = new System.Drawing.Size(103, 17);
             this.addIfGenderNotVisible.TabIndex = 72;
             this.addIfGenderNotVisible.Text = "Add if not visible";
             this.addIfGenderNotVisible.UseVisualStyleBackColor = true;
             // 
+            // friendsFiltersDataGridViewTextBoxColumn
+            // 
+            this.friendsFiltersDataGridViewTextBoxColumn.DataPropertyName = "FriendsFilters";
+            this.friendsFiltersDataGridViewTextBoxColumn.HeaderText = "FriendsFilters";
+            this.friendsFiltersDataGridViewTextBoxColumn.Name = "friendsFiltersDataGridViewTextBoxColumn";
+            this.friendsFiltersDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // friendsFiltersIdsDataGridViewTextBoxColumn
+            // 
+            this.friendsFiltersIdsDataGridViewTextBoxColumn.DataPropertyName = "FriendsFiltersIds";
+            this.friendsFiltersIdsDataGridViewTextBoxColumn.HeaderText = "FriendsFiltersIds";
+            this.friendsFiltersIdsDataGridViewTextBoxColumn.Name = "friendsFiltersIdsDataGridViewTextBoxColumn";
+            this.friendsFiltersIdsDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // fetchedTimeDataGridViewTextBoxColumn
+            // 
+            this.fetchedTimeDataGridViewTextBoxColumn.DataPropertyName = "FetchedTime";
+            this.fetchedTimeDataGridViewTextBoxColumn.HeaderText = "FetchedTime";
+            this.fetchedTimeDataGridViewTextBoxColumn.Name = "fetchedTimeDataGridViewTextBoxColumn";
+            this.fetchedTimeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // userLoggedInWhenFetchedDataGridViewTextBoxColumn
+            // 
+            this.userLoggedInWhenFetchedDataGridViewTextBoxColumn.DataPropertyName = "UserLoggedInWhenFetched";
+            this.userLoggedInWhenFetchedDataGridViewTextBoxColumn.HeaderText = "UserLoggedInWhenFetched";
+            this.userLoggedInWhenFetchedDataGridViewTextBoxColumn.Name = "userLoggedInWhenFetchedDataGridViewTextBoxColumn";
+            this.userLoggedInWhenFetchedDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // minIntervalBetweenFetchActionsDataGridViewTextBoxColumn
+            // 
+            this.minIntervalBetweenFetchActionsDataGridViewTextBoxColumn.DataPropertyName = "MinIntervalBetweenFetchActions";
+            this.minIntervalBetweenFetchActionsDataGridViewTextBoxColumn.HeaderText = "MinIntervalBetweenFetchActions";
+            this.minIntervalBetweenFetchActionsDataGridViewTextBoxColumn.Name = "minIntervalBetweenFetchActionsDataGridViewTextBoxColumn";
+            this.minIntervalBetweenFetchActionsDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // forcedFetchDataGridViewCheckBoxColumn
+            // 
+            this.forcedFetchDataGridViewCheckBoxColumn.DataPropertyName = "ForcedFetch";
+            this.forcedFetchDataGridViewCheckBoxColumn.HeaderText = "ForcedFetch";
+            this.forcedFetchDataGridViewCheckBoxColumn.Name = "forcedFetchDataGridViewCheckBoxColumn";
+            this.forcedFetchDataGridViewCheckBoxColumn.ReadOnly = true;
+            // 
+            // iFiltersFeatureManagerBindingSource
+            // 
+            this.iFiltersFeatureManagerBindingSource.DataSource = typeof(FacebookApplication.Interfaces.IFiltersFeatureManager);
+            this.iFiltersFeatureManagerBindingSource.CurrentItemChanged += new System.EventHandler(this.iFiltersFeatureManagerBindingSource_CurrentItemChanged);
+            // 
+            // iFriendFilterBindingSource
+            // 
+            this.iFriendFilterBindingSource.DataSource = typeof(FacebookApplication.Interfaces.IFriendFilter);
+            // 
+            // filtersListBox
+            // 
+            this.filtersListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.filtersListBox.DataSource = this.iFriendFilterBindingSource;
+            this.filtersListBox.DisplayMember = "Name";
+            this.filtersListBox.FormattingEnabled = true;
+            this.filtersListBox.Location = new System.Drawing.Point(3, 132);
+            this.filtersListBox.Name = "filtersListBox";
+            this.filtersListBox.Size = new System.Drawing.Size(463, 69);
+            this.filtersListBox.TabIndex = 73;
+            // 
             // FriendsFiltersPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.filtersListBox);
             this.Controls.Add(this.addIfGenderNotVisible);
             this.Controls.Add(this.addIfAgeNotVisible);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.filterNameTextBox);
             this.Controls.Add(this.friendsListsComboBox);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.addFilterButton);
@@ -259,12 +304,10 @@
             this.Controls.Add(this.ageCheckBox);
             this.Controls.Add(this.genderComboBox);
             this.Controls.Add(this.genderCheckBox);
-            this.Controls.Add(this.filtersListBox);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FriendsFiltersPage";
-            this.Size = new System.Drawing.Size(470, 250);
+            this.Size = new System.Drawing.Size(471, 241);
             this.Load += new System.EventHandler(this.friendsFiltersPage_Load);
-            this.Controls.SetChildIndex(this.filtersListBox, 0);
             this.Controls.SetChildIndex(this.genderCheckBox, 0);
             this.Controls.SetChildIndex(this.genderComboBox, 0);
             this.Controls.SetChildIndex(this.ageCheckBox, 0);
@@ -272,14 +315,15 @@
             this.Controls.SetChildIndex(this.addFilterButton, 0);
             this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.friendsListsComboBox, 0);
-            this.Controls.SetChildIndex(this.filterNameTextBox, 0);
-            this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.addIfAgeNotVisible, 0);
             this.Controls.SetChildIndex(this.addIfGenderNotVisible, 0);
+            this.Controls.SetChildIndex(this.filtersListBox, 0);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.maxAgeNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minAgeNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iFiltersFeatureManagerBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iFriendFilterBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,7 +331,6 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox filtersListBox;
         private System.Windows.Forms.ComboBox genderComboBox;
         private System.Windows.Forms.CheckBox genderCheckBox;
         private System.Windows.Forms.CheckBox ageCheckBox;
@@ -301,9 +344,16 @@
         private System.Windows.Forms.NumericUpDown maxAgeNumericUpDown;
         private System.Windows.Forms.NumericUpDown minAgeNumericUpDown;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox filterNameTextBox;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox addIfAgeNotVisible;
         private System.Windows.Forms.CheckBox addIfGenderNotVisible;
+        private System.Windows.Forms.DataGridViewTextBoxColumn friendsFiltersDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn friendsFiltersIdsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fetchedTimeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userLoggedInWhenFetchedDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn minIntervalBetweenFetchActionsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn forcedFetchDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.BindingSource iFiltersFeatureManagerBindingSource;
+        private System.Windows.Forms.BindingSource iFriendFilterBindingSource;
+        private System.Windows.Forms.ListBox filtersListBox;
     }
 }

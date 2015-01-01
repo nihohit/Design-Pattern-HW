@@ -25,9 +25,9 @@ namespace FacebookAppGUI
         private void updateFacebookApplicationManagerInRelevantControls(
             IFiltersFeatureManager i_FacebookApplicationManager)
         {
-            inboxPage.FacebookApplicationLogicManager = i_FacebookApplicationManager;
-            friendsPage1.FacebookApplicationLogicManager = i_FacebookApplicationManager;
-            friendsFiltersPage.FacebookApplicationLogicManager = i_FacebookApplicationManager;
+            inboxPage.FiltersFeatureManager = i_FacebookApplicationManager;
+            friendsPage1.FiltersFeatureManager = i_FacebookApplicationManager;
+            friendsFiltersPage.FiltersFeatureManager = i_FacebookApplicationManager;
         }
 
         private void tab_IndexChanged(object sender, EventArgs e)

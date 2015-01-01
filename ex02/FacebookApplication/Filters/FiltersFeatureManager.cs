@@ -10,6 +10,7 @@ namespace FacebookApplication
     public class FiltersFeatureManager : IFiltersFeatureManager
     {
         #region members
+        
         #endregion members
         #region Events
         #region IFacebookApplicationManager
@@ -52,6 +53,7 @@ namespace FacebookApplication
             LoggedInUserFriendListsManager = new FriendListsManager(minIntervalBetweenFetchActions);
             LoggedInUserInboxManager = new InboxManager(minIntervalBetweenFetchActions);
             LoggedInUserFriendsFiltersManager = new FriendsFiltersManager(LoggedInUserFriendsFetcher, minIntervalBetweenFetchActions);
+            LoggedInUserFriendsFiltersManager.AddFriendFilter(new FriendsFilter());
         }
         #endregion constructor
         #region public methods
@@ -145,6 +147,7 @@ namespace FacebookApplication
 
         public string AddFriendFilter(FriendsFilter i_FriendsFilter)
         {
+            i_FriendsFilter.UpdateFriends(LoggedInUserFriendsFetcher.GetFriends());
             return LoggedInUserFriendsFiltersManager.AddFriendFilter(i_FriendsFilter);
         }
 

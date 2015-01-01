@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
+using System.ComponentModel;
 
 namespace FacebookApplication
 {
@@ -19,7 +20,10 @@ namespace FacebookApplication
 
         public event EventHandler FilterRmoved;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         #endregion events
+        
         #region Properties (IFriendsFiltersManager)
 
         public IEnumerable<IFriendFilter> FriendsFilters
@@ -55,7 +59,7 @@ namespace FacebookApplication
 
             if (r_Filters.ContainsKey(name))
             {
-                throw new ArgumentException("Filter with this name already exist");
+                throw new ArgumentException("Filter already exist");
             }
 
             r_Filters.Add(name, i_FriendsFilter);
@@ -88,6 +92,7 @@ namespace FacebookApplication
 
             return friendFilter;
         }
+
         #endregion
         #endregion
         #region override protected methods
@@ -104,6 +109,6 @@ namespace FacebookApplication
 
         #endregion override protected methods
         #region private methods
-        #endregion private methods
+        #endregion private methods       
     }
 }

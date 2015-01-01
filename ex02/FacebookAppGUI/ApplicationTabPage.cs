@@ -8,25 +8,25 @@ namespace FacebookAppGUI
 {
     public partial class ApplicationTabPage : UserControl
     {
-        private IFiltersFeatureManager m_FacebookApplicationManager;
+        private IFiltersFeatureManager m_FiltersFeatureManager;
 
-        public IFiltersFeatureManager FacebookApplicationLogicManager
+        public IFiltersFeatureManager FiltersFeatureManager
         {
-            get { return m_FacebookApplicationManager; }
+            get { return m_FiltersFeatureManager; }
             set
             {
-                if (m_FacebookApplicationManager != value)
+                if (m_FiltersFeatureManager != value)
                 {
-                    if (m_FacebookApplicationManager != null)
+                    if (m_FiltersFeatureManager != null)
                     {
-                        m_FacebookApplicationManager.AfterFetch -= this.facebookApplicationManager_AfterFetch;
+                        m_FiltersFeatureManager.AfterFetch -= this.facebookApplicationManager_AfterFetch;
                         OnBeforeFacebookApplicationLogicManagerChanging();
                     }
 
-                    m_FacebookApplicationManager = value;
-                    if (m_FacebookApplicationManager != null)
+                    m_FiltersFeatureManager = value;
+                    if (m_FiltersFeatureManager != null)
                     {
-                        m_FacebookApplicationManager.AfterFetch += this.facebookApplicationManager_AfterFetch;
+                        m_FiltersFeatureManager.AfterFetch += this.facebookApplicationManager_AfterFetch;
                         OnFacebookApplicationLogicManagerChanged();
                     }
                 }
@@ -60,7 +60,7 @@ namespace FacebookAppGUI
                 if (typesToFetchWithTheirCollectionLimit == null || typesToFetchWithTheirCollectionLimit.Count < 1)
                 {
                     this.TopLevelControl.FetchAndShowWaitWindow(
-                        () => { FacebookApplicationLogicManager.FetchFromFacebook(eFetchOption.All, -1); });
+                        () => { FiltersFeatureManager.FetchFromFacebook(eFetchOption.All, -1); });
                 }
                 else
                 {
@@ -68,13 +68,13 @@ namespace FacebookAppGUI
                     {
                         KeyValuePair<eFetchOption, int> pair1 = pair;
                         this.TopLevelControl.FetchAndShowWaitWindow(
-                        () => this.FacebookApplicationLogicManager.FetchFromFacebook(pair1.Key, pair1.Value), pair.Key.ToString());
+                        () => this.FiltersFeatureManager.FetchFromFacebook(pair1.Key, pair1.Value), pair.Key.ToString());
                     }
                 }
             }
             catch (Exception exception)
             {
-                if (exception is NullReferenceException && FacebookApplicationLogicManager == null)
+                if (exception is NullReferenceException && FiltersFeatureManager == null)
                 {
                     exception = new NullReferenceException("Cannot fetch because facebook manager was not set in the page", exception);
                 }

@@ -57,13 +57,15 @@
     <Compile Include="BasicFacebookFunctionality.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Filters\AdvancedFilter.cs" />
+    <Compile Include="Filters\AndFilter.cs" />
     <Compile Include="Filters\BaseUserFilter.cs" />
     <Compile Include="FetchEventArgs.cs" />
-    <Compile Include="Filters\FilterBuilder.cs" />
+    <Compile Include="Filters\UsersFilterFactory.cs" />
+    <Compile Include="Interfaces\IUserFilterBuilder.cs" />
     <Compile Include="Singleton.cs" />
     <Compile Include="Filters\UsersAgeFilter.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="FiltersFeatureManager.cs" />
+    <Compile Include="Filters\FiltersFeatureManager.cs" />
     <Compile Include="FacebookFetchable.cs" />
     <Compile Include="FriendListsManager.cs" />
     <Compile Include="FriendsFetcher.cs" />

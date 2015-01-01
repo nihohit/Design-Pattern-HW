@@ -28,27 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.friendsFiltersCombo = new FacebookAppGUI.FriendsFiltersComboBox();
             this.inboxMessagesListBox = new FacebookAppGUI.MessagesListBox();
             this.selectedMessageTextBox = new System.Windows.Forms.TextBox();
             this.massagesLabel = new System.Windows.Forms.Label();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.friendsFiltersCombo = new FacebookAppGUI.FriendsFiltersComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // friendsListsCombo
-            // 
-            this.friendsFiltersCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.friendsFiltersCombo.LabelText = "Show conversation that include a member in:";
-            this.friendsFiltersCombo.Location = new System.Drawing.Point(3, 3);
-            this.friendsFiltersCombo.Name = "friendsListsCombo";
-            this.friendsFiltersCombo.Size = new System.Drawing.Size(653, 21);
-            this.friendsFiltersCombo.TabIndex = 55;
-            this.friendsFiltersCombo.FriendsFiltersChanged += new System.EventHandler(this.friendsListsCombo_FriendsFiltersChanged);
             // 
             // inboxMessagesListBox
             // 
@@ -98,6 +87,18 @@
             this.splitContainer.SplitterDistance = 217;
             this.splitContainer.TabIndex = 61;
             // 
+            // friendsFiltersCombo
+            // 
+            this.friendsFiltersCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.friendsFiltersCombo.FacebookApplicationLogicManager = null;
+            this.friendsFiltersCombo.LabelText = "Show conversation that include a member in:";
+            this.friendsFiltersCombo.Location = new System.Drawing.Point(3, 3);
+            this.friendsFiltersCombo.Name = "friendsFiltersCombo";
+            this.friendsFiltersCombo.Size = new System.Drawing.Size(653, 21);
+            this.friendsFiltersCombo.TabIndex = 55;
+            this.friendsFiltersCombo.FriendsFiltersChanged += new System.EventHandler(this.friendsListsCombo_FriendsFiltersChanged);
+            // 
             // InboxPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -122,11 +123,11 @@
 
         #endregion
 
-        private FriendsFiltersComboBox friendsFiltersCombo;
         private MessagesListBox inboxMessagesListBox;
         private System.Windows.Forms.TextBox selectedMessageTextBox;
         private System.Windows.Forms.Label massagesLabel;
         private System.Windows.Forms.SplitContainer splitContainer;
+        private FriendsFiltersComboBox friendsFiltersCombo;
 
 
     }
