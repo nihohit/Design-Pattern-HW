@@ -35,7 +35,7 @@ namespace FacebookAppGUI
 
         protected override void OnFacebookApplicationLogicManagerChanged()
         {
-             iFiltersFeatureManagerBindingSource.DataSource = FiltersFeatureManager;
+            iFiltersFeatureManagerBindingSource.DataSource = FiltersFeatureManager;
             if (FiltersFeatureManager != null)
             {
                 FiltersFeatureManager.FriendFilterAdded += (object sender, EventArgs e) => { iFriendFilterBindingSource.DataSource = (FiltersFeatureManager != null) ? new List<IFriendFilter>(FiltersFeatureManager.LoggedInUserFriendsFiltersManager.FriendsFilters) : null; };

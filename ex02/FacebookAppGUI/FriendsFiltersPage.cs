@@ -16,7 +16,13 @@ namespace FacebookAppGUI
 
         protected override Dictionary<eFetchOption, int> GetFetchTypesToFetchWithTheirCollectionLimit()
         {
-            Dictionary<eFetchOption, int> typesAndCollectionLimit = new Dictionary<eFetchOption, int> { { eFetchOption.FriendsLists, -1 } };
+            Dictionary<eFetchOption, int> typesAndCollectionLimit = new Dictionary<eFetchOption, int>
+            {
+                {
+                    eFetchOption.FriendsLists,
+                    Extensions.k_FriendsCollectionLimit
+                }
+            };
             return typesAndCollectionLimit;
         }
 

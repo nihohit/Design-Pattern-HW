@@ -39,7 +39,7 @@ namespace FacebookAppGUI
                     Location = this.Location,
                     StartPosition = FormStartPosition.Manual
                 };
-                tabsPage.FormClosing += delegate { this.Show(); };
+                tabsPage.FormClosed += delegate { this.Close(); };
                 tabsPage.Show();
                 this.Hide();
             }

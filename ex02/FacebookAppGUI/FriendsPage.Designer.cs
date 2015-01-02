@@ -64,7 +64,7 @@
             this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.Controls.Add(this.imageNormalPictureBox);
             this.splitContainer1.Size = new System.Drawing.Size(678, 224);
-            this.splitContainer1.SplitterDistance = 319;
+            this.splitContainer1.SplitterDistance = 317;
             this.splitContainer1.TabIndex = 56;
             // 
             // listBox1
@@ -75,7 +75,7 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(0, 0);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(319, 224);
+            this.listBox1.Size = new System.Drawing.Size(317, 224);
             this.listBox1.TabIndex = 56;
             this.listBox1.ValueMember = "ImageNormal";
             // 
@@ -85,11 +85,12 @@
             // 
             // imageNormalPictureBox
             // 
-            this.imageNormalPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.userBindingSource, "ImageNormal", true));
+            this.imageNormalPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.imageNormalPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.userBindingSource, "ImageLarge", true));
             this.imageNormalPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.imageNormalPictureBox.Location = new System.Drawing.Point(0, 0);
             this.imageNormalPictureBox.Name = "imageNormalPictureBox";
-            this.imageNormalPictureBox.Size = new System.Drawing.Size(355, 224);
+            this.imageNormalPictureBox.Size = new System.Drawing.Size(357, 224);
             this.imageNormalPictureBox.TabIndex = 44;
             this.imageNormalPictureBox.TabStop = false;
             // 
@@ -102,6 +103,7 @@
             // 
             this.iFriendFilterBindingSource.DataSource = typeof(FacebookApplication.Interfaces.IFriendFilter);
             this.iFriendFilterBindingSource.CurrentChanged += new System.EventHandler(this.iFriendFilterBindingSource_CurrentChanged);
+            this.iFriendFilterBindingSource.CurrentItemChanged += new System.EventHandler(this.iFriendFilterBindingSource_CurrentChanged);
             // 
             // iFriendFilterComboBox
             // 

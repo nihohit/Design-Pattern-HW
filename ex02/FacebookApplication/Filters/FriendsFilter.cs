@@ -73,14 +73,14 @@ namespace FacebookApplication
                                 Environment.NewLine);
                     }
                 }
-            }
 
-            foreach (User friend in friends)
-            {
-                r_FilteredFriends.Add(friend.Id, friend);
-            }
+                foreach (User friend in friends)
+                {
+                    r_FilteredFriends.Add(friend.Id, friend);
+                }
 
-            ErrorString = ErrorString.Trim(Environment.NewLine.ToCharArray());
+                ErrorString = ErrorString.Trim(Environment.NewLine.ToCharArray());
+            }
         }
 
         

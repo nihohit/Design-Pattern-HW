@@ -11,6 +11,8 @@ namespace FacebookAppGUI
         public InboxPage()
         {
             InitializeComponent();
+            this.selectedMessageTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.inboxThreadDisplayBindingSource, "MessagesDisplayString", true,
+                System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged, string.Empty));            
         }
 
         protected override Dictionary<eFetchOption, int> GetFetchTypesToFetchWithTheirCollectionLimit()
@@ -35,48 +37,69 @@ namespace FacebookAppGUI
             {
                 if (e.FetchOption != eFetchOption.Inbox)
                 {
-                    friendsFiltersCombo.UpdateFriendsFilters();
+                    updateFiltersDataSource();
                 }
-
-                updateInboxList();
+                else
+                {
+                    updateInboxThreads();
+                }
             }
         }
 
         protected override void OnFacebookApplicationLogicManagerChanged()
         {
-            friendsFiltersCombo.FacebookApplicationLogicManager = FiltersFeatureManager;
-        }
-
-        private void friendsListsCombo_FriendsFiltersChanged(object sender, EventArgs e)
-        {
-            updateInboxList();
-        }
-
-        private void inboxMessagesListBox_CurrentInboxThreadChanged(object sender, EventArgs e)
-        {
-            updateSelectedMessageTextBox();
-        }
-
-        private void updateSelectedMessageTextBox()
-        {
-            string currentInboxThreadDisplayString = inboxMessagesListBox.SelectedInboxThread == null
-                ? string.Empty
-                : inboxMessagesListBox.SelectedInboxThread.GetInboxThreadMessagesDisplayString();
-            selectedMessageTextBox.Text = currentInboxThreadDisplayString;
-        }
-
-        private void updateInboxList()
-        {
-            string usersThatCantBeFilteredMessage = null;
-            IEnumerable<InboxThread> inboxThreads = friendsFiltersCombo.AllFriendsSelected
-                ? FiltersFeatureManager.GetAllInboxThreads()
-                : FiltersFeatureManager.GetInboxThreadsForSpecificFilter(friendsFiltersCombo.SelectedFriendFilterId.Trim(), out usersThatCantBeFilteredMessage);
-            inboxMessagesListBox.UpdateInboxThreads(inboxThreads, UserWrapper.Instance.Id);
-            updateSelectedMessageTextBox();
-            if (!string.IsNullOrEmpty(usersThatCantBeFilteredMessage))
+            iFiltersFeatureManagerBindingSource.DataSource = FiltersFeatureManager;
+            if (FiltersFeatureManager != null)
             {
-                usersThatCantBeFilteredMessage.ShowLongMessageBox();
+                FiltersFeatureManager.FriendFilterAdded += (object sender, EventArgs e) => { iFriendFilterBindingSource.DataSource = (FiltersFeatureManager != null) ? new List<IFriendFilter>(FiltersFeatureManager.LoggedInUserFriendsFiltersManager.FriendsFilters) : null; };
+                FiltersFeatureManager.FriendFilterRemoved += (object sender, EventArgs e) => { iFriendFilterBindingSource.DataSource = (FiltersFeatureManager != null) ? new List<IFriendFilter>(FiltersFeatureManager.LoggedInUserFriendsFiltersManager.FriendsFilters) : null; };
             }
+        }
+
+        protected override void OnBeforeFacebookApplicationLogicManagerChanging()
+        {
+            IFiltersFeatureManager oldFiltersFeatureManager =
+                iFiltersFeatureManagerBindingSource.DataSource as IFiltersFeatureManager;
+            if (oldFiltersFeatureManager != null)
+            {
+                oldFiltersFeatureManager.FriendFilterAdded -= (object sender, EventArgs e) => { iFriendFilterBindingSource.DataSource = (FiltersFeatureManager != null) ? new List<IFriendFilter>(FiltersFeatureManager.LoggedInUserFriendsFiltersManager.FriendsFilters) : null; };
+                oldFiltersFeatureManager.FriendFilterRemoved -= (object sender, EventArgs e) => { iFriendFilterBindingSource.DataSource = (FiltersFeatureManager != null) ? new List<IFriendFilter>(FiltersFeatureManager.LoggedInUserFriendsFiltersManager.FriendsFilters) : null; };
+            }
+        }
+        
+        private void iFriendFilterBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+            updateInboxThreads();
+        }
+
+        private void iFiltersFeatureManagerBindingSource_CurrentItemChanged(object sender, EventArgs e)
+        {
+            updateFiltersDataSource();
+        }
+        
+        private void updateFiltersDataSource()
+        {
+            iFriendFilterBindingSource.DataSource = (FiltersFeatureManager != null) ? new List<IFriendFilter>(FiltersFeatureManager.LoggedInUserFriendsFiltersManager.FriendsFilters) : null;
+        }
+
+        private void updateInboxThreads()
+        {
+            List<InboxThreadDisplay> inboxThreadsDisplay = null;
+            IFriendFilter friendFilter = iFriendFilterBindingSource.Current as IFriendFilter;
+            if (friendFilter != null)
+            {
+                string usersThatCantBeFilteredMessage = null;
+                IEnumerable<InboxThread> inboxThreads = FiltersFeatureManager.GetInboxThreadsForSpecificFilter(
+                    friendFilter.Name.Trim(), out usersThatCantBeFilteredMessage);
+                inboxThreadsDisplay = new List<InboxThreadDisplay>();
+                foreach (InboxThread inboxThread in inboxThreads)
+                {
+                    inboxThreadsDisplay.Add(new InboxThreadDisplay(inboxThread, UserWrapper.Instance.Id));
+                }
+            }
+
+            inboxThreadDisplayBindingSource.DataSource = (inboxThreadsDisplay == null || inboxThreadsDisplay.Count < 1) ?
+                typeof(InboxThreadDisplay) : inboxThreadDisplayBindingSource.DataSource = inboxThreadsDisplay;
         }
     }
 }

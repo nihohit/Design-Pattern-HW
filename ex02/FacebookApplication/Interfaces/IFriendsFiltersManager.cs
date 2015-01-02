@@ -23,9 +23,9 @@ namespace FacebookApplication.Interfaces
 
         string AddFriendFilter(FriendsFilter i_FriendsFilter);
 
-        bool RemoveFriendFilter(string i_FilterId);
+        bool RemoveFriendFilter(string i_FilterName);
 
-        IFriendFilter GetFriendFilter(string i_FilterId);
+        IFriendFilter GetFriendFilter(string i_FilterName);
 
         #endregion methods
     }

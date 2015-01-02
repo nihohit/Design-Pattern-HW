@@ -100,6 +100,7 @@
     <Compile Include="InboxPage.Designer.cs">
       <DependentUpon>InboxPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="InboxThreadDisplay.cs" />
     <Compile Include="InterestPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -182,10 +183,10 @@
     <EmbeddedResource Include="FormApplicationTabs.resx">
       <DependentUpon>FormApplicationTabs.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="FacebookApplication.FriendsFilter.datasource" />
     <None Include="FacebookApplication.Interfaces.IFiltersFeatureManager.datasource" />
     <None Include="FacebookApplication.Interfaces.IFriendFilter.datasource" />
     <None Include="FacebookWrapper.ObjectModel.User.datasource" />
+    <None Include="InboxThreadDisplay.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

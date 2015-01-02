@@ -120,18 +120,18 @@ namespace FacebookApplication
             return LoggedInUserInboxManager.GetInboxThreads(null);
         }
 
-        public IEnumerable<InboxThread> GetInboxThreadsForSpecificFilter(string i_FriendFilterId, out string o_UsersThatCantBeFilteredMessage)
+        public IEnumerable<InboxThread> GetInboxThreadsForSpecificFilter(string i_FriendFilterName, out string o_UsersThatCantBeFilteredMessage)
         {
-            IFriendFilter friendFilter = LoggedInUserFriendsFiltersManager.GetFriendFilter(i_FriendFilterId);
+            IFriendFilter friendFilter = LoggedInUserFriendsFiltersManager.GetFriendFilter(i_FriendFilterName);
             o_UsersThatCantBeFilteredMessage = friendFilter.ErrorString;
             return LoggedInUserInboxManager.GetInboxThreads(friendFilter);
         }
 
-        public IEnumerable<User> GetFriends(string i_FilterId, out string o_UsersThatCantBeFilteredMessage)
+        public IEnumerable<User> GetFriends(string i_FilterName, out string o_UsersThatCantBeFilteredMessage)
         {
             IEnumerable<User> friends;
             o_UsersThatCantBeFilteredMessage = string.Empty;
-            IFriendFilter filter = LoggedInUserFriendsFiltersManager.GetFriendFilter(i_FilterId);
+            IFriendFilter filter = LoggedInUserFriendsFiltersManager.GetFriendFilter(i_FilterName);
             if (filter == null)
             {
                 friends = LoggedInUserFriendsFetcher.GetFriends();

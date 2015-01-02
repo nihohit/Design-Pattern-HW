@@ -61,7 +61,6 @@
     <Compile Include="Filters\BaseUserFilter.cs" />
     <Compile Include="FetchEventArgs.cs" />
     <Compile Include="Filters\UsersFilterFactory.cs" />
-    <Compile Include="Interfaces\IUserFilterBuilder.cs" />
     <Compile Include="Singleton.cs" />
     <Compile Include="Filters\UsersAgeFilter.cs" />
     <Compile Include="Extensions.cs" />
