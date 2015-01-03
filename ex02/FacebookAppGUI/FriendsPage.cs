@@ -26,7 +26,7 @@ namespace FacebookAppGUI
         }
 
         protected override void facebookApplicationManager_AfterFetch(object sender, FetchEventArgs e)
-        {            
+        {
             if (e.FetchOption == eFetchOption.All || e.FetchOption == eFetchOption.Friends)
             {
                 updateFiltersDataSource();
@@ -40,6 +40,7 @@ namespace FacebookAppGUI
                 FiltersFeatureManager.FriendFilterAdded += (object sender, EventArgs e) => { updateFiltersDataSource(); };
                 FiltersFeatureManager.FriendFilterRemoved += (object sender, EventArgs e) => { updateFiltersDataSource(); };
             }
+
             updateFiltersDataSource();
         }
 
@@ -62,7 +63,7 @@ namespace FacebookAppGUI
         {
             iFriendFilterBindingSource.DataSource = (FiltersFeatureManager != null) ? new List<IFriendFilter>(FiltersFeatureManager.LoggedInUserFriendsFiltersManager.FriendsFilters) : null;
         }
-        
+
         private void iFriendFilterBindingSource_CurrentChanged(object sender, EventArgs e)
         {
             updateFriends();

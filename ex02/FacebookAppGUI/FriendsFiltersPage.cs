@@ -7,6 +7,8 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppGUI
 {
+    using FacebookApplication.Filters;
+
     public partial class FriendsFiltersPage : ApplicationTabPage
     {
         public FriendsFiltersPage()
@@ -41,6 +43,7 @@ namespace FacebookAppGUI
                 FiltersFeatureManager.FriendFilterAdded += (object sender, EventArgs e) => { updateFiltersDataSource(); };
                 FiltersFeatureManager.FriendFilterRemoved += (object sender, EventArgs e) => { updateFiltersDataSource(); };
             }
+
             updateFiltersDataSource();
             updateFriendsListsDataSource();
         }
@@ -91,7 +94,7 @@ namespace FacebookAppGUI
 
         private void addFilterButton_Click(object sender, EventArgs e)
         {
-            if (friendsListCheckBox.Checked && 
+            if (friendsListCheckBox.Checked &&
                 (friendListBindingSource.DataSource == null || friendListBindingSource.Current as FriendList == null))
             {
                 MessageBox.Show(@"Choose Friend List. (if empty fetch from facebook with the link on page buttom)");
@@ -141,6 +144,6 @@ namespace FacebookAppGUI
         private void friendListBindingSource_CurrentChanged(object sender, EventArgs e)
         {
 
-        }     
+        }
     }
 }

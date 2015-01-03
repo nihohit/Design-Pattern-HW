@@ -40,7 +40,7 @@ namespace FacebookApplication
             UserWrapper.Instance.ReFetch();
             IEnumerable<PostedItem> currentActivity = UserWrapper.Instance.AllActivity;
 
-            List <PostedItem> currentPosts = currentActivity.Where(i_Post => i_Post.CreatedTime >= i_ShownInterestSince.Date).ToList();
+            List<PostedItem> currentPosts = currentActivity.Where(i_Post => i_Post.CreatedTime >= i_ShownInterestSince.Date).ToList();
             IEnumerable<User> usersWhoLikedPosts = currentPosts.SelectMany(i_Post => i_Post.LikedBy);
             IEnumerable<User> usersWhoCommentedOnPosts =
                 currentPosts.SelectMany(

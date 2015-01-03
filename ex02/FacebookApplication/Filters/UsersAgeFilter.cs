@@ -1,9 +1,11 @@
-﻿using System;
-using Facebook;
-using FacebookWrapper.ObjectModel;
-
-namespace FacebookApplication
+﻿namespace FacebookApplication.Filters
 {
+    using System;
+
+    using Facebook;
+
+    using FacebookWrapper.ObjectModel;
+
     public class UsersAgeFilter : BaseUserFilter
     {
         #region members
@@ -24,8 +26,8 @@ namespace FacebookApplication
 
         public UsersAgeFilter(int i_MinAge, int i_MaxAge, bool i_AddIfAgeNotVisible)
         {
-            MinAge = i_MinAge;
-            MaxAge = i_MaxAge;
+            this.MinAge = i_MinAge;
+            this.MaxAge = i_MaxAge;
             this.r_AddWithoutVisibleAge = i_AddIfAgeNotVisible;
         }
 
@@ -47,12 +49,12 @@ namespace FacebookApplication
 
             DateTime birthday = DateTime.Parse(i_User.Birthday);
             int age = DateTime.Today.Year - birthday.Year;
-            return (MinAge <= age) && (age <= MaxAge);
+            return (this.MinAge <= age) && (age <= this.MaxAge);
         }
 
         public override string ToString()
         {
-            return string.Format("Age between {0} to {1}{2}", MinAge, MaxAge, this.r_AddWithoutVisibleAge ? " or age is not defined" : string.Empty);
+            return string.Format("Age between {0} to {1}{2}", this.MinAge, this.MaxAge, this.r_AddWithoutVisibleAge ? " or age is not defined" : string.Empty);
         }
 
         #endregion

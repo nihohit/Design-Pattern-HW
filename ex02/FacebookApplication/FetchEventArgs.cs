@@ -1,5 +1,4 @@
 ﻿using System;
-using FacebookApplication.Interfaces;
 
 namespace FacebookApplication
 {

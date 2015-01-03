@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using FacebookApplication.Interfaces;
-using FacebookWrapper.ObjectModel;
-
-namespace FacebookApplication
+﻿namespace FacebookApplication.Filters
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using FacebookApplication.Interfaces;
+
+    using FacebookWrapper.ObjectModel;
+
     public class UsersFriendListsFilter : BaseUserFilter
     {
         #region members
@@ -22,8 +24,8 @@ namespace FacebookApplication
 
         public UsersFriendListsFilter(FriendList i_FriendList, IFriendListsManager i_FriendListsManager)
         {
-            r_FriendListsManager = i_FriendListsManager;
-            FriendListBelongsTo = i_FriendList;
+            this.r_FriendListsManager = i_FriendListsManager;
+            this.FriendListBelongsTo = i_FriendList;
         }
 
         #endregion constructor
@@ -33,15 +35,15 @@ namespace FacebookApplication
         protected override bool MantianConstrain(User i_User)
         {
             IEnumerable<string> frindBelongToListsIds =
-                r_FriendListsManager.GetAllFriendListsWhichFriendBelongsTo(i_User.Id);
+                this.r_FriendListsManager.GetAllFriendListsWhichFriendBelongsTo(i_User.Id);
 
-            return frindBelongToListsIds.Contains(FriendListBelongsTo.Id);
+            return frindBelongToListsIds.Contains(this.FriendListBelongsTo.Id);
         }
-        
+
         public override string ToString()
         {
-            return string.Format("Belongs to {0}", FriendListBelongsTo.Name);
+            return string.Format("Belongs to {0}", this.FriendListBelongsTo.Name);
         }
-        #endregion 
+        #endregion
     }
 }

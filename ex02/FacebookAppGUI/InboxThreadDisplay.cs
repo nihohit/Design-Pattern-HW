@@ -1,9 +1,4 @@
 ﻿using FacebookWrapper.ObjectModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FacebookApplication;
 
 namespace FacebookAppGUI
@@ -17,16 +12,14 @@ namespace FacebookAppGUI
 
         private readonly string r_UserIdThatInboxBelongsTo;
 
-        private const string k_MessageDisplayStringPrefix = "Converstion with ";
-        
         #endregion
 
         #region Properties
- 
-        public string InboxThreadDisplayName { get; private set;}
-        
-        public string MessagesDisplayString { get; private set;}
-        
+
+        public string InboxThreadDisplayName { get; private set; }
+
+        public string MessagesDisplayString { get; private set; }
+
         #endregion
 
         #region constractur

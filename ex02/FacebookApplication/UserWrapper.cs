@@ -107,7 +107,7 @@ namespace FacebookApplication
                     {
                         if (m_User == null)
                         {
-                            throw new ArgumentNullException("User");
+                            throw new ArgumentNullException("m_User");
                         }
                     }
                 }
@@ -126,7 +126,7 @@ namespace FacebookApplication
                     {
                         if (m_User == null)
                         {
-                            throw new ArgumentNullException("User");
+                            throw new ArgumentNullException("m_User");
                         }
                     }
                 }
@@ -145,7 +145,7 @@ namespace FacebookApplication
                     {
                         if (m_User == null)
                         {
-                            throw new ArgumentNullException("User");
+                            throw new ArgumentNullException("m_User");
                         }
                     }
                 }

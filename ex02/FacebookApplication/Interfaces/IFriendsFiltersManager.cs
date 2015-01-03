@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace FacebookApplication.Interfaces
 {
+    using FacebookApplication.Filters;
+
     public interface IFriendsFiltersManager : IFetchable
     {
         #region Properties

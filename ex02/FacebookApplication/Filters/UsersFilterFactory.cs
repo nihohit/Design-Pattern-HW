@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FacebookApplication.Interfaces;
-using FacebookWrapper.ObjectModel;
-
-namespace FacebookApplication
+﻿namespace FacebookApplication.Filters
 {
+    using System.Collections.Generic;
+
+    using FacebookApplication.Interfaces;
+
+    using FacebookWrapper.ObjectModel;
+
     public static class UsersFilterFactory
     {
         #region public methods
@@ -40,7 +38,7 @@ namespace FacebookApplication
                 usersFilters.Add(new UsersFriendListsFilter(i_FriendList, i_FriendsListManager));
             }
 
-            IUsersFilter usersFilter = (usersFilters != null) && (usersFilters.Count == 1) ?
+            IUsersFilter usersFilter = usersFilters.Count == 1 ?
                 usersFilters[0] : new AndFilter(usersFilters);
             return usersFilter;
         }
