@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<XMI xmi.version="1.2" xmlns:UML="org.omg/UML/1.4">
+  <XMI.header>
+    <XMI.documentation>
+      <XMI.exporter>Visual Paradigm for UML</XMI.exporter>
+      <XMI.exporterVersion>1.0</XMI.exporterVersion>
+    </XMI.documentation>
+    <XMI.metamodel xmi.name="UML" xmi.version="1.4" />
+  </XMI.header>
+  <XMI.content>
+    <UML:Model name="C:\Users\keren-or\Desktop\try1.xmi" xmi.id="t9M3ViGf08ZsIe1a" xmlns:UML="UML">
+      <UML:Namespace.ownedElement>
+        <UML:Class name="FriendsFiltersPage" xmi.id="g8F3InZo10Lzi6W" isAbstract="false" isActive="false" isLeaf="false" isRoot="false" visibility="public">
+          <UML:Classifier.feature>
+            <UML:Operation name="genderCheckBox_CheckedChanged" xmi.id="Mr87Ppy9U2Fzo0Z" isAbstract="false" isQuery="false" ownerScope="instance" visibility="public" />
+          </UML:Classifier.feature>
+        </UML:Class>
+        <UML:Collaboration name="Factory Method Sequence Diagram" xmi.id="Ql35BaSt1r4TEd2c">
+          <XMI.extension xmi.extender="Visual Paradigm for UML">
+            <type xmi.value="sd" />
+          </XMI.extension>
+          <UML:Namespace.ownedElement>
+            <UML:Actor name="facebook loged in user" xmi.id="h0LDx9k5PZj3m6I" />
+            <UML:ClassifierRole name="friendsFiltersPage" xmi.id="k7X0CzLc63HdTh5" base="g8F3InZo10Lzi6W">
+              <XMI.extension xmi.extender="Visual Paradigm for UML">
+                <active xmi.value="false" />
+                <stopped xmi.value="false" />
+                <ordered xmi.value="false" />
+                <unique xmi.value="false" />
+                <activations>
+                  <activation xmi.id="r5A9Mtj7Q6EhSp8" />
+                </activations>
+              </XMI.extension>
+            </UML:ClassifierRole>
+            <UML:CallAction xmi.id="Ih74Rkb2GLl31Msa">
+              <UML:CallAction.operation>
+                <UML:Operation xmi.idref="Mr87Ppy9U2Fzo0Z" />
+              </UML:CallAction.operation>
+            </UML:CallAction>
+            <UML:UninterpretedAction xmi.id="t0T9BjLi8y4C5Eka" />
+          </UML:Namespace.ownedElement>
+          <UML:Collaboration.interaction>
+            <UML:Interaction xmi.id="Ih74Rkb2GLl31Msb">
+              <UML:Interaction.message>
+                <UML:Message action="Ih74Rkb2GLl31Msa" xmi.id="Ih74Rkb2GLl31Ms" name="Check gender checkbox" receiver="k7X0CzLc63HdTh5" sender="h0LDx9k5PZj3m6I">
+                  <XMI.extension xmi.extender="Visual Paradigm for UML">
+                    <number xmi.value="1" />
+                    <asynchronous xmi.value="false" />
+                    <to xmi.value="r5A9Mtj7Q6EhSp8" />
+                  </XMI.extension>
+                </UML:Message>
+              </UML:Interaction.message>
+            </UML:Interaction>
+            <UML:Interaction xmi.id="t0T9BjLi8y4C5Ekb">
+              <UML:Interaction.message>
+                <UML:Message action="t0T9BjLi8y4C5Eka" xmi.id="t0T9BjLi8y4C5Ek" name="message 2">
+                  <XMI.extension xmi.extender="Visual Paradigm for UML">
+                    <number xmi.value="2" />
+                    <asynchronous xmi.value="false" />
+                  </XMI.extension>
+                </UML:Message>
+              </UML:Interaction.message>
+            </UML:Interaction>
+          </UML:Collaboration.interaction>
+        </UML:Collaboration>
+      </UML:Namespace.ownedElement>
+    </UML:Model>
+    <UML:Diagram name="Class Diagram" xmi.id="j3Y0Zvz1BIn4l8JU" diagramType="ClassDiagram" documentation="" toolName="Visual Paradigm for UML" xmlns:UML="UML">
+      <UML:Diagram.element>
+        <UML:DiagramElement connectionPointType="2" xmi.id="g8F3InZo10Lzi6WB" headerLength="40" lineLength="10" subject="g8F3InZo10Lzi6W" zorder="0" geometry="190,0,80,100" />
+      </UML:Diagram.element>
+    </UML:Diagram>
+    <UML:Diagram diagramType="InteractionDiagram" documentation="" name="Factory Method Sequence Diagram" toolName="Visual Paradigm for UML" xmi.id="Ql35BaSt1r4TEd2" xmlns:UML="UML">
+      <UML:Diagram.element>
+        <UML:DiagramElement zorder="50000" connectionPointType="0" geometry="5,50,121,153" subject="h0LDx9k5PZj3m6I" xmi.id="Ny4w8XFg67JbKr3p">
+          <elementFont bold="false" color="Cr:0,0,255,255" italic="false" name="Dialog" size="11" style="0" />
+          <elementFill color1="Cr:255,255,255,255" color2="" style="1" transparency="0" type="1" />
+        </UML:DiagramElement>
+        <UML:DiagramElement zorder="40000" connectionPointType="0" geometry="130,50,203,153" subject="k7X0CzLc63HdTh5" xmi.id="t4WNd5j9MJo70HzI">
+          <elementFont bold="false" color="Cr:0,0,255,255" italic="false" name="Dialog" size="11" style="0" />
+          <elementFill color1="Cr:255,200,0,255" color2="" style="1" transparency="0" type="1" />
+        </UML:DiagramElement>
+        <UML:DiagramElement zorder="40000" connectionPointType="2" headerLength="40" lineLength="10" geometry="221,88,20,49" subject="r5A9Mtj7Q6EhSp8" xmi.id="c0MZz36Vml2H7OyG">
+          <xmi:extension xmi.extender="Visual Paradigm for UML" xmlns:xmi="xmi">
+            <captionBounds xmi.value="0,0,8,12" />
+          </xmi:extension>
+          <elementFill color1="Cr:255,255,255,255" color2="" style="1" transparency="0" type="1" />
+        </UML:DiagramElement>
+        <UML:DiagramElement zorder="30000" connectorStyle="1" geometry="65,98;231,98" subject="Ih74Rkb2GLl31Ms" xmi.id="h0B3Xel6QZb5f4OY">
+          <XMI.extension xmi.extender="Visual Paradigm for UML">
+            <captionBounds xmi.value="76,73,83,32" />
+          </XMI.extension>
+          <elementFont bold="false" color="Cr:0,0,255,255" italic="false" name="Dialog" size="11" style="0" />
+        </UML:DiagramElement>
+        <UML:DiagramElement zorder="30001" connectorStyle="1" geometry="0,127;0,127" subject="t0T9BjLi8y4C5Ek" xmi.id="Fr45YzZw32Qlt1X9">
+          <XMI.extension xmi.extender="Visual Paradigm for UML">
+            <captionBounds xmi.value="-30,102,0,32" />
+          </XMI.extension>
+          <elementFont bold="false" color="Cr:0,0,255,255" italic="false" name="Dialog" size="11" style="0" />
+        </UML:DiagramElement>
+      </UML:Diagram.element>
+    </UML:Diagram>
+  </XMI.content>
+</XMI>

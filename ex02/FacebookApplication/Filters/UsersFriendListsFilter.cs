@@ -14,7 +14,7 @@ namespace FacebookApplication
 
         #region Properties
 
-        public FriendList FriendListBelongsTo { get; private set; }
+        private FriendList FriendListBelongsTo { get; set; }
 
         #endregion Properties
 

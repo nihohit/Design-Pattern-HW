@@ -9,8 +9,8 @@ namespace FacebookApplication
 {
     public abstract class AdvancedFilter : IUsersFilter
     {
-        public const string k_All = "All";
-        public const string k_None = "None";
+        protected const string k_All = "All";
+        protected const string k_None = "None";
 
         private readonly List<IUsersFilter> r_UserFilters = new List<IUsersFilter>();
 

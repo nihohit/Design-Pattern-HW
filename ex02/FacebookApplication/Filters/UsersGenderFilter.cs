@@ -13,7 +13,7 @@ namespace FacebookApplication
 
         #region Properties
 
-        public User.eGender Gender { get; private set; }
+        private User.eGender Gender { get; set; }
 
         #endregion Properties
 

@@ -14,9 +14,9 @@ namespace FacebookApplication
 
         #region Properties
 
-        public int MinAge { get; private set; }
+        private int MinAge { get; set; }
 
-        public int MaxAge { get; private set; }
+        private int MaxAge { get; set; }
 
         #endregion Properties
 
