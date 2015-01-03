@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Doc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <m_xmiID>b8P5Riu7VGl62Jy</m_xmiID>
+  <name>CRC card builder doc</name>
+  <crcCards>
+    <crcCard>
+      <m_xmiID>g8F3InZo10Lzi6W</m_xmiID>
+      <name>FriendsFiltersPage</name>
+      <attributes>
+        <attribute>
+          <m_xmiID>y5HAr3x2MCm9d7P</m_xmiID>
+          <name>genderCheckBox.Checked</name>
+        </attribute>
+      </attributes>
+      <Responsibilities>
+        <Responsibility>
+          <m_xmiID>Mw3z8OWo2x4RKr1</m_xmiID>
+          <name>Gender check</name>
+          <Methods>
+            <Method>
+              <m_xmiID>Mr87Ppy9U2Fzo0Z</m_xmiID>
+              <name>genderCheckBox_CheckedChanged</name>
+            </Method>
+          </Methods>
+        </Responsibility>
+        <Responsibility>
+          <m_xmiID>Mr90Nxs1YJg3w4F</m_xmiID>
+          <name>Add filter</name>
+          <Methods>
+            <Method>
+              <m_xmiID>Zp0b7W2Kfk9JVo3</m_xmiID>
+              <name>addFilterButton_Click</name>
+            </Method>
+          </Methods>
+        </Responsibility>
+      </Responsibilities>
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>n3D1EoPc2p5B0Sl</m_xmiID>
+      <name>FriendsFilter</name>
+      <attributes>
+        <attribute>
+          <m_xmiID>m1M3AePf96YqNb5</m_xmiID>
+          <name>attribute 1</name>
+        </attribute>
+      </attributes>
+      <Responsibilities>
+        <Responsibility>
+          <m_xmiID>St17Uje0DYg53Gc</m_xmiID>
+          <name>New</name>
+          <Methods>
+            <Method>
+              <m_xmiID>Cu69Sbk5ZGf81Io</m_xmiID>
+              <name>FriendsFilter</name>
+            </Method>
+          </Methods>
+        </Responsibility>
+      </Responsibilities>
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>Zm87KyOd9e2XVi5</m_xmiID>
+      <name>UsersFilterFactory</name>
+      <attributes />
+      <Responsibilities>
+        <Responsibility>
+          <m_xmiID>Ji5h6IPd47BrOc0</m_xmiID>
+          <name>CreateFilter</name>
+          <Methods>
+            <Method>
+              <m_xmiID>Zs2c5HGr4d3E9Ny</m_xmiID>
+              <name>CreateFilter</name>
+            </Method>
+          </Methods>
+        </Responsibility>
+      </Responsibilities>
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>t2AQe1u0UHp3q5N</m_xmiID>
+      <name>UsersGenderFilter</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>l8ITe02RaVf47Xh</m_xmiID>
+      <name>IUsersFilter</name>
+      <description />
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>y0YJq39Pxt6INk2</m_xmiID>
+      <name>IFiltersFeatureManager</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>Xi82Vue0POf3z7G</m_xmiID>
+      <name>IFriendsFetcher</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>Kn6k2R3Lhl4V0Uo</m_xmiID>
+      <name>IFriendsFiltersManager</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+  </crcCards>
+  <sequences>
+    <sequence>
+      <m_xmiID>Ql35BaSt1r4TEd2</m_xmiID>
+      <name>Factory Method Sequence Diagram</name>
+      <trigger />
+      <preConditions />
+      <successConditions />
+      <failureConditions />
+      <remarks />
+      <objects>
+        <object>
+          <m_xmiID>h0LDx9k5PZj3m6I</m_xmiID>
+          <name>facebook loged in user</name>
+          <IsActor>true</IsActor>
+        </object>
+        <object>
+          <m_xmiID>k7X0CzLc63HdTh5</m_xmiID>
+          <name>friendsFiltersPage</name>
+          <IsActor>false</IsActor>
+          <card>FriendsFiltersPage</card>
+        </object>
+        <object>
+          <m_xmiID>h5A7Wma3FBu2v6E</m_xmiID>
+          <name>newFilter</name>
+          <IsActor>false</IsActor>
+          <card>FriendsFilter</card>
+        </object>
+        <object>
+          <m_xmiID>x2Q4FcIk0e7TJj1</m_xmiID>
+          <name />
+          <IsActor>false</IsActor>
+          <card>UsersFilterFactory</card>
+        </object>
+        <object>
+          <m_xmiID>Sz71Few2L0VdJr9</m_xmiID>
+          <name>usersFilter</name>
+          <IsActor>false</IsActor>
+          <card>UsersGenderFilter</card>
+        </object>
+        <object>
+          <m_xmiID>t2YGo8p3FWa45De</m_xmiID>
+          <name>r_UsersFilter</name>
+          <IsActor>false</IsActor>
+          <card>IUsersFilter</card>
+        </object>
+        <object>
+          <m_xmiID>Dl9r4IEy08Ucq5X</m_xmiID>
+          <name>FiltersFeatureManager</name>
+          <IsActor>false</IsActor>
+          <card>IFiltersFeatureManager</card>
+        </object>
+        <object>
+          <m_xmiID>So2z1NOk43Rmg0C</m_xmiID>
+          <name>LoggedInUserFriendsFetcher</name>
+          <IsActor>false</IsActor>
+          <card>IFriendsFetcher</card>
+        </object>
+        <object>
+          <m_xmiID>Zo8e4NTx6l2V9Rk</m_xmiID>
+          <name>LoggedInUserFriendsFiltersManager</name>
+          <IsActor>false</IsActor>
+          <card>IFriendsFiltersManager</card>
+        </object>
+      </objects>
+      <messages>
+        <message>
+          <m_xmiID>Ih74Rkb2GLl31Ms</m_xmiID>
+          <name>Check gender checkbox</name>
+          <source>facebook loged in user</source>
+          <result>false</result>
+          <dest>friendsFiltersPage : FriendsFiltersPage</dest>
+          <destResponsibility>Gender check</destResponsibility>
+          <destMethod>genderCheckBox_CheckedChanged</destMethod>
+        </message>
+        <message>
+          <m_xmiID>b7IZo54RpWt69Vc</m_xmiID>
+          <name>Gender checkbox is checked and gender combobox is enabled</name>
+          <source>friendsFiltersPage : FriendsFiltersPage</source>
+          <result>true</result>
+          <dest>facebook loged in user</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>t0T9BjLi8y4C5Ek</m_xmiID>
+          <name>Press add filter button</name>
+          <source>facebook loged in user</source>
+          <result>false</result>
+          <dest>friendsFiltersPage : FriendsFiltersPage</dest>
+          <destResponsibility>Add filter</destResponsibility>
+          <destMethod>addFilterButton_Click</destMethod>
+        </message>
+        <message>
+          <m_xmiID>Kw47Jka5X1OqDj0</m_xmiID>
+          <name>new (true, female, true, false, 18, 38, true, false, null, null)</name>
+          <source>friendsFiltersPage : FriendsFiltersPage</source>
+          <result>false</result>
+          <dest>newFilter : FriendsFilter</dest>
+          <destResponsibility>New</destResponsibility>
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>y8HXe35GjJh04Dz</m_xmiID>
+          <name>CreateFilter (true, female, true, false, 18, 38, true, false, null, null)</name>
+          <source>newFilter : FriendsFilter</source>
+          <result>false</result>
+          <dest> : UsersFilterFactory</dest>
+          <destResponsibility>CreateFilter</destResponsibility>
+          <destMethod>CreateFilter</destMethod>
+        </message>
+        <message>
+          <m_xmiID>Pj3a9HXt2f6B0Vh</m_xmiID>
+          <name>new (female, true)</name>
+          <source> : UsersFilterFactory</source>
+          <result>false</result>
+          <dest>usersFilter : UsersGenderFilter</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>q7FKk18Ajb5Y4Qy</m_xmiID>
+          <name>this</name>
+          <source>usersFilter : UsersGenderFilter</source>
+          <result>true</result>
+          <dest> : UsersFilterFactory</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Wa15Zbx3P6MvHi7</m_xmiID>
+          <name>usersFilter</name>
+          <source> : UsersFilterFactory</source>
+          <result>true</result>
+          <dest>newFilter : FriendsFilter</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>o1Z3Ccz9XRa6k7U</m_xmiID>
+          <name>r_UsersFilter := usersFilter</name>
+          <source>newFilter : FriendsFilter</source>
+          <result>false</result>
+          <dest>newFilter : FriendsFilter</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Sa91YiWr4s6OEb7</m_xmiID>
+          <name>ToString()</name>
+          <source>newFilter : FriendsFilter</source>
+          <result>false</result>
+          <dest>usersFilter : UsersGenderFilter</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>n1Z5Otd7Q0YmJy4</m_xmiID>
+          <name>"female or gender is not defined"</name>
+          <source>usersFilter : UsersGenderFilter</source>
+          <result>true</result>
+          <dest>newFilter : FriendsFilter</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Qo02DeYl9z5O7Iv</m_xmiID>
+          <name>Name := "female or gender is not defined"</name>
+          <source>newFilter : FriendsFilter</source>
+          <result>false</result>
+          <dest>newFilter : FriendsFilter</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Oj3f7BKb51QaLc6</m_xmiID>
+          <name>this</name>
+          <source>newFilter : FriendsFilter</source>
+          <result>true</result>
+          <dest>friendsFiltersPage : FriendsFiltersPage</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Zl2b1IJm5g0T4Fd</m_xmiID>
+          <name>AddFriendFilter(newFilter)</name>
+          <source>friendsFiltersPage : FriendsFiltersPage</source>
+          <result>false</result>
+          <dest>FiltersFeatureManager : IFiltersFeatureManager</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>g5ETw01Rbo4W8Lp</m_xmiID>
+          <name>GetFriends()</name>
+          <source>FiltersFeatureManager : IFiltersFeatureManager</source>
+          <result>false</result>
+          <dest>LoggedInUserFriendsFetcher : IFriendsFetcher</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Fz0o4VLr3f6B8Jg</m_xmiID>
+          <name>IEnumerable&lt;User&gt; m_Friends</name>
+          <source>LoggedInUserFriendsFetcher : IFriendsFetcher</source>
+          <result>true</result>
+          <dest>FiltersFeatureManager : IFiltersFeatureManager</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Ec4f6H8CsKa0x5G</m_xmiID>
+          <name>UpdateFriends(m_Friends)</name>
+          <source>FiltersFeatureManager : IFiltersFeatureManager</source>
+          <result>false</result>
+          <dest>newFilter : FriendsFilter</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>o8IJz24EuAc7k6U</m_xmiID>
+          <name>void</name>
+          <source>newFilter : FriendsFilter</source>
+          <result>true</result>
+          <dest>FiltersFeatureManager : IFiltersFeatureManager</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Xq0b5F2BiCf4k7Q</m_xmiID>
+          <name>AddFriendFilter(newFilter)</name>
+          <source>FiltersFeatureManager : IFiltersFeatureManager</source>
+          <result>false</result>
+          <dest>LoggedInUserFriendsFiltersManager : IFriendsFiltersManager</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>o7LNn6p2KHm41Xz</m_xmiID>
+          <name>void</name>
+          <source>LoggedInUserFriendsFiltersManager : IFriendsFiltersManager</source>
+          <result>true</result>
+          <dest>FiltersFeatureManager : IFiltersFeatureManager</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Jr02XgRw8f7U3Mm</m_xmiID>
+          <name>void</name>
+          <source>FiltersFeatureManager : IFiltersFeatureManager</source>
+          <result>true</result>
+          <dest>friendsFiltersPage : FriendsFiltersPage</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Xh1x5GAj78SiIf9</m_xmiID>
+          <name>shows new row "female or gender is not defined" in filters list</name>
+          <source>friendsFiltersPage : FriendsFiltersPage</source>
+          <result>true</result>
+          <dest>facebook loged in user</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+      </messages>
+    </sequence>
+  </sequences>
+</Doc>
