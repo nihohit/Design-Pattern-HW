@@ -48,22 +48,20 @@ namespace FacebookAppGUI
 
         protected override void OnFacebookApplicationLogicManagerChanged()
         {
-            iFiltersFeatureManagerBindingSource.DataSource = FiltersFeatureManager;
             if (FiltersFeatureManager != null)
             {
-                FiltersFeatureManager.FriendFilterAdded += (object sender, EventArgs e) => { iFriendFilterBindingSource.DataSource = (FiltersFeatureManager != null) ? new List<IFriendFilter>(FiltersFeatureManager.LoggedInUserFriendsFiltersManager.FriendsFilters) : null; };
-                FiltersFeatureManager.FriendFilterRemoved += (object sender, EventArgs e) => { iFriendFilterBindingSource.DataSource = (FiltersFeatureManager != null) ? new List<IFriendFilter>(FiltersFeatureManager.LoggedInUserFriendsFiltersManager.FriendsFilters) : null; };
+                FiltersFeatureManager.FriendFilterAdded += (object sender, EventArgs e) => { updateFiltersDataSource(); };
+                FiltersFeatureManager.FriendFilterRemoved += (object sender, EventArgs e) => { updateFiltersDataSource(); };
             }
+            updateFiltersDataSource();
         }
 
         protected override void OnBeforeFacebookApplicationLogicManagerChanging()
         {
-            IFiltersFeatureManager oldFiltersFeatureManager =
-                iFiltersFeatureManagerBindingSource.DataSource as IFiltersFeatureManager;
-            if (oldFiltersFeatureManager != null)
+            if (FiltersFeatureManager != null)
             {
-                oldFiltersFeatureManager.FriendFilterAdded -= (object sender, EventArgs e) => { iFriendFilterBindingSource.DataSource = (FiltersFeatureManager != null) ? new List<IFriendFilter>(FiltersFeatureManager.LoggedInUserFriendsFiltersManager.FriendsFilters) : null; };
-                oldFiltersFeatureManager.FriendFilterRemoved -= (object sender, EventArgs e) => { iFriendFilterBindingSource.DataSource = (FiltersFeatureManager != null) ? new List<IFriendFilter>(FiltersFeatureManager.LoggedInUserFriendsFiltersManager.FriendsFilters) : null; };
+                FiltersFeatureManager.FriendFilterAdded -= (object sender, EventArgs e) => { updateFiltersDataSource(); };
+                FiltersFeatureManager.FriendFilterRemoved -= (object sender, EventArgs e) => { updateFiltersDataSource(); };
             }
         }
         
@@ -72,11 +70,6 @@ namespace FacebookAppGUI
             updateInboxThreads();
         }
 
-        private void iFiltersFeatureManagerBindingSource_CurrentItemChanged(object sender, EventArgs e)
-        {
-            updateFiltersDataSource();
-        }
-        
         private void updateFiltersDataSource()
         {
             iFriendFilterBindingSource.DataSource = (FiltersFeatureManager != null) ? new List<IFriendFilter>(FiltersFeatureManager.LoggedInUserFriendsFiltersManager.FriendsFilters) : null;

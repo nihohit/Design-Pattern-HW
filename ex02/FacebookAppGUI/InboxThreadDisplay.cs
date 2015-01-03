@@ -18,11 +18,7 @@ namespace FacebookAppGUI
         private readonly string r_UserIdThatInboxBelongsTo;
 
         private const string k_MessageDisplayStringPrefix = "Converstion with ";
-
-        private string m_inboxThreadDisplayName;
         
-        private string m_MessagesDisplayString;
-
         #endregion
 
         #region Properties

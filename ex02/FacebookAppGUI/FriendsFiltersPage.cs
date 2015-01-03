@@ -30,29 +30,49 @@ namespace FacebookAppGUI
         {
             if (e.FetchOption == eFetchOption.All || e.FetchOption == eFetchOption.FriendsLists)
             {
-                friendsListsComboBox.UpdateFriendsLists(
-                    FiltersFeatureManager.GetRelevantFriendsListsForLoggedinUser());
+                updateFriendsListsDataSource();
             }
         }
 
         protected override void OnFacebookApplicationLogicManagerChanged()
         {
-            iFiltersFeatureManagerBindingSource.DataSource = FiltersFeatureManager;
             if (FiltersFeatureManager != null)
             {
-                FiltersFeatureManager.FriendFilterAdded += (object sender, EventArgs e) => { iFriendFilterBindingSource.DataSource = (FiltersFeatureManager != null) ? new List<IFriendFilter>(FiltersFeatureManager.LoggedInUserFriendsFiltersManager.FriendsFilters) : null; };
-                FiltersFeatureManager.FriendFilterRemoved += (object sender, EventArgs e) => { iFriendFilterBindingSource.DataSource = (FiltersFeatureManager != null) ? new List<IFriendFilter>(FiltersFeatureManager.LoggedInUserFriendsFiltersManager.FriendsFilters) : null; };
+                FiltersFeatureManager.FriendFilterAdded += (object sender, EventArgs e) => { updateFiltersDataSource(); };
+                FiltersFeatureManager.FriendFilterRemoved += (object sender, EventArgs e) => { updateFiltersDataSource(); };
             }
+            updateFiltersDataSource();
+            updateFriendsListsDataSource();
         }
 
         protected override void OnBeforeFacebookApplicationLogicManagerChanging()
         {
-            IFiltersFeatureManager oldFiltersFeatureManager =
-                iFiltersFeatureManagerBindingSource.DataSource as IFiltersFeatureManager;
-            if (oldFiltersFeatureManager != null)
+            if (FiltersFeatureManager != null)
             {
-                oldFiltersFeatureManager.FriendFilterAdded -= (object sender, EventArgs e) => { iFriendFilterBindingSource.DataSource = (FiltersFeatureManager != null) ? new List<IFriendFilter>(FiltersFeatureManager.LoggedInUserFriendsFiltersManager.FriendsFilters) : null; };
-                oldFiltersFeatureManager.FriendFilterRemoved -= (object sender, EventArgs e) => { iFriendFilterBindingSource.DataSource = (FiltersFeatureManager != null) ? new List<IFriendFilter>(FiltersFeatureManager.LoggedInUserFriendsFiltersManager.FriendsFilters) : null; };
+                FiltersFeatureManager.FriendFilterAdded -= (object sender, EventArgs e) => { updateFiltersDataSource(); };
+                FiltersFeatureManager.FriendFilterRemoved -= (object sender, EventArgs e) => { updateFiltersDataSource(); };
+            }
+        }
+
+        private void updateFriendsListsDataSource()
+        {
+            if (FiltersFeatureManager == null)
+            {
+                friendListBindingSource.DataSource = null;
+            }
+            else
+            {
+                List<FriendList> notEmptyFreindsLists = new List<FriendList>();
+                IEnumerable<FriendList> allFriendsLists = FiltersFeatureManager.GetRelevantFriendsListsForLoggedinUser();
+                foreach (FriendList friendList in allFriendsLists)
+                {
+                    if (friendList.Members.Count > 0)
+                    {
+                        notEmptyFreindsLists.Add(friendList);
+                    }
+                }
+
+                friendListBindingSource.DataSource = notEmptyFreindsLists;
             }
         }
 
@@ -71,7 +91,8 @@ namespace FacebookAppGUI
 
         private void addFilterButton_Click(object sender, EventArgs e)
         {
-            if (friendsListCheckBox.Checked && friendsListsComboBox.SelectedFriendList == null)
+            if (friendsListCheckBox.Checked && 
+                (friendListBindingSource.DataSource == null || friendListBindingSource.Current as FriendList == null))
             {
                 MessageBox.Show(@"Choose Friend List. (if empty fetch from facebook with the link on page buttom)");
             }
@@ -89,7 +110,7 @@ namespace FacebookAppGUI
                                                    decimal.ToInt32(maxAgeNumericUpDown.Value),
                                                    addIfAgeNotVisible.Checked,
                                                    friendsListCheckBox.Checked,
-                                                   friendsListsComboBox.SelectedFriendList,
+                                                   friendListBindingSource.Current as FriendList,
                                                    FiltersFeatureManager.LoggedInUserFriendListsManager);
 
                     FiltersFeatureManager.AddFriendFilter(newFilter);
@@ -116,10 +137,9 @@ namespace FacebookAppGUI
             iFriendFilterBindingSource.DataSource = (FiltersFeatureManager != null) ? new List<IFriendFilter>(FiltersFeatureManager.LoggedInUserFriendsFiltersManager.FriendsFilters) : null;
         }
 
-        private void iFiltersFeatureManagerBindingSource_CurrentItemChanged(object sender, EventArgs e)
+        private void friendListBindingSource_CurrentChanged(object sender, EventArgs e)
         {
-            updateFiltersDataSource();
-        }
 
+        }     
     }
 }

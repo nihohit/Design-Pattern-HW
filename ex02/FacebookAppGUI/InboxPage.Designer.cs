@@ -36,7 +36,6 @@
             this.inboxThreadDisplayBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.iFriendFilterComboBox = new System.Windows.Forms.ComboBox();
             this.iFriendFilterBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.iFiltersFeatureManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -44,7 +43,6 @@
             this.splitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inboxThreadDisplayBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iFriendFilterBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iFiltersFeatureManagerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // selectedMessageTextBox
@@ -108,6 +106,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.iFriendFilterComboBox.DataSource = this.iFriendFilterBindingSource;
             this.iFriendFilterComboBox.DisplayMember = "Name";
+            this.iFriendFilterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.iFriendFilterComboBox.FormattingEnabled = true;
             this.iFriendFilterComboBox.Location = new System.Drawing.Point(234, 7);
             this.iFriendFilterComboBox.Name = "iFriendFilterComboBox";
@@ -120,11 +119,6 @@
             this.iFriendFilterBindingSource.DataSource = typeof(FacebookApplication.Interfaces.IFriendFilter);
             this.iFriendFilterBindingSource.CurrentChanged += new System.EventHandler(this.iFriendFilterBindingSource_CurrentChanged);
             this.iFriendFilterBindingSource.CurrentItemChanged += new System.EventHandler(this.iFriendFilterBindingSource_CurrentChanged);
-            // 
-            // iFiltersFeatureManagerBindingSource
-            // 
-            this.iFiltersFeatureManagerBindingSource.DataSource = typeof(FacebookApplication.Interfaces.IFiltersFeatureManager);
-            this.iFiltersFeatureManagerBindingSource.CurrentItemChanged += new System.EventHandler(this.iFiltersFeatureManagerBindingSource_CurrentItemChanged);
             // 
             // label1
             // 
@@ -155,7 +149,6 @@
             this.splitContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.inboxThreadDisplayBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iFriendFilterBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iFiltersFeatureManagerBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,7 +162,6 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ComboBox iFriendFilterComboBox;
         private System.Windows.Forms.BindingSource iFriendFilterBindingSource;
-        private System.Windows.Forms.BindingSource iFiltersFeatureManagerBindingSource;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.BindingSource inboxThreadDisplayBindingSource;
 

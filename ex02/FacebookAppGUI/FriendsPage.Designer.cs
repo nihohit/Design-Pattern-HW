@@ -33,9 +33,8 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.imageNormalPictureBox = new System.Windows.Forms.PictureBox();
-            this.iFiltersFeatureManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.iFriendFilterBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.iFriendFilterComboBox = new System.Windows.Forms.ComboBox();
+            this.friendFilterComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -43,7 +42,6 @@
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageNormalPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iFiltersFeatureManagerBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iFriendFilterBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,29 +92,25 @@
             this.imageNormalPictureBox.TabIndex = 44;
             this.imageNormalPictureBox.TabStop = false;
             // 
-            // iFiltersFeatureManagerBindingSource
-            // 
-            this.iFiltersFeatureManagerBindingSource.DataSource = typeof(FacebookApplication.Interfaces.IFiltersFeatureManager);
-            this.iFiltersFeatureManagerBindingSource.CurrentItemChanged += new System.EventHandler(this.iFiltersFeatureManagerBindingSource_CurrentItemChanged);
-            // 
             // iFriendFilterBindingSource
             // 
             this.iFriendFilterBindingSource.DataSource = typeof(FacebookApplication.Interfaces.IFriendFilter);
             this.iFriendFilterBindingSource.CurrentChanged += new System.EventHandler(this.iFriendFilterBindingSource_CurrentChanged);
             this.iFriendFilterBindingSource.CurrentItemChanged += new System.EventHandler(this.iFriendFilterBindingSource_CurrentChanged);
             // 
-            // iFriendFilterComboBox
+            // friendFilterComboBox
             // 
-            this.iFriendFilterComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.friendFilterComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.iFriendFilterComboBox.DataSource = this.iFriendFilterBindingSource;
-            this.iFriendFilterComboBox.DisplayMember = "Name";
-            this.iFriendFilterComboBox.FormattingEnabled = true;
-            this.iFriendFilterComboBox.Location = new System.Drawing.Point(45, 6);
-            this.iFriendFilterComboBox.Name = "iFriendFilterComboBox";
-            this.iFriendFilterComboBox.Size = new System.Drawing.Size(636, 21);
-            this.iFriendFilterComboBox.TabIndex = 57;
-            this.iFriendFilterComboBox.ValueMember = "FilterdFriends";
+            this.friendFilterComboBox.DataSource = this.iFriendFilterBindingSource;
+            this.friendFilterComboBox.DisplayMember = "Name";
+            this.friendFilterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.friendFilterComboBox.FormattingEnabled = true;
+            this.friendFilterComboBox.Location = new System.Drawing.Point(45, 6);
+            this.friendFilterComboBox.Name = "friendFilterComboBox";
+            this.friendFilterComboBox.Size = new System.Drawing.Size(636, 21);
+            this.friendFilterComboBox.TabIndex = 57;
+            this.friendFilterComboBox.ValueMember = "FilterdFriends";
             // 
             // label1
             // 
@@ -132,12 +126,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.iFriendFilterComboBox);
+            this.Controls.Add(this.friendFilterComboBox);
             this.Controls.Add(this.splitContainer1);
             this.Name = "FriendsPage";
             this.Size = new System.Drawing.Size(711, 307);
             this.Controls.SetChildIndex(this.splitContainer1, 0);
-            this.Controls.SetChildIndex(this.iFriendFilterComboBox, 0);
+            this.Controls.SetChildIndex(this.friendFilterComboBox, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -145,7 +139,6 @@
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageNormalPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iFiltersFeatureManagerBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iFriendFilterBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -157,9 +150,8 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.BindingSource userBindingSource;
-        private System.Windows.Forms.BindingSource iFiltersFeatureManagerBindingSource;
         private System.Windows.Forms.BindingSource iFriendFilterBindingSource;
-        private System.Windows.Forms.ComboBox iFriendFilterComboBox;
+        private System.Windows.Forms.ComboBox friendFilterComboBox;
         private System.Windows.Forms.PictureBox imageNormalPictureBox;
         private System.Windows.Forms.Label label1;
     }
