@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using FacebookApplication.Interfaces;
 using FacebookWrapper.ObjectModel;
-using System.ComponentModel;
 
 namespace FacebookApplication
 {
+    using FacebookApplication.Filters;
+
     public class FriendsFiltersManager : FacebookFetchable, IFriendsFiltersManager
     {
         #region members
@@ -21,7 +22,7 @@ namespace FacebookApplication
         public event EventHandler FilterRmoved;
 
         #endregion events
-        
+
         #region Properties (IFriendsFiltersManager)
 
         public IEnumerable<IFriendFilter> FriendsFilters
@@ -107,6 +108,6 @@ namespace FacebookApplication
 
         #endregion override protected methods
         #region private methods
-        #endregion private methods       
+        #endregion private methods
     }
 }

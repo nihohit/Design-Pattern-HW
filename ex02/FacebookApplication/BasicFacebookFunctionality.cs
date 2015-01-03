@@ -98,8 +98,7 @@
             lock (r_Lock)
             {
                 this.m_CurrentlySelectedComment = null;
-                this.m_CurrentlySelectedPost = this.r_CurrentActivityFeed
-                    [m_CurrentActivityBox.SelectedIndex];
+                this.m_CurrentlySelectedPost = this.r_CurrentActivityFeed[m_CurrentActivityBox.SelectedIndex];
                 this.m_CurrentCommentTextBox.Show();
                 this.m_CurrentCommentTextBox.Clear();
                 this.m_CurrentCommentButton.Show();

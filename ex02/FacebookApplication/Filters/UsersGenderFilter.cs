@@ -1,8 +1,9 @@
-﻿using Facebook;
-using FacebookWrapper.ObjectModel;
-
-namespace FacebookApplication
+﻿namespace FacebookApplication.Filters
 {
+    using Facebook;
+
+    using FacebookWrapper.ObjectModel;
+
     public class UsersGenderFilter : BaseUserFilter
     {
         #region members
@@ -21,7 +22,7 @@ namespace FacebookApplication
 
         public UsersGenderFilter(User.eGender i_Gender, bool i_AddIfCantSeeGender)
         {
-            Gender = i_Gender;
+            this.Gender = i_Gender;
             this.r_AddIfCantSeeGender = i_AddIfCantSeeGender;
         }
 
@@ -41,12 +42,12 @@ namespace FacebookApplication
                 throw new FacebookOAuthException("Cannot see user gender");
             }
 
-            return i_User.Gender == Gender;
+            return i_User.Gender == this.Gender;
         }
 
         public override string ToString()
         {
-            return Gender.ToString() + (this.r_AddIfCantSeeGender ? " or gender is not defined" : string.Empty);
+            return this.Gender.ToString() + (this.r_AddIfCantSeeGender ? " or gender is not defined" : string.Empty);
         }
 
         #endregion

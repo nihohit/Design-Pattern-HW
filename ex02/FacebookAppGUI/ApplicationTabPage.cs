@@ -90,7 +90,7 @@ namespace FacebookAppGUI
 
         protected virtual void facebookApplicationManager_AfterFetch(object sender, FetchEventArgs e)
         {
-            throw new NotImplementedException("Should override method");
+            throw new Exception("Unimplemented");
         }
     }
 }

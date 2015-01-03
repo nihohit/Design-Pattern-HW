@@ -5,6 +5,8 @@ using FacebookApplication.Interfaces;
 
 namespace FacebookAppGUI
 {
+    using FacebookApplication.Filters;
+
     public partial class FormLogin : Form
     {
         private const string k_AppId = "540432436034011"; // "501103096696183"; //facebook stop supporting manage_friendlists, so cannot get members with our application any more

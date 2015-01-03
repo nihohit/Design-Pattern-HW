@@ -4,6 +4,8 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication.Interfaces
 {
+    using FacebookApplication.Filters;
+
     public interface IFiltersFeatureManager
     {
         #region Events

@@ -11,8 +11,14 @@ namespace FacebookAppGUI
         public InboxPage()
         {
             InitializeComponent();
-            this.selectedMessageTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.inboxThreadDisplayBindingSource, "MessagesDisplayString", true,
-                System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged, string.Empty));            
+            this.selectedMessageTextBox.DataBindings.Add(
+                new System.Windows.Forms.Binding(
+                    "Text",
+                    this.inboxThreadDisplayBindingSource,
+                    "MessagesDisplayString",
+                    true,
+                    System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged,
+                    string.Empty));
         }
 
         protected override Dictionary<eFetchOption, int> GetFetchTypesToFetchWithTheirCollectionLimit()
@@ -64,7 +70,7 @@ namespace FacebookAppGUI
                 FiltersFeatureManager.FriendFilterRemoved -= (object sender, EventArgs e) => { updateFiltersDataSource(); };
             }
         }
-        
+
         private void iFriendFilterBindingSource_CurrentChanged(object sender, EventArgs e)
         {
             updateInboxThreads();

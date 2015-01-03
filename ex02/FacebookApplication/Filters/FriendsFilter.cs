@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using FacebookApplication.Interfaces;
-using FacebookWrapper.ObjectModel;
-
-namespace FacebookApplication
+﻿namespace FacebookApplication.Filters
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using FacebookApplication.Interfaces;
+
+    using FacebookWrapper.ObjectModel;
+
     public class FriendsFilter : IFriendFilter
     {
         #region members
@@ -19,12 +21,12 @@ namespace FacebookApplication
 
         public IEnumerable<string> FilterdFriendsIds
         {
-            get { return r_FilteredFriends.Keys; }
+            get { return this.r_FilteredFriends.Keys; }
         }
 
         public IEnumerable<User> FilterdFriends
         {
-            get { return r_FilteredFriends.Values; }
+            get { return this.r_FilteredFriends.Values; }
         }
 
         public string ErrorString { get; private set; }
@@ -45,28 +47,37 @@ namespace FacebookApplication
             FriendList i_FriendList = null,
             IFriendListsManager i_FriendsListManager = null)
         {
-            r_UsersFilter = UsersFilterFactory.CreateFilter( i_FilterGender, i_Gender, i_AddIfGenderNotVisible, 
-                i_FilterAge, i_MinAge, i_MaxAge, i_AddIfAgeNotVisible, i_FilterByFriendList, i_FriendList, i_FriendsListManager);            
-            Name = r_UsersFilter.ToString();            
-            r_FilteredFriends = new Dictionary<string, User>();            
+            this.r_UsersFilter = UsersFilterFactory.CreateFilter(
+                i_FilterGender,
+                i_Gender,
+                i_AddIfGenderNotVisible,
+                i_FilterAge,
+                i_MinAge,
+                i_MaxAge,
+                i_AddIfAgeNotVisible,
+                i_FilterByFriendList,
+                i_FriendList,
+                i_FriendsListManager);
+            this.Name = this.r_UsersFilter.ToString();
+            this.r_FilteredFriends = new Dictionary<string, User>();
         }
         #endregion constructor
         #region public methods
 
         public void UpdateFriends(IEnumerable<User> i_Friends)
         {
-            r_FilteredFriends.Clear();
-            ErrorString = string.Empty;
+            this.r_FilteredFriends.Clear();
+            this.ErrorString = string.Empty;
             IEnumerable<User> friends = i_Friends;
             if (i_Friends != null && i_Friends.Count() > 1)
             {
                 Dictionary<string, List<string>> usersThatThrowExceptionNamesByError;
-                friends = r_UsersFilter.FilterUsers(friends, out usersThatThrowExceptionNamesByError);
+                friends = this.r_UsersFilter.FilterUsers(friends, out usersThatThrowExceptionNamesByError);
                 if (usersThatThrowExceptionNamesByError != null)
                 {
                     foreach (string errorMessage in usersThatThrowExceptionNamesByError.Keys)
                     {
-                        ErrorString += string.Format(
+                        this.ErrorString += string.Format(
                                 "{0} couldn't be filtered because: {1}{2}",
                                 usersThatThrowExceptionNamesByError[errorMessage],
                                 errorMessage,
@@ -76,19 +87,18 @@ namespace FacebookApplication
 
                 foreach (User friend in friends)
                 {
-                    r_FilteredFriends.Add(friend.Id, friend);
+                    this.r_FilteredFriends.Add(friend.Id, friend);
                 }
 
-                ErrorString = ErrorString.Trim(Environment.NewLine.ToCharArray());
+                this.ErrorString = this.ErrorString.Trim(Environment.NewLine.ToCharArray());
             }
         }
 
-        
         public override string ToString()
         {
-            return string.Format("'{0}': ", Name) + r_UsersFilter.ToString();            
+            return string.Format("'{0}': ", this.Name) + this.r_UsersFilter;
         }
-         
+
         #endregion public methods
     }
 }
