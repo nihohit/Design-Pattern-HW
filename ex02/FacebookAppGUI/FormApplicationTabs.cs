@@ -26,7 +26,7 @@ namespace FacebookAppGUI
             IFiltersFeatureManager i_FacebookApplicationManager)
         {
             inboxPage.FiltersFeatureManager = i_FacebookApplicationManager;
-            friendsPage1.FiltersFeatureManager = i_FacebookApplicationManager;
+            friendsPage.FiltersFeatureManager = i_FacebookApplicationManager;
             friendsFiltersPage.FiltersFeatureManager = i_FacebookApplicationManager;
         }
 

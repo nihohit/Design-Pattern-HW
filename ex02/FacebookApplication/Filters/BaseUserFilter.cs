@@ -7,6 +7,10 @@ namespace FacebookApplication
 {
     public abstract class BaseUserFilter : IUsersFilter
     {
+        protected BaseUserFilter() 
+        { 
+        }
+
         #region public methods
 
         #region IUsersFilter

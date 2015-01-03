@@ -20,8 +20,6 @@ namespace FacebookApplication
 
         public event EventHandler FilterRmoved;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         #endregion events
         
         #region Properties (IFriendsFiltersManager)

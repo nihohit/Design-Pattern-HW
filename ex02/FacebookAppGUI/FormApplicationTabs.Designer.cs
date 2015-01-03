@@ -53,7 +53,7 @@
             this.inboxTabPage = new System.Windows.Forms.TabPage();
             this.inboxPage = new FacebookAppGUI.InboxPage();
             this.friendsTabPage = new System.Windows.Forms.TabPage();
-            this.friendsPage1 = new FacebookAppGUI.FriendsPage();
+            this.friendsPage = new FacebookAppGUI.FriendsPage();
             this.interestCheckTab = new System.Windows.Forms.TabPage();
             this.interestPage = new FacebookAppGUI.InterestPage();
             this.InterestToolTab = new System.Windows.Forms.TabPage();
@@ -319,6 +319,7 @@
             this.friendsFiltersPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.friendsFiltersPage.FiltersFeatureManager = null;
             this.friendsFiltersPage.Location = new System.Drawing.Point(0, 0);
+            this.friendsFiltersPage.Margin = new System.Windows.Forms.Padding(4);
             this.friendsFiltersPage.Name = "friendsFiltersPage";
             this.friendsFiltersPage.Size = new System.Drawing.Size(786, 498);
             this.friendsFiltersPage.TabIndex = 0;
@@ -348,7 +349,7 @@
             // 
             // friendsTabPage
             // 
-            this.friendsTabPage.Controls.Add(this.friendsPage1);
+            this.friendsTabPage.Controls.Add(this.friendsPage);
             this.friendsTabPage.Location = new System.Drawing.Point(4, 22);
             this.friendsTabPage.Margin = new System.Windows.Forms.Padding(2);
             this.friendsTabPage.Name = "friendsTabPage";
@@ -358,16 +359,16 @@
             this.friendsTabPage.Text = "Friends";
             this.friendsTabPage.UseVisualStyleBackColor = true;
             // 
-            // friendsPage1
+            // friendsPage
             // 
-            this.friendsPage1.AutoScroll = true;
-            this.friendsPage1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.friendsPage1.FiltersFeatureManager = null;
-            this.friendsPage1.Location = new System.Drawing.Point(2, 2);
-            this.friendsPage1.Margin = new System.Windows.Forms.Padding(2);
-            this.friendsPage1.Name = "friendsPage1";
-            this.friendsPage1.Size = new System.Drawing.Size(782, 494);
-            this.friendsPage1.TabIndex = 0;
+            this.friendsPage.AutoScroll = true;
+            this.friendsPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.friendsPage.FiltersFeatureManager = null;
+            this.friendsPage.Location = new System.Drawing.Point(2, 2);
+            this.friendsPage.Margin = new System.Windows.Forms.Padding(2);
+            this.friendsPage.Name = "friendsPage";
+            this.friendsPage.Size = new System.Drawing.Size(782, 494);
+            this.friendsPage.TabIndex = 0;
             // 
             // interestCheckTab
             // 
@@ -574,14 +575,14 @@
             this.FriendsLabel.Size = new System.Drawing.Size(100, 23);
             this.FriendsLabel.TabIndex = 63;
             // 
-            // ApplicationTabsForm
+            // FormApplicationTabs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(795, 536);
             this.Controls.Add(this.myProfile);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "ApplicationTabsForm";
+            this.Name = "FormApplicationTabs";
             this.Text = "TabsPage";
             this.myProfile.ResumeLayout(false);
             this.ProfileTab.ResumeLayout(false);
@@ -636,7 +637,7 @@
         private System.Windows.Forms.TabPage inboxTabPage;
         private System.Windows.Forms.TabPage friendsTabPage;
         private InboxPage inboxPage;
-        private FriendsPage friendsPage1;
+        private FriendsPage friendsPage;
         private System.Windows.Forms.TabPage interestCheckTab;
         protected System.Windows.Forms.TabControl myProfile;
         private InterestPage interestPage;

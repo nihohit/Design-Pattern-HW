@@ -10,30 +10,27 @@ namespace FacebookApplication
 {
     public class AndFilter : AdvancedFilter
     {
+
+        protected override string DisplayForEmptyFilter
+        {
+            get { return k_All; }
+        }
+
+        protected override char DisplayFiltersSeperator
+        {
+            get { return ','; }
+        }
+
         public AndFilter(List<IUsersFilter> i_UserFilters) : base(i_UserFilters) { }
 
-        protected override IEnumerable<User> ApplyCurrentFilter(Interfaces.IUsersFilter i_Filter, IEnumerable<User> i_Users,
-            IEnumerable<User> i_UsersAfterPreviousFiltersApplied, out Dictionary<string, List<string>> o_UsersThatThrowExceptionNamesByError)
+        protected override IEnumerable<User> ApplyAdvancedFilterOperator(IEnumerable<User> i_UsersBeforeCurrentFilter,
+            IEnumerable<User> i_UsersAfterCurrentFilter)
         {
-            return i_Filter.FilterUsers(i_UsersAfterPreviousFiltersApplied, out o_UsersThatThrowExceptionNamesByError);
+            return (i_UsersBeforeCurrentFilter == null || i_UsersAfterCurrentFilter == null ) ?
+                new List<User>() : i_UsersBeforeCurrentFilter.Intersect(i_UsersAfterCurrentFilter);
         }
         
-        protected override string GetDisplayWhenNoFilters()
-        {
-            return AdvancedFilter.k_All;
-        }
-
-        protected override string GetDisplayStringForToString(IUsersFilter i_Filter)
-        {
-            return i_Filter + ", ";
-        }
-
-        protected override string TrimDisplayString(string i_DisplayString)
-        {
-            return i_DisplayString.Trim().Trim(',');
-        }
-
-        protected override IEnumerable<User> GetFriendsBeforeFilterApplied(IEnumerable<User> i_Users)
+        protected override IEnumerable<User> GetFriendsForEmptyFilter(IEnumerable<User> i_Users)
         {
             return i_Users;
         }

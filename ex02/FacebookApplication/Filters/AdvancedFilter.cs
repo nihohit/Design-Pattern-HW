@@ -9,11 +9,14 @@ namespace FacebookApplication
 {
     public abstract class AdvancedFilter : IUsersFilter
     {
-        public static string k_All = "All";
-        public static string k_None = "None";
+        public const string k_All = "All";
+        public const string k_None = "None";
 
         private readonly List<IUsersFilter> r_UserFilters = new List<IUsersFilter>();
-        
+
+        protected abstract string DisplayForEmptyFilter { get; }
+        protected abstract char DisplayFiltersSeperator { get; }
+
         protected AdvancedFilter(List<IUsersFilter> i_UserFilters)
         {
             if (i_UserFilters != null)
@@ -25,11 +28,12 @@ namespace FacebookApplication
         public IEnumerable<User> FilterUsers(IEnumerable<User> i_Users, out Dictionary<string, List<string>> o_UsersThatThrowExceptionNamesByError)
         {
             o_UsersThatThrowExceptionNamesByError = new Dictionary<string, List<string>>();
-            IEnumerable<User> filteredUsers = GetFriendsBeforeFilterApplied(i_Users);
+            IEnumerable<User> filteredUsers = GetFriendsForEmptyFilter(i_Users);
             Dictionary<string, List<string>> usersThatThrowExceptionNamesByError;
             foreach (IUsersFilter filter in r_UserFilters)
             {
-                filteredUsers = ApplyCurrentFilter(filter, i_Users, filteredUsers, out usersThatThrowExceptionNamesByError);
+                IEnumerable<User> currFilterFilteredUsers = filter.FilterUsers(i_Users, out usersThatThrowExceptionNamesByError);
+                filteredUsers = ApplyAdvancedFilterOperator(filteredUsers, currFilterFilteredUsers);
                 if (usersThatThrowExceptionNamesByError != null)
                 {
                     foreach (string error in usersThatThrowExceptionNamesByError.Keys)
@@ -50,33 +54,26 @@ namespace FacebookApplication
             return filteredUsers;
         }
 
-        protected abstract IEnumerable<User> ApplyCurrentFilter(IUsersFilter i_Filter, IEnumerable<User> i_Users,
-            IEnumerable<User> i_UsersAfterPreviousFiltersApplied,
-            out Dictionary<string, List<string>> o_UsersThatThrowExceptionNamesByError);
+        protected abstract IEnumerable<User> ApplyAdvancedFilterOperator(IEnumerable<User> i_UsersBeforeCurrentFilter,
+            IEnumerable<User> i_UsersAfterCurrentFilter);
 
-        protected abstract IEnumerable<User> GetFriendsBeforeFilterApplied(IEnumerable<User> i_Users);
-
-        protected abstract string GetDisplayWhenNoFilters();
-
-        protected abstract string GetDisplayStringForToString(IUsersFilter i_Filter);
-
-        protected abstract string TrimDisplayString(string i_DisplayString);
-
+        protected abstract IEnumerable<User> GetFriendsForEmptyFilter(IEnumerable<User> i_Users);
+                
         public override string ToString()
         {
             string toString = string.Empty;
             if (r_UserFilters == null || r_UserFilters.Count < 1)
             {
-                toString = GetDisplayWhenNoFilters();
+                toString = DisplayForEmptyFilter;
             }
             else
             {
                 foreach (IUsersFilter userFilter in r_UserFilters)
                 {
-                    toString += GetDisplayStringForToString(userFilter);
+                    toString += userFilter.ToString() + DisplayFiltersSeperator + " ";
                 }
 
-                toString = TrimDisplayString(toString);
+                toString = toString.Trim().Trim(DisplayFiltersSeperator);
             }
 
             return toString;
