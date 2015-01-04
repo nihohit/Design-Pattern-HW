@@ -14,7 +14,7 @@
 
         #region Properties
 
-        private User.eGender Gender { get; set; }
+        private readonly User.eGender r_Gender;
 
         #endregion Properties
 
@@ -22,7 +22,7 @@
 
         public UsersGenderFilter(User.eGender i_Gender, bool i_AddIfCantSeeGender)
         {
-            this.Gender = i_Gender;
+            this.r_Gender = i_Gender;
             this.r_AddIfCantSeeGender = i_AddIfCantSeeGender;
         }
 
@@ -42,12 +42,12 @@
                 throw new FacebookOAuthException("Cannot see user gender");
             }
 
-            return i_User.Gender == this.Gender;
+            return i_User.Gender == this.r_Gender;
         }
 
         public override string ToString()
         {
-            return this.Gender.ToString() + (this.r_AddIfCantSeeGender ? " or gender is not defined" : string.Empty);
+            return this.r_Gender.ToString() + (this.r_AddIfCantSeeGender ? " or gender is not defined" : string.Empty);
         }
 
         #endregion

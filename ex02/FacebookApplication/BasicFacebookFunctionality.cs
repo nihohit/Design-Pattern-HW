@@ -33,6 +33,8 @@
 
         private Button m_CurrentCommentButton;
 
+        public int TabNumber { get; set; }
+
         #endregion private fields
 
         #region general methods
@@ -42,7 +44,8 @@
             ListBox i_Activity,
             ListBox i_CommentsView,
             Button i_LikeButton,
-            Button i_CommentButton)
+            Button i_CommentButton,
+            int i_TabNumber)
         {
             lock (r_Lock)
             {
@@ -54,6 +57,7 @@
                 this.m_CurrentLikeButton = i_LikeButton;
                 this.m_CurrentCommentButton = i_CommentButton;
                 this.HideContextualObjects();
+                TabNumber = i_TabNumber;
             }
         }
 
@@ -77,6 +81,7 @@
 
         private Task commentAsync()
         {
+            var currentTabNumber = TabNumber;
             return new Task(
                 () =>
                 {
@@ -89,7 +94,11 @@
                     }
 
                     this.m_CurrentlySelectedPost.Comment(text);
-                    m_CurrentActivityBox.Invoke(new Action(this.ActivitySelected));
+
+                    if (currentTabNumber == TabNumber)
+                    {
+                        m_CurrentActivityBox.Invoke(new Action(this.ActivitySelected));
+                    }
                 });
         }
 

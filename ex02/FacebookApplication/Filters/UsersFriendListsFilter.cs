@@ -11,21 +11,18 @@
     {
         #region members
 
+        private readonly FriendList r_FriendListBelongsTo;
+
         private readonly IFriendListsManager r_FriendListsManager;
+
         #endregion members
-
-        #region Properties
-
-        private FriendList FriendListBelongsTo { get; set; }
-
-        #endregion Properties
 
         #region constructor
 
         public UsersFriendListsFilter(FriendList i_FriendList, IFriendListsManager i_FriendListsManager)
         {
             this.r_FriendListsManager = i_FriendListsManager;
-            this.FriendListBelongsTo = i_FriendList;
+            this.r_FriendListBelongsTo = i_FriendList;
         }
 
         #endregion constructor
@@ -37,12 +34,12 @@
             IEnumerable<string> frindBelongToListsIds =
                 this.r_FriendListsManager.GetAllFriendListsWhichFriendBelongsTo(i_User.Id);
 
-            return frindBelongToListsIds.Contains(this.FriendListBelongsTo.Id);
+            return frindBelongToListsIds.Contains(this.r_FriendListBelongsTo.Id);
         }
 
         public override string ToString()
         {
-            return string.Format("Belongs to {0}", this.FriendListBelongsTo.Name);
+            return string.Format("Belongs to {0}", this.r_FriendListBelongsTo.Name);
         }
         #endregion
     }

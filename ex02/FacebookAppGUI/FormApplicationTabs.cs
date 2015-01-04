@@ -74,7 +74,7 @@ namespace FacebookAppGUI
                 new Task(
                     () =>
                     {
-                        if (UserWrapper.Instance.PostStatus(postText))
+                        if (UserWrapper.Instance.PostStatus(postText) && r_BasicfacebookFunctionality.TabNumber == 0)
                         {
                             this.r_BasicfacebookFunctionality.FetchPosts(UserWrapper.Instance.Posts);
                         }
@@ -90,7 +90,8 @@ namespace FacebookAppGUI
                 myProfileActivityBox,
                 myProfileViewComments,
                 myProfileLikeButton,
-                myProfileCommentButton);
+                myProfileCommentButton,
+                0);
             this.r_BasicfacebookFunctionality.InvokedFetchPosts(UserWrapper.Instance.Posts);
         }
 
@@ -101,7 +102,8 @@ namespace FacebookAppGUI
                 newsFeedActivityBox,
                 newsFeedViewComments,
                 newsFeedLikeButton,
-                newsFeedCommentButton);
+                newsFeedCommentButton,
+                1);
             this.r_BasicfacebookFunctionality.InvokedFetchPosts(UserWrapper.Instance.NewsFeed);
         }
     }
