@@ -39,10 +39,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Facebook">
-      <HintPath>..\..\ex01\Ex01\Ex01\bin\Debug\Facebook.dll</HintPath>
+      <HintPath>..\FacebookDLLs\Facebook.dll</HintPath>
     </Reference>
     <Reference Include="FbGraphApiWrapper">
-      <HintPath>..\..\ex01\Ex01\Ex01\bin\Debug\FbGraphApiWrapper.dll</HintPath>
+      <HintPath>..\FacebookDLLs\FbGraphApiWrapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

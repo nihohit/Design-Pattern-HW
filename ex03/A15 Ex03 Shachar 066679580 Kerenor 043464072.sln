@@ -5,20 +5,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacebookApplication", "Face
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B11D3EDB-DCCD-4BF4-82C3-B330FA3C7FEA}"
 	ProjectSection(SolutionItems) = preProject
-		A15 Ex02 ShacharLangbeheim 066679580 KerenorBerkers 043464072.docx = A15 Ex02 ShacharLangbeheim 066679580 KerenorBerkers 043464072.docx
+		A15 Ex03 ShacharLangbeheim 066679580 KerenorBerkers 043464072.docx = A15 Ex03 ShacharLangbeheim 066679580 KerenorBerkers 043464072.docx
 		TextFile1.txt = TextFile1.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacebookAppGUI", "FacebookAppGUI\FacebookAppGUI.csproj", "{25802257-F556-480C-B13A-262D6BC8A252}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JPG", "JPG", "{09614CEA-8E79-49E5-9966-824361C4B9F9}"
-	ProjectSection(SolutionItems) = preProject
-		CompositeClassDiagram.jpg = CompositeClassDiagram.jpg
-		CompositeSequenceDiagram.jpg = CompositeSequenceDiagram.jpg
-		FactoryMethodClassDiagram.jpg = FactoryMethodClassDiagram.jpg
-		FactoryMethodFullSequenceDiagram.jpg = FactoryMethodFullSequenceDiagram.jpg
-		FactoryMethodSequenceDiagram.jpg = FactoryMethodSequenceDiagram.jpg
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,8 +28,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{09614CEA-8E79-49E5-9966-824361C4B9F9} = {B11D3EDB-DCCD-4BF4-82C3-B330FA3C7FEA}
 	EndGlobalSection
 EndGlobal
