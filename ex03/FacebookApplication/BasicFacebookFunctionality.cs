@@ -8,7 +8,6 @@
     using System.Windows.Forms;
 
     using FacebookWrapper.ObjectModel;
-    using FacebookAppGUI;
 
     public class BasicFacebookFunctionality
     {

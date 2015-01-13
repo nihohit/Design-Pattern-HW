@@ -74,7 +74,7 @@ namespace FacebookApplication
             }
         }
 
-        public IEnumerable<PostedItem> AllActivity
+        public IEnumerable<IEnumerable<PostedItem>> AllActivityStreams
         {
             get
             {
@@ -82,16 +82,16 @@ namespace FacebookApplication
                 {
                     if (m_User == null)
                     {
-                        return new PostedItem[0];
+                        return new IEnumerable<PostedItem>[0];
                     }
 
-                    List<PostedItem> currentActivity = new List<PostedItem>();
-                    currentActivity.AddRange(m_User.WallPosts);
-                    currentActivity.AddRange(m_User.Posts);
-                    currentActivity.AddRange(m_User.PostedLinks);
-                    currentActivity.AddRange(m_User.Statuses);
-                    currentActivity.AddRange(m_User.Albums);
-                    currentActivity.AddRange(m_User.Videos);
+                    List<IEnumerable<PostedItem>> currentActivity = new List<IEnumerable<PostedItem>>();
+                    currentActivity.Add(m_User.WallPosts);
+                    currentActivity.Add(m_User.Posts);
+                    currentActivity.Add(m_User.PostedLinks);
+                    currentActivity.Add(m_User.Statuses);
+                    currentActivity.Add(m_User.Albums);
+                    currentActivity.Add(m_User.Videos);
                     return currentActivity;
                 }
             }
@@ -252,6 +252,16 @@ namespace FacebookApplication
             {
                 m_User.ReFetch();
             }
+        }
+
+        public IEnumerable<PostedItem> AllActivity(int i_AmountOfItemsFromEachStream)
+        {
+            int currentLimit = FacebookService.s_CollectionLimit;
+            FacebookService.s_CollectionLimit = i_AmountOfItemsFromEachStream;
+            ReFetch();
+            var iterator = new UserActivityIterator(AllActivityStreams);
+            FacebookService.s_CollectionLimit = currentLimit;
+            return iterator;
         }
 
         #endregion public methods

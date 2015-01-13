@@ -3,6 +3,7 @@
 namespace FacebookAppGUI
 {
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
 
     using FacebookApplication;
@@ -19,11 +20,25 @@ namespace FacebookAppGUI
 
         private void checkButton_Click(object sender, EventArgs e)
         {
-            string[] results = this.r_InterestChecker.FindInterestedFriendsNames(
-                lastInterestDate.Value,
-                Convert.ToInt32(itemAmountToCheck.Value)).ToArray();
-            interestedFreindsBox.Items.Clear();
-            interestedFreindsBox.Items.AddRange(results);
+            checkInterest().Start();
+        }
+
+        private Task checkInterest()
+        {
+            return new Task(
+                () =>
+                {
+                    string[] results =
+                        this.r_InterestChecker.FindInterestedFriendsNames(
+                            lastInterestDate.Value,
+                            () => UserWrapper.Instance.AllActivity(Convert.ToInt32(itemAmountToCheck.Value)))
+                            .ToArray();
+                    interestedFreindsBox.Invoke(new Action(() => 
+                        {
+                            interestedFreindsBox.Items.Clear();
+                            interestedFreindsBox.Items.AddRange(results);
+                        }));
+                });
         }
     }
 }

@@ -81,6 +81,7 @@
     <Compile Include="Interfaces\IUsersFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Filters\UsersFriendListsFilter.cs" />
+    <Compile Include="UserActivityIterator.cs" />
     <Compile Include="UserComparer.cs" />
     <Compile Include="Filters\UsersGenderFilter.cs" />
     <Compile Include="UserWrapper.cs" />

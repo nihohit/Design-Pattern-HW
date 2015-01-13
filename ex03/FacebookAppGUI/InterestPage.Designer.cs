@@ -35,6 +35,8 @@
             this.itemAmountToCheck = new System.Windows.Forms.NumericUpDown();
             this.warningLabel = new System.Windows.Forms.Label();
             this.checkButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.itemAmountToCheck)).BeginInit();
             this.SuspendLayout();
             // 
@@ -120,10 +122,30 @@
             this.checkButton.UseVisualStyleBackColor = true;
             this.checkButton.Click += new System.EventHandler(this.checkButton_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 158);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(249, 17);
+            this.label1.TabIndex = 61;
+            this.label1.Text = "This check takes a couple of seconds.";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 175);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(122, 17);
+            this.label2.TabIndex = 62;
+            this.label2.Text = "Please be patient.";
+            // 
             // InterestPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.checkButton);
             this.Controls.Add(this.warningLabel);
             this.Controls.Add(this.itemAmountToCheck);
@@ -148,5 +170,7 @@
         private System.Windows.Forms.NumericUpDown itemAmountToCheck;
         private System.Windows.Forms.Label warningLabel;
         private System.Windows.Forms.Button checkButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
