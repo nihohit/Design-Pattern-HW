@@ -3,7 +3,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication.Interfaces
 {
-    public interface IInboxManager : IFetchable
+    public interface IInboxManager 
     {
         #region methods
 

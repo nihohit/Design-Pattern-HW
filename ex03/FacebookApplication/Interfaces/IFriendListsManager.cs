@@ -3,7 +3,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication.Interfaces
 {
-    public interface IFriendListsManager : IFetchable
+    public interface IFriendListsManager
     {
         #region methods
 
@@ -12,8 +12,6 @@ namespace FacebookApplication.Interfaces
         IEnumerable<string> GetAllFriendListsWhichFriendBelongsTo(string i_FriendId);
 
         string GetFriendListsDisplayName(IEnumerable<FriendList> i_FriendLists);
-
-        FriendList CreateFriendList(string i_Name, IEnumerable<User> i_Members);
 
         #endregion methods
     }

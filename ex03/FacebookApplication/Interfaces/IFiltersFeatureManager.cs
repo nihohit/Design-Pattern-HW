@@ -40,8 +40,6 @@ namespace FacebookApplication.Interfaces
 
         IEnumerable<FriendList> GetRelevantFriendsListsForLoggedinUser();
 
-        FriendList CreateFriendList(string i_Name, IEnumerable<User> i_Members);
-
         string GetInboxThreadDisplayString(string i_InboxThreadId);
 
         string GetInboxThreadFriendsNames(string i_InboxThreadId);

@@ -12,6 +12,8 @@
     {
         #region members
 
+        private readonly FacebookFetchObject r_FacebookFetchObject;
+
         #endregion members
         #region Events
         #region IFacebookApplicationManager
@@ -50,10 +52,11 @@
         public FiltersFeatureManager()
         {
             TimeSpan minIntervalBetweenFetchActions = TimeSpan.FromSeconds(30);
-            this.LoggedInUserFriendsFetcher = new FriendsFetcher(minIntervalBetweenFetchActions);
-            this.LoggedInUserFriendListsManager = new FriendListsManager(minIntervalBetweenFetchActions);
-            this.LoggedInUserInboxManager = new InboxManager(minIntervalBetweenFetchActions);
-            this.LoggedInUserFriendsFiltersManager = new FriendsFiltersManager(this.LoggedInUserFriendsFetcher, minIntervalBetweenFetchActions);
+            r_FacebookFetchObject = new FacebookFetchObject(minIntervalBetweenFetchActions);
+            this.LoggedInUserFriendsFetcher = new FriendsFetcher(r_FacebookFetchObject);
+            this.LoggedInUserFriendListsManager = new FriendListsManager(r_FacebookFetchObject);
+            this.LoggedInUserInboxManager = new InboxManager(r_FacebookFetchObject);
+            this.LoggedInUserFriendsFiltersManager = new FriendsFiltersManager(r_FacebookFetchObject);
             this.LoggedInUserFriendsFiltersManager.AddFriendFilter(new FriendsFilter());
         }
         #endregion constructor
@@ -67,38 +70,11 @@
 
         public void FetchFromFacebook(eFetchOption i_FetchOption, int i_CollectionLimit)
         {
-            int origCollectionLimit = FacebookService.s_CollectionLimit;
-            if (i_CollectionLimit > 0)
-            {
-                FacebookService.s_CollectionLimit = i_CollectionLimit;
-            }
-
-            if (i_FetchOption == eFetchOption.All || i_FetchOption == eFetchOption.Friends)
-            {
-                this.LoggedInUserFriendsFetcher.Fetch();
-                this.LoggedInUserFriendsFiltersManager.Fetch();
-            }
-
-            if (i_FetchOption == eFetchOption.All || i_FetchOption == eFetchOption.FriendsLists)
-            {
-                this.LoggedInUserFriendListsManager.Fetch();
-            }
-
-            if (i_FetchOption == eFetchOption.All || i_FetchOption == eFetchOption.Inbox)
-            {
-                this.LoggedInUserInboxManager.Fetch();
-            }
-
-            FacebookService.s_CollectionLimit = origCollectionLimit;
+            r_FacebookFetchObject.FetchFromFacebook(i_FetchOption, i_CollectionLimit);
             if (this.AfterFetch != null)
             {
                 this.AfterFetch(this, new FetchEventArgs(i_FetchOption, i_CollectionLimit));
             }
-        }
-
-        public FriendList CreateFriendList(string i_Name, IEnumerable<User> i_Members)
-        {
-            return this.LoggedInUserFriendListsManager.CreateFriendList(i_Name, i_Members);
         }
 
         public IEnumerable<FriendList> GetRelevantFriendsListsForLoggedinUser()

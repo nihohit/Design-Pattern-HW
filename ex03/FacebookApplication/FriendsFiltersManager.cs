@@ -7,13 +7,13 @@ namespace FacebookApplication
 {
     using FacebookApplication.Filters;
 
-    public class FriendsFiltersManager : FacebookFetchable, IFriendsFiltersManager
+    public class FriendsFiltersManager : IFriendsFiltersManager
     {
         #region members
 
         private readonly Dictionary<string, IFriendFilter> r_Filters;
-        private readonly IFriendsFetcher r_FriendsFetcher;
-
+        private readonly FacebookFetchObject r_FacebookFetchObject;
+        
         #endregion members
         #region events (IFriendsFiltersManager)
 
@@ -38,15 +38,21 @@ namespace FacebookApplication
         #endregion Properties
         #region constructor
 
-        public FriendsFiltersManager(IFriendsFetcher i_FriendsFetcher, TimeSpan? i_MinIntervalBetweenFetchActions)
-            : base(i_MinIntervalBetweenFetchActions)
+        public FriendsFiltersManager(FacebookFetchObject i_FacebookFetchObject)
         {
-            r_FriendsFetcher = i_FriendsFetcher;
             r_Filters = new Dictionary<string, IFriendFilter>();
+            r_FacebookFetchObject = i_FacebookFetchObject;
+            r_FacebookFetchObject.AttachFetchFriendsObserver(updateFriends);
         }
 
         #endregion constructor
         #region public methods
+        
+        public void Dispose()
+        {
+            r_FacebookFetchObject.DetachFetchFriendsObserver(updateFriends);
+        }
+
         #region IFriendFilterManager
         public string AddFriendFilter(FriendsFilter i_FriendsFilter)
         {
@@ -94,20 +100,17 @@ namespace FacebookApplication
 
         #endregion
         #endregion
-        #region override protected methods
-
-        protected override void FacebookFetch()
+        
+        #region private methods
+        
+        private void updateFriends(IEnumerable<User> i_Friends)
         {
-            r_FriendsFetcher.Fetch();
-            IEnumerable<User> friends = r_FriendsFetcher.GetFriends();
             foreach (IFriendFilter friendFilter in r_Filters.Values)
             {
-                friendFilter.UpdateFriends(friends);
+                friendFilter.UpdateFriends(i_Friends);
             }
         }
-
-        #endregion override protected methods
-        #region private methods
+        
         #endregion private methods
     }
 }

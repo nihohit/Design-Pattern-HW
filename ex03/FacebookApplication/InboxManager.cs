@@ -6,25 +6,34 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication
 {
-    public class InboxManager : FacebookFetchable, IInboxManager
+    public class InboxManager : IInboxManager
     {
         #region members
 
         private readonly Dictionary<string, InboxThread> r_InboxThreads;
 
+        private readonly FacebookFetchObject r_FacebookFetchObject;
+        
         #endregion members
         #region Properties
         #endregion Properties
         #region constructor
 
-        public InboxManager(TimeSpan? i_MinIntervalBetweenFetchActions = null)
-            : base(i_MinIntervalBetweenFetchActions)
+        public InboxManager(FacebookFetchObject i_FacebookFetchObject)
         {
             r_InboxThreads = new Dictionary<string, InboxThread>();
+            r_FacebookFetchObject = i_FacebookFetchObject;
+            r_FacebookFetchObject.AttachFetchInboxObserver(updateInboxThreads);
         }
 
         #endregion constructor
         #region public methods
+
+        public void Dispose()
+        {
+            r_FacebookFetchObject.DetachFetchInboxObserver(updateInboxThreads);
+        }
+
         #region IInboxManager
 
         public string GetInboxThreadFriendsNames(string i_InboxThreadId)
@@ -66,24 +75,9 @@ namespace FacebookApplication
         }
 
         #endregion IInboxManager
-        #region override
-
-        public override void ResetFetchDetails()
-        {
-            reset();
-            base.ResetFetchDetails();
-        }
-
-        #endregion override
+        
         #endregion public methods
-        #region override protected methods
-
-        protected override void FacebookFetch()
-        {
-            fetchInbox();
-        }
-
-        #endregion override protected methods
+        
         #region private methods
 
         private IEnumerable<InboxThread> getInboxThreadsForSpecificFriendFilter(IFriendFilter i_FriendFilter)
@@ -99,19 +93,13 @@ namespace FacebookApplication
             return friendListInboxThreads;
         }
 
-        private void fetchInbox()
+        private void updateInboxThreads(IEnumerable<InboxThread> i_InboxThreads)
         {
             r_InboxThreads.Clear();
-            FacebookObjectCollection<InboxThread> inboxThreads = UserWrapper.Instance.InboxThreads;
-            foreach (InboxThread inboxThread in inboxThreads)
+            foreach (InboxThread inboxThread in i_InboxThreads)
             {
                 r_InboxThreads.Add(inboxThread.Id, inboxThread);
             }
-        }
-
-        private void reset()
-        {
-            r_InboxThreads.Clear();
         }
 
         #endregion private methods

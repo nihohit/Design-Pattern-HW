@@ -3,7 +3,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication.Interfaces
 {
-    public interface IFriendsFetcher : IFetchable
+    public interface IFriendsFetcher 
     {
         #region methods
 

@@ -5,7 +5,7 @@ namespace FacebookApplication.Interfaces
 {
     using FacebookApplication.Filters;
 
-    public interface IFriendsFiltersManager : IFetchable
+    public interface IFriendsFiltersManager 
     {
         #region Properties
 

@@ -5,57 +5,42 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication
 {
-    public class FriendsFetcher : FacebookFetchable, IFriendsFetcher
+    public class FriendsFetcher : IFriendsFetcher
     {
         #region members
-
-        private FacebookObjectCollection<User> m_Friends;
+        private readonly FacebookFetchObject r_FacebookFetchObject;
+        private IEnumerable<User> m_Friends;
         #endregion members
         #region Properties
         #endregion Properties
         #region constructor
 
-        public FriendsFetcher(TimeSpan? i_MinIntervalBetweenFetchActions)
-            : base(i_MinIntervalBetweenFetchActions)
+        public FriendsFetcher(FacebookFetchObject i_FacebookFetchObject)
         {
-            reset();
+            m_Friends = null;
+            r_FacebookFetchObject = i_FacebookFetchObject;
+            r_FacebookFetchObject.AttachFetchFriendsObserver(updateFriends);
         }
         #endregion constructor
         #region public methods
+
+        public void Dispose()
+        {
+            r_FacebookFetchObject.DetachFetchFriendsObserver(updateFriends);
+        }
+
         #region IFriendsFetcher
         public IEnumerable<User> GetFriends()
         {
             return m_Friends;
         }
-        #endregion IFriendsFetcher
-        #region override
-
-        public override void ResetFetchDetails()
-        {
-            reset();
-            base.ResetFetchDetails();
-        }
-
-        #endregion override
+        #endregion IFriendsFetcher        
         #endregion public methods
-        #region override protected methods
-
-        protected override void FacebookFetch()
-        {
-            fetchFriends();
-        }
-        
-        #endregion override protected methods
         #region private methods
 
-        private void fetchFriends()
+        private void updateFriends(IEnumerable<User> i_Friends)
         {
-            m_Friends = UserWrapper.Instance.Friends;
-        }
-
-        private void reset()
-        {
-            m_Friends = null;
+            m_Friends = i_Friends;
         }
 
         #endregion private methods

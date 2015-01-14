@@ -6,7 +6,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookApplication
 {
-    public class FriendListsManager : FacebookFetchable, IFriendListsManager
+    public class FriendListsManager : IFriendListsManager
     {
         #region members
 
@@ -14,6 +14,8 @@ namespace FacebookApplication
 
         private readonly Dictionary<string, List<string>> r_FriendsListsByFriendsIds;
 
+        private readonly FacebookFetchObject r_FacebookFetchObject;
+        
         #endregion members
 
         #region Properties
@@ -22,12 +24,12 @@ namespace FacebookApplication
 
         #region constructor
 
-        public FriendListsManager(TimeSpan? i_MinIntervalBetweenFetchActions)
-            : base(i_MinIntervalBetweenFetchActions)
+        public FriendListsManager(FacebookFetchObject i_FacebookFetchObject)
         {
             r_FriendsListsByFriendsIds = new Dictionary<string, List<string>>();
             r_FriendsListsForLoggedinUser = new Dictionary<string, FriendList>();
-            UserWrapper.Instance.BeforeLoggin += (sender, e) => { ResetFetchDetails(); };
+            r_FacebookFetchObject = i_FacebookFetchObject;
+            r_FacebookFetchObject.AttachFetchFriendsListsObserver(updateFriendLists);
         }
 
         #endregion constructor
@@ -36,7 +38,7 @@ namespace FacebookApplication
 
         public void Dispose()
         {
-            UserWrapper.Instance.BeforeLoggin -= (sender, e) => { ResetFetchDetails(); };
+            r_FacebookFetchObject.DetachFetchFriendsListsObserver(updateFriendLists);
         }
 
         #region IFriendListsManager
@@ -68,59 +70,17 @@ namespace FacebookApplication
             friendListsDisplayName = friendListsDisplayName.Trim(',');
             return friendListsDisplayName.Trim();
         }
-
-        public FriendList CreateFriendList(string i_Name, IEnumerable<User> i_Members)
-        {
-            UserLoggedInWhenFetched.ValidateUserNotNull();
-            FriendList friendList = UserLoggedInWhenFetched.CreateFriendList(i_Name);
-            friendList.AddMemeber(i_Members);
-            return friendList;
-        }
-
+        
         #endregion IFriendsFetcher
 
-        #region override
-
-        public override void ResetFetchDetails()
-        {
-            reset();
-            base.ResetFetchDetails();
-        }
-
-        #endregion override
-
         #endregion public methods
-
-        #region override protected methods
-
-        protected override void FacebookFetch()
-        {
-            fetchFriendLists();
-        }
-
-        #endregion override protected methods
-
+        
         #region private methods
-
-        private void reset()
+                
+        private void updateFriendLists(IEnumerable<FriendList> i_FriendsListsForLoggedinUser)
         {
-            r_FriendsListsByFriendsIds.Clear();
-            r_FriendsListsForLoggedinUser.Clear();
-        }
-
-        private void fetchFriendLists()
-        {
-            FacebookObjectCollection<FriendList> friendsListsForLoggedinUser = UserWrapper.Instance.FriendLists;
-            string friendsListWithFetchError = null;
-            foreach (FriendList friendList in friendsListsForLoggedinUser)
+            foreach (FriendList friendList in i_FriendsListsForLoggedinUser)
             {
-                if (friendList.Members == null)
-                {
-                    friendsListWithFetchError = friendsListWithFetchError ?? "Could not Fetch members of:";
-                    friendsListWithFetchError += " " + friendList.Name + ",";
-                    continue;
-                }
-
                 r_FriendsListsForLoggedinUser.Add(friendList.Id, friendList);
                 foreach (User friend in friendList.Members)
                 {
@@ -133,11 +93,6 @@ namespace FacebookApplication
 
                     friendsListsIds.Add(friendList.Id);
                 }
-            }
-
-            if (friendsListWithFetchError != null)
-            {
-                throw new FacebookApiException(friendsListWithFetchError);
             }
         }
 
