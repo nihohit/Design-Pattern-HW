@@ -5,32 +5,32 @@ namespace FacebookApplication
 {
     using FacebookWrapper.ObjectModel;
 
-    public class UserActivityIterator : IEnumerable<PostedItem>
+    public class UserActivityIteratorCreator : IEnumerable<PostedItem>
     {
-        private readonly IEnumerator<PostedItem> r_InternalIterator;
+        private readonly IEnumerator<PostedItem> r_Iterator;
 
-        public UserActivityIterator(IEnumerable<IEnumerable<PostedItem>> i_AllActivityStreams)
+        public UserActivityIteratorCreator(IEnumerable<IEnumerable<PostedItem>> i_AllActivityStreams)
         {
-            this.r_InternalIterator = new UserActivityInternalIterator(i_AllActivityStreams);
+            this.r_Iterator = new UserActivityIterator(i_AllActivityStreams);
         }
 
         public IEnumerator<PostedItem> GetEnumerator()
         {
-            return this.r_InternalIterator;
+            return this.r_Iterator;
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return this.r_InternalIterator;
+            return this.r_Iterator;
         }
 
-        private class UserActivityInternalIterator : IEnumerator<PostedItem>
+        private class UserActivityIterator : IEnumerator<PostedItem>
         {
             private readonly IEnumerator<IEnumerable<PostedItem>> r_AllActivityStreams;
 
             private IEnumerator<PostedItem> m_CurrentStream;
 
-            public UserActivityInternalIterator(IEnumerable<IEnumerable<PostedItem>> i_AllActivityStreams)
+            public UserActivityIterator(IEnumerable<IEnumerable<PostedItem>> i_AllActivityStreams)
             {
                 this.r_AllActivityStreams = i_AllActivityStreams.GetEnumerator();
             }

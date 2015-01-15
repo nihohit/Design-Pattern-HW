@@ -259,9 +259,9 @@ namespace FacebookApplication
             int currentLimit = FacebookService.s_CollectionLimit;
             FacebookService.s_CollectionLimit = i_AmountOfItemsFromEachStream;
             ReFetch();
-            var iterator = new UserActivityIterator(AllActivityStreams);
+            var iteratorCreator = new UserActivityIteratorCreator(AllActivityStreams);
             FacebookService.s_CollectionLimit = currentLimit;
-            return iterator;
+            return iteratorCreator;
         }
 
         #endregion public methods
