@@ -21,6 +21,7 @@ namespace FacebookAppGUI
         private void fetchingFromFacebookForm_Load(object sender, EventArgs e)
         {
             Application.DoEvents();
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();
         }
 

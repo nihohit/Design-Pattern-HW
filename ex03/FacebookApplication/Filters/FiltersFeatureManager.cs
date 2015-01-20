@@ -53,9 +53,9 @@
         {
             TimeSpan minIntervalBetweenFetchActions = TimeSpan.FromSeconds(30);
             r_FacebookFetchObject = new FacebookFetchObject(minIntervalBetweenFetchActions);
-            this.LoggedInUserFriendsFetcher = new FriendsFetcher(r_FacebookFetchObject);
             this.LoggedInUserFriendListsManager = new FriendListsManager(r_FacebookFetchObject);
             this.LoggedInUserInboxManager = new InboxManager(r_FacebookFetchObject);
+            this.LoggedInUserFriendsFetcher = new FriendsFetcher(r_FacebookFetchObject);
             this.LoggedInUserFriendsFiltersManager = new FriendsFiltersManager(r_FacebookFetchObject);
             this.LoggedInUserFriendsFiltersManager.AddFriendFilter(new FriendsFilter());
         }

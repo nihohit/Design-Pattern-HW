@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Doc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <m_xmiID>b8P5Riu7VGl62Jy</m_xmiID>
+  <name>CRC card builder doc</name>
+  <crcCards>
+    <crcCard>
+      <m_xmiID>g8F3InZo10Lzi6W</m_xmiID>
+      <name>FriendsFiltersPage</name>
+      <attributes>
+        <attribute>
+          <m_xmiID>y5HAr3x2MCm9d7P</m_xmiID>
+          <name>genderCheckBox.Checked</name>
+        </attribute>
+      </attributes>
+      <Responsibilities>
+        <Responsibility>
+          <m_xmiID>Mw3z8OWo2x4RKr1</m_xmiID>
+          <name>Gender check</name>
+          <Methods>
+            <Method>
+              <m_xmiID>Mr87Ppy9U2Fzo0Z</m_xmiID>
+              <name>genderCheckBox_CheckedChanged</name>
+            </Method>
+          </Methods>
+        </Responsibility>
+        <Responsibility>
+          <m_xmiID>Mr90Nxs1YJg3w4F</m_xmiID>
+          <name>Add filter</name>
+          <Methods>
+            <Method>
+              <m_xmiID>Zp0b7W2Kfk9JVo3</m_xmiID>
+              <name>addFilterButton_Click</name>
+            </Method>
+          </Methods>
+        </Responsibility>
+      </Responsibilities>
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>n3D1EoPc2p5B0Sl</m_xmiID>
+      <name>FriendsFilter</name>
+      <attributes>
+        <attribute>
+          <m_xmiID>m1M3AePf96YqNb5</m_xmiID>
+          <name>attribute 1</name>
+        </attribute>
+      </attributes>
+      <Responsibilities>
+        <Responsibility>
+          <m_xmiID>St17Uje0DYg53Gc</m_xmiID>
+          <name>New</name>
+          <Methods>
+            <Method>
+              <m_xmiID>Cu69Sbk5ZGf81Io</m_xmiID>
+              <name>FriendsFilter</name>
+            </Method>
+          </Methods>
+        </Responsibility>
+      </Responsibilities>
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>Zm87KyOd9e2XVi5</m_xmiID>
+      <name>UsersFilterFactory</name>
+      <attributes />
+      <Responsibilities>
+        <Responsibility>
+          <m_xmiID>Ji5h6IPd47BrOc0</m_xmiID>
+          <name>CreateFilter</name>
+          <Methods>
+            <Method>
+              <m_xmiID>Zs2c5HGr4d3E9Ny</m_xmiID>
+              <name>CreateFilter</name>
+            </Method>
+          </Methods>
+        </Responsibility>
+      </Responsibilities>
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>t2AQe1u0UHp3q5N</m_xmiID>
+      <name>UsersGenderFilter</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>l8ITe02RaVf47Xh</m_xmiID>
+      <name>IFriendFilter</name>
+      <description />
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>y0YJq39Pxt6INk2</m_xmiID>
+      <name>IFiltersFeatureManager</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>Xi82Vue0POf3z7G</m_xmiID>
+      <name>IFriendsFetcher</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>Kn6k2R3Lhl4V0Uo</m_xmiID>
+      <name>IFriendsFiltersManager</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>k5RFj63Mlz9GBx8</m_xmiID>
+      <name>IEnumerable&lt;IFriendFilter&gt;</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>g6WXn23AaId9y4U</m_xmiID>
+      <name>UsersAgeFilter</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>Yd51WqKy96Nap4L</m_xmiID>
+      <name>AndFilter</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>h8NRb2c3YBz56Ly</m_xmiID>
+      <name>FriendsPage</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>Cm61BgTs4z0MVk8</m_xmiID>
+      <name>Extensions</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>Zm71Vle9G4QpLb8</m_xmiID>
+      <name>FormFetchingFromFacebook</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>Nt6f8ROq25ZzCi7</m_xmiID>
+      <name>FacebookFetchObject</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>Fy0h8AIn6z3NKv9</m_xmiID>
+      <name>FacebookService</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>Hi12QxDw06Brg5F</m_xmiID>
+      <name>UserWrapper</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+    <crcCard>
+      <m_xmiID>Yv0e5O6Qxl7I4Uf</m_xmiID>
+      <name>Application</name>
+      <attributes />
+      <Responsibilities />
+      <superclass />
+    </crcCard>
+  </crcCards>
+  <sequences>
+    <sequence>
+      <m_xmiID>Ql35BaSt1r4TEd2</m_xmiID>
+      <name>Factory Method Sequence Diagram</name>
+      <trigger />
+      <preConditions />
+      <successConditions />
+      <failureConditions />
+      <remarks />
+      <objects>
+        <object>
+          <m_xmiID>h0LDx9k5PZj3m6I</m_xmiID>
+          <name>facebook loged in user</name>
+          <IsActor>true</IsActor>
+        </object>
+        <object>
+          <m_xmiID>k7X0CzLc63HdTh5</m_xmiID>
+          <name>friendsFiltersPage</name>
+          <IsActor>false</IsActor>
+          <card>FriendsFiltersPage</card>
+        </object>
+        <object>
+          <m_xmiID>h5A7Wma3FBu2v6E</m_xmiID>
+          <name>newFilter</name>
+          <IsActor>false</IsActor>
+          <card>FriendsFilter</card>
+        </object>
+        <object>
+          <m_xmiID>x2Q4FcIk0e7TJj1</m_xmiID>
+          <name />
+          <IsActor>false</IsActor>
+          <card>IFriendFilter</card>
+        </object>
+        <object>
+          <m_xmiID>Sz71Few2L0VdJr9</m_xmiID>
+          <name />
+          <IsActor>false</IsActor>
+          <card>UsersGenderFilter</card>
+        </object>
+        <object>
+          <m_xmiID>t2YGo8p3FWa45De</m_xmiID>
+          <name>r_UsersFilter</name>
+          <IsActor>false</IsActor>
+          <card>IFriendFilter</card>
+        </object>
+        <object>
+          <m_xmiID>Dl9r4IEy08Ucq5X</m_xmiID>
+          <name>FiltersFeatureManager</name>
+          <IsActor>false</IsActor>
+          <card>IFiltersFeatureManager</card>
+        </object>
+        <object>
+          <m_xmiID>So2z1NOk43Rmg0C</m_xmiID>
+          <name>LoggedInUserFriendsFetcher</name>
+          <IsActor>false</IsActor>
+          <card>IFriendsFetcher</card>
+        </object>
+        <object>
+          <m_xmiID>Zo8e4NTx6l2V9Rk</m_xmiID>
+          <name>LoggedInUserFriendsFiltersManager</name>
+          <IsActor>false</IsActor>
+          <card>IFriendsFiltersManager</card>
+        </object>
+        <object>
+          <m_xmiID>Ba96FpCs80Afd2J</m_xmiID>
+          <name>r_Filters.Values</name>
+          <IsActor>false</IsActor>
+          <card>IEnumerable&lt;IFriendFilter&gt;</card>
+        </object>
+        <object>
+          <m_xmiID>Xb8a6A0Swj4U9Jk</m_xmiID>
+          <name />
+          <IsActor>false</IsActor>
+          <card>UsersAgeFilter</card>
+        </object>
+        <object>
+          <m_xmiID>k7FHy4r9VJj65Rz</m_xmiID>
+          <name>usersFilter</name>
+          <IsActor>false</IsActor>
+          <card>AndFilter</card>
+        </object>
+        <object>
+          <m_xmiID>Ir2b0SGn3y6WJd7</m_xmiID>
+          <name>friendsPage</name>
+          <IsActor>false</IsActor>
+          <card>FriendsPage</card>
+        </object>
+        <object>
+          <m_xmiID>Wc6f8H5CoZw02Gx</m_xmiID>
+          <name />
+          <IsActor>false</IsActor>
+          <card>Extensions</card>
+        </object>
+        <object>
+          <m_xmiID>l8UCk14XvGd52Nh</m_xmiID>
+          <name>fetchingFromFacebookForm</name>
+          <IsActor>false</IsActor>
+          <card>FormFetchingFromFacebook</card>
+        </object>
+        <object>
+          <m_xmiID>Xg2i8Z0VxEp35Kh</m_xmiID>
+          <name>r_FacebookFetchObject</name>
+          <IsActor>false</IsActor>
+          <card>FacebookFetchObject</card>
+        </object>
+        <object>
+          <m_xmiID>x6TUu9t0MNf4k7V</m_xmiID>
+          <name />
+          <IsActor>false</IsActor>
+          <card>FacebookService</card>
+        </object>
+        <object>
+          <m_xmiID>q5ENs24XtYb1c7S</m_xmiID>
+          <name>s_Instance</name>
+          <IsActor>false</IsActor>
+          <card>UserWrapper</card>
+        </object>
+        <object>
+          <m_xmiID>t0Z2GqJi8p6MDd1</m_xmiID>
+          <name />
+          <IsActor>false</IsActor>
+          <card>Application</card>
+        </object>
+      </objects>
+      <messages>
+        <message>
+          <m_xmiID>Ih74Rkb2GLl31Ms</m_xmiID>
+          <name>Press 'Fetch from facebook' link on Friends tab</name>
+          <source>facebook loged in user</source>
+          <result>false</result>
+          <dest>friendsPage : FriendsPage</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>b7IZo54RpWt69Vc</m_xmiID>
+          <name>FetchAndShowWaitWindow(this,  () =&gt; this.FiltersFeatureManager.FetchFromFacebook(FacebookApplication.eFetchOption.Friends, 1000), "Friends")</name>
+          <source>friendsPage : FriendsPage</source>
+          <result>false</result>
+          <dest> : Extensions</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>q4NLz28Svj6C9Pp</m_xmiID>
+          <name>new (() =&gt; this.FiltersFeatureManager.FetchFromFacebook(FacebookApplication.eFetchOption.Friends, 1000), "Friends")</name>
+          <source>friendsPage : FriendsPage</source>
+          <result>false</result>
+          <dest>fetchingFromFacebookForm : FormFetchingFromFacebook</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>o1Z3Ccz9XRa6k7U</m_xmiID>
+          <name>r_FetchActionMethod := () =&gt; this.FiltersFeatureManager.FetchFromFacebook(FacebookApplication.eFetchOption.Friends, 1000)</name>
+          <source>fetchingFromFacebookForm : FormFetchingFromFacebook</source>
+          <result>false</result>
+          <dest>fetchingFromFacebookForm : FormFetchingFromFacebook</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>y3XZz8n7M6QhNt0</m_xmiID>
+          <name>this</name>
+          <source>fetchingFromFacebookForm : FormFetchingFromFacebook</source>
+          <result>true</result>
+          <dest>friendsPage : FriendsPage</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>x6R7XwEv10IiSt2</m_xmiID>
+          <name>ShowDialog(this)</name>
+          <source>friendsPage : FriendsPage</source>
+          <result>false</result>
+          <dest>fetchingFromFacebookForm : FormFetchingFromFacebook</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>t0T9BjLi8y4C5Ek</m_xmiID>
+          <name>fetchingFromFacebookForm_FormClosing(this, new FormClosingEventArgs(UserClosing, false))</name>
+          <source>fetchingFromFacebookForm : FormFetchingFromFacebook</source>
+          <result>false</result>
+          <dest>fetchingFromFacebookForm : FormFetchingFromFacebook</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Kw47Jka5X1OqDj0</m_xmiID>
+          <name>FetchFromFacebook(eFetchOption.Friends, 1000)</name>
+          <source>fetchingFromFacebookForm : FormFetchingFromFacebook</source>
+          <result>false</result>
+          <dest>FiltersFeatureManager : IFiltersFeatureManager</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>y8HXe35GjJh04Dz</m_xmiID>
+          <name>FetchFromFacebook(eFetchOption.Friends, 1000)</name>
+          <source>FiltersFeatureManager : IFiltersFeatureManager</source>
+          <result>false</result>
+          <dest>r_FacebookFetchObject : FacebookFetchObject</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Zl2b1IJm5g0T4Fd</m_xmiID>
+          <name>get("s_CollectionLimit")</name>
+          <source>r_FacebookFetchObject : FacebookFetchObject</source>
+          <result>false</result>
+          <dest> : FacebookService</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Jr02XgRw8f7U3Mm</m_xmiID>
+          <name>s_CollectionLimit</name>
+          <source> : FacebookService</source>
+          <result>true</result>
+          <dest>r_FacebookFetchObject : FacebookFetchObject</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>b7Y6Rem8CZl9q3P</m_xmiID>
+          <name>origCollectionLimit := s_CollectionLimit</name>
+          <source>r_FacebookFetchObject : FacebookFetchObject</source>
+          <result>false</result>
+          <dest>r_FacebookFetchObject : FacebookFetchObject</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>z6RBf78MqQk1v4H</m_xmiID>
+          <name>set("s_CollectionLimit", 1000)</name>
+          <source>r_FacebookFetchObject : FacebookFetchObject</source>
+          <result>false</result>
+          <dest> : FacebookService</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>d2VBt8u7UIe4r1F</m_xmiID>
+          <name>void</name>
+          <source> : FacebookService</source>
+          <result>true</result>
+          <dest>r_FacebookFetchObject : FacebookFetchObject</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Pj3a9HXt2f6B0Vh</m_xmiID>
+          <name>ReFetch()</name>
+          <source>r_FacebookFetchObject : FacebookFetchObject</source>
+          <result>false</result>
+          <dest>s_Instance : UserWrapper</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Wa15Zbx3P6MvHi7</m_xmiID>
+          <name>ReFetch()</name>
+          <source>s_Instance : UserWrapper</source>
+          <result>false</result>
+          <dest> : FacebookService</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>o8IJz24EuAc7k6U</m_xmiID>
+          <name>void</name>
+          <source> : FacebookService</source>
+          <result>true</result>
+          <dest>s_Instance : UserWrapper</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>o7LNn6p2KHm41Xz</m_xmiID>
+          <name>void</name>
+          <source>s_Instance : UserWrapper</source>
+          <result>true</result>
+          <dest>r_FacebookFetchObject : FacebookFetchObject</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>q7FKk18Ajb5Y4Qy</m_xmiID>
+          <name>updateFetchTime()</name>
+          <source>r_FacebookFetchObject : FacebookFetchObject</source>
+          <result>false</result>
+          <dest>r_FacebookFetchObject : FacebookFetchObject</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>a2VOc39Kub8BMe5</m_xmiID>
+          <name>get("Friends")</name>
+          <source>r_FacebookFetchObject : FacebookFetchObject</source>
+          <result>false</result>
+          <dest>s_Instance : UserWrapper</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Gt64Exw0BZg1v9U</m_xmiID>
+          <name>get("Friends")</name>
+          <source>s_Instance : UserWrapper</source>
+          <result>false</result>
+          <dest> : FacebookService</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Mm2h3W1AvDx4p9Y</m_xmiID>
+          <name>friends</name>
+          <source> : FacebookService</source>
+          <result>true</result>
+          <dest>s_Instance : UserWrapper</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Yj8a5O0Aep7ICx6</m_xmiID>
+          <name>friends</name>
+          <source>s_Instance : UserWrapper</source>
+          <result>true</result>
+          <dest>r_FacebookFetchObject : FacebookFetchObject</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>w8H3Gtb5P9Jpi4K</m_xmiID>
+          <name>m_FetchFriendsDelegates.Invoke(friends)</name>
+          <source>r_FacebookFetchObject : FacebookFetchObject</source>
+          <result>false</result>
+          <dest>LoggedInUserFriendsFetcher : IFriendsFetcher</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Sa91YiWr4s6OEb7</m_xmiID>
+          <name>m_Friends := friends</name>
+          <source>LoggedInUserFriendsFetcher : IFriendsFetcher</source>
+          <result>false</result>
+          <dest>LoggedInUserFriendsFetcher : IFriendsFetcher</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Jz16Qhb5VIe34Cs</m_xmiID>
+          <name>void</name>
+          <source>LoggedInUserFriendsFetcher : IFriendsFetcher</source>
+          <result>true</result>
+          <dest>r_FacebookFetchObject : FacebookFetchObject</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Mb9n2YTv87Iij1A</m_xmiID>
+          <name>m_FetchFriendsDelegates.Invoke(friends)</name>
+          <source>r_FacebookFetchObject : FacebookFetchObject</source>
+          <result>false</result>
+          <dest>LoggedInUserFriendsFiltersManager : IFriendsFiltersManager</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message xsi:type="umlLoopStartHelper">
+          <m_xmiID>r6Q7Spc2V8OyIw3</m_xmiID>
+          <name>foreach IFriendFilter in r_Filters.Values</name>
+          <source />
+          <result>false</result>
+          <dest />
+          <destResponsibility />
+          <destMethod />
+          <operatorType>loop</operatorType>
+          <operand>r_Filters.Values : IEnumerable&lt;IFriendFilter&gt;</operand>
+          <saveState>false</saveState>
+          <color>NamedColor:Green</color>
+        </message>
+        <message>
+          <m_xmiID>n1Z5Otd7Q0YmJy4</m_xmiID>
+          <name>UpdateFriends(friends)</name>
+          <source>LoggedInUserFriendsFiltersManager : IFriendsFiltersManager</source>
+          <result>false</result>
+          <dest> : IFriendFilter</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Qo02DeYl9z5O7Iv</m_xmiID>
+          <name>void</name>
+          <source> : IFriendFilter</source>
+          <result>true</result>
+          <dest>LoggedInUserFriendsFiltersManager : IFriendsFiltersManager</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message xsi:type="umlLoopEndHelper">
+          <m_xmiID>Zi2m4F9Wyl6J8Ev</m_xmiID>
+          <name />
+          <source />
+          <result>false</result>
+          <dest />
+          <destResponsibility />
+          <destMethod />
+          <restoreState>false</restoreState>
+        </message>
+        <message>
+          <m_xmiID>Oj3f7BKb51QaLc6</m_xmiID>
+          <name>void</name>
+          <source>LoggedInUserFriendsFiltersManager : IFriendsFiltersManager</source>
+          <result>true</result>
+          <dest>r_FacebookFetchObject : FacebookFetchObject</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>g5ETw01Rbo4W8Lp</m_xmiID>
+          <name>set("s_CollectionLimit",origCollectionLimit)</name>
+          <source>r_FacebookFetchObject : FacebookFetchObject</source>
+          <result>false</result>
+          <dest> : FacebookService</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Fz0o4VLr3f6B8Jg</m_xmiID>
+          <name>void</name>
+          <source> : FacebookService</source>
+          <result>true</result>
+          <dest>r_FacebookFetchObject : FacebookFetchObject</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Ec4f6H8CsKa0x5G</m_xmiID>
+          <name>void</name>
+          <source>r_FacebookFetchObject : FacebookFetchObject</source>
+          <result>true</result>
+          <dest>FiltersFeatureManager : IFiltersFeatureManager</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>u2S6TkWy8p4EZw3</m_xmiID>
+          <name>AfterFetch(this, new FetchEventArgs(eFetchOption.Friends, 1000))</name>
+          <source>FiltersFeatureManager : IFiltersFeatureManager</source>
+          <result>false</result>
+          <dest>friendsPage : FriendsPage</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Ah8o3ZRb9k2V0Kg</m_xmiID>
+          <name>updateFiltersDataSource()</name>
+          <source>friendsPage : FriendsPage</source>
+          <result>false</result>
+          <dest>friendsPage : FriendsPage</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Oh9f4Z0Nyr7U1Bc</m_xmiID>
+          <name>void</name>
+          <source>friendsPage : FriendsPage</source>
+          <result>true</result>
+          <dest>FiltersFeatureManager : IFiltersFeatureManager</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>h9L8Cfj6Q3IbRl7</m_xmiID>
+          <name>void</name>
+          <source>FiltersFeatureManager : IFiltersFeatureManager</source>
+          <result>true</result>
+          <dest>fetchingFromFacebookForm : FormFetchingFromFacebook</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>d7Q4Bza6CZx2t8D</m_xmiID>
+          <name>DialogResult.OK</name>
+          <source>fetchingFromFacebookForm : FormFetchingFromFacebook</source>
+          <result>true</result>
+          <dest>friendsPage : FriendsPage</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+        <message>
+          <m_xmiID>Ai72Xrx9Z8YdSz1</m_xmiID>
+          <name>Show friends in tab according to chosen filter friends</name>
+          <source>friendsPage : FriendsPage</source>
+          <result>true</result>
+          <dest>facebook loged in user</dest>
+          <destResponsibility />
+          <destMethod />
+        </message>
+      </messages>
+    </sequence>
+  </sequences>
+</Doc>

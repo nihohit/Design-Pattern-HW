@@ -3,7 +3,7 @@ Exercise No...........: 3
 First Student Details.: 066679580 - Shachar Langbeheim
 Second Student Details: 043464072 - keren or berkers
 Delivery Date.........: 22 - Jan - 2015
-Delivered In Delay....: 
+Delivered In Delay....: NO
 Delay Reason..........: 
 Comments..............: 
 =======================End Exercise Checking Report=========================
